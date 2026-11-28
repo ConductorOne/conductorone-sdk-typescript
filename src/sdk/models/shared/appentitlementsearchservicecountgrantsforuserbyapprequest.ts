@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * CountGrantsForUserByApp request.
@@ -34,10 +35,12 @@ export const AppEntitlementSearchServiceCountGrantsForUserByAppRequest$outboundS
     AppEntitlementSearchServiceCountGrantsForUserByAppRequest$Outbound,
     z.ZodTypeDef,
     AppEntitlementSearchServiceCountGrantsForUserByAppRequest
-  > = z.object({
-    appIds: z.nullable(z.array(z.string())).optional(),
-    userId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appIds: z.nullable(z.array(z.string())).optional(),
+      userId: z.string().optional(),
+    })
+  );
 
 export function appEntitlementSearchServiceCountGrantsForUserByAppRequestToJSON(
   appEntitlementSearchServiceCountGrantsForUserByAppRequest:

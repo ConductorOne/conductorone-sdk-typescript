@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TenantAuthConfigServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const TenantAuthConfigServiceDeleteRequest$outboundSchema: z.ZodType<
   TenantAuthConfigServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   TenantAuthConfigServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function tenantAuthConfigServiceDeleteRequestToJSON(
   tenantAuthConfigServiceDeleteRequest: TenantAuthConfigServiceDeleteRequest,

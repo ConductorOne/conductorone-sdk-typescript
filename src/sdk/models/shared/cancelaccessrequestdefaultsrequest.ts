@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The CancelAccessRequestDefaultsRequest message.
@@ -17,7 +18,7 @@ export const CancelAccessRequestDefaultsRequest$outboundSchema: z.ZodType<
   CancelAccessRequestDefaultsRequest$Outbound,
   z.ZodTypeDef,
   CancelAccessRequestDefaultsRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function cancelAccessRequestDefaultsRequestToJSON(
   cancelAccessRequestDefaultsRequest: CancelAccessRequestDefaultsRequest,

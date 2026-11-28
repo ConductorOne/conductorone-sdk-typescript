@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -36,7 +37,7 @@ export const TargetType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TargetType
-> = openEnums.outboundSchema(TargetType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(TargetType));
 
 /** @internal */
 export type RequestCatalogManagementServicePlanTypeChangeRequest$Outbound = {
@@ -49,9 +50,11 @@ export const RequestCatalogManagementServicePlanTypeChangeRequest$outboundSchema
     RequestCatalogManagementServicePlanTypeChangeRequest$Outbound,
     z.ZodTypeDef,
     RequestCatalogManagementServicePlanTypeChangeRequest
-  > = z.object({
-    targetType: TargetType$outboundSchema.optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      targetType: TargetType$outboundSchema.optional(),
+    })
+  );
 
 export function requestCatalogManagementServicePlanTypeChangeRequestToJSON(
   requestCatalogManagementServicePlanTypeChangeRequest:

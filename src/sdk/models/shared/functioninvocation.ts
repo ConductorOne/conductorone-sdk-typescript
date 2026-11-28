@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -87,33 +87,37 @@ export const FunctionInvocationStatus$inboundSchema: z.ZodType<
   FunctionInvocationStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FunctionInvocationStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(FunctionInvocationStatus)
+);
 
 /** @internal */
 export const FunctionInvocation$inboundSchema: z.ZodType<
   FunctionInvocation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  commitId: z.string().optional(),
-  conversationId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  error: z.string().optional(),
-  functionId: z.string().optional(),
-  id: z.string().optional(),
-  input: z.nullable(z.record(z.any())).optional(),
-  networkCallerUserId: z.string().optional(),
-  networkConfig: z.nullable(FunctionNetworkConfig$inboundSchema).optional(),
-  networkPolicyRevision: z.string().optional(),
-  output: z.nullable(z.record(z.any())).optional(),
-  resultRef: z.nullable(FunctionInvocationResultRef$inboundSchema).optional(),
-  status: FunctionInvocationStatus$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commitId: z.string().optional(),
+    conversationId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    error: z.string().optional(),
+    functionId: z.string().optional(),
+    id: z.string().optional(),
+    input: z.nullable(z.record(z.any())).optional(),
+    networkCallerUserId: z.string().optional(),
+    networkConfig: z.nullable(FunctionNetworkConfig$inboundSchema).optional(),
+    networkPolicyRevision: z.string().optional(),
+    output: z.nullable(z.record(z.any())).optional(),
+    resultRef: z.nullable(FunctionInvocationResultRef$inboundSchema).optional(),
+    status: FunctionInvocationStatus$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function functionInvocationFromJSON(
   jsonString: string,

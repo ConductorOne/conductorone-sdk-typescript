@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const ResponsePolicyPostAction$inboundSchema: z.ZodType<
   ResponsePolicyPostAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    version: z.string().optional(),
+  })
+);
 /** @internal */
 export type ResponsePolicyPostAction$Outbound = {
   version?: string | undefined;
@@ -38,9 +40,11 @@ export const ResponsePolicyPostAction$outboundSchema: z.ZodType<
   ResponsePolicyPostAction$Outbound,
   z.ZodTypeDef,
   ResponsePolicyPostAction
-> = z.object({
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    version: z.string().optional(),
+  })
+);
 
 export function responsePolicyPostActionToJSON(
   responsePolicyPostAction: ResponsePolicyPostAction,

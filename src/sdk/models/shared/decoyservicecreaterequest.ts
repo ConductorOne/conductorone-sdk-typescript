@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   DecoyAccessTokenInput,
   DecoyAccessTokenInput$Outbound,
@@ -73,19 +74,21 @@ export const DecoyServiceCreateRequest$outboundSchema: z.ZodType<
   DecoyServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   DecoyServiceCreateRequest
-> = z.object({
-  accessToken: z.nullable(DecoyAccessTokenInput$outboundSchema).optional(),
-  annotations: z.record(z.string()).optional(),
-  connectorClient: z.nullable(DecoyConnectorClientInput$outboundSchema)
-    .optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  userClientCredential: z.nullable(
-    DecoyUserClientCredentialInput$outboundSchema,
-  ).optional(),
-  workloadFed: z.nullable(DecoyWorkloadFederationInput$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessToken: z.nullable(DecoyAccessTokenInput$outboundSchema).optional(),
+    annotations: z.record(z.string()).optional(),
+    connectorClient: z.nullable(DecoyConnectorClientInput$outboundSchema)
+      .optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    userClientCredential: z.nullable(
+      DecoyUserClientCredentialInput$outboundSchema,
+    ).optional(),
+    workloadFed: z.nullable(DecoyWorkloadFederationInput$outboundSchema)
+      .optional(),
+  })
+);
 
 export function decoyServiceCreateRequestToJSON(
   decoyServiceCreateRequest: DecoyServiceCreateRequest,

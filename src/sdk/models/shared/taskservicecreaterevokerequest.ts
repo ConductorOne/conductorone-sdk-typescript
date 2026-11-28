@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -51,14 +52,16 @@ export const TaskServiceCreateRevokeRequest$outboundSchema: z.ZodType<
   TaskServiceCreateRevokeRequest$Outbound,
   z.ZodTypeDef,
   TaskServiceCreateRevokeRequest
-> = z.object({
-  appEntitlementId: z.string(),
-  appId: z.string(),
-  appUserId: z.string().optional(),
-  description: z.string().optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  identityUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string(),
+    appId: z.string(),
+    appUserId: z.string().optional(),
+    description: z.string().optional(),
+    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+    identityUserId: z.string().optional(),
+  })
+);
 
 export function taskServiceCreateRevokeRequestToJSON(
   taskServiceCreateRevokeRequest: TaskServiceCreateRevokeRequest,

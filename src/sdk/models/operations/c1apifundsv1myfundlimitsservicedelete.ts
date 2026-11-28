@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiFundsV1MyFundLimitsServiceDeleteRequest$outboundSchema:
     C1ApiFundsV1MyFundLimitsServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1MyFundLimitsServiceDeleteRequest
-  > = z.object({
-    appId: z.string(),
-    myFundLimitsServiceDeleteRequest: shared
-      .MyFundLimitsServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      myFundLimitsServiceDeleteRequest: "MyFundLimitsServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      myFundLimitsServiceDeleteRequest: shared
+        .MyFundLimitsServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        myFundLimitsServiceDeleteRequest: "MyFundLimitsServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiFundsV1MyFundLimitsServiceDeleteRequestToJSON(
   c1ApiFundsV1MyFundLimitsServiceDeleteRequest:
@@ -79,20 +81,23 @@ export const C1ApiFundsV1MyFundLimitsServiceDeleteResponse$inboundSchema:
     C1ApiFundsV1MyFundLimitsServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MyFundLimitsServiceDeleteResponse: shared
-      .MyFundLimitsServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MyFundLimitsServiceDeleteResponse": "myFundLimitsServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MyFundLimitsServiceDeleteResponse: shared
+        .MyFundLimitsServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MyFundLimitsServiceDeleteResponse":
+          "myFundLimitsServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1MyFundLimitsServiceDeleteResponseFromJSON(
   jsonString: string,

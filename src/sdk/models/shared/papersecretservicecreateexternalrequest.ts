@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -127,8 +128,8 @@ export const PaperSecretServiceCreateExternalRequestInputFormat$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretServiceCreateExternalRequestInputFormat
-  > = openEnums.outboundSchema(
-    PaperSecretServiceCreateExternalRequestInputFormat,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(PaperSecretServiceCreateExternalRequestInputFormat)
   );
 
 /** @internal */
@@ -136,7 +137,9 @@ export const RequiredAgeSuite$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   RequiredAgeSuite
-> = openEnums.outboundSchema(RequiredAgeSuite);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(RequiredAgeSuite)
+);
 
 /** @internal */
 export const PaperSecretServiceCreateExternalRequestSecretType$outboundSchema:
@@ -144,8 +147,8 @@ export const PaperSecretServiceCreateExternalRequestSecretType$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretServiceCreateExternalRequestSecretType
-  > = openEnums.outboundSchema(
-    PaperSecretServiceCreateExternalRequestSecretType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(PaperSecretServiceCreateExternalRequestSecretType)
   );
 
 /** @internal */
@@ -167,20 +170,23 @@ export const PaperSecretServiceCreateExternalRequest$outboundSchema: z.ZodType<
   PaperSecretServiceCreateExternalRequest$Outbound,
   z.ZodTypeDef,
   PaperSecretServiceCreateExternalRequest
-> = z.object({
-  allowedEmails: z.nullable(z.array(z.string())).optional(),
-  contentType: z.string().optional(),
-  displayName: z.string().optional(),
-  expiresIn: z.nullable(z.string()).optional(),
-  fileSize: z.number().int().transform(v => `${v}`).optional(),
-  filename: z.string().optional(),
-  inputFormat: PaperSecretServiceCreateExternalRequestInputFormat$outboundSchema
-    .optional(),
-  maxViews: z.number().int().optional(),
-  requiredAgeSuite: RequiredAgeSuite$outboundSchema.optional(),
-  secretType: PaperSecretServiceCreateExternalRequestSecretType$outboundSchema
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedEmails: z.nullable(z.array(z.string())).optional(),
+    contentType: z.string().optional(),
+    displayName: z.string().optional(),
+    expiresIn: z.nullable(z.string()).optional(),
+    fileSize: z.number().int().transform(v => `${v}`).optional(),
+    filename: z.string().optional(),
+    inputFormat:
+      PaperSecretServiceCreateExternalRequestInputFormat$outboundSchema
+        .optional(),
+    maxViews: z.number().int().optional(),
+    requiredAgeSuite: RequiredAgeSuite$outboundSchema.optional(),
+    secretType: PaperSecretServiceCreateExternalRequestSecretType$outboundSchema
+      .optional(),
+  })
+);
 
 export function paperSecretServiceCreateExternalRequestToJSON(
   paperSecretServiceCreateExternalRequest:

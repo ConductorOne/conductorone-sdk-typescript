@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -42,13 +42,15 @@ export const C1ApiIamV1RolesGetRequest$outboundSchema: z.ZodType<
   C1ApiIamV1RolesGetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiIamV1RolesGetRequest
-> = z.object({
-  roleId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    roleId: "role_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    roleId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      roleId: "role_id",
+    });
+  })
+);
 
 export function c1ApiIamV1RolesGetRequestToJSON(
   c1ApiIamV1RolesGetRequest: C1ApiIamV1RolesGetRequest,
@@ -63,19 +65,21 @@ export const C1ApiIamV1RolesGetResponse$inboundSchema: z.ZodType<
   C1ApiIamV1RolesGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  GetRolesResponse: shared.GetRolesResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "GetRolesResponse": "getRolesResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    GetRolesResponse: shared.GetRolesResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "GetRolesResponse": "getRolesResponse",
+    });
+  })
+);
 
 export function c1ApiIamV1RolesGetResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ArtifactInput,
   ArtifactInput$Outbound,
@@ -41,10 +42,12 @@ export const ArtifactServiceUpdateRequest$outboundSchema: z.ZodType<
   ArtifactServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   ArtifactServiceUpdateRequest
-> = z.object({
-  artifact: z.nullable(ArtifactInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    artifact: z.nullable(ArtifactInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function artifactServiceUpdateRequestToJSON(
   artifactServiceUpdateRequest: ArtifactServiceUpdateRequest,

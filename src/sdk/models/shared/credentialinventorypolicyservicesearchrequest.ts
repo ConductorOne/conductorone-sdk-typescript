@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   CredentialInventoryPolicyRef,
   CredentialInventoryPolicyRef$Outbound,
@@ -45,13 +46,15 @@ export const CredentialInventoryPolicyServiceSearchRequest$outboundSchema:
     CredentialInventoryPolicyServiceSearchRequest$Outbound,
     z.ZodTypeDef,
     CredentialInventoryPolicyServiceSearchRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    refs: z.nullable(z.array(CredentialInventoryPolicyRef$outboundSchema))
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+      refs: z.nullable(z.array(CredentialInventoryPolicyRef$outboundSchema))
+        .optional(),
+    })
+  );
 
 export function credentialInventoryPolicyServiceSearchRequestToJSON(
   credentialInventoryPolicyServiceSearchRequest:

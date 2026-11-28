@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The CreateRiskLevelAttributeValueRequest message.
@@ -24,9 +25,11 @@ export const CreateRiskLevelAttributeValueRequest$outboundSchema: z.ZodType<
   CreateRiskLevelAttributeValueRequest$Outbound,
   z.ZodTypeDef,
   CreateRiskLevelAttributeValueRequest
-> = z.object({
-  value: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    value: z.string().optional(),
+  })
+);
 
 export function createRiskLevelAttributeValueRequestToJSON(
   createRiskLevelAttributeValueRequest: CreateRiskLevelAttributeValueRequest,

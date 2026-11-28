@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The LocalUserInvitationServiceCreateRequest message.
@@ -54,15 +55,17 @@ export const LocalUserInvitationServiceCreateRequest$outboundSchema: z.ZodType<
   LocalUserInvitationServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   LocalUserInvitationServiceCreateRequest
-> = z.object({
-  displayName: z.string(),
-  email: z.string(),
-  initialRoleIds: z.nullable(z.array(z.string())).optional(),
-  jobId: z.string().optional(),
-  onboardingFlowId: z.string().optional(),
-  purpose: z.string().optional(),
-  sponsorUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    email: z.string(),
+    initialRoleIds: z.nullable(z.array(z.string())).optional(),
+    jobId: z.string().optional(),
+    onboardingFlowId: z.string().optional(),
+    purpose: z.string().optional(),
+    sponsorUserId: z.string().optional(),
+  })
+);
 
 export function localUserInvitationServiceCreateRequestToJSON(
   localUserInvitationServiceCreateRequest:

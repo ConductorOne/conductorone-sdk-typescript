@@ -28,12 +28,16 @@ export class Principal extends ClientSDK {
    * List lists service principals for the tenant.
    */
   async list(
+    request?:
+      | operations.C1ApiServicePrincipalV1ServicePrincipalServiceListRequest
+      | undefined,
     options?: RequestOptions,
   ): Promise<
     operations.C1ApiServicePrincipalV1ServicePrincipalServiceListResponse
   > {
     return unwrapAsync(principalList(
       this,
+      request,
       options,
     ));
   }

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -59,19 +59,21 @@ export const C1ApiSsov1SSOApplicationServiceBatchImportSubjectCompatibilityReque
     C1ApiSsov1SSOApplicationServiceBatchImportSubjectCompatibilityRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSsov1SSOApplicationServiceBatchImportSubjectCompatibilityRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    ssoApplicationServiceBatchImportSubjectCompatibilityRequest: shared
-      .SSOApplicationServiceBatchImportSubjectCompatibilityRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      ssoApplicationServiceBatchImportSubjectCompatibilityRequest:
-        "SSOApplicationServiceBatchImportSubjectCompatibilityRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      ssoApplicationServiceBatchImportSubjectCompatibilityRequest: shared
+        .SSOApplicationServiceBatchImportSubjectCompatibilityRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        ssoApplicationServiceBatchImportSubjectCompatibilityRequest:
+          "SSOApplicationServiceBatchImportSubjectCompatibilityRequest",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceBatchImportSubjectCompatibilityRequestToJSON(
   c1ApiSsov1SSOApplicationServiceBatchImportSubjectCompatibilityRequest:
@@ -91,22 +93,24 @@ export const C1ApiSsov1SSOApplicationServiceBatchImportSubjectCompatibilityRespo
     C1ApiSsov1SSOApplicationServiceBatchImportSubjectCompatibilityResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSOApplicationServiceBatchImportSubjectCompatibilityResponse: shared
-      .SSOApplicationServiceBatchImportSubjectCompatibilityResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSOApplicationServiceBatchImportSubjectCompatibilityResponse":
-        "ssoApplicationServiceBatchImportSubjectCompatibilityResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSOApplicationServiceBatchImportSubjectCompatibilityResponse: shared
+        .SSOApplicationServiceBatchImportSubjectCompatibilityResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSOApplicationServiceBatchImportSubjectCompatibilityResponse":
+          "ssoApplicationServiceBatchImportSubjectCompatibilityResponse",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceBatchImportSubjectCompatibilityResponseFromJSON(
   jsonString: string,

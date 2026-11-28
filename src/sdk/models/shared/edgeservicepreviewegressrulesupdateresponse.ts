@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,10 @@ export type EdgeServicePreviewEgressRulesUpdateResponse = {
    */
   results?: Array<EdgeEgressHostChange> | null | undefined;
   /**
-   * The Edge never configured egress rules, so saving any list, even an
+   * Saving starts a configured policy with an unmatched deny on an Edge that
    *
    * @remarks
-   *  empty one, switches it to denying every host no rule allows.
+   *  never configured rules. False when the proposed unmatched rule is ALLOW.
    */
   startsDefaultDeny?: boolean | undefined;
 };
@@ -42,11 +42,14 @@ export const EdgeServicePreviewEgressRulesUpdateResponse$inboundSchema:
     EdgeServicePreviewEgressRulesUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    check: z.nullable(EdgeEgressRuleListCheck$inboundSchema).optional(),
-    results: z.nullable(z.array(EdgeEgressHostChange$inboundSchema)).optional(),
-    startsDefaultDeny: z.boolean().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      check: z.nullable(EdgeEgressRuleListCheck$inboundSchema).optional(),
+      results: z.nullable(z.array(EdgeEgressHostChange$inboundSchema))
+        .optional(),
+      startsDefaultDeny: z.boolean().optional(),
+    })
+  );
 
 export function edgeServicePreviewEgressRulesUpdateResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,10 +27,12 @@ export const AcceptRiskRoutingAction$inboundSchema: z.ZodType<
   AcceptRiskRoutingAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  duration: z.nullable(z.string()).optional(),
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    duration: z.nullable(z.string()).optional(),
+    reason: z.string().optional(),
+  })
+);
 /** @internal */
 export type AcceptRiskRoutingAction$Outbound = {
   duration?: string | null | undefined;
@@ -42,10 +44,12 @@ export const AcceptRiskRoutingAction$outboundSchema: z.ZodType<
   AcceptRiskRoutingAction$Outbound,
   z.ZodTypeDef,
   AcceptRiskRoutingAction
-> = z.object({
-  duration: z.nullable(z.string()).optional(),
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    duration: z.nullable(z.string()).optional(),
+    reason: z.string().optional(),
+  })
+);
 
 export function acceptRiskRoutingActionToJSON(
   acceptRiskRoutingAction: AcceptRiskRoutingAction,

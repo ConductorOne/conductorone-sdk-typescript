@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -54,25 +54,31 @@ export const FindingRiskFactorSeverity$inboundSchema: z.ZodType<
   FindingRiskFactorSeverity,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FindingRiskFactorSeverity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(FindingRiskFactorSeverity)
+);
 /** @internal */
 export const FindingRiskFactorSeverity$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FindingRiskFactorSeverity
-> = openEnums.outboundSchema(FindingRiskFactorSeverity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FindingRiskFactorSeverity)
+);
 
 /** @internal */
 export const FindingRiskFactor$inboundSchema: z.ZodType<
   FindingRiskFactor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  name: z.string().optional(),
-  severity: FindingRiskFactorSeverity$inboundSchema.optional(),
-  weight: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    name: z.string().optional(),
+    severity: FindingRiskFactorSeverity$inboundSchema.optional(),
+    weight: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type FindingRiskFactor$Outbound = {
   description?: string | undefined;
@@ -86,12 +92,14 @@ export const FindingRiskFactor$outboundSchema: z.ZodType<
   FindingRiskFactor$Outbound,
   z.ZodTypeDef,
   FindingRiskFactor
-> = z.object({
-  description: z.string().optional(),
-  name: z.string().optional(),
-  severity: FindingRiskFactorSeverity$outboundSchema.optional(),
-  weight: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    name: z.string().optional(),
+    severity: FindingRiskFactorSeverity$outboundSchema.optional(),
+    weight: z.number().int().optional(),
+  })
+);
 
 export function findingRiskFactorToJSON(
   findingRiskFactor: FindingRiskFactor,

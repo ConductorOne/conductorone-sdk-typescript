@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -54,12 +54,14 @@ export const MCPServerServiceTestConnectionResponse$inboundSchema: z.ZodType<
   MCPServerServiceTestConnectionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  credentialVerified: z.boolean().optional(),
-  failureReason: z.string().optional(),
-  reachable: z.boolean().optional(),
-  toolCount: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credentialVerified: z.boolean().optional(),
+    failureReason: z.string().optional(),
+    reachable: z.boolean().optional(),
+    toolCount: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function mcpServerServiceTestConnectionResponseFromJSON(
   jsonString: string,

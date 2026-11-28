@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,17 +50,19 @@ export const C1ApiAppV1AppEntitlementsUpdateRequest$outboundSchema: z.ZodType<
   C1ApiAppV1AppEntitlementsUpdateRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV1AppEntitlementsUpdateRequest
-> = z.object({
-  appId: z.string(),
-  id: z.string(),
-  updateAppEntitlementRequest: shared.UpdateAppEntitlementRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    updateAppEntitlementRequest: "UpdateAppEntitlementRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    id: z.string(),
+    updateAppEntitlementRequest: shared
+      .UpdateAppEntitlementRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      updateAppEntitlementRequest: "UpdateAppEntitlementRequest",
+    });
+  })
+);
 
 export function c1ApiAppV1AppEntitlementsUpdateRequestToJSON(
   c1ApiAppV1AppEntitlementsUpdateRequest:
@@ -78,20 +80,22 @@ export const C1ApiAppV1AppEntitlementsUpdateResponse$inboundSchema: z.ZodType<
   C1ApiAppV1AppEntitlementsUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  UpdateAppEntitlementResponse: shared
-    .UpdateAppEntitlementResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "UpdateAppEntitlementResponse": "updateAppEntitlementResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    UpdateAppEntitlementResponse: shared
+      .UpdateAppEntitlementResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "UpdateAppEntitlementResponse": "updateAppEntitlementResponse",
+    });
+  })
+);
 
 export function c1ApiAppV1AppEntitlementsUpdateResponseFromJSON(
   jsonString: string,

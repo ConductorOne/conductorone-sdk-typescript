@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,12 +23,14 @@ export const CredentialExpiringEvidence$inboundSchema: z.ZodType<
   CredentialExpiringEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expired: z.boolean().optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expired: z.boolean().optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type CredentialExpiringEvidence$Outbound = {
   expired?: boolean | undefined;
@@ -40,10 +42,12 @@ export const CredentialExpiringEvidence$outboundSchema: z.ZodType<
   CredentialExpiringEvidence$Outbound,
   z.ZodTypeDef,
   CredentialExpiringEvidence
-> = z.object({
-  expired: z.boolean().optional(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expired: z.boolean().optional(),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function credentialExpiringEvidenceToJSON(
   credentialExpiringEvidence: CredentialExpiringEvidence,

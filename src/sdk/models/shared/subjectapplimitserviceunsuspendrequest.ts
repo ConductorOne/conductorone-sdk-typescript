@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SubjectAppLimitServiceUnsuspendRequest message.
@@ -17,7 +18,7 @@ export const SubjectAppLimitServiceUnsuspendRequest$outboundSchema: z.ZodType<
   SubjectAppLimitServiceUnsuspendRequest$Outbound,
   z.ZodTypeDef,
   SubjectAppLimitServiceUnsuspendRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function subjectAppLimitServiceUnsuspendRequestToJSON(
   subjectAppLimitServiceUnsuspendRequest:

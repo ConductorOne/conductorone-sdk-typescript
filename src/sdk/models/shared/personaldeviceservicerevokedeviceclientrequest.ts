@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The PersonalDeviceServiceRevokeDeviceClientRequest message.
@@ -18,7 +19,7 @@ export const PersonalDeviceServiceRevokeDeviceClientRequest$outboundSchema:
     PersonalDeviceServiceRevokeDeviceClientRequest$Outbound,
     z.ZodTypeDef,
     PersonalDeviceServiceRevokeDeviceClientRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function personalDeviceServiceRevokeDeviceClientRequestToJSON(
   personalDeviceServiceRevokeDeviceClientRequest:

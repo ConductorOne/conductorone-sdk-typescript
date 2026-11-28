@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const MagicVault$inboundSchema: z.ZodType<
   MagicVault,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowUnauthedViews: z.boolean().optional(),
-  allowedViews: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowUnauthedViews: z.boolean().optional(),
+    allowedViews: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type MagicVault$Outbound = {
   allowUnauthedViews?: boolean | undefined;
@@ -41,10 +43,12 @@ export const MagicVault$outboundSchema: z.ZodType<
   MagicVault$Outbound,
   z.ZodTypeDef,
   MagicVault
-> = z.object({
-  allowUnauthedViews: z.boolean().optional(),
-  allowedViews: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowUnauthedViews: z.boolean().optional(),
+    allowedViews: z.number().int().optional(),
+  })
+);
 
 export function magicVaultToJSON(magicVault: MagicVault): string {
   return JSON.stringify(MagicVault$outboundSchema.parse(magicVault));

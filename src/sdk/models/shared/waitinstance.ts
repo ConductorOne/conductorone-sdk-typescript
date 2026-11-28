@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -99,37 +99,43 @@ export const WaitInstanceState$inboundSchema: z.ZodType<
   WaitInstanceState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(WaitInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(WaitInstanceState)
+);
 /** @internal */
 export const WaitInstanceState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   WaitInstanceState
-> = openEnums.outboundSchema(WaitInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(WaitInstanceState)
+);
 
 /** @internal */
 export const WaitInstance$inboundSchema: z.ZodType<
   WaitInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  commentOnFirstWait: z.string().optional(),
-  commentOnTimeout: z.string().optional(),
-  condition: z.nullable(WaitConditionInstance$inboundSchema).optional(),
-  name: z.string().optional(),
-  skipped: z.nullable(SkippedAction$inboundSchema).optional(),
-  startedWaitingAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  state: WaitInstanceState$inboundSchema.optional(),
-  succeeded: z.nullable(ConditionSucceeded$inboundSchema).optional(),
-  timedOut: z.nullable(ConditionTimedOut$inboundSchema).optional(),
-  timeout: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  timeoutDuration: z.nullable(z.string()).optional(),
-  untilTime: z.nullable(WaitUntilTimeInstance$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commentOnFirstWait: z.string().optional(),
+    commentOnTimeout: z.string().optional(),
+    condition: z.nullable(WaitConditionInstance$inboundSchema).optional(),
+    name: z.string().optional(),
+    skipped: z.nullable(SkippedAction$inboundSchema).optional(),
+    startedWaitingAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    state: WaitInstanceState$inboundSchema.optional(),
+    succeeded: z.nullable(ConditionSucceeded$inboundSchema).optional(),
+    timedOut: z.nullable(ConditionTimedOut$inboundSchema).optional(),
+    timeout: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    timeoutDuration: z.nullable(z.string()).optional(),
+    untilTime: z.nullable(WaitUntilTimeInstance$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type WaitInstance$Outbound = {
   commentOnFirstWait?: string | undefined;
@@ -151,21 +157,23 @@ export const WaitInstance$outboundSchema: z.ZodType<
   WaitInstance$Outbound,
   z.ZodTypeDef,
   WaitInstance
-> = z.object({
-  commentOnFirstWait: z.string().optional(),
-  commentOnTimeout: z.string().optional(),
-  condition: z.nullable(WaitConditionInstance$outboundSchema).optional(),
-  name: z.string().optional(),
-  skipped: z.nullable(SkippedAction$outboundSchema).optional(),
-  startedWaitingAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  state: WaitInstanceState$outboundSchema.optional(),
-  succeeded: z.nullable(ConditionSucceeded$outboundSchema).optional(),
-  timedOut: z.nullable(ConditionTimedOut$outboundSchema).optional(),
-  timeout: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  timeoutDuration: z.nullable(z.string()).optional(),
-  untilTime: z.nullable(WaitUntilTimeInstance$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commentOnFirstWait: z.string().optional(),
+    commentOnTimeout: z.string().optional(),
+    condition: z.nullable(WaitConditionInstance$outboundSchema).optional(),
+    name: z.string().optional(),
+    skipped: z.nullable(SkippedAction$outboundSchema).optional(),
+    startedWaitingAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    state: WaitInstanceState$outboundSchema.optional(),
+    succeeded: z.nullable(ConditionSucceeded$outboundSchema).optional(),
+    timedOut: z.nullable(ConditionTimedOut$outboundSchema).optional(),
+    timeout: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    timeoutDuration: z.nullable(z.string()).optional(),
+    untilTime: z.nullable(WaitUntilTimeInstance$outboundSchema).optional(),
+  })
+);
 
 export function waitInstanceToJSON(waitInstance: WaitInstance): string {
   return JSON.stringify(WaitInstance$outboundSchema.parse(waitInstance));

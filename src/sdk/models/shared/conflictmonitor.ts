@@ -3,13 +3,41 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccessConflictNotificationConfig,
   AccessConflictNotificationConfig$inboundSchema,
 } from "./accessconflictnotificationconfig.js";
+import {
+  ConflictMonitorRule,
+  ConflictMonitorRule$inboundSchema,
+} from "./conflictmonitorrule.js";
+
+/**
+ * Effective severity for new findings from this monitor. This is medium until
+ *
+ * @remarks
+ *  configured severity is enabled for your tenant, even if another value is stored.
+ */
+export const ConflictMonitorSeverity = {
+  FindingSeverityUnspecified: "FINDING_SEVERITY_UNSPECIFIED",
+  FindingSeverityInfo: "FINDING_SEVERITY_INFO",
+  FindingSeverityLow: "FINDING_SEVERITY_LOW",
+  FindingSeverityMedium: "FINDING_SEVERITY_MEDIUM",
+  FindingSeverityHigh: "FINDING_SEVERITY_HIGH",
+  FindingSeverityCritical: "FINDING_SEVERITY_CRITICAL",
+} as const;
+/**
+ * Effective severity for new findings from this monitor. This is medium until
+ *
+ * @remarks
+ *  configured severity is enabled for your tenant, even if another value is stored.
+ */
+export type ConflictMonitorSeverity = OpenEnum<typeof ConflictMonitorSeverity>;
 
 /**
  * A conflict monitor defines a Separation of Duty rule between two entitlement sets.
@@ -45,41 +73,62 @@ export type ConflictMonitor = {
    */
   id?: string | undefined;
   /**
-   * When true, the rule flags users who are in set A but NOT in set B ("is not
+   * Deprecated: use rule. True when rule is holds_a_without_b.
    *
-   * @remarks
-   *  in"), instead of the default A-and-B intersection.
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   negateGroupB?: boolean | undefined;
   notificationConfig?: AccessConflictNotificationConfig | null | undefined;
+  rule?: ConflictMonitorRule | null | undefined;
+  /**
+   * Effective severity for new findings from this monitor. This is medium until
+   *
+   * @remarks
+   *  configured severity is enabled for your tenant, even if another value is stored.
+   */
+  severity?: ConflictMonitorSeverity | undefined;
   updatedAt?: Date | null | undefined;
 };
+
+/** @internal */
+export const ConflictMonitorSeverity$inboundSchema: z.ZodType<
+  ConflictMonitorSeverity,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ConflictMonitorSeverity)
+);
 
 /** @internal */
 export const ConflictMonitor$inboundSchema: z.ZodType<
   ConflictMonitor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  entitlementSetAId: z.string().optional(),
-  entitlementSetBId: z.string().optional(),
-  id: z.string().optional(),
-  negateGroupB: z.boolean().optional(),
-  notificationConfig: z.nullable(AccessConflictNotificationConfig$inboundSchema)
-    .optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    entitlementSetAId: z.string().optional(),
+    entitlementSetBId: z.string().optional(),
+    id: z.string().optional(),
+    negateGroupB: z.boolean().optional(),
+    notificationConfig: z.nullable(
+      AccessConflictNotificationConfig$inboundSchema,
+    ).optional(),
+    rule: z.nullable(ConflictMonitorRule$inboundSchema).optional(),
+    severity: ConflictMonitorSeverity$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function conflictMonitorFromJSON(
   jsonString: string,

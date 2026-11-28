@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AuthzenServerServiceDeleteRequest deletes the AuthZEN server for an app.
@@ -17,7 +18,7 @@ export const AuthzenServerServiceDeleteRequest$outboundSchema: z.ZodType<
   AuthzenServerServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   AuthzenServerServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function authzenServerServiceDeleteRequestToJSON(
   authzenServerServiceDeleteRequest: AuthzenServerServiceDeleteRequest,

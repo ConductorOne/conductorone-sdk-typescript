@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AttributionFilters narrows settled usage before grouping. All predicates are
@@ -50,13 +51,15 @@ export const AttributionFilters$outboundSchema: z.ZodType<
   AttributionFilters$Outbound,
   z.ZodTypeDef,
   AttributionFilters
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  departmentAbsent: z.boolean().optional(),
-  departments: z.nullable(z.array(z.string())).optional(),
-  modelIds: z.nullable(z.array(z.string())).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    departmentAbsent: z.boolean().optional(),
+    departments: z.nullable(z.array(z.string())).optional(),
+    modelIds: z.nullable(z.array(z.string())).optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function attributionFiltersToJSON(
   attributionFilters: AttributionFilters,

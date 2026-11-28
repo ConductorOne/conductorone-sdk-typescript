@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -55,24 +55,26 @@ export const CredentialType$inboundSchema: z.ZodType<
   CredentialType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CredentialType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(CredentialType));
 /** @internal */
 export const CredentialType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CredentialType
-> = openEnums.outboundSchema(CredentialType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(CredentialType));
 
 /** @internal */
 export const PerCredentialDuration$inboundSchema: z.ZodType<
   PerCredentialDuration,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessTokenTtlSeconds: z.number().int().optional(),
-  credentialType: CredentialType$inboundSchema.optional(),
-  maxSessionDurationSeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessTokenTtlSeconds: z.number().int().optional(),
+    credentialType: CredentialType$inboundSchema.optional(),
+    maxSessionDurationSeconds: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type PerCredentialDuration$Outbound = {
   accessTokenTtlSeconds?: number | undefined;
@@ -85,11 +87,13 @@ export const PerCredentialDuration$outboundSchema: z.ZodType<
   PerCredentialDuration$Outbound,
   z.ZodTypeDef,
   PerCredentialDuration
-> = z.object({
-  accessTokenTtlSeconds: z.number().int().optional(),
-  credentialType: CredentialType$outboundSchema.optional(),
-  maxSessionDurationSeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessTokenTtlSeconds: z.number().int().optional(),
+    credentialType: CredentialType$outboundSchema.optional(),
+    maxSessionDurationSeconds: z.number().int().optional(),
+  })
+);
 
 export function perCredentialDurationToJSON(
   perCredentialDuration: PerCredentialDuration,

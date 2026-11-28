@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -45,23 +45,29 @@ export const AgentTraitStatus$inboundSchema: z.ZodType<
   AgentTraitStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AgentTraitStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AgentTraitStatus)
+);
 /** @internal */
 export const AgentTraitStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AgentTraitStatus
-> = openEnums.outboundSchema(AgentTraitStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AgentTraitStatus)
+);
 
 /** @internal */
 export const AgentTrait$inboundSchema: z.ZodType<
   AgentTrait,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  identityAppUserId: z.string().optional(),
-  status: AgentTraitStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identityAppUserId: z.string().optional(),
+    status: AgentTraitStatus$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type AgentTrait$Outbound = {
   identityAppUserId?: string | undefined;
@@ -73,10 +79,12 @@ export const AgentTrait$outboundSchema: z.ZodType<
   AgentTrait$Outbound,
   z.ZodTypeDef,
   AgentTrait
-> = z.object({
-  identityAppUserId: z.string().optional(),
-  status: AgentTraitStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identityAppUserId: z.string().optional(),
+    status: AgentTraitStatus$outboundSchema.optional(),
+  })
+);
 
 export function agentTraitToJSON(agentTrait: AgentTrait): string {
   return JSON.stringify(AgentTrait$outboundSchema.parse(agentTrait));

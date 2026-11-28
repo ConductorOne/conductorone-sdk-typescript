@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for updating the duration of an existing grant.
@@ -21,10 +22,12 @@ export const UpdateGrantDurationRequest$outboundSchema: z.ZodType<
   UpdateGrantDurationRequest$Outbound,
   z.ZodTypeDef,
   UpdateGrantDurationRequest
-> = z.object({
-  newDeprovisionAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    newDeprovisionAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function updateGrantDurationRequestToJSON(
   updateGrantDurationRequest: UpdateGrantDurationRequest,

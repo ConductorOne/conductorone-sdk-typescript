@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The BulkSnoozeAction message.
@@ -26,10 +27,13 @@ export const BulkSnoozeAction$outboundSchema: z.ZodType<
   BulkSnoozeAction$Outbound,
   z.ZodTypeDef,
   BulkSnoozeAction
-> = z.object({
-  reason: z.string().optional(),
-  snoozeUntil: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string().optional(),
+    snoozeUntil: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function bulkSnoozeActionToJSON(
   bulkSnoozeAction: BulkSnoozeAction,

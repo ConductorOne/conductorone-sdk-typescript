@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,11 +36,13 @@ export const SpendRemedyReviewTarget$inboundSchema: z.ZodType<
   SpendRemedyReviewTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  absent: z.nullable(SpendRemedyAbsentTarget$inboundSchema).optional(),
-  deleted: z.nullable(SpendRemedyControlsSnapshot$inboundSchema).optional(),
-  live: z.nullable(SpendRemedyControlsSnapshot$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    absent: z.nullable(SpendRemedyAbsentTarget$inboundSchema).optional(),
+    deleted: z.nullable(SpendRemedyControlsSnapshot$inboundSchema).optional(),
+    live: z.nullable(SpendRemedyControlsSnapshot$inboundSchema).optional(),
+  })
+);
 
 export function spendRemedyReviewTargetFromJSON(
   jsonString: string,

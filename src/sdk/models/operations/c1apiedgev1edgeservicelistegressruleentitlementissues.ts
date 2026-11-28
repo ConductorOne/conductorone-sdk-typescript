@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,14 +48,16 @@ export const C1ApiEdgeV1EdgeServiceListEgressRuleEntitlementIssuesRequest$outbou
     C1ApiEdgeV1EdgeServiceListEgressRuleEntitlementIssuesRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListEgressRuleEntitlementIssuesRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressRuleEntitlementIssuesRequestToJSON(
   c1ApiEdgeV1EdgeServiceListEgressRuleEntitlementIssuesRequest:
@@ -73,22 +75,24 @@ export const C1ApiEdgeV1EdgeServiceListEgressRuleEntitlementIssuesResponse$inbou
     C1ApiEdgeV1EdgeServiceListEgressRuleEntitlementIssuesResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListEgressRuleEntitlementIssuesResponse: shared
-      .EdgeServiceListEgressRuleEntitlementIssuesResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListEgressRuleEntitlementIssuesResponse":
-        "edgeServiceListEgressRuleEntitlementIssuesResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListEgressRuleEntitlementIssuesResponse: shared
+        .EdgeServiceListEgressRuleEntitlementIssuesResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListEgressRuleEntitlementIssuesResponse":
+          "edgeServiceListEgressRuleEntitlementIssuesResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressRuleEntitlementIssuesResponseFromJSON(
   jsonString: string,

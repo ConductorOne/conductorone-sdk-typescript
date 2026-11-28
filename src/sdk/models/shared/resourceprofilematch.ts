@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,10 +30,12 @@ export const ResourceProfileMatch$inboundSchema: z.ZodType<
   ResourceProfileMatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string().optional(),
-  value: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string().optional(),
+    value: z.string().optional(),
+  })
+);
 /** @internal */
 export type ResourceProfileMatch$Outbound = {
   key?: string | undefined;
@@ -45,10 +47,12 @@ export const ResourceProfileMatch$outboundSchema: z.ZodType<
   ResourceProfileMatch$Outbound,
   z.ZodTypeDef,
   ResourceProfileMatch
-> = z.object({
-  key: z.string().optional(),
-  value: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string().optional(),
+    value: z.string().optional(),
+  })
+);
 
 export function resourceProfileMatchToJSON(
   resourceProfileMatch: ResourceProfileMatch,

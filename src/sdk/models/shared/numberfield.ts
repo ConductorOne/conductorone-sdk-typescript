@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const NumberField$inboundSchema: z.ZodType<
   NumberField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  maxValue: z.string().transform(v => parseInt(v, 10)).optional(),
-  minValue: z.string().transform(v => parseInt(v, 10)).optional(),
-  step: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxValue: z.string().transform(v => parseInt(v, 10)).optional(),
+    minValue: z.string().transform(v => parseInt(v, 10)).optional(),
+    step: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 /** @internal */
 export type NumberField$Outbound = {
   maxValue?: string | undefined;
@@ -47,11 +49,13 @@ export const NumberField$outboundSchema: z.ZodType<
   NumberField$Outbound,
   z.ZodTypeDef,
   NumberField
-> = z.object({
-  maxValue: z.number().int().transform(v => `${v}`).optional(),
-  minValue: z.number().int().transform(v => `${v}`).optional(),
-  step: z.number().int().transform(v => `${v}`).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxValue: z.number().int().transform(v => `${v}`).optional(),
+    minValue: z.number().int().transform(v => `${v}`).optional(),
+    step: z.number().int().transform(v => `${v}`).optional(),
+  })
+);
 
 export function numberFieldToJSON(numberField: NumberField): string {
   return JSON.stringify(NumberField$outboundSchema.parse(numberField));

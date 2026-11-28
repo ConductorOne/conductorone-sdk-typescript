@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -91,58 +91,68 @@ export const AccessReviewInclusionScopeAppUserStatuses$inboundSchema: z.ZodType<
   AccessReviewInclusionScopeAppUserStatuses,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewInclusionScopeAppUserStatuses);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewInclusionScopeAppUserStatuses)
+);
 /** @internal */
 export const AccessReviewInclusionScopeAppUserStatuses$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, AccessReviewInclusionScopeAppUserStatuses> =
-    openEnums.outboundSchema(AccessReviewInclusionScopeAppUserStatuses);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(AccessReviewInclusionScopeAppUserStatuses)
+    );
 
 /** @internal */
 export const AccessReviewInclusionScopeAppUserTypes$inboundSchema: z.ZodType<
   AccessReviewInclusionScopeAppUserTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewInclusionScopeAppUserTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewInclusionScopeAppUserTypes)
+);
 /** @internal */
 export const AccessReviewInclusionScopeAppUserTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessReviewInclusionScopeAppUserTypes
-> = openEnums.outboundSchema(AccessReviewInclusionScopeAppUserTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccessReviewInclusionScopeAppUserTypes)
+);
 
 /** @internal */
 export const UserStatuses$inboundSchema: z.ZodType<
   UserStatuses,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(UserStatuses);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(UserStatuses));
 /** @internal */
 export const UserStatuses$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UserStatuses
-> = openEnums.outboundSchema(UserStatuses);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(UserStatuses));
 
 /** @internal */
 export const AccessReviewInclusionScope$inboundSchema: z.ZodType<
   AccessReviewInclusionScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appUserStatuses: z.nullable(
-    z.array(AccessReviewInclusionScopeAppUserStatuses$inboundSchema),
-  ).optional(),
-  appUserTypes: z.nullable(
-    z.array(AccessReviewInclusionScopeAppUserTypes$inboundSchema),
-  ).optional(),
-  managerIds: z.nullable(z.array(z.string())).optional(),
-  multiUserProfileAttributes: z.record(
-    IncludedUserAttributeValues$inboundSchema,
-  ).optional(),
-  noAccountOwners: z.boolean().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-  userStatuses: z.nullable(z.array(UserStatuses$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserStatuses: z.nullable(
+      z.array(AccessReviewInclusionScopeAppUserStatuses$inboundSchema),
+    ).optional(),
+    appUserTypes: z.nullable(
+      z.array(AccessReviewInclusionScopeAppUserTypes$inboundSchema),
+    ).optional(),
+    managerIds: z.nullable(z.array(z.string())).optional(),
+    multiUserProfileAttributes: z.record(
+      IncludedUserAttributeValues$inboundSchema,
+    ).optional(),
+    noAccountOwners: z.boolean().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+    userStatuses: z.nullable(z.array(UserStatuses$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type AccessReviewInclusionScope$Outbound = {
   appUserStatuses?: Array<string> | null | undefined;
@@ -161,21 +171,23 @@ export const AccessReviewInclusionScope$outboundSchema: z.ZodType<
   AccessReviewInclusionScope$Outbound,
   z.ZodTypeDef,
   AccessReviewInclusionScope
-> = z.object({
-  appUserStatuses: z.nullable(
-    z.array(AccessReviewInclusionScopeAppUserStatuses$outboundSchema),
-  ).optional(),
-  appUserTypes: z.nullable(
-    z.array(AccessReviewInclusionScopeAppUserTypes$outboundSchema),
-  ).optional(),
-  managerIds: z.nullable(z.array(z.string())).optional(),
-  multiUserProfileAttributes: z.record(
-    IncludedUserAttributeValues$outboundSchema,
-  ).optional(),
-  noAccountOwners: z.boolean().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-  userStatuses: z.nullable(z.array(UserStatuses$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserStatuses: z.nullable(
+      z.array(AccessReviewInclusionScopeAppUserStatuses$outboundSchema),
+    ).optional(),
+    appUserTypes: z.nullable(
+      z.array(AccessReviewInclusionScopeAppUserTypes$outboundSchema),
+    ).optional(),
+    managerIds: z.nullable(z.array(z.string())).optional(),
+    multiUserProfileAttributes: z.record(
+      IncludedUserAttributeValues$outboundSchema,
+    ).optional(),
+    noAccountOwners: z.boolean().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+    userStatuses: z.nullable(z.array(UserStatuses$outboundSchema)).optional(),
+  })
+);
 
 export function accessReviewInclusionScopeToJSON(
   accessReviewInclusionScope: AccessReviewInclusionScope,

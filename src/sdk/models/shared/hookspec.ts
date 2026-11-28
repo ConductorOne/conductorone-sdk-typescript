@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -119,31 +119,33 @@ export const EventType$inboundSchema: z.ZodType<
   EventType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EventType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(EventType));
 
 /** @internal */
 export const PatternKind$inboundSchema: z.ZodType<
   PatternKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PatternKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(PatternKind));
 
 /** @internal */
 export const HookSpec$inboundSchema: z.ZodType<
   HookSpec,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  celFilter: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  eventType: EventType$inboundSchema.optional(),
-  key: z.string().optional(),
-  patternKind: PatternKind$inboundSchema.optional(),
-  postHook: z.boolean().optional(),
-  priority: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    celFilter: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    eventType: EventType$inboundSchema.optional(),
+    key: z.string().optional(),
+    patternKind: PatternKind$inboundSchema.optional(),
+    postHook: z.boolean().optional(),
+    priority: z.number().int().optional(),
+  })
+);
 
 export function hookSpecFromJSON(
   jsonString: string,

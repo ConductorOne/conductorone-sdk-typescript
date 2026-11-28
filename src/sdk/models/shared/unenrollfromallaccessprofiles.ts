@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -44,13 +44,15 @@ export const UnenrollFromAllAccessProfiles$inboundSchema: z.ZodType<
   UnenrollFromAllAccessProfiles,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  catalogIds: z.nullable(z.array(z.string())).optional(),
-  catalogIdsCel: z.string().optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogIds: z.nullable(z.array(z.string())).optional(),
+    catalogIdsCel: z.string().optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdsCel: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type UnenrollFromAllAccessProfiles$Outbound = {
   catalogIds?: Array<string> | null | undefined;
@@ -65,13 +67,15 @@ export const UnenrollFromAllAccessProfiles$outboundSchema: z.ZodType<
   UnenrollFromAllAccessProfiles$Outbound,
   z.ZodTypeDef,
   UnenrollFromAllAccessProfiles
-> = z.object({
-  catalogIds: z.nullable(z.array(z.string())).optional(),
-  catalogIdsCel: z.string().optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogIds: z.nullable(z.array(z.string())).optional(),
+    catalogIdsCel: z.string().optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdsCel: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+  })
+);
 
 export function unenrollFromAllAccessProfilesToJSON(
   unenrollFromAllAccessProfiles: UnenrollFromAllAccessProfiles,

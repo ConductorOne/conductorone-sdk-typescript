@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,16 +52,18 @@ export const C1ApiServicePrincipalV1ServicePrincipalServiceDeleteRequest$outboun
     C1ApiServicePrincipalV1ServicePrincipalServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiServicePrincipalV1ServicePrincipalServiceDeleteRequest
-  > = z.object({
-    id: z.string(),
-    servicePrincipalServiceDeleteRequest: shared
-      .ServicePrincipalServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      servicePrincipalServiceDeleteRequest:
-        "ServicePrincipalServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      servicePrincipalServiceDeleteRequest: shared
+        .ServicePrincipalServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        servicePrincipalServiceDeleteRequest:
+          "ServicePrincipalServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiServicePrincipalV1ServicePrincipalServiceDeleteRequestToJSON(
   c1ApiServicePrincipalV1ServicePrincipalServiceDeleteRequest:
@@ -79,21 +81,23 @@ export const C1ApiServicePrincipalV1ServicePrincipalServiceDeleteResponse$inboun
     C1ApiServicePrincipalV1ServicePrincipalServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ServicePrincipalServiceDeleteResponse: shared
-      .ServicePrincipalServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ServicePrincipalServiceDeleteResponse":
-        "servicePrincipalServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ServicePrincipalServiceDeleteResponse: shared
+        .ServicePrincipalServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ServicePrincipalServiceDeleteResponse":
+          "servicePrincipalServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiServicePrincipalV1ServicePrincipalServiceDeleteResponseFromJSON(
   jsonString: string,

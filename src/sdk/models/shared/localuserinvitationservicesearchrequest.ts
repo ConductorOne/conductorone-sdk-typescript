@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -53,8 +54,10 @@ export const LocalUserInvitationServiceSearchRequestStatusFilter$outboundSchema:
     string,
     z.ZodTypeDef,
     LocalUserInvitationServiceSearchRequestStatusFilter
-  > = openEnums.outboundSchema(
-    LocalUserInvitationServiceSearchRequestStatusFilter,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      LocalUserInvitationServiceSearchRequestStatusFilter,
+    )
   );
 
 /** @internal */
@@ -70,14 +73,16 @@ export const LocalUserInvitationServiceSearchRequest$outboundSchema: z.ZodType<
   LocalUserInvitationServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   LocalUserInvitationServiceSearchRequest
-> = z.object({
-  directoryAppId: z.string().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  statusFilter:
-    LocalUserInvitationServiceSearchRequestStatusFilter$outboundSchema
-      .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    directoryAppId: z.string().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    statusFilter:
+      LocalUserInvitationServiceSearchRequestStatusFilter$outboundSchema
+        .optional(),
+  })
+);
 
 export function localUserInvitationServiceSearchRequestToJSON(
   localUserInvitationServiceSearchRequest:

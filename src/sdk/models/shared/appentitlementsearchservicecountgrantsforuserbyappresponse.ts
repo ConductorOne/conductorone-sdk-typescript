@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -77,7 +77,7 @@ export type AppEntitlementSearchServiceCountGrantsForUserByAppResponse = {
 
 /** @internal */
 export const Band$inboundSchema: z.ZodType<Band, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Band);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Band));
 
 /** @internal */
 export const AppEntitlementSearchServiceCountGrantsForUserByAppResponse$inboundSchema:
@@ -85,14 +85,16 @@ export const AppEntitlementSearchServiceCountGrantsForUserByAppResponse$inboundS
     AppEntitlementSearchServiceCountGrantsForUserByAppResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    appCount: z.number().int().optional(),
-    appGrantCounts: z.nullable(z.array(GraphAppGrantCount$inboundSchema))
-      .optional(),
-    appUsers: z.nullable(z.array(AppUserRef$inboundSchema)).optional(),
-    band: Band$inboundSchema.optional(),
-    totalGrants: z.string().transform(v => parseInt(v, 10)).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appCount: z.number().int().optional(),
+      appGrantCounts: z.nullable(z.array(GraphAppGrantCount$inboundSchema))
+        .optional(),
+      appUsers: z.nullable(z.array(AppUserRef$inboundSchema)).optional(),
+      band: Band$inboundSchema.optional(),
+      totalGrants: z.string().transform(v => parseInt(v, 10)).optional(),
+    })
+  );
 
 export function appEntitlementSearchServiceCountGrantsForUserByAppResponseFromJSON(
   jsonString: string,

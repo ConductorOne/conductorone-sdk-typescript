@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,12 +38,15 @@ export const EntitlementCluster$inboundSchema: z.ZodType<
   EntitlementCluster,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  avgCoverage: z.number().optional(),
-  avgSimilarity: z.number().optional(),
-  entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema)).optional(),
-  userCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    avgCoverage: z.number().optional(),
+    avgSimilarity: z.number().optional(),
+    entitlements: z.nullable(z.array(CohortEntitlement$inboundSchema))
+      .optional(),
+    userCount: z.number().int().optional(),
+  })
+);
 
 export function entitlementClusterFromJSON(
   jsonString: string,

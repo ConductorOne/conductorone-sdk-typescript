@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,9 +47,11 @@ export const C1ApiAccessconflictV1AccessConflictServiceGetMonitorRequest$outboun
     C1ApiAccessconflictV1AccessConflictServiceGetMonitorRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAccessconflictV1AccessConflictServiceGetMonitorRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiAccessconflictV1AccessConflictServiceGetMonitorRequestToJSON(
   c1ApiAccessconflictV1AccessConflictServiceGetMonitorRequest:
@@ -67,19 +69,21 @@ export const C1ApiAccessconflictV1AccessConflictServiceGetMonitorResponse$inboun
     C1ApiAccessconflictV1AccessConflictServiceGetMonitorResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ConflictMonitor: shared.ConflictMonitor$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ConflictMonitor": "conflictMonitor",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ConflictMonitor: shared.ConflictMonitor$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ConflictMonitor": "conflictMonitor",
+      });
+    })
+  );
 
 export function c1ApiAccessconflictV1AccessConflictServiceGetMonitorResponseFromJSON(
   jsonString: string,

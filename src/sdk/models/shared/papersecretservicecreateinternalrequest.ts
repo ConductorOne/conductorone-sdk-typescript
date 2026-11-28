@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -128,8 +129,8 @@ export const PaperSecretServiceCreateInternalRequestInputFormat$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretServiceCreateInternalRequestInputFormat
-  > = openEnums.outboundSchema(
-    PaperSecretServiceCreateInternalRequestInputFormat,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(PaperSecretServiceCreateInternalRequestInputFormat)
   );
 
 /** @internal */
@@ -138,8 +139,10 @@ export const PaperSecretServiceCreateInternalRequestRequiredAgeSuite$outboundSch
     string,
     z.ZodTypeDef,
     PaperSecretServiceCreateInternalRequestRequiredAgeSuite
-  > = openEnums.outboundSchema(
-    PaperSecretServiceCreateInternalRequestRequiredAgeSuite,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      PaperSecretServiceCreateInternalRequestRequiredAgeSuite,
+    )
   );
 
 /** @internal */
@@ -148,8 +151,8 @@ export const PaperSecretServiceCreateInternalRequestSecretType$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretServiceCreateInternalRequestSecretType
-  > = openEnums.outboundSchema(
-    PaperSecretServiceCreateInternalRequestSecretType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(PaperSecretServiceCreateInternalRequestSecretType)
   );
 
 /** @internal */
@@ -171,22 +174,25 @@ export const PaperSecretServiceCreateInternalRequest$outboundSchema: z.ZodType<
   PaperSecretServiceCreateInternalRequest$Outbound,
   z.ZodTypeDef,
   PaperSecretServiceCreateInternalRequest
-> = z.object({
-  allowedUserIds: z.nullable(z.array(z.string())).optional(),
-  contentType: z.string().optional(),
-  displayName: z.string().optional(),
-  expiresIn: z.nullable(z.string()).optional(),
-  fileSize: z.number().int().transform(v => `${v}`).optional(),
-  filename: z.string().optional(),
-  inputFormat: PaperSecretServiceCreateInternalRequestInputFormat$outboundSchema
-    .optional(),
-  maxViews: z.number().int().optional(),
-  requiredAgeSuite:
-    PaperSecretServiceCreateInternalRequestRequiredAgeSuite$outboundSchema
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedUserIds: z.nullable(z.array(z.string())).optional(),
+    contentType: z.string().optional(),
+    displayName: z.string().optional(),
+    expiresIn: z.nullable(z.string()).optional(),
+    fileSize: z.number().int().transform(v => `${v}`).optional(),
+    filename: z.string().optional(),
+    inputFormat:
+      PaperSecretServiceCreateInternalRequestInputFormat$outboundSchema
+        .optional(),
+    maxViews: z.number().int().optional(),
+    requiredAgeSuite:
+      PaperSecretServiceCreateInternalRequestRequiredAgeSuite$outboundSchema
+        .optional(),
+    secretType: PaperSecretServiceCreateInternalRequestSecretType$outboundSchema
       .optional(),
-  secretType: PaperSecretServiceCreateInternalRequestSecretType$outboundSchema
-    .optional(),
-});
+  })
+);
 
 export function paperSecretServiceCreateInternalRequestToJSON(
   paperSecretServiceCreateInternalRequest:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,15 +45,17 @@ export const C1ApiAttributeV1AttributesListRiskLevelsRequest$outboundSchema:
     C1ApiAttributeV1AttributesListRiskLevelsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesListRiskLevelsRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesListRiskLevelsRequestToJSON(
   c1ApiAttributeV1AttributesListRiskLevelsRequest:
@@ -72,20 +74,22 @@ export const C1ApiAttributeV1AttributesListRiskLevelsResponse$inboundSchema:
     C1ApiAttributeV1AttributesListRiskLevelsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListRiskLevelsResponse: shared.ListRiskLevelsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListRiskLevelsResponse": "listRiskLevelsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListRiskLevelsResponse: shared.ListRiskLevelsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListRiskLevelsResponse": "listRiskLevelsResponse",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesListRiskLevelsResponseFromJSON(
   jsonString: string,

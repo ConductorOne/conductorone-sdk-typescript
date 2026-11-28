@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,9 +48,11 @@ export const C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueReque
     C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRequestToJSON(
   c1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRequest:
@@ -70,21 +72,23 @@ export const C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueRespo
     C1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetComplianceFrameworkAttributeValueResponse: shared
-      .GetComplianceFrameworkAttributeValueResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetComplianceFrameworkAttributeValueResponse":
-        "getComplianceFrameworkAttributeValueResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetComplianceFrameworkAttributeValueResponse: shared
+        .GetComplianceFrameworkAttributeValueResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetComplianceFrameworkAttributeValueResponse":
+          "getComplianceFrameworkAttributeValueResponse",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesGetComplianceFrameworkAttributeValueResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -69,30 +69,34 @@ export const SSOApplicationOIDCClientPkcePolicy$inboundSchema: z.ZodType<
   SSOApplicationOIDCClientPkcePolicy,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SSOApplicationOIDCClientPkcePolicy);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SSOApplicationOIDCClientPkcePolicy)
+);
 
 /** @internal */
 export const SSOApplicationOIDCClient$inboundSchema: z.ZodType<
   SSOApplicationOIDCClient,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  authentication: z.nullable(
-    SSOApplicationOIDCClientAuthentication$inboundSchema,
-  ).optional(),
-  clientId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  pkcePolicy: SSOApplicationOIDCClientPkcePolicy$inboundSchema.optional(),
-  redirectUris: z.nullable(z.array(z.string())).optional(),
-  ssoApplicationId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    authentication: z.nullable(
+      SSOApplicationOIDCClientAuthentication$inboundSchema,
+    ).optional(),
+    clientId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    pkcePolicy: SSOApplicationOIDCClientPkcePolicy$inboundSchema.optional(),
+    redirectUris: z.nullable(z.array(z.string())).optional(),
+    ssoApplicationId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function ssoApplicationOIDCClientFromJSON(
   jsonString: string,

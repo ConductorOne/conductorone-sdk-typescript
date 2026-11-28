@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -69,18 +70,21 @@ export const ConnectorServiceCreateDelegatedRequest$outboundSchema: z.ZodType<
   ConnectorServiceCreateDelegatedRequest$Outbound,
   z.ZodTypeDef,
   ConnectorServiceCreateDelegatedRequest
-> = z.object({
-  appEntitlementOwnerRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  appManagedStateBindingRef: z.nullable(
-    AppManagedStateBindingRef$outboundSchema,
-  ).optional(),
-  catalogId: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementOwnerRefs: z.nullable(
+      z.array(AppEntitlementRef$outboundSchema),
+    ).optional(),
+    appManagedStateBindingRef: z.nullable(
+      AppManagedStateBindingRef$outboundSchema,
+    ).optional(),
+    catalogId: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    expandMask: z.nullable(ConnectorExpandMask$outboundSchema).optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function connectorServiceCreateDelegatedRequestToJSON(
   connectorServiceCreateDelegatedRequest:

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -202,35 +203,39 @@ export const AgentStatuses$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AgentStatuses
-> = openEnums.outboundSchema(AgentStatuses);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AgentStatuses));
 
 /** @internal */
 export const SearchAppResourcesRequestCredentialTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SearchAppResourcesRequestCredentialTypes
-> = openEnums.outboundSchema(SearchAppResourcesRequestCredentialTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SearchAppResourcesRequestCredentialTypes)
+);
 
 /** @internal */
 export const Direction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Direction
-> = openEnums.outboundSchema(Direction);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Direction));
 
 /** @internal */
 export const SearchAppResourcesRequestNhiTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SearchAppResourcesRequestNhiTypes
-> = openEnums.outboundSchema(SearchAppResourcesRequestNhiTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SearchAppResourcesRequestNhiTypes)
+);
 
 /** @internal */
 export const SortField$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SortField
-> = openEnums.outboundSchema(SortField);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(SortField));
 
 /** @internal */
 export type SearchAppResourcesRequest$Outbound = {
@@ -264,35 +269,37 @@ export const SearchAppResourcesRequest$outboundSchema: z.ZodType<
   SearchAppResourcesRequest$Outbound,
   z.ZodTypeDef,
   SearchAppResourcesRequest
-> = z.object({
-  agentStatuses: z.nullable(z.array(AgentStatuses$outboundSchema)).optional(),
-  appId: z.string().optional(),
-  appIds: z.nullable(z.array(z.string())).optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  credentialTypes: z.nullable(
-    z.array(SearchAppResourcesRequestCredentialTypes$outboundSchema),
-  ).optional(),
-  direction: Direction$outboundSchema.optional(),
-  excludeDeletedApps: z.boolean().optional(),
-  excludeDeletedResourceBindings: z.boolean().optional(),
-  excludeResourceIds: z.nullable(z.array(z.string())).optional(),
-  excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-  nhiTypes: z.nullable(
-    z.array(SearchAppResourcesRequestNhiTypes$outboundSchema),
-  ).optional(),
-  ownerUserIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(AppResourceRef$outboundSchema)).optional(),
-  resourceIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-  secretAging: z.nullable(SecretAgingFilter$outboundSchema).optional(),
-  sortField: SortField$outboundSchema.optional(),
-  unownedOnly: z.boolean().optional(),
-  withOpenFindings: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentStatuses: z.nullable(z.array(AgentStatuses$outboundSchema)).optional(),
+    appId: z.string().optional(),
+    appIds: z.nullable(z.array(z.string())).optional(),
+    appUserIds: z.nullable(z.array(z.string())).optional(),
+    credentialTypes: z.nullable(
+      z.array(SearchAppResourcesRequestCredentialTypes$outboundSchema),
+    ).optional(),
+    direction: Direction$outboundSchema.optional(),
+    excludeDeletedApps: z.boolean().optional(),
+    excludeDeletedResourceBindings: z.boolean().optional(),
+    excludeResourceIds: z.nullable(z.array(z.string())).optional(),
+    excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
+    nhiTypes: z.nullable(
+      z.array(SearchAppResourcesRequestNhiTypes$outboundSchema),
+    ).optional(),
+    ownerUserIds: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(AppResourceRef$outboundSchema)).optional(),
+    resourceIds: z.nullable(z.array(z.string())).optional(),
+    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
+    secretAging: z.nullable(SecretAgingFilter$outboundSchema).optional(),
+    sortField: SortField$outboundSchema.optional(),
+    unownedOnly: z.boolean().optional(),
+    withOpenFindings: z.boolean().optional(),
+  })
+);
 
 export function searchAppResourcesRequestToJSON(
   searchAppResourcesRequest: SearchAppResourcesRequest,

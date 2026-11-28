@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const AcceptInstance$inboundSchema: z.ZodType<
   AcceptInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  acceptMessage: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acceptMessage: z.string().optional(),
+  })
+);
 /** @internal */
 export type AcceptInstance$Outbound = {
   acceptMessage?: string | undefined;
@@ -38,9 +40,11 @@ export const AcceptInstance$outboundSchema: z.ZodType<
   AcceptInstance$Outbound,
   z.ZodTypeDef,
   AcceptInstance
-> = z.object({
-  acceptMessage: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acceptMessage: z.string().optional(),
+  })
+);
 
 export function acceptInstanceToJSON(acceptInstance: AcceptInstance): string {
   return JSON.stringify(AcceptInstance$outboundSchema.parse(acceptInstance));

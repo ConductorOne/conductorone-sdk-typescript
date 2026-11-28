@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,16 +52,18 @@ export const C1ApiServicePrincipalV1ServicePrincipalServiceUpdateRequest$outboun
     C1ApiServicePrincipalV1ServicePrincipalServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiServicePrincipalV1ServicePrincipalServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    servicePrincipalServiceUpdateRequest: shared
-      .ServicePrincipalServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      servicePrincipalServiceUpdateRequest:
-        "ServicePrincipalServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      servicePrincipalServiceUpdateRequest: shared
+        .ServicePrincipalServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        servicePrincipalServiceUpdateRequest:
+          "ServicePrincipalServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiServicePrincipalV1ServicePrincipalServiceUpdateRequestToJSON(
   c1ApiServicePrincipalV1ServicePrincipalServiceUpdateRequest:
@@ -79,21 +81,23 @@ export const C1ApiServicePrincipalV1ServicePrincipalServiceUpdateResponse$inboun
     C1ApiServicePrincipalV1ServicePrincipalServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ServicePrincipalServiceUpdateResponse: shared
-      .ServicePrincipalServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ServicePrincipalServiceUpdateResponse":
-        "servicePrincipalServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ServicePrincipalServiceUpdateResponse: shared
+        .ServicePrincipalServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ServicePrincipalServiceUpdateResponse":
+          "servicePrincipalServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiServicePrincipalV1ServicePrincipalServiceUpdateResponseFromJSON(
   jsonString: string,

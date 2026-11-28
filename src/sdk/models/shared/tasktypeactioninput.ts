@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessProfileComponentTargetInput,
   AccessProfileComponentTargetInput$Outbound,
@@ -80,18 +81,21 @@ export const TaskTypeActionInput$outboundSchema: z.ZodType<
   TaskTypeActionInput$Outbound,
   z.ZodTypeDef,
   TaskTypeActionInput
-> = z.object({
-  accessProfileComponent: z.nullable(
-    AccessProfileComponentTargetInput$outboundSchema,
-  ).optional(),
-  actionInstance: z.nullable(TaskActionInstanceInput$outboundSchema).optional(),
-  credentialIssue: z.nullable(CredentialIssueTargetInput$outboundSchema)
-    .optional(),
-  finding: z.nullable(FindingTargetInput$outboundSchema).optional(),
-  scopeRole: z.nullable(ScopeRoleInput$outboundSchema).optional(),
-  source: z.nullable(TaskActionSourceInput$outboundSchema).optional(),
-  toolCall: z.nullable(GatedToolCallTargetInput$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileComponent: z.nullable(
+      AccessProfileComponentTargetInput$outboundSchema,
+    ).optional(),
+    actionInstance: z.nullable(TaskActionInstanceInput$outboundSchema)
+      .optional(),
+    credentialIssue: z.nullable(CredentialIssueTargetInput$outboundSchema)
+      .optional(),
+    finding: z.nullable(FindingTargetInput$outboundSchema).optional(),
+    scopeRole: z.nullable(ScopeRoleInput$outboundSchema).optional(),
+    source: z.nullable(TaskActionSourceInput$outboundSchema).optional(),
+    toolCall: z.nullable(GatedToolCallTargetInput$outboundSchema).optional(),
+  })
+);
 
 export function taskTypeActionInputToJSON(
   taskTypeActionInput: TaskTypeActionInput,

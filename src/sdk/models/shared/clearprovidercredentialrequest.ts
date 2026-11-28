@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ClearProviderCredentialRequest message.
@@ -17,7 +18,7 @@ export const ClearProviderCredentialRequest$outboundSchema: z.ZodType<
   ClearProviderCredentialRequest$Outbound,
   z.ZodTypeDef,
   ClearProviderCredentialRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function clearProviderCredentialRequestToJSON(
   clearProviderCredentialRequest: ClearProviderCredentialRequest,

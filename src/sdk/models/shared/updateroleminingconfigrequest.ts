@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   CohortHintInput,
   CohortHintInput$Outbound,
@@ -39,11 +40,13 @@ export const UpdateRoleMiningConfigRequest$outboundSchema: z.ZodType<
   UpdateRoleMiningConfigRequest$Outbound,
   z.ZodTypeDef,
   UpdateRoleMiningConfigRequest
-> = z.object({
-  cohortHints: z.nullable(z.array(CohortHintInput$outboundSchema)).optional(),
-  maxSuggestions: z.number().int().optional(),
-  minCohortSize: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cohortHints: z.nullable(z.array(CohortHintInput$outboundSchema)).optional(),
+    maxSuggestions: z.number().int().optional(),
+    minCohortSize: z.number().int().optional(),
+  })
+);
 
 export function updateRoleMiningConfigRequestToJSON(
   updateRoleMiningConfigRequest: UpdateRoleMiningConfigRequest,

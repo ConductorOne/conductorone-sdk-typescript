@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   XAAClientAudienceMapping,
   XAAClientAudienceMapping$Outbound,
@@ -29,11 +30,13 @@ export const XAAClientAudienceMappingServiceUpdateRequest$outboundSchema:
     XAAClientAudienceMappingServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     XAAClientAudienceMappingServiceUpdateRequest
-  > = z.object({
-    clientAudienceMapping: z.nullable(XAAClientAudienceMapping$outboundSchema)
-      .optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      clientAudienceMapping: z.nullable(XAAClientAudienceMapping$outboundSchema)
+        .optional(),
+      updateMask: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function xaaClientAudienceMappingServiceUpdateRequestToJSON(
   xaaClientAudienceMappingServiceUpdateRequest:

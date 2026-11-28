@@ -1,0 +1,21 @@
+# C1ApiIamV1OAuthAuthorizationServiceSearchConsentsResponse
+
+## Example Usage
+
+```typescript
+import { C1ApiIamV1OAuthAuthorizationServiceSearchConsentsResponse } from "conductorone-sdk-typescript/sdk/models/operations";
+
+let value: C1ApiIamV1OAuthAuthorizationServiceSearchConsentsResponse = {
+  contentType: "<value>",
+  statusCode: 419360,
+};
+```
+
+## Fields
+
+| Field                                                                                                                                                 | Type                                                                                                                                                  | Required                                                                                                                                              | Description                                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contentType`                                                                                                                                         | *string*                                                                                                                                              | :heavy_check_mark:                                                                                                                                    | HTTP response content type for this operation                                                                                                         |
+| `statusCode`                                                                                                                                          | *number*                                                                                                                                              | :heavy_check_mark:                                                                                                                                    | HTTP response status code for this operation                                                                                                          |
+| `rawResponse`                                                                                                                                         | [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response)                                                                                 | :heavy_check_mark:                                                                                                                                    | Raw HTTP response; suitable for custom response parsing                                                                                               |
+| `oAuthAuthorizationServiceSearchConsentsResponse`                                                                                                     | [shared.OAuthAuthorizationServiceSearchConsentsResponse](../../../sdk/models/shared/oauthauthorizationservicesearchconsentsresponse.md)               | :heavy_minus_sign:                                                                                                                                    | OAuthAuthorizationServiceSearchConsentsResponse contains current consents in<br/> descending creation order, with consent ID breaking creation-time ties. |

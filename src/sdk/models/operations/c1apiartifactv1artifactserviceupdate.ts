@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1ApiArtifactV1ArtifactServiceUpdateRequest$outboundSchema:
     C1ApiArtifactV1ArtifactServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiArtifactV1ArtifactServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    artifactServiceUpdateRequest: shared
-      .ArtifactServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      artifactServiceUpdateRequest: "ArtifactServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      artifactServiceUpdateRequest: shared
+        .ArtifactServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        artifactServiceUpdateRequest: "ArtifactServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiArtifactV1ArtifactServiceUpdateRequestToJSON(
   c1ApiArtifactV1ArtifactServiceUpdateRequest:
@@ -78,20 +80,22 @@ export const C1ApiArtifactV1ArtifactServiceUpdateResponse$inboundSchema:
     C1ApiArtifactV1ArtifactServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ArtifactServiceUpdateResponse: shared
-      .ArtifactServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ArtifactServiceUpdateResponse": "artifactServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ArtifactServiceUpdateResponse: shared
+        .ArtifactServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ArtifactServiceUpdateResponse": "artifactServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiArtifactV1ArtifactServiceUpdateResponseFromJSON(
   jsonString: string,

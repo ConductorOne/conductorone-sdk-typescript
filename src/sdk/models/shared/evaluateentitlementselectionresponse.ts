@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -37,12 +37,14 @@ export const EvaluateEntitlementSelectionResponse$inboundSchema: z.ZodType<
   EvaluateEntitlementSelectionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  coreHolderFacets: z.nullable(z.array(AttributeFacet$inboundSchema))
-    .optional(),
-  selectedEntitlementCount: z.number().int().optional(),
-  usersWithAllEntitlements: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    coreHolderFacets: z.nullable(z.array(AttributeFacet$inboundSchema))
+      .optional(),
+    selectedEntitlementCount: z.number().int().optional(),
+    usersWithAllEntitlements: z.number().int().optional(),
+  })
+);
 
 export function evaluateEntitlementSelectionResponseFromJSON(
   jsonString: string,

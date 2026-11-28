@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -261,47 +261,49 @@ export const WellKnownRegex$inboundSchema: z.ZodType<
   WellKnownRegex,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(WellKnownRegex);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(WellKnownRegex));
 /** @internal */
 export const WellKnownRegex$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   WellKnownRegex
-> = openEnums.outboundSchema(WellKnownRegex);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(WellKnownRegex));
 
 /** @internal */
 export const StringRules$inboundSchema: z.ZodType<
   StringRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  address: z.nullable(z.boolean()).optional(),
-  const: z.string().optional(),
-  contains: z.string().optional(),
-  email: z.nullable(z.boolean()).optional(),
-  hostname: z.nullable(z.boolean()).optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  ip: z.nullable(z.boolean()).optional(),
-  ipv4: z.nullable(z.boolean()).optional(),
-  ipv6: z.nullable(z.boolean()).optional(),
-  len: z.string().optional(),
-  lenBytes: z.string().optional(),
-  maxBytes: z.string().optional(),
-  maxLen: z.string().optional(),
-  minBytes: z.string().optional(),
-  minLen: z.string().optional(),
-  notContains: z.string().optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-  pattern: z.string().optional(),
-  prefix: z.string().optional(),
-  strict: z.boolean().optional(),
-  suffix: z.string().optional(),
-  uri: z.nullable(z.boolean()).optional(),
-  uriRef: z.nullable(z.boolean()).optional(),
-  uuid: z.nullable(z.boolean()).optional(),
-  wellKnownRegex: z.nullable(WellKnownRegex$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.nullable(z.boolean()).optional(),
+    const: z.string().optional(),
+    contains: z.string().optional(),
+    email: z.nullable(z.boolean()).optional(),
+    hostname: z.nullable(z.boolean()).optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    ip: z.nullable(z.boolean()).optional(),
+    ipv4: z.nullable(z.boolean()).optional(),
+    ipv6: z.nullable(z.boolean()).optional(),
+    len: z.string().optional(),
+    lenBytes: z.string().optional(),
+    maxBytes: z.string().optional(),
+    maxLen: z.string().optional(),
+    minBytes: z.string().optional(),
+    minLen: z.string().optional(),
+    notContains: z.string().optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+    pattern: z.string().optional(),
+    prefix: z.string().optional(),
+    strict: z.boolean().optional(),
+    suffix: z.string().optional(),
+    uri: z.nullable(z.boolean()).optional(),
+    uriRef: z.nullable(z.boolean()).optional(),
+    uuid: z.nullable(z.boolean()).optional(),
+    wellKnownRegex: z.nullable(WellKnownRegex$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type StringRules$Outbound = {
   address?: boolean | null | undefined;
@@ -337,34 +339,36 @@ export const StringRules$outboundSchema: z.ZodType<
   StringRules$Outbound,
   z.ZodTypeDef,
   StringRules
-> = z.object({
-  address: z.nullable(z.boolean()).optional(),
-  const: z.string().optional(),
-  contains: z.string().optional(),
-  email: z.nullable(z.boolean()).optional(),
-  hostname: z.nullable(z.boolean()).optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  ip: z.nullable(z.boolean()).optional(),
-  ipv4: z.nullable(z.boolean()).optional(),
-  ipv6: z.nullable(z.boolean()).optional(),
-  len: z.string().optional(),
-  lenBytes: z.string().optional(),
-  maxBytes: z.string().optional(),
-  maxLen: z.string().optional(),
-  minBytes: z.string().optional(),
-  minLen: z.string().optional(),
-  notContains: z.string().optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-  pattern: z.string().optional(),
-  prefix: z.string().optional(),
-  strict: z.boolean().optional(),
-  suffix: z.string().optional(),
-  uri: z.nullable(z.boolean()).optional(),
-  uriRef: z.nullable(z.boolean()).optional(),
-  uuid: z.nullable(z.boolean()).optional(),
-  wellKnownRegex: z.nullable(WellKnownRegex$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    address: z.nullable(z.boolean()).optional(),
+    const: z.string().optional(),
+    contains: z.string().optional(),
+    email: z.nullable(z.boolean()).optional(),
+    hostname: z.nullable(z.boolean()).optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    ip: z.nullable(z.boolean()).optional(),
+    ipv4: z.nullable(z.boolean()).optional(),
+    ipv6: z.nullable(z.boolean()).optional(),
+    len: z.string().optional(),
+    lenBytes: z.string().optional(),
+    maxBytes: z.string().optional(),
+    maxLen: z.string().optional(),
+    minBytes: z.string().optional(),
+    minLen: z.string().optional(),
+    notContains: z.string().optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+    pattern: z.string().optional(),
+    prefix: z.string().optional(),
+    strict: z.boolean().optional(),
+    suffix: z.string().optional(),
+    uri: z.nullable(z.boolean()).optional(),
+    uriRef: z.nullable(z.boolean()).optional(),
+    uuid: z.nullable(z.boolean()).optional(),
+    wellKnownRegex: z.nullable(WellKnownRegex$outboundSchema).optional(),
+  })
+);
 
 export function stringRulesToJSON(stringRules: StringRules): string {
   return JSON.stringify(StringRules$outboundSchema.parse(stringRules));

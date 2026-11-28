@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -20,6 +21,33 @@ export const FindingSearchRequestAppUserTypes = {
 export type FindingSearchRequestAppUserTypes = OpenEnum<
   typeof FindingSearchRequestAppUserTypes
 >;
+
+export const ExcludeFindingTypes = {
+  FindingTypeUnspecified: "FINDING_TYPE_UNSPECIFIED",
+  FindingTypeSimilarUsernameMatch: "FINDING_TYPE_SIMILAR_USERNAME_MATCH",
+  FindingTypeServiceAccountMisclassification:
+    "FINDING_TYPE_SERVICE_ACCOUNT_MISCLASSIFICATION",
+  FindingTypeNhiUnowned: "FINDING_TYPE_NHI_UNOWNED",
+  FindingTypeServiceAccountUnowned: "FINDING_TYPE_SERVICE_ACCOUNT_UNOWNED",
+  FindingTypeDecoyCredentialUsed: "FINDING_TYPE_DECOY_CREDENTIAL_USED",
+  FindingTypeCustom: "FINDING_TYPE_CUSTOM",
+  FindingTypeConnectorAnomalyDetectionDisabled:
+    "FINDING_TYPE_CONNECTOR_ANOMALY_DETECTION_DISABLED",
+  FindingTypeDeactivatedOwner: "FINDING_TYPE_DEACTIVATED_OWNER",
+  FindingTypeUnusedSecret: "FINDING_TYPE_UNUSED_SECRET",
+  FindingTypeCredentialPubliclyExposed:
+    "FINDING_TYPE_CREDENTIAL_PUBLICLY_EXPOSED",
+  FindingTypeDecoyPubliclyExposed: "FINDING_TYPE_DECOY_PUBLICLY_EXPOSED",
+  FindingTypeCredentialExpiring: "FINDING_TYPE_CREDENTIAL_EXPIRING",
+  FindingTypeConnectorSyncFailing: "FINDING_TYPE_CONNECTOR_SYNC_FAILING",
+  FindingTypeShadowMcp: "FINDING_TYPE_SHADOW_MCP",
+  FindingTypeShadowApp: "FINDING_TYPE_SHADOW_APP",
+  FindingTypeMcpGatewayToolCallRisk: "FINDING_TYPE_MCP_GATEWAY_TOOL_CALL_RISK",
+  FindingTypeEdge: "FINDING_TYPE_EDGE",
+  FindingTypeAccessConflict: "FINDING_TYPE_ACCESS_CONFLICT",
+  FindingTypeConnectorHostOutdated: "FINDING_TYPE_CONNECTOR_HOST_OUTDATED",
+} as const;
+export type ExcludeFindingTypes = OpenEnum<typeof ExcludeFindingTypes>;
 
 export const FindingTypes = {
   FindingTypeUnspecified: "FINDING_TYPE_UNSPECIFIED",
@@ -43,6 +71,8 @@ export const FindingTypes = {
   FindingTypeShadowApp: "FINDING_TYPE_SHADOW_APP",
   FindingTypeMcpGatewayToolCallRisk: "FINDING_TYPE_MCP_GATEWAY_TOOL_CALL_RISK",
   FindingTypeEdge: "FINDING_TYPE_EDGE",
+  FindingTypeAccessConflict: "FINDING_TYPE_ACCESS_CONFLICT",
+  FindingTypeConnectorHostOutdated: "FINDING_TYPE_CONNECTOR_HOST_OUTDATED",
 } as const;
 export type FindingTypes = OpenEnum<typeof FindingTypes>;
 
@@ -167,6 +197,13 @@ export type FindingSearchRequest = {
    */
   edgeIds?: Array<string> | null | undefined;
   /**
+   * Exclude findings of these types. Applied together with every other filter,
+   *
+   * @remarks
+   *  including finding_types. Empty = not applied.
+   */
+  excludeFindingTypes?: Array<ExcludeFindingTypes> | null | undefined;
+  /**
    * Filter by finding type (OR within field).
    */
   findingTypes?: Array<FindingTypes> | null | undefined;
@@ -226,6 +263,14 @@ export type FindingSearchRequest = {
    */
   severities?: Array<Severities> | null | undefined;
   /**
+   * Filter by the detector source that raised the finding (OR within field),
+   *
+   * @remarks
+   *  matching Finding.source_detector_id exactly, e.g.
+   *  "access_conflict:<monitor_id>". Empty = not applied.
+   */
+  sourceDetectorIds?: Array<string> | null | undefined;
+  /**
    * Filter by source kind (OR within field).
    */
   sourceKinds?: Array<SourceKinds> | null | undefined;
@@ -233,6 +278,14 @@ export type FindingSearchRequest = {
    * Filter by states (OR within field).
    */
   states?: Array<States> | null | undefined;
+  /**
+   * Filter by the identity users findings are about (OR within field): matches
+   *
+   * @remarks
+   *  findings whose target is an IdentityUserTarget for one of these users. Not
+   *  the assignee; see assignee_identity_user_ids. Empty = not applied.
+   */
+  targetIdentityUserIds?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -240,39 +293,50 @@ export const FindingSearchRequestAppUserTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FindingSearchRequestAppUserTypes
-> = openEnums.outboundSchema(FindingSearchRequestAppUserTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FindingSearchRequestAppUserTypes)
+);
+
+/** @internal */
+export const ExcludeFindingTypes$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ExcludeFindingTypes
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ExcludeFindingTypes)
+);
 
 /** @internal */
 export const FindingTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FindingTypes
-> = openEnums.outboundSchema(FindingTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(FindingTypes));
 
 /** @internal */
 export const NhiTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   NhiTypes
-> = openEnums.outboundSchema(NhiTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(NhiTypes));
 
 /** @internal */
 export const Severities$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Severities
-> = openEnums.outboundSchema(Severities);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Severities));
 
 /** @internal */
 export const SourceKinds$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SourceKinds
-> = openEnums.outboundSchema(SourceKinds);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(SourceKinds));
 
 /** @internal */
 export const States$outboundSchema: z.ZodType<string, z.ZodTypeDef, States> =
-  openEnums.outboundSchema(States);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(States));
 
 /** @internal */
 export type FindingSearchRequest$Outbound = {
@@ -287,6 +351,7 @@ export type FindingSearchRequest$Outbound = {
   customSubTypes?: Array<string> | null | undefined;
   decoyIds?: Array<string> | null | undefined;
   edgeIds?: Array<string> | null | undefined;
+  excludeFindingTypes?: Array<string> | null | undefined;
   findingTypes?: Array<string> | null | undefined;
   includeUnassigned?: boolean | undefined;
   nhiTypes?: Array<string> | null | undefined;
@@ -297,8 +362,10 @@ export type FindingSearchRequest$Outbound = {
   refs?: Array<FindingRef$Outbound> | null | undefined;
   scopeToAppOwner?: boolean | undefined;
   severities?: Array<string> | null | undefined;
+  sourceDetectorIds?: Array<string> | null | undefined;
   sourceKinds?: Array<string> | null | undefined;
   states?: Array<string> | null | undefined;
+  targetIdentityUserIds?: Array<string> | null | undefined;
 };
 
 /** @internal */
@@ -306,33 +373,39 @@ export const FindingSearchRequest$outboundSchema: z.ZodType<
   FindingSearchRequest$Outbound,
   z.ZodTypeDef,
   FindingSearchRequest
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  appResourceIds: z.nullable(z.array(z.string())).optional(),
-  appResourceTraitIds: z.nullable(z.array(z.string())).optional(),
-  appResourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  appUserTypes: z.nullable(
-    z.array(FindingSearchRequestAppUserTypes$outboundSchema),
-  ).optional(),
-  assigneeIdentityUserIds: z.nullable(z.array(z.string())).optional(),
-  connectorIds: z.nullable(z.array(z.string())).optional(),
-  customSubTypes: z.nullable(z.array(z.string())).optional(),
-  decoyIds: z.nullable(z.array(z.string())).optional(),
-  edgeIds: z.nullable(z.array(z.string())).optional(),
-  findingTypes: z.nullable(z.array(FindingTypes$outboundSchema)).optional(),
-  includeUnassigned: z.boolean().optional(),
-  nhiTypes: z.nullable(z.array(NhiTypes$outboundSchema)).optional(),
-  ownerIdentityUserIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
-  scopeToAppOwner: z.boolean().optional(),
-  severities: z.nullable(z.array(Severities$outboundSchema)).optional(),
-  sourceKinds: z.nullable(z.array(SourceKinds$outboundSchema)).optional(),
-  states: z.nullable(z.array(States$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    appResourceIds: z.nullable(z.array(z.string())).optional(),
+    appResourceTraitIds: z.nullable(z.array(z.string())).optional(),
+    appResourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    appUserIds: z.nullable(z.array(z.string())).optional(),
+    appUserTypes: z.nullable(
+      z.array(FindingSearchRequestAppUserTypes$outboundSchema),
+    ).optional(),
+    assigneeIdentityUserIds: z.nullable(z.array(z.string())).optional(),
+    connectorIds: z.nullable(z.array(z.string())).optional(),
+    customSubTypes: z.nullable(z.array(z.string())).optional(),
+    decoyIds: z.nullable(z.array(z.string())).optional(),
+    edgeIds: z.nullable(z.array(z.string())).optional(),
+    excludeFindingTypes: z.nullable(z.array(ExcludeFindingTypes$outboundSchema))
+      .optional(),
+    findingTypes: z.nullable(z.array(FindingTypes$outboundSchema)).optional(),
+    includeUnassigned: z.boolean().optional(),
+    nhiTypes: z.nullable(z.array(NhiTypes$outboundSchema)).optional(),
+    ownerIdentityUserIds: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(FindingRef$outboundSchema)).optional(),
+    scopeToAppOwner: z.boolean().optional(),
+    severities: z.nullable(z.array(Severities$outboundSchema)).optional(),
+    sourceDetectorIds: z.nullable(z.array(z.string())).optional(),
+    sourceKinds: z.nullable(z.array(SourceKinds$outboundSchema)).optional(),
+    states: z.nullable(z.array(States$outboundSchema)).optional(),
+    targetIdentityUserIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function findingSearchRequestToJSON(
   findingSearchRequest: FindingSearchRequest,

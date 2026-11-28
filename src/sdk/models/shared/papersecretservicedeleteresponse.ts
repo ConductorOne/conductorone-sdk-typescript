@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { PaperSecret, PaperSecret$inboundSchema } from "./papersecret.js";
@@ -20,9 +20,11 @@ export const PaperSecretServiceDeleteResponse$inboundSchema: z.ZodType<
   PaperSecretServiceDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  secret: z.nullable(PaperSecret$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    secret: z.nullable(PaperSecret$inboundSchema).optional(),
+  })
+);
 
 export function paperSecretServiceDeleteResponseFromJSON(
   jsonString: string,

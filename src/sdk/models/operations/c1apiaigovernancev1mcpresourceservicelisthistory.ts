@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,20 +53,22 @@ export const C1ApiAiGovernanceV1MCPResourceServiceListHistoryRequest$outboundSch
     C1ApiAiGovernanceV1MCPResourceServiceListHistoryRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPResourceServiceListHistoryRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    id: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      id: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPResourceServiceListHistoryRequestToJSON(
   c1ApiAiGovernanceV1MCPResourceServiceListHistoryRequest:
@@ -84,21 +86,23 @@ export const C1ApiAiGovernanceV1MCPResourceServiceListHistoryResponse$inboundSch
     C1ApiAiGovernanceV1MCPResourceServiceListHistoryResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPResourceServiceListHistoryResponse: shared
-      .MCPResourceServiceListHistoryResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPResourceServiceListHistoryResponse":
-        "mcpResourceServiceListHistoryResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPResourceServiceListHistoryResponse: shared
+        .MCPResourceServiceListHistoryResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPResourceServiceListHistoryResponse":
+          "mcpResourceServiceListHistoryResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPResourceServiceListHistoryResponseFromJSON(
   jsonString: string,

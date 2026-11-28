@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,12 @@ export const ConflictMonitorRefs$inboundSchema: z.ZodType<
   ConflictMonitorRefs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  conflictMonitorRefs: z.nullable(z.array(ConflictMonitorRef$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conflictMonitorRefs: z.nullable(z.array(ConflictMonitorRef$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type ConflictMonitorRefs$Outbound = {
   conflictMonitorRefs?: Array<ConflictMonitorRef$Outbound> | null | undefined;
@@ -42,10 +44,12 @@ export const ConflictMonitorRefs$outboundSchema: z.ZodType<
   ConflictMonitorRefs$Outbound,
   z.ZodTypeDef,
   ConflictMonitorRefs
-> = z.object({
-  conflictMonitorRefs: z.nullable(z.array(ConflictMonitorRef$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conflictMonitorRefs: z.nullable(z.array(ConflictMonitorRef$outboundSchema))
+      .optional(),
+  })
+);
 
 export function conflictMonitorRefsToJSON(
   conflictMonitorRefs: ConflictMonitorRefs,

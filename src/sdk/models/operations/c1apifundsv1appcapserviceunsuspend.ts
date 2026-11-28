@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiFundsV1AppCapServiceUnsuspendRequest$outboundSchema:
     C1ApiFundsV1AppCapServiceUnsuspendRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1AppCapServiceUnsuspendRequest
-  > = z.object({
-    appId: z.string(),
-    appCapServiceUnsuspendRequest: shared
-      .AppCapServiceUnsuspendRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appCapServiceUnsuspendRequest: "AppCapServiceUnsuspendRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appCapServiceUnsuspendRequest: shared
+        .AppCapServiceUnsuspendRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appCapServiceUnsuspendRequest: "AppCapServiceUnsuspendRequest",
+      });
+    })
+  );
 
 export function c1ApiFundsV1AppCapServiceUnsuspendRequestToJSON(
   c1ApiFundsV1AppCapServiceUnsuspendRequest:
@@ -76,20 +78,22 @@ export function c1ApiFundsV1AppCapServiceUnsuspendRequestToJSON(
 /** @internal */
 export const C1ApiFundsV1AppCapServiceUnsuspendResponse$inboundSchema:
   z.ZodType<C1ApiFundsV1AppCapServiceUnsuspendResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      AppCapServiceUnsuspendResponse: shared
-        .AppCapServiceUnsuspendResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "AppCapServiceUnsuspendResponse": "appCapServiceUnsuspendResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        AppCapServiceUnsuspendResponse: shared
+          .AppCapServiceUnsuspendResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "AppCapServiceUnsuspendResponse": "appCapServiceUnsuspendResponse",
+        });
+      })
+    );
 
 export function c1ApiFundsV1AppCapServiceUnsuspendResponseFromJSON(
   jsonString: string,

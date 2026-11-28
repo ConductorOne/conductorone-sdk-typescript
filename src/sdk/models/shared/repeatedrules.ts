@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,13 +54,15 @@ export const RepeatedRules$inboundSchema: z.ZodType<
   RepeatedRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ignoreEmpty: z.boolean().optional(),
-  items: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
-  maxItems: z.string().optional(),
-  minItems: z.string().optional(),
-  unique: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ignoreEmpty: z.boolean().optional(),
+    items: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
+    maxItems: z.string().optional(),
+    minItems: z.string().optional(),
+    unique: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type RepeatedRules$Outbound = {
   ignoreEmpty?: boolean | undefined;
@@ -75,13 +77,15 @@ export const RepeatedRules$outboundSchema: z.ZodType<
   RepeatedRules$Outbound,
   z.ZodTypeDef,
   RepeatedRules
-> = z.object({
-  ignoreEmpty: z.boolean().optional(),
-  items: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
-  maxItems: z.string().optional(),
-  minItems: z.string().optional(),
-  unique: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ignoreEmpty: z.boolean().optional(),
+    items: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
+    maxItems: z.string().optional(),
+    minItems: z.string().optional(),
+    unique: z.boolean().optional(),
+  })
+);
 
 export function repeatedRulesToJSON(repeatedRules: RepeatedRules): string {
   return JSON.stringify(RepeatedRules$outboundSchema.parse(repeatedRules));

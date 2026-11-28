@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   VirtualMCPAssignedTools,
   VirtualMCPAssignedTools$Outbound,
@@ -20,11 +23,29 @@ import {
 } from "./virtualmcppresentation.js";
 
 /**
- * VirtualMCPServerServiceCreateRequest creates an active Virtual MCP Server
+ * Initial lifecycle state. Omitted or ACTIVE creates an active server.
  *
  * @remarks
- *  with Raw tool presentation and either a mapped source or explicit tool
- *  assignments.
+ *  DISABLED creates a server that denies connections until it is enabled.
+ */
+export const InitialState = {
+  VirtualMcpServerStateUnspecified: "VIRTUAL_MCP_SERVER_STATE_UNSPECIFIED",
+  VirtualMcpServerStateActive: "VIRTUAL_MCP_SERVER_STATE_ACTIVE",
+  VirtualMcpServerStateDisabled: "VIRTUAL_MCP_SERVER_STATE_DISABLED",
+} as const;
+/**
+ * Initial lifecycle state. Omitted or ACTIVE creates an active server.
+ *
+ * @remarks
+ *  DISABLED creates a server that denies connections until it is enabled.
+ */
+export type InitialState = OpenEnum<typeof InitialState>;
+
+/**
+ * VirtualMCPServerServiceCreateRequest creates a Virtual MCP Server with Raw
+ *
+ * @remarks
+ *  tool presentation and either a mapped source or explicit tool assignments.
  *
  * This message contains a oneof named composition. Only a single field of the following list may be set at a time:
  *   - mappedSource
@@ -40,6 +61,13 @@ export type VirtualMCPServerServiceCreateRequest = {
    * Human-readable name shown to administrators and users.
    */
   displayName?: string | undefined;
+  /**
+   * Initial lifecycle state. Omitted or ACTIVE creates an active server.
+   *
+   * @remarks
+   *  DISABLED creates a server that denies connections until it is enabled.
+   */
+  initialState?: InitialState | undefined;
   mappedSource?: VirtualMCPMappedSource | null | undefined;
   presentation?: VirtualMCPPresentation | null | undefined;
   /**
@@ -54,20 +82,37 @@ export type VirtualMCPServerServiceCreateRequest = {
    */
   requireDpop?: boolean | undefined;
   /**
+   * When true, ConductorOne does not automatically grant the new server's `use`
+   *
+   * @remarks
+   *  entitlement to the members of the mapped source's birthright access profile.
+   *  Valid only with mapped_source. Defaults to false.
+   */
+  skipAutomaticAccess?: boolean | undefined;
+  /**
    * Initial canonical lowercase route segment, unique for the tenant.
    */
   slug?: string | undefined;
 };
 
 /** @internal */
+export const InitialState$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  InitialState
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(InitialState));
+
+/** @internal */
 export type VirtualMCPServerServiceCreateRequest$Outbound = {
   allowPersonalSources?: boolean | undefined;
   assignedTools?: VirtualMCPAssignedTools$Outbound | null | undefined;
   displayName?: string | undefined;
+  initialState?: string | undefined;
   mappedSource?: VirtualMCPMappedSource$Outbound | null | undefined;
   presentation?: VirtualMCPPresentation$Outbound | null | undefined;
   requireDeviceTrust?: boolean | undefined;
   requireDpop?: boolean | undefined;
+  skipAutomaticAccess?: boolean | undefined;
   slug?: string | undefined;
 };
 
@@ -76,16 +121,21 @@ export const VirtualMCPServerServiceCreateRequest$outboundSchema: z.ZodType<
   VirtualMCPServerServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   VirtualMCPServerServiceCreateRequest
-> = z.object({
-  allowPersonalSources: z.boolean().optional(),
-  assignedTools: z.nullable(VirtualMCPAssignedTools$outboundSchema).optional(),
-  displayName: z.string().optional(),
-  mappedSource: z.nullable(VirtualMCPMappedSource$outboundSchema).optional(),
-  presentation: z.nullable(VirtualMCPPresentation$outboundSchema).optional(),
-  requireDeviceTrust: z.boolean().optional(),
-  requireDpop: z.boolean().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPersonalSources: z.boolean().optional(),
+    assignedTools: z.nullable(VirtualMCPAssignedTools$outboundSchema)
+      .optional(),
+    displayName: z.string().optional(),
+    initialState: InitialState$outboundSchema.optional(),
+    mappedSource: z.nullable(VirtualMCPMappedSource$outboundSchema).optional(),
+    presentation: z.nullable(VirtualMCPPresentation$outboundSchema).optional(),
+    requireDeviceTrust: z.boolean().optional(),
+    requireDpop: z.boolean().optional(),
+    skipAutomaticAccess: z.boolean().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function virtualMCPServerServiceCreateRequestToJSON(
   virtualMCPServerServiceCreateRequest: VirtualMCPServerServiceCreateRequest,

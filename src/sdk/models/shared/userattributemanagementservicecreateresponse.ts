@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -46,17 +47,19 @@ export const UserAttributeManagementServiceCreateResponseExpanded$inboundSchema:
     UserAttributeManagementServiceCreateResponseExpanded,
     z.ZodTypeDef,
     unknown
-  > = collectExtraKeys$(
-    z.object({
-      "@type": z.string().optional(),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "@type": "atType",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        "@type": z.string().optional(),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "@type": "atType",
+      });
+    })
+  );
 
 export function userAttributeManagementServiceCreateResponseExpandedFromJSON(
   jsonString: string,
@@ -80,14 +83,14 @@ export const UserAttributeManagementServiceCreateResponse$inboundSchema:
     UserAttributeManagementServiceCreateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    attribute: z.nullable(UserAttributeMappingView$inboundSchema).optional(),
-    expanded: z.nullable(
-      z.array(z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      attribute: z.nullable(UserAttributeMappingView$inboundSchema).optional(),
+      expanded: z.nullable(z.array(z.lazy(() =>
         UserAttributeManagementServiceCreateResponseExpanded$inboundSchema
-      )),
-    ).optional(),
-  });
+      ))).optional(),
+    })
+  );
 
 export function userAttributeManagementServiceCreateResponseFromJSON(
   jsonString: string,

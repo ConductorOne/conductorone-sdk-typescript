@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const CampaignScheduleTime$inboundSchema: z.ZodType<
   CampaignScheduleTime,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hours: z.number().int().optional(),
-  minutes: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hours: z.number().int().optional(),
+    minutes: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type CampaignScheduleTime$Outbound = {
   hours?: number | undefined;
@@ -41,10 +43,12 @@ export const CampaignScheduleTime$outboundSchema: z.ZodType<
   CampaignScheduleTime$Outbound,
   z.ZodTypeDef,
   CampaignScheduleTime
-> = z.object({
-  hours: z.number().int().optional(),
-  minutes: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hours: z.number().int().optional(),
+    minutes: z.number().int().optional(),
+  })
+);
 
 export function campaignScheduleTimeToJSON(
   campaignScheduleTime: CampaignScheduleTime,

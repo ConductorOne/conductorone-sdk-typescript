@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Artifact, Artifact$inboundSchema } from "./artifact.js";
@@ -20,9 +20,11 @@ export const ArtifactServiceGetResponse$inboundSchema: z.ZodType<
   ArtifactServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  artifact: z.nullable(Artifact$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    artifact: z.nullable(Artifact$inboundSchema).optional(),
+  })
+);
 
 export function artifactServiceGetResponseFromJSON(
   jsonString: string,

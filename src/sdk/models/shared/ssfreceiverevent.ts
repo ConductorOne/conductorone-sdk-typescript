@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -167,47 +167,51 @@ export const CanonicalType$inboundSchema: z.ZodType<
   CanonicalType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CanonicalType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(CanonicalType));
 
 /** @internal */
 export const MatchMethod$inboundSchema: z.ZodType<
   MatchMethod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MatchMethod);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(MatchMethod));
 
 /** @internal */
 export const SSFReceiverEventOutcome$inboundSchema: z.ZodType<
   SSFReceiverEventOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SSFReceiverEventOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SSFReceiverEventOutcome)
+);
 
 /** @internal */
 export const SSFReceiverEvent$inboundSchema: z.ZodType<
   SSFReceiverEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  canonicalType: CanonicalType$inboundSchema.optional(),
-  id: z.string().optional(),
-  matchMethod: MatchMethod$inboundSchema.optional(),
-  matchedUserId: z.string().optional(),
-  outcome: SSFReceiverEventOutcome$inboundSchema.optional(),
-  outcomeDetail: z.string().optional(),
-  receivedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  sessionsRevoked: z.number().int().optional(),
-  setJti: z.string().optional(),
-  streamId: z.string().optional(),
-  wireEventProfile: z.string().optional(),
-  wireEventType: z.string().optional(),
-  wireInitiatingEntity: z.string().optional(),
-  wireReasonAdmin: z.string().optional(),
-  wireSubjectFormat: z.string().optional(),
-  wireSubjectIdentifier: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    canonicalType: CanonicalType$inboundSchema.optional(),
+    id: z.string().optional(),
+    matchMethod: MatchMethod$inboundSchema.optional(),
+    matchedUserId: z.string().optional(),
+    outcome: SSFReceiverEventOutcome$inboundSchema.optional(),
+    outcomeDetail: z.string().optional(),
+    receivedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    sessionsRevoked: z.number().int().optional(),
+    setJti: z.string().optional(),
+    streamId: z.string().optional(),
+    wireEventProfile: z.string().optional(),
+    wireEventType: z.string().optional(),
+    wireInitiatingEntity: z.string().optional(),
+    wireReasonAdmin: z.string().optional(),
+    wireSubjectFormat: z.string().optional(),
+    wireSubjectIdentifier: z.string().optional(),
+  })
+);
 
 export function ssfReceiverEventFromJSON(
   jsonString: string,

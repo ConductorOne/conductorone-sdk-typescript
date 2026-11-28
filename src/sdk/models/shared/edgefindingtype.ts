@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -84,40 +84,46 @@ export const EdgeFindingTypeCategory$inboundSchema: z.ZodType<
   EdgeFindingTypeCategory,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeFindingTypeCategory);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeFindingTypeCategory)
+);
 /** @internal */
 export const EdgeFindingTypeCategory$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EdgeFindingTypeCategory
-> = openEnums.outboundSchema(EdgeFindingTypeCategory);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EdgeFindingTypeCategory)
+);
 
 /** @internal */
 export const Subcategory$inboundSchema: z.ZodType<
   Subcategory,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Subcategory);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Subcategory));
 /** @internal */
 export const Subcategory$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Subcategory
-> = openEnums.outboundSchema(Subcategory);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Subcategory));
 
 /** @internal */
 export const EdgeFindingType$inboundSchema: z.ZodType<
   EdgeFindingType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  category: EdgeFindingTypeCategory$inboundSchema.optional(),
-  edgeId: z.string().optional(),
-  ruleId: z.string().optional(),
-  subcategory: Subcategory$inboundSchema.optional(),
-  subject: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    category: EdgeFindingTypeCategory$inboundSchema.optional(),
+    edgeId: z.string().optional(),
+    ruleId: z.string().optional(),
+    subcategory: Subcategory$inboundSchema.optional(),
+    subject: z.string().optional(),
+  })
+);
 /** @internal */
 export type EdgeFindingType$Outbound = {
   appId?: string | undefined;
@@ -133,14 +139,16 @@ export const EdgeFindingType$outboundSchema: z.ZodType<
   EdgeFindingType$Outbound,
   z.ZodTypeDef,
   EdgeFindingType
-> = z.object({
-  appId: z.string().optional(),
-  category: EdgeFindingTypeCategory$outboundSchema.optional(),
-  edgeId: z.string().optional(),
-  ruleId: z.string().optional(),
-  subcategory: Subcategory$outboundSchema.optional(),
-  subject: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    category: EdgeFindingTypeCategory$outboundSchema.optional(),
+    edgeId: z.string().optional(),
+    ruleId: z.string().optional(),
+    subcategory: Subcategory$outboundSchema.optional(),
+    subject: z.string().optional(),
+  })
+);
 
 export function edgeFindingTypeToJSON(
   edgeFindingType: EdgeFindingType,

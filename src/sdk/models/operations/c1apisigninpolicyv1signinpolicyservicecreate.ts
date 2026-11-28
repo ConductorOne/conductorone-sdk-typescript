@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -36,20 +36,23 @@ export const C1ApiSignInPolicyV1SignInPolicyServiceCreateResponse$inboundSchema:
     C1ApiSignInPolicyV1SignInPolicyServiceCreateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SignInPolicyServiceCreateResponse: shared
-      .SignInPolicyServiceCreateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SignInPolicyServiceCreateResponse": "signInPolicyServiceCreateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SignInPolicyServiceCreateResponse: shared
+        .SignInPolicyServiceCreateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SignInPolicyServiceCreateResponse":
+          "signInPolicyServiceCreateResponse",
+      });
+    })
+  );
 
 export function c1ApiSignInPolicyV1SignInPolicyServiceCreateResponseFromJSON(
   jsonString: string,

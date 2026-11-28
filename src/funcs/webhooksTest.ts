@@ -8,9 +8,8 @@ import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { RequestOptions } from "../lib/sdks.js";
+import { encodePath, RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
-import { pathToFunc } from "../lib/url.js";
 import { ConductoroneSDKTypescriptError } from "../sdk/models/errors/conductoronesdktypescripterror.js";
 import {
   ConnectionError,
@@ -30,6 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Send a sample event to the webhook URL to verify that the endpoint is reachable and responding correctly.
+ *  Returns FAILED_PRECONDITION if the webhook has been deleted, and NOT_FOUND if the webhook does not exist.
  */
 export function webhooksTest(
   client: ConductoroneSDKTypescriptCore,
@@ -97,7 +97,11 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/api/v1/webhooks/{id}/test")(pathParams);
+  const pathResult = encodePath("/api/v1/webhooks/{id}/test", pathParams);
+  if (!pathResult.ok) {
+    return [pathResult, { status: "invalid" }];
+  }
+  const path = pathResult.value;
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",

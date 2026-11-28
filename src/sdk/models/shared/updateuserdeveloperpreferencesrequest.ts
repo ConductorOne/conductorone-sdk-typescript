@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TerraformPreferences,
   TerraformPreferences$Outbound,
@@ -26,9 +27,11 @@ export const UpdateUserDeveloperPreferencesRequest$outboundSchema: z.ZodType<
   UpdateUserDeveloperPreferencesRequest$Outbound,
   z.ZodTypeDef,
   UpdateUserDeveloperPreferencesRequest
-> = z.object({
-  terraform: z.nullable(TerraformPreferences$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    terraform: z.nullable(TerraformPreferences$outboundSchema).optional(),
+  })
+);
 
 export function updateUserDeveloperPreferencesRequestToJSON(
   updateUserDeveloperPreferencesRequest: UpdateUserDeveloperPreferencesRequest,

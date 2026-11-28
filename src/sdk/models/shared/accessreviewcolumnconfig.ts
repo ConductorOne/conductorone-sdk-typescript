@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -86,21 +86,23 @@ export type AccessReviewColumnConfig = {
 
 /** @internal */
 export const Columns$inboundSchema: z.ZodType<Columns, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Columns);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Columns));
 /** @internal */
 export const Columns$outboundSchema: z.ZodType<string, z.ZodTypeDef, Columns> =
-  openEnums.outboundSchema(Columns);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Columns));
 
 /** @internal */
 export const AccessReviewColumnConfig$inboundSchema: z.ZodType<
   AccessReviewColumnConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  columns: z.nullable(z.array(Columns$inboundSchema)).optional(),
-  orderedColumns: z.nullable(z.array(AccessReviewTaskColumnRef$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    columns: z.nullable(z.array(Columns$inboundSchema)).optional(),
+    orderedColumns: z.nullable(z.array(AccessReviewTaskColumnRef$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type AccessReviewColumnConfig$Outbound = {
   columns?: Array<string> | null | undefined;
@@ -112,11 +114,14 @@ export const AccessReviewColumnConfig$outboundSchema: z.ZodType<
   AccessReviewColumnConfig$Outbound,
   z.ZodTypeDef,
   AccessReviewColumnConfig
-> = z.object({
-  columns: z.nullable(z.array(Columns$outboundSchema)).optional(),
-  orderedColumns: z.nullable(z.array(AccessReviewTaskColumnRef$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    columns: z.nullable(z.array(Columns$outboundSchema)).optional(),
+    orderedColumns: z.nullable(
+      z.array(AccessReviewTaskColumnRef$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function accessReviewColumnConfigToJSON(
   accessReviewColumnConfig: AccessReviewColumnConfig,

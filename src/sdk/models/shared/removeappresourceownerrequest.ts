@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for removing an owner from an app resource.
@@ -24,9 +25,11 @@ export const RemoveAppResourceOwnerRequest$outboundSchema: z.ZodType<
   RemoveAppResourceOwnerRequest$Outbound,
   z.ZodTypeDef,
   RemoveAppResourceOwnerRequest
-> = z.object({
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string().optional(),
+  })
+);
 
 export function removeAppResourceOwnerRequestToJSON(
   removeAppResourceOwnerRequest: RemoveAppResourceOwnerRequest,

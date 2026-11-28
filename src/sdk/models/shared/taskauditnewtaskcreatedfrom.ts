@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,11 +34,14 @@ export const TaskAuditNewTaskCreatedFrom$inboundSchema: z.ZodType<
   TaskAuditNewTaskCreatedFrom,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  originalTaskId: z.string().optional(),
-  originalTaskNumericId: z.string().transform(v => parseInt(v, 10)).optional(),
-  originalTaskType: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    originalTaskId: z.string().optional(),
+    originalTaskNumericId: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    originalTaskType: z.string().optional(),
+  })
+);
 
 export function taskAuditNewTaskCreatedFromFromJSON(
   jsonString: string,

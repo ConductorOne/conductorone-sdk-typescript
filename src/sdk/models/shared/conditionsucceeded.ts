@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,11 +19,13 @@ export const ConditionSucceeded$inboundSchema: z.ZodType<
   ConditionSucceeded,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  succeededAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    succeededAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ConditionSucceeded$Outbound = {
   succeededAt?: string | null | undefined;
@@ -34,9 +36,12 @@ export const ConditionSucceeded$outboundSchema: z.ZodType<
   ConditionSucceeded$Outbound,
   z.ZodTypeDef,
   ConditionSucceeded
-> = z.object({
-  succeededAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    succeededAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function conditionSucceededToJSON(
   conditionSucceeded: ConditionSucceeded,

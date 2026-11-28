@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,12 +23,14 @@ export const FormCompletedAction$inboundSchema: z.ZodType<
   FormCompletedAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    userId: z.string().optional(),
+  })
+);
 /** @internal */
 export type FormCompletedAction$Outbound = {
   completedAt?: string | null | undefined;
@@ -40,10 +42,13 @@ export const FormCompletedAction$outboundSchema: z.ZodType<
   FormCompletedAction$Outbound,
   z.ZodTypeDef,
   FormCompletedAction
-> = z.object({
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function formCompletedActionToJSON(
   formCompletedAction: FormCompletedAction,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPAccessProfileToolBindingServiceDeleteRequest deletes tool bindings.
@@ -25,9 +26,11 @@ export const MCPAccessProfileToolBindingServiceDeleteRequest$outboundSchema:
     MCPAccessProfileToolBindingServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     MCPAccessProfileToolBindingServiceDeleteRequest
-  > = z.object({
-    mcpToolIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      mcpToolIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function mcpAccessProfileToolBindingServiceDeleteRequestToJSON(
   mcpAccessProfileToolBindingServiceDeleteRequest:

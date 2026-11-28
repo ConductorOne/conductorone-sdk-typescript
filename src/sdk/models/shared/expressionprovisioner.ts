@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const ExpressionProvisioner$inboundSchema: z.ZodType<
   ExpressionProvisioner,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowReassignment: z.boolean().optional(),
-  expressions: z.nullable(z.array(z.string())).optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowReassignment: z.boolean().optional(),
+    expressions: z.nullable(z.array(z.string())).optional(),
+    fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type ExpressionProvisioner$Outbound = {
   allowReassignment?: boolean | undefined;
@@ -47,11 +49,13 @@ export const ExpressionProvisioner$outboundSchema: z.ZodType<
   ExpressionProvisioner$Outbound,
   z.ZodTypeDef,
   ExpressionProvisioner
-> = z.object({
-  allowReassignment: z.boolean().optional(),
-  expressions: z.nullable(z.array(z.string())).optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowReassignment: z.boolean().optional(),
+    expressions: z.nullable(z.array(z.string())).optional(),
+    fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function expressionProvisionerToJSON(
   expressionProvisioner: ExpressionProvisioner,

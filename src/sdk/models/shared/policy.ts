@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -244,40 +244,42 @@ export const PolicyType$inboundSchema: z.ZodType<
   PolicyType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PolicyType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(PolicyType));
 /** @internal */
 export const PolicyType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   PolicyType
-> = openEnums.outboundSchema(PolicyType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(PolicyType));
 
 /** @internal */
-export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> = z
-  .object({
-    annotations: z.record(z.string()).optional(),
-    baselinePolicyId: z.string().optional(),
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    id: z.string().optional(),
-    policySteps: z.record(PolicySteps$inboundSchema).optional(),
-    policyType: PolicyType$inboundSchema.optional(),
-    postActions: z.nullable(z.array(PolicyPostActions$inboundSchema))
-      .optional(),
-    reassignTasksToDelegates: z.boolean().optional(),
-    rules: z.nullable(z.array(Rule$inboundSchema)).optional(),
-    scope: z.nullable(PolicyScope$inboundSchema).optional(),
-    systemBuiltin: z.boolean().optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
+export const Policy$inboundSchema: z.ZodType<Policy, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      annotations: z.record(z.string()).optional(),
+      baselinePolicyId: z.string().optional(),
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      id: z.string().optional(),
+      policySteps: z.record(PolicySteps$inboundSchema).optional(),
+      policyType: PolicyType$inboundSchema.optional(),
+      postActions: z.nullable(z.array(PolicyPostActions$inboundSchema))
+        .optional(),
+      reassignTasksToDelegates: z.boolean().optional(),
+      rules: z.nullable(z.array(Rule$inboundSchema)).optional(),
+      scope: z.nullable(PolicyScope$inboundSchema).optional(),
+      systemBuiltin: z.boolean().optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    })
+  );
 /** @internal */
 export type Policy$Outbound = {
   annotations?: { [k: string]: string } | undefined;
@@ -302,23 +304,26 @@ export const Policy$outboundSchema: z.ZodType<
   Policy$Outbound,
   z.ZodTypeDef,
   Policy
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  baselinePolicyId: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  policySteps: z.record(PolicySteps$outboundSchema).optional(),
-  policyType: PolicyType$outboundSchema.optional(),
-  postActions: z.nullable(z.array(PolicyPostActions$outboundSchema)).optional(),
-  reassignTasksToDelegates: z.boolean().optional(),
-  rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
-  scope: z.nullable(PolicyScope$outboundSchema).optional(),
-  systemBuiltin: z.boolean().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    baselinePolicyId: z.string().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    policySteps: z.record(PolicySteps$outboundSchema).optional(),
+    policyType: PolicyType$outboundSchema.optional(),
+    postActions: z.nullable(z.array(PolicyPostActions$outboundSchema))
+      .optional(),
+    reassignTasksToDelegates: z.boolean().optional(),
+    rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
+    scope: z.nullable(PolicyScope$outboundSchema).optional(),
+    systemBuiltin: z.boolean().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function policyToJSON(policy: Policy): string {
   return JSON.stringify(Policy$outboundSchema.parse(policy));
@@ -352,18 +357,21 @@ export const PolicyInput$outboundSchema: z.ZodType<
   PolicyInput$Outbound,
   z.ZodTypeDef,
   PolicyInput
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  baselinePolicyId: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  policySteps: z.record(PolicyStepsInput$outboundSchema).optional(),
-  policyType: PolicyType$outboundSchema.optional(),
-  postActions: z.nullable(z.array(PolicyPostActions$outboundSchema)).optional(),
-  reassignTasksToDelegates: z.boolean().optional(),
-  rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
-  scope: z.nullable(PolicyScope$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    baselinePolicyId: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    policySteps: z.record(PolicyStepsInput$outboundSchema).optional(),
+    policyType: PolicyType$outboundSchema.optional(),
+    postActions: z.nullable(z.array(PolicyPostActions$outboundSchema))
+      .optional(),
+    reassignTasksToDelegates: z.boolean().optional(),
+    rules: z.nullable(z.array(Rule$outboundSchema)).optional(),
+    scope: z.nullable(PolicyScope$outboundSchema).optional(),
+  })
+);
 
 export function policyInputToJSON(policyInput: PolicyInput): string {
   return JSON.stringify(PolicyInput$outboundSchema.parse(policyInput));

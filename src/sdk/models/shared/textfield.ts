@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const TextField$inboundSchema: z.ZodType<
   TextField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  multiline: z.boolean().optional(),
-  suffix: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    multiline: z.boolean().optional(),
+    suffix: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type TextField$Outbound = {
   multiline?: boolean | undefined;
@@ -41,10 +43,12 @@ export const TextField$outboundSchema: z.ZodType<
   TextField$Outbound,
   z.ZodTypeDef,
   TextField
-> = z.object({
-  multiline: z.boolean().optional(),
-  suffix: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    multiline: z.boolean().optional(),
+    suffix: z.nullable(z.string()).optional(),
+  })
+);
 
 export function textFieldToJSON(textField: TextField): string {
   return JSON.stringify(TextField$outboundSchema.parse(textField));

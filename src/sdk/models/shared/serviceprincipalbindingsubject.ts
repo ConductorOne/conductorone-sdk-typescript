@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AuthzenServerRef,
   AuthzenServerRef$Outbound,
@@ -60,12 +61,14 @@ export const ServicePrincipalBindingSubject$outboundSchema: z.ZodType<
   ServicePrincipalBindingSubject$Outbound,
   z.ZodTypeDef,
   ServicePrincipalBindingSubject
-> = z.object({
-  authzenServer: z.nullable(AuthzenServerRef$outboundSchema).optional(),
-  edge: z.nullable(EdgeRef$outboundSchema).optional(),
-  functionId: z.nullable(z.string()).optional(),
-  ssoApplication: z.nullable(SSOApplicationRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authzenServer: z.nullable(AuthzenServerRef$outboundSchema).optional(),
+    edge: z.nullable(EdgeRef$outboundSchema).optional(),
+    functionId: z.nullable(z.string()).optional(),
+    ssoApplication: z.nullable(SSOApplicationRef$outboundSchema).optional(),
+  })
+);
 
 export function servicePrincipalBindingSubjectToJSON(
   servicePrincipalBindingSubject: ServicePrincipalBindingSubject,

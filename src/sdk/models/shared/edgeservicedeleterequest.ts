@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * EdgeServiceDeleteRequest deletes the Edge for an app.
@@ -17,7 +18,7 @@ export const EdgeServiceDeleteRequest$outboundSchema: z.ZodType<
   EdgeServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   EdgeServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function edgeServiceDeleteRequestToJSON(
   edgeServiceDeleteRequest: EdgeServiceDeleteRequest,

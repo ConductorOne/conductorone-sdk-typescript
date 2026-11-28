@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const HookFunctionRef$inboundSchema: z.ZodType<
   HookFunctionRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  commitId: z.string().optional(),
-  functionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commitId: z.string().optional(),
+    functionId: z.string().optional(),
+  })
+);
 /** @internal */
 export type HookFunctionRef$Outbound = {
   commitId?: string | undefined;
@@ -41,10 +43,12 @@ export const HookFunctionRef$outboundSchema: z.ZodType<
   HookFunctionRef$Outbound,
   z.ZodTypeDef,
   HookFunctionRef
-> = z.object({
-  commitId: z.string().optional(),
-  functionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    commitId: z.string().optional(),
+    functionId: z.string().optional(),
+  })
+);
 
 export function hookFunctionRefToJSON(
   hookFunctionRef: HookFunctionRef,

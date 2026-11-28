@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { A2UISurface, A2UISurface$inboundSchema } from "./a2uisurface.js";
@@ -23,9 +23,11 @@ export const A2UIServiceListSurfacesResponse$inboundSchema: z.ZodType<
   A2UIServiceListSurfacesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  surfaces: z.nullable(z.array(A2UISurface$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    surfaces: z.nullable(z.array(A2UISurface$inboundSchema)).optional(),
+  })
+);
 
 export function a2UIServiceListSurfacesResponseFromJSON(
   jsonString: string,

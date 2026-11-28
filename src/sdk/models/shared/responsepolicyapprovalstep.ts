@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -61,16 +61,18 @@ export const ResponsePolicyApprovalStep$inboundSchema: z.ZodType<
   ResponsePolicyApprovalStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approve: z.nullable(ResponsePolicyApprovalStepApprove$inboundSchema)
-    .optional(),
-  deny: z.nullable(ResponsePolicyApprovalStepDeny$inboundSchema).optional(),
-  reassign: z.nullable(ResponsePolicyApprovalStepReassign$inboundSchema)
-    .optional(),
-  replacePolicy: z.nullable(ResponsePolicyApprovalReplacePolicy$inboundSchema)
-    .optional(),
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approve: z.nullable(ResponsePolicyApprovalStepApprove$inboundSchema)
+      .optional(),
+    deny: z.nullable(ResponsePolicyApprovalStepDeny$inboundSchema).optional(),
+    reassign: z.nullable(ResponsePolicyApprovalStepReassign$inboundSchema)
+      .optional(),
+    replacePolicy: z.nullable(ResponsePolicyApprovalReplacePolicy$inboundSchema)
+      .optional(),
+    version: z.string().optional(),
+  })
+);
 /** @internal */
 export type ResponsePolicyApprovalStep$Outbound = {
   approve?: ResponsePolicyApprovalStepApprove$Outbound | null | undefined;
@@ -88,16 +90,19 @@ export const ResponsePolicyApprovalStep$outboundSchema: z.ZodType<
   ResponsePolicyApprovalStep$Outbound,
   z.ZodTypeDef,
   ResponsePolicyApprovalStep
-> = z.object({
-  approve: z.nullable(ResponsePolicyApprovalStepApprove$outboundSchema)
-    .optional(),
-  deny: z.nullable(ResponsePolicyApprovalStepDeny$outboundSchema).optional(),
-  reassign: z.nullable(ResponsePolicyApprovalStepReassign$outboundSchema)
-    .optional(),
-  replacePolicy: z.nullable(ResponsePolicyApprovalReplacePolicy$outboundSchema)
-    .optional(),
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approve: z.nullable(ResponsePolicyApprovalStepApprove$outboundSchema)
+      .optional(),
+    deny: z.nullable(ResponsePolicyApprovalStepDeny$outboundSchema).optional(),
+    reassign: z.nullable(ResponsePolicyApprovalStepReassign$outboundSchema)
+      .optional(),
+    replacePolicy: z.nullable(
+      ResponsePolicyApprovalReplacePolicy$outboundSchema,
+    ).optional(),
+    version: z.string().optional(),
+  })
+);
 
 export function responsePolicyApprovalStepToJSON(
   responsePolicyApprovalStep: ResponsePolicyApprovalStep,

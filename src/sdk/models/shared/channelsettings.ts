@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,11 +39,13 @@ export const ChannelSettings$inboundSchema: z.ZodType<
   ChannelSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.nullable(EmailChannelSettings$inboundSchema).optional(),
-  slack: z.nullable(SlackChannelSettings$inboundSchema).optional(),
-  teams: z.nullable(MSTeamsChannelSettings$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.nullable(EmailChannelSettings$inboundSchema).optional(),
+    slack: z.nullable(SlackChannelSettings$inboundSchema).optional(),
+    teams: z.nullable(MSTeamsChannelSettings$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ChannelSettings$Outbound = {
   email?: EmailChannelSettings$Outbound | null | undefined;
@@ -56,11 +58,13 @@ export const ChannelSettings$outboundSchema: z.ZodType<
   ChannelSettings$Outbound,
   z.ZodTypeDef,
   ChannelSettings
-> = z.object({
-  email: z.nullable(EmailChannelSettings$outboundSchema).optional(),
-  slack: z.nullable(SlackChannelSettings$outboundSchema).optional(),
-  teams: z.nullable(MSTeamsChannelSettings$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.nullable(EmailChannelSettings$outboundSchema).optional(),
+    slack: z.nullable(SlackChannelSettings$outboundSchema).optional(),
+    teams: z.nullable(MSTeamsChannelSettings$outboundSchema).optional(),
+  })
+);
 
 export function channelSettingsToJSON(
   channelSettings: ChannelSettings,

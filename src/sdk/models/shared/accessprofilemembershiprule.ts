@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const AccessProfileMembershipRule$inboundSchema: z.ZodType<
   AccessProfileMembershipRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cel: z.string().optional(),
+  })
+);
 /** @internal */
 export type AccessProfileMembershipRule$Outbound = {
   cel?: string | undefined;
@@ -35,9 +37,11 @@ export const AccessProfileMembershipRule$outboundSchema: z.ZodType<
   AccessProfileMembershipRule$Outbound,
   z.ZodTypeDef,
   AccessProfileMembershipRule
-> = z.object({
-  cel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cel: z.string().optional(),
+  })
+);
 
 export function accessProfileMembershipRuleToJSON(
   accessProfileMembershipRule: AccessProfileMembershipRule,

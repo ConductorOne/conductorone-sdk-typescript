@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,9 +30,11 @@ export const AccessProfileCompositionReviewItem$inboundSchema: z.ZodType<
   AccessProfileCompositionReviewItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entitlement: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlement: z.nullable(AppEntitlementRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type AccessProfileCompositionReviewItem$Outbound = {
   entitlement?: AppEntitlementRef$Outbound | null | undefined;
@@ -43,9 +45,11 @@ export const AccessProfileCompositionReviewItem$outboundSchema: z.ZodType<
   AccessProfileCompositionReviewItem$Outbound,
   z.ZodTypeDef,
   AccessProfileCompositionReviewItem
-> = z.object({
-  entitlement: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlement: z.nullable(AppEntitlementRef$outboundSchema).optional(),
+  })
+);
 
 export function accessProfileCompositionReviewItemToJSON(
   accessProfileCompositionReviewItem: AccessProfileCompositionReviewItem,

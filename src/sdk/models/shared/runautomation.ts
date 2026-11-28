@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,12 +46,14 @@ export const RunAutomation$inboundSchema: z.ZodType<
   RunAutomation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  automationTemplateIdCel: z.nullable(z.string()).optional(),
-  automationTemplateRef: z.nullable(AutomationTemplateRef$inboundSchema)
-    .optional(),
-  context: z.nullable(AutomationContext$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automationTemplateIdCel: z.nullable(z.string()).optional(),
+    automationTemplateRef: z.nullable(AutomationTemplateRef$inboundSchema)
+      .optional(),
+    context: z.nullable(AutomationContext$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type RunAutomation$Outbound = {
   automationTemplateIdCel?: string | null | undefined;
@@ -64,12 +66,14 @@ export const RunAutomation$outboundSchema: z.ZodType<
   RunAutomation$Outbound,
   z.ZodTypeDef,
   RunAutomation
-> = z.object({
-  automationTemplateIdCel: z.nullable(z.string()).optional(),
-  automationTemplateRef: z.nullable(AutomationTemplateRef$outboundSchema)
-    .optional(),
-  context: z.nullable(AutomationContext$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automationTemplateIdCel: z.nullable(z.string()).optional(),
+    automationTemplateRef: z.nullable(AutomationTemplateRef$outboundSchema)
+      .optional(),
+    context: z.nullable(AutomationContext$outboundSchema).optional(),
+  })
+);
 
 export function runAutomationToJSON(runAutomation: RunAutomation): string {
   return JSON.stringify(RunAutomation$outboundSchema.parse(runAutomation));

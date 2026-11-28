@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,17 +52,19 @@ export const C1ApiCrossAppAccessV1XAAResourceServerServiceCreateRequest$outbound
     C1ApiCrossAppAccessV1XAAResourceServerServiceCreateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAResourceServerServiceCreateRequest
-  > = z.object({
-    appId: z.string(),
-    xaaResourceServerServiceCreateRequest: shared
-      .XAAResourceServerServiceCreateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      xaaResourceServerServiceCreateRequest:
-        "XAAResourceServerServiceCreateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      xaaResourceServerServiceCreateRequest: shared
+        .XAAResourceServerServiceCreateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        xaaResourceServerServiceCreateRequest:
+          "XAAResourceServerServiceCreateRequest",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAResourceServerServiceCreateRequestToJSON(
   c1ApiCrossAppAccessV1XAAResourceServerServiceCreateRequest:
@@ -80,21 +82,23 @@ export const C1ApiCrossAppAccessV1XAAResourceServerServiceCreateResponse$inbound
     C1ApiCrossAppAccessV1XAAResourceServerServiceCreateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAResourceServerServiceCreateResponse: shared
-      .XAAResourceServerServiceCreateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAResourceServerServiceCreateResponse":
-        "xaaResourceServerServiceCreateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAResourceServerServiceCreateResponse: shared
+        .XAAResourceServerServiceCreateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAResourceServerServiceCreateResponse":
+          "xaaResourceServerServiceCreateResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAResourceServerServiceCreateResponseFromJSON(
   jsonString: string,

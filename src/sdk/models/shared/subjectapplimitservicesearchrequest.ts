@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   SubjectAppLimitStateFilter,
   SubjectAppLimitStateFilter$Outbound,
@@ -46,13 +47,15 @@ export const SubjectAppLimitServiceSearchRequest$outboundSchema: z.ZodType<
   SubjectAppLimitServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   SubjectAppLimitServiceSearchRequest
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  states: z.nullable(SubjectAppLimitStateFilter$outboundSchema).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    states: z.nullable(SubjectAppLimitStateFilter$outboundSchema).optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function subjectAppLimitServiceSearchRequestToJSON(
   subjectAppLimitServiceSearchRequest: SubjectAppLimitServiceSearchRequest,

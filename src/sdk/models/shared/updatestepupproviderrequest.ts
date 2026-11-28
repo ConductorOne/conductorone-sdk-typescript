@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   StepUpProviderInput,
   StepUpProviderInput$Outbound,
@@ -28,10 +29,12 @@ export const UpdateStepUpProviderRequest$outboundSchema: z.ZodType<
   UpdateStepUpProviderRequest$Outbound,
   z.ZodTypeDef,
   UpdateStepUpProviderRequest
-> = z.object({
-  stepUpProvider: z.nullable(StepUpProviderInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stepUpProvider: z.nullable(StepUpProviderInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateStepUpProviderRequestToJSON(
   updateStepUpProviderRequest: UpdateStepUpProviderRequest,

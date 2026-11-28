@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiSSFReceiverV1SSFReceiverStreamServiceListRequest$outboundSchem
     C1ApiSSFReceiverV1SSFReceiverStreamServiceListRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSSFReceiverV1SSFReceiverStreamServiceListRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiSSFReceiverV1SSFReceiverStreamServiceListRequestToJSON(
   c1ApiSSFReceiverV1SSFReceiverStreamServiceListRequest:
@@ -74,21 +76,23 @@ export const C1ApiSSFReceiverV1SSFReceiverStreamServiceListResponse$inboundSchem
     C1ApiSSFReceiverV1SSFReceiverStreamServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSFReceiverStreamServiceListResponse: shared
-      .SSFReceiverStreamServiceListResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSFReceiverStreamServiceListResponse":
-        "ssfReceiverStreamServiceListResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSFReceiverStreamServiceListResponse: shared
+        .SSFReceiverStreamServiceListResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSFReceiverStreamServiceListResponse":
+          "ssfReceiverStreamServiceListResponse",
+      });
+    })
+  );
 
 export function c1ApiSSFReceiverV1SSFReceiverStreamServiceListResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for adding an owner to an app resource.
@@ -24,9 +25,11 @@ export const AddAppResourceOwnerRequest$outboundSchema: z.ZodType<
   AddAppResourceOwnerRequest$Outbound,
   z.ZodTypeDef,
   AddAppResourceOwnerRequest
-> = z.object({
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string().optional(),
+  })
+);
 
 export function addAppResourceOwnerRequestToJSON(
   addAppResourceOwnerRequest: AddAppResourceOwnerRequest,

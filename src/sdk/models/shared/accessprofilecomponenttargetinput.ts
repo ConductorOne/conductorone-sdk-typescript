@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessProfileMembershipRuleInput,
   AccessProfileMembershipRuleInput$Outbound,
@@ -49,15 +50,17 @@ export const AccessProfileComponentTargetInput$outboundSchema: z.ZodType<
   AccessProfileComponentTargetInput$Outbound,
   z.ZodTypeDef,
   AccessProfileComponentTargetInput
-> = z.object({
-  accessProfile: z.nullable(AccessProfileRef$outboundSchema).optional(),
-  compositionEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
-    .optional(),
-  membershipEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
-    .optional(),
-  membershipRule: z.nullable(AccessProfileMembershipRuleInput$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfile: z.nullable(AccessProfileRef$outboundSchema).optional(),
+    compositionEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
+      .optional(),
+    membershipEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
+      .optional(),
+    membershipRule: z.nullable(AccessProfileMembershipRuleInput$outboundSchema)
+      .optional(),
+  })
+);
 
 export function accessProfileComponentTargetInputToJSON(
   accessProfileComponentTargetInput: AccessProfileComponentTargetInput,

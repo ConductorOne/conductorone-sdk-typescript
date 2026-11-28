@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -42,14 +42,16 @@ export const TestTokenStepResult$inboundSchema: z.ZodType<
   TestTokenStepResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actual: z.string().optional(),
-  detail: z.string().optional(),
-  expected: z.string().optional(),
-  passed: z.boolean().optional(),
-  skipped: z.boolean().optional(),
-  stepName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actual: z.string().optional(),
+    detail: z.string().optional(),
+    expected: z.string().optional(),
+    passed: z.boolean().optional(),
+    skipped: z.boolean().optional(),
+    stepName: z.string().optional(),
+  })
+);
 
 export function testTokenStepResultFromJSON(
   jsonString: string,

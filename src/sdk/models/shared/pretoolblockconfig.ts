@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,9 +28,11 @@ export const PreToolBlockConfig$inboundSchema: z.ZodType<
   PreToolBlockConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+  })
+);
 /** @internal */
 export type PreToolBlockConfig$Outbound = {
   message?: string | undefined;
@@ -41,9 +43,11 @@ export const PreToolBlockConfig$outboundSchema: z.ZodType<
   PreToolBlockConfig$Outbound,
   z.ZodTypeDef,
   PreToolBlockConfig
-> = z.object({
-  message: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+  })
+);
 
 export function preToolBlockConfigToJSON(
   preToolBlockConfig: PreToolBlockConfig,

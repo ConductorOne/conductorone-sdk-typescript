@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ReportingServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const ReportingServiceDeleteRequest$outboundSchema: z.ZodType<
   ReportingServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   ReportingServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function reportingServiceDeleteRequestToJSON(
   reportingServiceDeleteRequest: ReportingServiceDeleteRequest,

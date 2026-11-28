@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,9 +23,11 @@ export const UserNotificationSettings$inboundSchema: z.ZodType<
   UserNotificationSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  channelSettings: z.nullable(ChannelSettings$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    channelSettings: z.nullable(ChannelSettings$inboundSchema).optional(),
+  })
+);
 
 export function userNotificationSettingsFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ReportingServiceSaveRequest message.
@@ -70,15 +71,17 @@ export const ReportingServiceSaveRequest$outboundSchema: z.ZodType<
   ReportingServiceSaveRequest$Outbound,
   z.ZodTypeDef,
   ReportingServiceSaveRequest
-> = z.object({
-  conversationId: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  expectedProgramId: z.string().optional(),
-  prompt: z.string().optional(),
-  reportId: z.string().optional(),
-  surfaceId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    expectedProgramId: z.string().optional(),
+    prompt: z.string().optional(),
+    reportId: z.string().optional(),
+    surfaceId: z.string().optional(),
+  })
+);
 
 export function reportingServiceSaveRequestToJSON(
   reportingServiceSaveRequest: ReportingServiceSaveRequest,

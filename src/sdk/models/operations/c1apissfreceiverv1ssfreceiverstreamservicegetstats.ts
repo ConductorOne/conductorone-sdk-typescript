@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,13 +46,15 @@ export const C1ApiSSFReceiverV1SSFReceiverStreamServiceGetStatsRequest$outboundS
     C1ApiSSFReceiverV1SSFReceiverStreamServiceGetStatsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSSFReceiverV1SSFReceiverStreamServiceGetStatsRequest
-  > = z.object({
-    streamId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      streamId: "stream_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      streamId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        streamId: "stream_id",
+      });
+    })
+  );
 
 export function c1ApiSSFReceiverV1SSFReceiverStreamServiceGetStatsRequestToJSON(
   c1ApiSSFReceiverV1SSFReceiverStreamServiceGetStatsRequest:
@@ -70,21 +72,23 @@ export const C1ApiSSFReceiverV1SSFReceiverStreamServiceGetStatsResponse$inboundS
     C1ApiSSFReceiverV1SSFReceiverStreamServiceGetStatsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSFReceiverStreamServiceGetStatsResponse: shared
-      .SSFReceiverStreamServiceGetStatsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSFReceiverStreamServiceGetStatsResponse":
-        "ssfReceiverStreamServiceGetStatsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSFReceiverStreamServiceGetStatsResponse: shared
+        .SSFReceiverStreamServiceGetStatsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSFReceiverStreamServiceGetStatsResponse":
+          "ssfReceiverStreamServiceGetStatsResponse",
+      });
+    })
+  );
 
 export function c1ApiSSFReceiverV1SSFReceiverStreamServiceGetStatsResponseFromJSON(
   jsonString: string,

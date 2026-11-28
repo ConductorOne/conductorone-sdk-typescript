@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,25 +45,27 @@ export type Role = {
 };
 
 /** @internal */
-export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> = z
-  .object({
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    displayName: z.string().optional(),
-    id: z.string().optional(),
-    name: z.string().optional(),
-    permissions: z.nullable(z.array(z.string())).optional(),
-    serviceRoles: z.nullable(z.array(z.string())).optional(),
-    systemApiOnly: z.boolean().optional(),
-    systemBuiltin: z.boolean().optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
+export const Role$inboundSchema: z.ZodType<Role, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      displayName: z.string().optional(),
+      id: z.string().optional(),
+      name: z.string().optional(),
+      permissions: z.nullable(z.array(z.string())).optional(),
+      serviceRoles: z.nullable(z.array(z.string())).optional(),
+      systemApiOnly: z.boolean().optional(),
+      systemBuiltin: z.boolean().optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    })
+  );
 
 export function roleFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAScopeServiceDeleteRequest deletes a scope (soft delete).
@@ -17,7 +18,7 @@ export const XAAScopeServiceDeleteRequest$outboundSchema: z.ZodType<
   XAAScopeServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   XAAScopeServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function xaaScopeServiceDeleteRequestToJSON(
   xaaScopeServiceDeleteRequest: XAAScopeServiceDeleteRequest,

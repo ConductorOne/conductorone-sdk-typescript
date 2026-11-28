@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FunctionCall, FunctionCall$inboundSchema } from "./functioncall.js";
@@ -28,10 +28,12 @@ export const A2UIAction$inboundSchema: z.ZodType<
   A2UIAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  event: z.nullable(ServerEvent$inboundSchema).optional(),
-  functionCall: z.nullable(FunctionCall$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.nullable(ServerEvent$inboundSchema).optional(),
+    functionCall: z.nullable(FunctionCall$inboundSchema).optional(),
+  })
+);
 
 export function a2UIActionFromJSON(
   jsonString: string,

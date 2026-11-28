@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,11 +30,13 @@ export const EdgeInferenceModelFamily$inboundSchema: z.ZodType<
   EdgeInferenceModelFamily,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  family: z.string().optional(),
-  models: z.nullable(z.array(EdgeInferenceRegistryModel$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    family: z.string().optional(),
+    models: z.nullable(z.array(EdgeInferenceRegistryModel$inboundSchema))
+      .optional(),
+  })
+);
 
 export function edgeInferenceModelFamilyFromJSON(
   jsonString: string,

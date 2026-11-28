@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,17 +46,19 @@ export const C1ApiAppV2AppOwnersGetUserOwnerRequest$outboundSchema: z.ZodType<
   C1ApiAppV2AppOwnersGetUserOwnerRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV2AppOwnersGetUserOwnerRequest
-> = z.object({
-  appId: z.string(),
-  roleSlug: z.string(),
-  userRefId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    roleSlug: "role_slug",
-    userRefId: "user_ref_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    roleSlug: z.string(),
+    userRefId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      roleSlug: "role_slug",
+      userRefId: "user_ref_id",
+    });
+  })
+);
 
 export function c1ApiAppV2AppOwnersGetUserOwnerRequestToJSON(
   c1ApiAppV2AppOwnersGetUserOwnerRequest:
@@ -74,20 +76,22 @@ export const C1ApiAppV2AppOwnersGetUserOwnerResponse$inboundSchema: z.ZodType<
   C1ApiAppV2AppOwnersGetUserOwnerResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  GetAppUserOwnerResponse: shared.GetAppUserOwnerResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "GetAppUserOwnerResponse": "getAppUserOwnerResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    GetAppUserOwnerResponse: shared.GetAppUserOwnerResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "GetAppUserOwnerResponse": "getAppUserOwnerResponse",
+    });
+  })
+);
 
 export function c1ApiAppV2AppOwnersGetUserOwnerResponseFromJSON(
   jsonString: string,

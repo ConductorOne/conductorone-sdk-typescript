@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,12 +23,14 @@ export const TaskAuditWaitForAnalysisStepSuccess$inboundSchema: z.ZodType<
   TaskAuditWaitForAnalysisStepSuccess,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stepId: z.string().optional(),
-  succeededAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stepId: z.string().optional(),
+    succeededAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function taskAuditWaitForAnalysisStepSuccessFromJSON(
   jsonString: string,

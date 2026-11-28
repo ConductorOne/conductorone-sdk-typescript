@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for setting the app owners.
@@ -24,9 +25,11 @@ export const SetAppOwnersRequest$outboundSchema: z.ZodType<
   SetAppOwnersRequest$Outbound,
   z.ZodTypeDef,
   SetAppOwnersRequest
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function setAppOwnersRequestToJSON(
   setAppOwnersRequest: SetAppOwnersRequest,

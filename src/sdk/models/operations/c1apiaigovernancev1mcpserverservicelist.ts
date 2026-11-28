@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,18 +51,20 @@ export const C1ApiAiGovernanceV1MCPServerServiceListRequest$outboundSchema:
     C1ApiAiGovernanceV1MCPServerServiceListRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPServerServiceListRequest
-  > = z.object({
-    appId: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceListRequestToJSON(
   c1ApiAiGovernanceV1MCPServerServiceListRequest:
@@ -81,20 +83,22 @@ export const C1ApiAiGovernanceV1MCPServerServiceListResponse$inboundSchema:
     C1ApiAiGovernanceV1MCPServerServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPServerServiceListResponse: shared
-      .MCPServerServiceListResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPServerServiceListResponse": "mcpServerServiceListResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPServerServiceListResponse: shared
+        .MCPServerServiceListResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPServerServiceListResponse": "mcpServerServiceListResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceListResponseFromJSON(
   jsonString: string,

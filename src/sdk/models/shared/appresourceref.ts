@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const AppResourceRef$inboundSchema: z.ZodType<
   AppResourceRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  appResourceTypeId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appResourceTypeId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 /** @internal */
 export type AppResourceRef$Outbound = {
   appId?: string | undefined;
@@ -47,11 +49,13 @@ export const AppResourceRef$outboundSchema: z.ZodType<
   AppResourceRef$Outbound,
   z.ZodTypeDef,
   AppResourceRef
-> = z.object({
-  appId: z.string().optional(),
-  appResourceTypeId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appResourceTypeId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function appResourceRefToJSON(appResourceRef: AppResourceRef): string {
   return JSON.stringify(AppResourceRef$outboundSchema.parse(appResourceRef));

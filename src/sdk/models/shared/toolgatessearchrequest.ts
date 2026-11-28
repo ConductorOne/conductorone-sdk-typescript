@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ToolGatesSearchRequest message.
@@ -34,11 +35,13 @@ export const ToolGatesSearchRequest$outboundSchema: z.ZodType<
   ToolGatesSearchRequest$Outbound,
   z.ZodTypeDef,
   ToolGatesSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+  })
+);
 
 export function toolGatesSearchRequestToJSON(
   toolGatesSearchRequest: ToolGatesSearchRequest,

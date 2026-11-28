@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const FindingDispatchOutcomeNotify$inboundSchema: z.ZodType<
   FindingDispatchOutcomeNotify,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  onDone: z.boolean().optional(),
-  onError: z.boolean().optional(),
-  recipients: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    onDone: z.boolean().optional(),
+    onError: z.boolean().optional(),
+    recipients: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type FindingDispatchOutcomeNotify$Outbound = {
   onDone?: boolean | undefined;
@@ -47,11 +49,13 @@ export const FindingDispatchOutcomeNotify$outboundSchema: z.ZodType<
   FindingDispatchOutcomeNotify$Outbound,
   z.ZodTypeDef,
   FindingDispatchOutcomeNotify
-> = z.object({
-  onDone: z.boolean().optional(),
-  onError: z.boolean().optional(),
-  recipients: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    onDone: z.boolean().optional(),
+    onError: z.boolean().optional(),
+    recipients: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function findingDispatchOutcomeNotifyToJSON(
   findingDispatchOutcomeNotify: FindingDispatchOutcomeNotify,

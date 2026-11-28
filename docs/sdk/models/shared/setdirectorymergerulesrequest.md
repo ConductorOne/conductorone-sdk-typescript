@@ -1,0 +1,17 @@
+# SetDirectoryMergeRulesRequest
+
+The SetDirectoryMergeRulesRequest message.
+
+## Example Usage
+
+```typescript
+import { SetDirectoryMergeRulesRequest } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: SetDirectoryMergeRulesRequest = {};
+```
+
+## Fields
+
+| Field                                                                                                                                                                                                                                                  | Type                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `rules`                                                                                                                                                                                                                                                | [shared.DirectoryMergeRuleInput](../../../sdk/models/shared/directorymergeruleinput.md)[]                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                     | Every rule in the desired evaluation order, built-in rules included.<br/> max_items admits a directory saved before the limit with 20 legacy match cases plus the 3 built-in<br/> rules; the server enforces the limit of 10 for anything that grows the list. |

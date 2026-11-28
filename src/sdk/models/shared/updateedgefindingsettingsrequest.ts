@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   EdgeFindingSettingsEntry,
   EdgeFindingSettingsEntry$Outbound,
@@ -49,13 +50,15 @@ export const UpdateEdgeFindingSettingsRequest$outboundSchema: z.ZodType<
   UpdateEdgeFindingSettingsRequest$Outbound,
   z.ZodTypeDef,
   UpdateEdgeFindingSettingsRequest
-> = z.object({
-  settings: z.nullable(z.array(EdgeFindingSettingsEntry$outboundSchema))
-    .optional(),
-  subcategorySettings: z.nullable(
-    z.array(EdgeFindingSubcategorySettingsEntry$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    settings: z.nullable(z.array(EdgeFindingSettingsEntry$outboundSchema))
+      .optional(),
+    subcategorySettings: z.nullable(
+      z.array(EdgeFindingSubcategorySettingsEntry$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function updateEdgeFindingSettingsRequestToJSON(
   updateEdgeFindingSettingsRequest: UpdateEdgeFindingSettingsRequest,

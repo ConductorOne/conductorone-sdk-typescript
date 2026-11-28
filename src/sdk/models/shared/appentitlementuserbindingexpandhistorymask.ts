@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AppEntitlementUserBindingExpandHistoryMask message.
@@ -25,9 +26,11 @@ export const AppEntitlementUserBindingExpandHistoryMask$outboundSchema:
     AppEntitlementUserBindingExpandHistoryMask$Outbound,
     z.ZodTypeDef,
     AppEntitlementUserBindingExpandHistoryMask
-  > = z.object({
-    paths: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      paths: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function appEntitlementUserBindingExpandHistoryMaskToJSON(
   appEntitlementUserBindingExpandHistoryMask:

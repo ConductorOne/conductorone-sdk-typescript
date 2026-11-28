@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -69,25 +69,29 @@ export const Component$inboundSchema: z.ZodType<
   Component,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Component);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Component));
 
 /** @internal */
 export const SAMLMetadataFindingLevel$inboundSchema: z.ZodType<
   SAMLMetadataFindingLevel,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SAMLMetadataFindingLevel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SAMLMetadataFindingLevel)
+);
 
 /** @internal */
 export const SAMLMetadataFinding$inboundSchema: z.ZodType<
   SAMLMetadataFinding,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  component: Component$inboundSchema.optional(),
-  level: SAMLMetadataFindingLevel$inboundSchema.optional(),
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    component: Component$inboundSchema.optional(),
+    level: SAMLMetadataFindingLevel$inboundSchema.optional(),
+    reason: z.string().optional(),
+  })
+);
 
 export function samlMetadataFindingFromJSON(
   jsonString: string,

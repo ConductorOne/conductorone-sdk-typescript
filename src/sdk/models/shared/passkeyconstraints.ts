@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,24 +50,26 @@ export const Attestation$inboundSchema: z.ZodType<
   Attestation,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Attestation);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Attestation));
 /** @internal */
 export const Attestation$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Attestation
-> = openEnums.outboundSchema(Attestation);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Attestation));
 
 /** @internal */
 export const PasskeyConstraints$inboundSchema: z.ZodType<
   PasskeyConstraints,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowedAaguids: z.nullable(z.array(z.string())).optional(),
-  attestation: Attestation$inboundSchema.optional(),
-  requireUserVerification: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedAaguids: z.nullable(z.array(z.string())).optional(),
+    attestation: Attestation$inboundSchema.optional(),
+    requireUserVerification: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type PasskeyConstraints$Outbound = {
   allowedAaguids?: Array<string> | null | undefined;
@@ -80,11 +82,13 @@ export const PasskeyConstraints$outboundSchema: z.ZodType<
   PasskeyConstraints$Outbound,
   z.ZodTypeDef,
   PasskeyConstraints
-> = z.object({
-  allowedAaguids: z.nullable(z.array(z.string())).optional(),
-  attestation: Attestation$outboundSchema.optional(),
-  requireUserVerification: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedAaguids: z.nullable(z.array(z.string())).optional(),
+    attestation: Attestation$outboundSchema.optional(),
+    requireUserVerification: z.boolean().optional(),
+  })
+);
 
 export function passkeyConstraintsToJSON(
   passkeyConstraints: PasskeyConstraints,

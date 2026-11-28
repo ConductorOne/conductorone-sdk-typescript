@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,17 +53,20 @@ export const C1ApiSsov1SSOApplicationServiceDeleteRequest$outboundSchema:
     C1ApiSsov1SSOApplicationServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSsov1SSOApplicationServiceDeleteRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    ssoApplicationServiceDeleteRequest: shared
-      .SSOApplicationServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      ssoApplicationServiceDeleteRequest: "SSOApplicationServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      ssoApplicationServiceDeleteRequest: shared
+        .SSOApplicationServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        ssoApplicationServiceDeleteRequest:
+          "SSOApplicationServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceDeleteRequestToJSON(
   c1ApiSsov1SSOApplicationServiceDeleteRequest:
@@ -82,21 +85,23 @@ export const C1ApiSsov1SSOApplicationServiceDeleteResponse$inboundSchema:
     C1ApiSsov1SSOApplicationServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSOApplicationServiceDeleteResponse: shared
-      .SSOApplicationServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSOApplicationServiceDeleteResponse":
-        "ssoApplicationServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSOApplicationServiceDeleteResponse: shared
+        .SSOApplicationServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSOApplicationServiceDeleteResponse":
+          "ssoApplicationServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceDeleteResponseFromJSON(
   jsonString: string,

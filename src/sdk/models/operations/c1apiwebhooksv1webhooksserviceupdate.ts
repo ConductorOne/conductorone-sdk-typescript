@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1ApiWebhooksV1WebhooksServiceUpdateRequest$outboundSchema:
     C1ApiWebhooksV1WebhooksServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiWebhooksV1WebhooksServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    webhooksServiceUpdateRequest: shared
-      .WebhooksServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      webhooksServiceUpdateRequest: "WebhooksServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      webhooksServiceUpdateRequest: shared
+        .WebhooksServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        webhooksServiceUpdateRequest: "WebhooksServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiWebhooksV1WebhooksServiceUpdateRequestToJSON(
   c1ApiWebhooksV1WebhooksServiceUpdateRequest:
@@ -78,20 +80,22 @@ export const C1ApiWebhooksV1WebhooksServiceUpdateResponse$inboundSchema:
     C1ApiWebhooksV1WebhooksServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    WebhooksServiceUpdateResponse: shared
-      .WebhooksServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "WebhooksServiceUpdateResponse": "webhooksServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      WebhooksServiceUpdateResponse: shared
+        .WebhooksServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "WebhooksServiceUpdateResponse": "webhooksServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiWebhooksV1WebhooksServiceUpdateResponseFromJSON(
   jsonString: string,

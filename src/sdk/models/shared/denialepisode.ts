@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -180,80 +180,88 @@ export const AuthorityKind$inboundSchema: z.ZodType<
   AuthorityKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AuthorityKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AuthorityKind));
 
 /** @internal */
 export const PeriodKind$inboundSchema: z.ZodType<
   PeriodKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PeriodKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(PeriodKind));
 
 /** @internal */
 export const DenialEpisodeReason$inboundSchema: z.ZodType<
   DenialEpisodeReason,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DenialEpisodeReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DenialEpisodeReason)
+);
 
 /** @internal */
 export const RequestTaskState$inboundSchema: z.ZodType<
   RequestTaskState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(RequestTaskState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(RequestTaskState)
+);
 
 /** @internal */
 export const ScopeKind$inboundSchema: z.ZodType<
   ScopeKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ScopeKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ScopeKind));
 
 /** @internal */
 export const DenialEpisodeState$inboundSchema: z.ZodType<
   DenialEpisodeState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DenialEpisodeState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DenialEpisodeState)
+);
 
 /** @internal */
 export const DenialEpisode$inboundSchema: z.ZodType<
   DenialEpisode,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  attemptCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  authorityId: z.string().optional(),
-  authorityKind: AuthorityKind$inboundSchema.optional(),
-  authorityVersion: z.string().transform(v => parseInt(v, 10)).optional(),
-  blockId: z.string().optional(),
-  budgetKey: z.string().optional(),
-  closedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  firstDeniedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  lastDeniedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  periodEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  periodKey: z.string().optional(),
-  periodKind: PeriodKind$inboundSchema.optional(),
-  periodStart: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  reason: DenialEpisodeReason$inboundSchema.optional(),
-  requestTaskId: z.string().optional(),
-  requestTaskState: RequestTaskState$inboundSchema.optional(),
-  scopeAppId: z.string().optional(),
-  scopeKind: ScopeKind$inboundSchema.optional(),
-  scopeUserId: z.string().optional(),
-  state: DenialEpisodeState$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attemptCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    authorityId: z.string().optional(),
+    authorityKind: AuthorityKind$inboundSchema.optional(),
+    authorityVersion: z.string().transform(v => parseInt(v, 10)).optional(),
+    blockId: z.string().optional(),
+    budgetKey: z.string().optional(),
+    closedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    firstDeniedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    lastDeniedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    periodEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    periodKey: z.string().optional(),
+    periodKind: PeriodKind$inboundSchema.optional(),
+    periodStart: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    reason: DenialEpisodeReason$inboundSchema.optional(),
+    requestTaskId: z.string().optional(),
+    requestTaskState: RequestTaskState$inboundSchema.optional(),
+    scopeAppId: z.string().optional(),
+    scopeKind: ScopeKind$inboundSchema.optional(),
+    scopeUserId: z.string().optional(),
+    state: DenialEpisodeState$inboundSchema.optional(),
+  })
+);
 
 export function denialEpisodeFromJSON(
   jsonString: string,

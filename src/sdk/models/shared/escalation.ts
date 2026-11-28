@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -62,14 +62,17 @@ export const Escalation$inboundSchema: z.ZodType<
   Escalation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cancelTicket: z.nullable(CancelTicket$inboundSchema).optional(),
-  escalationComment: z.string().optional(),
-  expiration: z.string().transform(v => parseInt(v, 10)).optional(),
-  reassignToApprovers: z.nullable(ReassignToApprovers$inboundSchema).optional(),
-  replacePolicy: z.nullable(ReplacePolicy$inboundSchema).optional(),
-  skipStep: z.nullable(SkipStep$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cancelTicket: z.nullable(CancelTicket$inboundSchema).optional(),
+    escalationComment: z.string().optional(),
+    expiration: z.string().transform(v => parseInt(v, 10)).optional(),
+    reassignToApprovers: z.nullable(ReassignToApprovers$inboundSchema)
+      .optional(),
+    replacePolicy: z.nullable(ReplacePolicy$inboundSchema).optional(),
+    skipStep: z.nullable(SkipStep$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Escalation$Outbound = {
   cancelTicket?: CancelTicket$Outbound | null | undefined;
@@ -85,15 +88,17 @@ export const Escalation$outboundSchema: z.ZodType<
   Escalation$Outbound,
   z.ZodTypeDef,
   Escalation
-> = z.object({
-  cancelTicket: z.nullable(CancelTicket$outboundSchema).optional(),
-  escalationComment: z.string().optional(),
-  expiration: z.number().int().transform(v => `${v}`).optional(),
-  reassignToApprovers: z.nullable(ReassignToApprovers$outboundSchema)
-    .optional(),
-  replacePolicy: z.nullable(ReplacePolicy$outboundSchema).optional(),
-  skipStep: z.nullable(SkipStep$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cancelTicket: z.nullable(CancelTicket$outboundSchema).optional(),
+    escalationComment: z.string().optional(),
+    expiration: z.number().int().transform(v => `${v}`).optional(),
+    reassignToApprovers: z.nullable(ReassignToApprovers$outboundSchema)
+      .optional(),
+    replacePolicy: z.nullable(ReplacePolicy$outboundSchema).optional(),
+    skipStep: z.nullable(SkipStep$outboundSchema).optional(),
+  })
+);
 
 export function escalationToJSON(escalation: Escalation): string {
   return JSON.stringify(Escalation$outboundSchema.parse(escalation));

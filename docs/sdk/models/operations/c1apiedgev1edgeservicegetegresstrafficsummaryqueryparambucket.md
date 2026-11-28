@@ -16,5 +16,5 @@ let value: C1ApiEdgeV1EdgeServiceGetEgressTrafficSummaryQueryParamBucket =
 ## Values
 
 ```typescript
-"TB_TIME_BUCKET_UNSPECIFIED" | "TB_TIME_BUCKET_HOUR" | "TB_TIME_BUCKET_DAY" | Unrecognized<string>
+"TB_TIME_BUCKET_UNSPECIFIED" | "TB_TIME_BUCKET_HOUR" | "TB_TIME_BUCKET_DAY" | "TB_TIME_BUCKET_FIVE_MINUTES" | "TB_TIME_BUCKET_FIFTEEN_MINUTES" | Unrecognized<string>
 ```

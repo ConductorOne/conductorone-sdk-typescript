@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,10 +30,12 @@ export const C1OnboardingWelcomeComponent$inboundSchema: z.ZodType<
   C1OnboardingWelcomeComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  recommendedCatalogId: z.string().optional(),
-  recommendedDisplayName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    recommendedCatalogId: z.string().optional(),
+    recommendedDisplayName: z.string().optional(),
+  })
+);
 
 export function c1OnboardingWelcomeComponentFromJSON(
   jsonString: string,

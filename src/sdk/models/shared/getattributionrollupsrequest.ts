@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -57,7 +58,7 @@ export const Dimension$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Dimension
-> = openEnums.outboundSchema(Dimension);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Dimension));
 
 /** @internal */
 export type GetAttributionRollupsRequest$Outbound = {
@@ -74,14 +75,16 @@ export const GetAttributionRollupsRequest$outboundSchema: z.ZodType<
   GetAttributionRollupsRequest$Outbound,
   z.ZodTypeDef,
   GetAttributionRollupsRequest
-> = z.object({
-  dimension: Dimension$outboundSchema.optional(),
-  endTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  filters: z.nullable(AttributionFilters$outboundSchema).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  startTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dimension: Dimension$outboundSchema.optional(),
+    endTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    filters: z.nullable(AttributionFilters$outboundSchema).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    startTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function getAttributionRollupsRequestToJSON(
   getAttributionRollupsRequest: GetAttributionRollupsRequest,

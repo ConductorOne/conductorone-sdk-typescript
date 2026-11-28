@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,9 +30,11 @@ export const EvaluateExpressions$inboundSchema: z.ZodType<
   EvaluateExpressions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expressions: z.nullable(z.array(Expression$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expressions: z.nullable(z.array(Expression$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type EvaluateExpressions$Outbound = {
   expressions?: Array<Expression$Outbound> | null | undefined;
@@ -43,9 +45,11 @@ export const EvaluateExpressions$outboundSchema: z.ZodType<
   EvaluateExpressions$Outbound,
   z.ZodTypeDef,
   EvaluateExpressions
-> = z.object({
-  expressions: z.nullable(z.array(Expression$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expressions: z.nullable(z.array(Expression$outboundSchema)).optional(),
+  })
+);
 
 export function evaluateExpressionsToJSON(
   evaluateExpressions: EvaluateExpressions,

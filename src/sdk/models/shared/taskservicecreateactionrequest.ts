@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -23,6 +24,10 @@ export type TaskServiceCreateActionRequest = {
   description?: string | undefined;
   expandMask?: TaskExpandMask | null | undefined;
   formValues?: { [k: string]: any } | null | undefined;
+  /**
+   * If true, rejects the request with FAILED_PRECONDITION unless the action is a current group-creation template. Defaults to false.
+   */
+  groupOnly?: boolean | undefined;
 };
 
 /** @internal */
@@ -31,6 +36,7 @@ export type TaskServiceCreateActionRequest$Outbound = {
   description?: string | undefined;
   expandMask?: TaskExpandMask$Outbound | null | undefined;
   formValues?: { [k: string]: any } | null | undefined;
+  groupOnly?: boolean | undefined;
 };
 
 /** @internal */
@@ -38,12 +44,15 @@ export const TaskServiceCreateActionRequest$outboundSchema: z.ZodType<
   TaskServiceCreateActionRequest$Outbound,
   z.ZodTypeDef,
   TaskServiceCreateActionRequest
-> = z.object({
-  actionId: z.string().optional(),
-  description: z.string().optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  formValues: z.nullable(z.record(z.any())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actionId: z.string().optional(),
+    description: z.string().optional(),
+    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+    formValues: z.nullable(z.record(z.any())).optional(),
+    groupOnly: z.boolean().optional(),
+  })
+);
 
 export function taskServiceCreateActionRequestToJSON(
   taskServiceCreateActionRequest: TaskServiceCreateActionRequest,

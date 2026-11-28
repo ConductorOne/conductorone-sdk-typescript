@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -65,31 +65,37 @@ export const TaskTypeGrantOutcome$inboundSchema: z.ZodType<
   TaskTypeGrantOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskTypeGrantOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskTypeGrantOutcome)
+);
 /** @internal */
 export const TaskTypeGrantOutcome$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskTypeGrantOutcome
-> = openEnums.outboundSchema(TaskTypeGrantOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TaskTypeGrantOutcome)
+);
 
 /** @internal */
 export const TaskTypeGrant$inboundSchema: z.ZodType<
   TaskTypeGrant,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  grantDuration: z.nullable(z.string()).optional(),
-  identityUserId: z.string().optional(),
-  outcome: TaskTypeGrantOutcome$inboundSchema.optional(),
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  source: z.nullable(TaskGrantSource$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    grantDuration: z.nullable(z.string()).optional(),
+    identityUserId: z.string().optional(),
+    outcome: TaskTypeGrantOutcome$inboundSchema.optional(),
+    outcomeTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    source: z.nullable(TaskGrantSource$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type TaskTypeGrant$Outbound = {
   appEntitlementId?: string | undefined;
@@ -107,16 +113,19 @@ export const TaskTypeGrant$outboundSchema: z.ZodType<
   TaskTypeGrant$Outbound,
   z.ZodTypeDef,
   TaskTypeGrant
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  grantDuration: z.nullable(z.string()).optional(),
-  identityUserId: z.string().optional(),
-  outcome: TaskTypeGrantOutcome$outboundSchema.optional(),
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  source: z.nullable(TaskGrantSource$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    grantDuration: z.nullable(z.string()).optional(),
+    identityUserId: z.string().optional(),
+    outcome: TaskTypeGrantOutcome$outboundSchema.optional(),
+    outcomeTime: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    source: z.nullable(TaskGrantSource$outboundSchema).optional(),
+  })
+);
 
 export function taskTypeGrantToJSON(taskTypeGrant: TaskTypeGrant): string {
   return JSON.stringify(TaskTypeGrant$outboundSchema.parse(taskTypeGrant));

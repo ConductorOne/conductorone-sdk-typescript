@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,10 +29,12 @@ export const SensitiveFileGuardConfig$inboundSchema: z.ZodType<
   SensitiveFileGuardConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  blockedDirectories: z.nullable(z.array(z.string())).optional(),
-  blockedPatterns: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blockedDirectories: z.nullable(z.array(z.string())).optional(),
+    blockedPatterns: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type SensitiveFileGuardConfig$Outbound = {
   blockedDirectories?: Array<string> | null | undefined;
@@ -44,10 +46,12 @@ export const SensitiveFileGuardConfig$outboundSchema: z.ZodType<
   SensitiveFileGuardConfig$Outbound,
   z.ZodTypeDef,
   SensitiveFileGuardConfig
-> = z.object({
-  blockedDirectories: z.nullable(z.array(z.string())).optional(),
-  blockedPatterns: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blockedDirectories: z.nullable(z.array(z.string())).optional(),
+    blockedPatterns: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function sensitiveFileGuardConfigToJSON(
   sensitiveFileGuardConfig: SensitiveFileGuardConfig,

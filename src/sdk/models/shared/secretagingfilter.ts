@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SecretAgingFilter restricts a resource search to secrets (credential_type != 0)
@@ -36,20 +37,22 @@ export const SecretAgingFilter$outboundSchema: z.ZodType<
   SecretAgingFilter$Outbound,
   z.ZodTypeDef,
   SecretAgingFilter
-> = z.object({
-  lastUsedAfter: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  lastUsedBefore: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  secretCreatedAfter: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  secretCreatedBefore: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  secretExpiresAfter: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  secretExpiresBefore: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    lastUsedAfter: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    lastUsedBefore: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    secretCreatedAfter: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    secretCreatedBefore: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    secretExpiresAfter: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    secretExpiresBefore: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function secretAgingFilterToJSON(
   secretAgingFilter: SecretAgingFilter,

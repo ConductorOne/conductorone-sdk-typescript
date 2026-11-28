@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ServicePrincipalInput,
   ServicePrincipalInput$Outbound,
@@ -28,10 +29,13 @@ export const ServicePrincipalServiceUpdateRequest$outboundSchema: z.ZodType<
   ServicePrincipalServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   ServicePrincipalServiceUpdateRequest
-> = z.object({
-  servicePrincipal: z.nullable(ServicePrincipalInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    servicePrincipal: z.nullable(ServicePrincipalInput$outboundSchema)
+      .optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function servicePrincipalServiceUpdateRequestToJSON(
   servicePrincipalServiceUpdateRequest: ServicePrincipalServiceUpdateRequest,

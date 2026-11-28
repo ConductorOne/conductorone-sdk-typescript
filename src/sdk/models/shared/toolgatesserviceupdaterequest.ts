@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ToolGate,
   ToolGate$Outbound,
@@ -28,10 +29,12 @@ export const ToolGatesServiceUpdateRequest$outboundSchema: z.ZodType<
   ToolGatesServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   ToolGatesServiceUpdateRequest
-> = z.object({
-  toolGate: z.nullable(ToolGate$outboundSchema),
-  updateMask: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolGate: z.nullable(ToolGate$outboundSchema),
+    updateMask: z.nullable(z.string()),
+  })
+);
 
 export function toolGatesServiceUpdateRequestToJSON(
   toolGatesServiceUpdateRequest: ToolGatesServiceUpdateRequest,

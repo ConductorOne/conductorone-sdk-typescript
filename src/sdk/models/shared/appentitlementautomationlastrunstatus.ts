@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,20 +50,25 @@ export const AppEntitlementAutomationLastRunStatusStatus$inboundSchema:
     AppEntitlementAutomationLastRunStatusStatus,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(AppEntitlementAutomationLastRunStatusStatus);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(AppEntitlementAutomationLastRunStatusStatus)
+  );
 
 /** @internal */
 export const AppEntitlementAutomationLastRunStatus$inboundSchema: z.ZodType<
   AppEntitlementAutomationLastRunStatus,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  errorMessage: z.string().optional(),
-  lastCompletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  status: AppEntitlementAutomationLastRunStatusStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    errorMessage: z.string().optional(),
+    lastCompletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    status: AppEntitlementAutomationLastRunStatusStatus$inboundSchema
+      .optional(),
+  })
+);
 
 export function appEntitlementAutomationLastRunStatusFromJSON(
   jsonString: string,

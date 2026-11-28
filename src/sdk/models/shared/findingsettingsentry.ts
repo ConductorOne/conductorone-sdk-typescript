@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -31,6 +32,8 @@ export const FindingSettingsEntryFindingType = {
   FindingTypeShadowApp: "FINDING_TYPE_SHADOW_APP",
   FindingTypeMcpGatewayToolCallRisk: "FINDING_TYPE_MCP_GATEWAY_TOOL_CALL_RISK",
   FindingTypeEdge: "FINDING_TYPE_EDGE",
+  FindingTypeAccessConflict: "FINDING_TYPE_ACCESS_CONFLICT",
+  FindingTypeConnectorHostOutdated: "FINDING_TYPE_CONNECTOR_HOST_OUTDATED",
 } as const;
 /**
  * The finding type to configure. Must be a detector-backed type.
@@ -67,7 +70,9 @@ export const FindingSettingsEntryFindingType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FindingSettingsEntryFindingType
-> = openEnums.outboundSchema(FindingSettingsEntryFindingType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FindingSettingsEntryFindingType)
+);
 
 /** @internal */
 export type FindingSettingsEntry$Outbound = {
@@ -80,10 +85,12 @@ export const FindingSettingsEntry$outboundSchema: z.ZodType<
   FindingSettingsEntry$Outbound,
   z.ZodTypeDef,
   FindingSettingsEntry
-> = z.object({
-  enabled: z.nullable(z.boolean()).optional(),
-  findingType: FindingSettingsEntryFindingType$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.nullable(z.boolean()).optional(),
+    findingType: FindingSettingsEntryFindingType$outboundSchema.optional(),
+  })
+);
 
 export function findingSettingsEntryToJSON(
   findingSettingsEntry: FindingSettingsEntry,

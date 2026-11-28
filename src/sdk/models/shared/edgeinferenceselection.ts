@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -110,45 +110,48 @@ export const PickerMode$inboundSchema: z.ZodType<
   PickerMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PickerMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(PickerMode));
 /** @internal */
 export const PickerMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   PickerMode
-> = openEnums.outboundSchema(PickerMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(PickerMode));
 
 /** @internal */
 export const Strategy$inboundSchema: z.ZodType<
   Strategy,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Strategy);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Strategy));
 /** @internal */
 export const Strategy$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Strategy
-> = openEnums.outboundSchema(Strategy);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Strategy));
 
 /** @internal */
 export const EdgeInferenceSelection$inboundSchema: z.ZodType<
   EdgeInferenceSelection,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  attemptTimeoutMs: z.number().int().optional(),
-  confidenceThreshold: z.number().optional(),
-  handoffNotes: z.nullable(EdgeInferenceHandoffNotes$inboundSchema).optional(),
-  maxAttempts: z.number().int().optional(),
-  pickerMode: PickerMode$inboundSchema.optional(),
-  recentWindow: z.number().int().optional(),
-  retry: z.nullable(EdgeInferenceRetry$inboundSchema).optional(),
-  routeDeadlineMs: z.number().int().optional(),
-  stages: z.nullable(z.array(EdgeInferenceStage$inboundSchema)).optional(),
-  strategy: Strategy$inboundSchema.optional(),
-  targetIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attemptTimeoutMs: z.number().int().optional(),
+    confidenceThreshold: z.number().optional(),
+    handoffNotes: z.nullable(EdgeInferenceHandoffNotes$inboundSchema)
+      .optional(),
+    maxAttempts: z.number().int().optional(),
+    pickerMode: PickerMode$inboundSchema.optional(),
+    recentWindow: z.number().int().optional(),
+    retry: z.nullable(EdgeInferenceRetry$inboundSchema).optional(),
+    routeDeadlineMs: z.number().int().optional(),
+    stages: z.nullable(z.array(EdgeInferenceStage$inboundSchema)).optional(),
+    strategy: Strategy$inboundSchema.optional(),
+    targetIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type EdgeInferenceSelection$Outbound = {
   attemptTimeoutMs?: number | undefined;
@@ -169,19 +172,22 @@ export const EdgeInferenceSelection$outboundSchema: z.ZodType<
   EdgeInferenceSelection$Outbound,
   z.ZodTypeDef,
   EdgeInferenceSelection
-> = z.object({
-  attemptTimeoutMs: z.number().int().optional(),
-  confidenceThreshold: z.number().optional(),
-  handoffNotes: z.nullable(EdgeInferenceHandoffNotes$outboundSchema).optional(),
-  maxAttempts: z.number().int().optional(),
-  pickerMode: PickerMode$outboundSchema.optional(),
-  recentWindow: z.number().int().optional(),
-  retry: z.nullable(EdgeInferenceRetry$outboundSchema).optional(),
-  routeDeadlineMs: z.number().int().optional(),
-  stages: z.nullable(z.array(EdgeInferenceStage$outboundSchema)).optional(),
-  strategy: Strategy$outboundSchema.optional(),
-  targetIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attemptTimeoutMs: z.number().int().optional(),
+    confidenceThreshold: z.number().optional(),
+    handoffNotes: z.nullable(EdgeInferenceHandoffNotes$outboundSchema)
+      .optional(),
+    maxAttempts: z.number().int().optional(),
+    pickerMode: PickerMode$outboundSchema.optional(),
+    recentWindow: z.number().int().optional(),
+    retry: z.nullable(EdgeInferenceRetry$outboundSchema).optional(),
+    routeDeadlineMs: z.number().int().optional(),
+    stages: z.nullable(z.array(EdgeInferenceStage$outboundSchema)).optional(),
+    strategy: Strategy$outboundSchema.optional(),
+    targetIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function edgeInferenceSelectionToJSON(
   edgeInferenceSelection: EdgeInferenceSelection,

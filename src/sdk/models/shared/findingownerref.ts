@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -58,12 +58,14 @@ export const FindingOwnerRef$inboundSchema: z.ZodType<
   FindingOwnerRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appOwnerAppId: z.nullable(z.string()).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
-  managerOfUserId: z.nullable(z.string()).optional(),
-  userSetId: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appOwnerAppId: z.nullable(z.string()).optional(),
+    identityUserId: z.nullable(z.string()).optional(),
+    managerOfUserId: z.nullable(z.string()).optional(),
+    userSetId: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type FindingOwnerRef$Outbound = {
   appOwnerAppId?: string | null | undefined;
@@ -77,12 +79,14 @@ export const FindingOwnerRef$outboundSchema: z.ZodType<
   FindingOwnerRef$Outbound,
   z.ZodTypeDef,
   FindingOwnerRef
-> = z.object({
-  appOwnerAppId: z.nullable(z.string()).optional(),
-  identityUserId: z.nullable(z.string()).optional(),
-  managerOfUserId: z.nullable(z.string()).optional(),
-  userSetId: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appOwnerAppId: z.nullable(z.string()).optional(),
+    identityUserId: z.nullable(z.string()).optional(),
+    managerOfUserId: z.nullable(z.string()).optional(),
+    userSetId: z.nullable(z.string()).optional(),
+  })
+);
 
 export function findingOwnerRefToJSON(
   findingOwnerRef: FindingOwnerRef,

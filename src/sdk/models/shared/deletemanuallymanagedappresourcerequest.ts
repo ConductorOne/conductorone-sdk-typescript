@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The request message for deleting a manually managed app resource.
@@ -17,7 +18,7 @@ export const DeleteManuallyManagedAppResourceRequest$outboundSchema: z.ZodType<
   DeleteManuallyManagedAppResourceRequest$Outbound,
   z.ZodTypeDef,
   DeleteManuallyManagedAppResourceRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteManuallyManagedAppResourceRequestToJSON(
   deleteManuallyManagedAppResourceRequest:

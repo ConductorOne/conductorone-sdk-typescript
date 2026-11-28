@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -42,14 +42,17 @@ export const EdgeServiceListInferenceRoutesResponse$inboundSchema: z.ZodType<
   EdgeServiceListInferenceRoutesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  capabilitySummary: z.nullable(EdgeCapabilitySummary$inboundSchema).optional(),
-  routes: z.nullable(z.array(EdgeInferenceRouteOption$inboundSchema))
-    .optional(),
-  unservedTargets: z.nullable(
-    z.array(EdgeInferenceUnservedTarget$inboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    capabilitySummary: z.nullable(EdgeCapabilitySummary$inboundSchema)
+      .optional(),
+    routes: z.nullable(z.array(EdgeInferenceRouteOption$inboundSchema))
+      .optional(),
+    unservedTargets: z.nullable(
+      z.array(EdgeInferenceUnservedTarget$inboundSchema),
+    ).optional(),
+  })
+);
 
 export function edgeServiceListInferenceRoutesResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -62,23 +62,25 @@ export const Transport$inboundSchema: z.ZodType<
   Transport,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Transport);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Transport));
 /** @internal */
 export const Transport$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Transport
-> = openEnums.outboundSchema(Transport);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Transport));
 
 /** @internal */
 export const ShadowMcpType$inboundSchema: z.ZodType<
   ShadowMcpType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mcpIdentifier: z.string().optional(),
-  transport: Transport$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mcpIdentifier: z.string().optional(),
+    transport: Transport$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ShadowMcpType$Outbound = {
   mcpIdentifier?: string | undefined;
@@ -90,10 +92,12 @@ export const ShadowMcpType$outboundSchema: z.ZodType<
   ShadowMcpType$Outbound,
   z.ZodTypeDef,
   ShadowMcpType
-> = z.object({
-  mcpIdentifier: z.string().optional(),
-  transport: Transport$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mcpIdentifier: z.string().optional(),
+    transport: Transport$outboundSchema.optional(),
+  })
+);
 
 export function shadowMcpTypeToJSON(shadowMcpType: ShadowMcpType): string {
   return JSON.stringify(ShadowMcpType$outboundSchema.parse(shadowMcpType));

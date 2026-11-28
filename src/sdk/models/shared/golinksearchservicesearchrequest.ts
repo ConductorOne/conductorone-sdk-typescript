@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -64,7 +65,9 @@ export const GoLinkSearchServiceSearchRequestStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   GoLinkSearchServiceSearchRequestStatus
-> = openEnums.outboundSchema(GoLinkSearchServiceSearchRequestStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(GoLinkSearchServiceSearchRequestStatus)
+);
 
 /** @internal */
 export type GoLinkSearchServiceSearchRequest$Outbound = {
@@ -81,15 +84,17 @@ export const GoLinkSearchServiceSearchRequest$outboundSchema: z.ZodType<
   GoLinkSearchServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   GoLinkSearchServiceSearchRequest
-> = z.object({
-  ownerUserIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(GoLinkRef$outboundSchema)).optional(),
-  status: z.nullable(GoLinkSearchServiceSearchRequestStatus$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ownerUserIds: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(GoLinkRef$outboundSchema)).optional(),
+    status: z.nullable(GoLinkSearchServiceSearchRequestStatus$outboundSchema)
+      .optional(),
+  })
+);
 
 export function goLinkSearchServiceSearchRequestToJSON(
   goLinkSearchServiceSearchRequest: GoLinkSearchServiceSearchRequest,

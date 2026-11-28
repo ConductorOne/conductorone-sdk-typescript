@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   EntitlementRef,
   EntitlementRef$Outbound,
@@ -52,15 +53,17 @@ export const EvaluateEntitlementSelectionRequest1$outboundSchema: z.ZodType<
   EvaluateEntitlementSelectionRequest1$Outbound,
   z.ZodTypeDef,
   EvaluateEntitlementSelectionRequest1
-> = z.object({
-  analysisId: z.string().optional(),
-  explicitlyExcluded: z.nullable(z.array(EntitlementRef$outboundSchema))
-    .optional(),
-  explicitlyIncluded: z.nullable(z.array(EntitlementRef$outboundSchema))
-    .optional(),
-  includeFacets: z.boolean().optional(),
-  minimumCoverageBasisPoints: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    analysisId: z.string().optional(),
+    explicitlyExcluded: z.nullable(z.array(EntitlementRef$outboundSchema))
+      .optional(),
+    explicitlyIncluded: z.nullable(z.array(EntitlementRef$outboundSchema))
+      .optional(),
+    includeFacets: z.boolean().optional(),
+    minimumCoverageBasisPoints: z.number().int().optional(),
+  })
+);
 
 export function evaluateEntitlementSelectionRequest1ToJSON(
   evaluateEntitlementSelectionRequest1: EvaluateEntitlementSelectionRequest1,

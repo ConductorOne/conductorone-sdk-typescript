@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -53,12 +53,14 @@ export const ConnectorCreateAccount$inboundSchema: z.ZodType<
   ConnectorCreateAccount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
-  passwordCel: z.string().optional(),
-  userIdCel: z.nullable(z.string()).optional(),
-  userProperties: z.nullable(UserProperties$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
+    passwordCel: z.string().optional(),
+    userIdCel: z.nullable(z.string()).optional(),
+    userProperties: z.nullable(UserProperties$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ConnectorCreateAccount$Outbound = {
   connectorRef?: ConnectorRef$Outbound | null | undefined;
@@ -72,12 +74,14 @@ export const ConnectorCreateAccount$outboundSchema: z.ZodType<
   ConnectorCreateAccount$Outbound,
   z.ZodTypeDef,
   ConnectorCreateAccount
-> = z.object({
-  connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
-  passwordCel: z.string().optional(),
-  userIdCel: z.nullable(z.string()).optional(),
-  userProperties: z.nullable(UserProperties$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
+    passwordCel: z.string().optional(),
+    userIdCel: z.nullable(z.string()).optional(),
+    userProperties: z.nullable(UserProperties$outboundSchema).optional(),
+  })
+);
 
 export function connectorCreateAccountToJSON(
   connectorCreateAccount: ConnectorCreateAccount,

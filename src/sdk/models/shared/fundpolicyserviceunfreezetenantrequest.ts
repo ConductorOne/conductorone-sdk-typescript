@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The FundPolicyServiceUnfreezeTenantRequest message.
@@ -17,7 +18,7 @@ export const FundPolicyServiceUnfreezeTenantRequest$outboundSchema: z.ZodType<
   FundPolicyServiceUnfreezeTenantRequest$Outbound,
   z.ZodTypeDef,
   FundPolicyServiceUnfreezeTenantRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function fundPolicyServiceUnfreezeTenantRequestToJSON(
   fundPolicyServiceUnfreezeTenantRequest:

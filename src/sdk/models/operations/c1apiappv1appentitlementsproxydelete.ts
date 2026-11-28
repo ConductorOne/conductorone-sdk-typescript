@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -57,22 +57,24 @@ export const C1ApiAppV1AppEntitlementsProxyDeleteRequest$outboundSchema:
     C1ApiAppV1AppEntitlementsProxyDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsProxyDeleteRequest
-  > = z.object({
-    srcAppId: z.string(),
-    srcAppEntitlementId: z.string(),
-    dstAppId: z.string(),
-    dstAppEntitlementId: z.string(),
-    deleteAppEntitlementProxyRequest: shared
-      .DeleteAppEntitlementProxyRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      srcAppId: "src_app_id",
-      srcAppEntitlementId: "src_app_entitlement_id",
-      dstAppId: "dst_app_id",
-      dstAppEntitlementId: "dst_app_entitlement_id",
-      deleteAppEntitlementProxyRequest: "DeleteAppEntitlementProxyRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      srcAppId: z.string(),
+      srcAppEntitlementId: z.string(),
+      dstAppId: z.string(),
+      dstAppEntitlementId: z.string(),
+      deleteAppEntitlementProxyRequest: shared
+        .DeleteAppEntitlementProxyRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        srcAppId: "src_app_id",
+        srcAppEntitlementId: "src_app_entitlement_id",
+        dstAppId: "dst_app_id",
+        dstAppEntitlementId: "dst_app_entitlement_id",
+        deleteAppEntitlementProxyRequest: "DeleteAppEntitlementProxyRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsProxyDeleteRequestToJSON(
   c1ApiAppV1AppEntitlementsProxyDeleteRequest:
@@ -91,20 +93,23 @@ export const C1ApiAppV1AppEntitlementsProxyDeleteResponse$inboundSchema:
     C1ApiAppV1AppEntitlementsProxyDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteAppEntitlementProxyResponse: shared
-      .DeleteAppEntitlementProxyResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteAppEntitlementProxyResponse": "deleteAppEntitlementProxyResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteAppEntitlementProxyResponse: shared
+        .DeleteAppEntitlementProxyResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteAppEntitlementProxyResponse":
+          "deleteAppEntitlementProxyResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsProxyDeleteResponseFromJSON(
   jsonString: string,

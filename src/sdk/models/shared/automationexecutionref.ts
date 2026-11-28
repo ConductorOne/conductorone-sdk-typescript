@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AutomationExecutionRef message.
@@ -24,9 +25,11 @@ export const AutomationExecutionRef$outboundSchema: z.ZodType<
   AutomationExecutionRef$Outbound,
   z.ZodTypeDef,
   AutomationExecutionRef
-> = z.object({
-  id: z.number().int().transform(v => `${v}`).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.number().int().transform(v => `${v}`).optional(),
+  })
+);
 
 export function automationExecutionRefToJSON(
   automationExecutionRef: AutomationExecutionRef,

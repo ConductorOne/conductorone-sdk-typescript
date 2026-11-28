@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -112,7 +113,9 @@ export type TenantAuthConfigServiceCreateRequest = {
 /** @internal */
 export const TenantAuthConfigServiceCreateRequestStatus$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, TenantAuthConfigServiceCreateRequestStatus> =
-    openEnums.outboundSchema(TenantAuthConfigServiceCreateRequestStatus);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(TenantAuthConfigServiceCreateRequestStatus)
+    );
 
 /** @internal */
 export type TenantAuthConfigServiceCreateRequest$Outbound = {
@@ -137,23 +140,26 @@ export const TenantAuthConfigServiceCreateRequest$outboundSchema: z.ZodType<
   TenantAuthConfigServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   TenantAuthConfigServiceCreateRequest
-> = z.object({
-  bootstrapDomains: z.nullable(z.array(z.string())).optional(),
-  c1Local: z.nullable(AuthConfigC1Local$outboundSchema).optional(),
-  deprecationDeadline: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  deprecationMessage: z.string().optional(),
-  displayName: z.string(),
-  google: z.nullable(AuthConfigGoogleInput$outboundSchema).optional(),
-  isDefaultBootstrap: z.boolean().optional(),
-  jumpcloud: z.nullable(AuthConfigJumpCloud$outboundSchema).optional(),
-  microsoft: z.nullable(AuthConfigMicrosoft$outboundSchema).optional(),
-  oidc: z.nullable(AuthConfigOIDC$outboundSchema).optional(),
-  okta: z.nullable(AuthConfigOkta$outboundSchema).optional(),
-  onelogin: z.nullable(AuthConfigOneLogin$outboundSchema).optional(),
-  pingone: z.nullable(AuthConfigPingOne$outboundSchema).optional(),
-  status: TenantAuthConfigServiceCreateRequestStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bootstrapDomains: z.nullable(z.array(z.string())).optional(),
+    c1Local: z.nullable(AuthConfigC1Local$outboundSchema).optional(),
+    deprecationDeadline: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    deprecationMessage: z.string().optional(),
+    displayName: z.string(),
+    google: z.nullable(AuthConfigGoogleInput$outboundSchema).optional(),
+    isDefaultBootstrap: z.boolean().optional(),
+    jumpcloud: z.nullable(AuthConfigJumpCloud$outboundSchema).optional(),
+    microsoft: z.nullable(AuthConfigMicrosoft$outboundSchema).optional(),
+    oidc: z.nullable(AuthConfigOIDC$outboundSchema).optional(),
+    okta: z.nullable(AuthConfigOkta$outboundSchema).optional(),
+    onelogin: z.nullable(AuthConfigOneLogin$outboundSchema).optional(),
+    pingone: z.nullable(AuthConfigPingOne$outboundSchema).optional(),
+    status: TenantAuthConfigServiceCreateRequestStatus$outboundSchema
+      .optional(),
+  })
+);
 
 export function tenantAuthConfigServiceCreateRequestToJSON(
   tenantAuthConfigServiceCreateRequest: TenantAuthConfigServiceCreateRequest,

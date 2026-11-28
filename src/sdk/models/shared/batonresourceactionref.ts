@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -42,13 +42,15 @@ export const BatonResourceActionRef$inboundSchema: z.ZodType<
   BatonResourceActionRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  batonActionDisplayName: z.string().optional(),
-  batonActionName: z.string().optional(),
-  connectorId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    batonActionDisplayName: z.string().optional(),
+    batonActionName: z.string().optional(),
+    connectorId: z.string().optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 /** @internal */
 export type BatonResourceActionRef$Outbound = {
   appId?: string | undefined;
@@ -63,13 +65,15 @@ export const BatonResourceActionRef$outboundSchema: z.ZodType<
   BatonResourceActionRef$Outbound,
   z.ZodTypeDef,
   BatonResourceActionRef
-> = z.object({
-  appId: z.string().optional(),
-  batonActionDisplayName: z.string().optional(),
-  batonActionName: z.string().optional(),
-  connectorId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    batonActionDisplayName: z.string().optional(),
+    batonActionName: z.string().optional(),
+    connectorId: z.string().optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 
 export function batonResourceActionRefToJSON(
   batonResourceActionRef: BatonResourceActionRef,

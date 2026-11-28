@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiFunctionsV1FunctionsServiceGetLockFileRequest$outboundSchema:
     C1ApiFunctionsV1FunctionsServiceGetLockFileRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceGetLockFileRequest
-  > = z.object({
-    functionId: z.string(),
-    commitId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      functionId: "function_id",
-      commitId: "commit_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      functionId: z.string(),
+      commitId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        functionId: "function_id",
+        commitId: "commit_id",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceGetLockFileRequestToJSON(
   c1ApiFunctionsV1FunctionsServiceGetLockFileRequest:
@@ -74,21 +76,23 @@ export const C1ApiFunctionsV1FunctionsServiceGetLockFileResponse$inboundSchema:
     C1ApiFunctionsV1FunctionsServiceGetLockFileResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FunctionsServiceGetLockFileResponse: shared
-      .FunctionsServiceGetLockFileResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FunctionsServiceGetLockFileResponse":
-        "functionsServiceGetLockFileResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FunctionsServiceGetLockFileResponse: shared
+        .FunctionsServiceGetLockFileResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FunctionsServiceGetLockFileResponse":
+          "functionsServiceGetLockFileResponse",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceGetLockFileResponseFromJSON(
   jsonString: string,

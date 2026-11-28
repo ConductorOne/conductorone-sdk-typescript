@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAResourceServerRef is a lightweight reference to a resource server, used
@@ -32,10 +33,12 @@ export const XAAResourceServerRef$outboundSchema: z.ZodType<
   XAAResourceServerRef$Outbound,
   z.ZodTypeDef,
   XAAResourceServerRef
-> = z.object({
-  appId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function xaaResourceServerRefToJSON(
   xaaResourceServerRef: XAAResourceServerRef,

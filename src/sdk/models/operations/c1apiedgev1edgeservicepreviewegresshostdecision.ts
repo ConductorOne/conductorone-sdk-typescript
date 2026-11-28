@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,18 +56,20 @@ export const C1ApiEdgeV1EdgeServicePreviewEgressHostDecisionRequest$outboundSche
     C1ApiEdgeV1EdgeServicePreviewEgressHostDecisionRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServicePreviewEgressHostDecisionRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    edgeServicePreviewEgressHostDecisionRequest: shared
-      .EdgeServicePreviewEgressHostDecisionRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      edgeServicePreviewEgressHostDecisionRequest:
-        "EdgeServicePreviewEgressHostDecisionRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      edgeServicePreviewEgressHostDecisionRequest: shared
+        .EdgeServicePreviewEgressHostDecisionRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        edgeServicePreviewEgressHostDecisionRequest:
+          "EdgeServicePreviewEgressHostDecisionRequest",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServicePreviewEgressHostDecisionRequestToJSON(
   c1ApiEdgeV1EdgeServicePreviewEgressHostDecisionRequest:
@@ -86,21 +88,23 @@ export const C1ApiEdgeV1EdgeServicePreviewEgressHostDecisionResponse$inboundSche
     C1ApiEdgeV1EdgeServicePreviewEgressHostDecisionResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServicePreviewEgressHostDecisionResponse: shared
-      .EdgeServicePreviewEgressHostDecisionResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServicePreviewEgressHostDecisionResponse":
-        "edgeServicePreviewEgressHostDecisionResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServicePreviewEgressHostDecisionResponse: shared
+        .EdgeServicePreviewEgressHostDecisionResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServicePreviewEgressHostDecisionResponse":
+          "edgeServicePreviewEgressHostDecisionResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServicePreviewEgressHostDecisionResponseFromJSON(
   jsonString: string,

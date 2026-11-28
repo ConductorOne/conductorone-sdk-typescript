@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -63,13 +63,15 @@ export const CredentialPubliclyExposedType$inboundSchema: z.ZodType<
   CredentialPubliclyExposedType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connectorClientId: z.nullable(z.string()).optional(),
-  connectorManagedCredentialId: z.nullable(z.string()).optional(),
-  credentialDisplayName: z.string().optional(),
-  functionClientId: z.nullable(z.string()).optional(),
-  userClientId: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorClientId: z.nullable(z.string()).optional(),
+    connectorManagedCredentialId: z.nullable(z.string()).optional(),
+    credentialDisplayName: z.string().optional(),
+    functionClientId: z.nullable(z.string()).optional(),
+    userClientId: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type CredentialPubliclyExposedType$Outbound = {
   connectorClientId?: string | null | undefined;
@@ -84,13 +86,15 @@ export const CredentialPubliclyExposedType$outboundSchema: z.ZodType<
   CredentialPubliclyExposedType$Outbound,
   z.ZodTypeDef,
   CredentialPubliclyExposedType
-> = z.object({
-  connectorClientId: z.nullable(z.string()).optional(),
-  connectorManagedCredentialId: z.nullable(z.string()).optional(),
-  credentialDisplayName: z.string().optional(),
-  functionClientId: z.nullable(z.string()).optional(),
-  userClientId: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorClientId: z.nullable(z.string()).optional(),
+    connectorManagedCredentialId: z.nullable(z.string()).optional(),
+    credentialDisplayName: z.string().optional(),
+    functionClientId: z.nullable(z.string()).optional(),
+    userClientId: z.nullable(z.string()).optional(),
+  })
+);
 
 export function credentialPubliclyExposedTypeToJSON(
   credentialPubliclyExposedType: CredentialPubliclyExposedType,

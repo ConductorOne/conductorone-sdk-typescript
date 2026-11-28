@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const UserApproval$inboundSchema: z.ZodType<
   UserApproval,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowSelfApproval: z.boolean().optional(),
-  requireDistinctApprovers: z.boolean().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSelfApproval: z.boolean().optional(),
+    requireDistinctApprovers: z.boolean().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type UserApproval$Outbound = {
   allowSelfApproval?: boolean | undefined;
@@ -47,11 +49,13 @@ export const UserApproval$outboundSchema: z.ZodType<
   UserApproval$Outbound,
   z.ZodTypeDef,
   UserApproval
-> = z.object({
-  allowSelfApproval: z.boolean().optional(),
-  requireDistinctApprovers: z.boolean().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSelfApproval: z.boolean().optional(),
+    requireDistinctApprovers: z.boolean().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function userApprovalToJSON(userApproval: UserApproval): string {
   return JSON.stringify(UserApproval$outboundSchema.parse(userApproval));

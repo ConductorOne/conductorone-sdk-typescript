@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,20 +50,24 @@ export const TextFieldComponentVariant$inboundSchema: z.ZodType<
   TextFieldComponentVariant,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TextFieldComponentVariant);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TextFieldComponentVariant)
+);
 
 /** @internal */
 export const TextFieldComponent$inboundSchema: z.ZodType<
   TextFieldComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  checks: z.nullable(z.array(FunctionCall$inboundSchema)).optional(),
-  label: z.nullable(DynamicString$inboundSchema).optional(),
-  placeholder: z.nullable(DynamicString$inboundSchema).optional(),
-  value: z.nullable(DynamicString$inboundSchema).optional(),
-  variant: TextFieldComponentVariant$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checks: z.nullable(z.array(FunctionCall$inboundSchema)).optional(),
+    label: z.nullable(DynamicString$inboundSchema).optional(),
+    placeholder: z.nullable(DynamicString$inboundSchema).optional(),
+    value: z.nullable(DynamicString$inboundSchema).optional(),
+    variant: TextFieldComponentVariant$inboundSchema.optional(),
+  })
+);
 
 export function textFieldComponentFromJSON(
   jsonString: string,

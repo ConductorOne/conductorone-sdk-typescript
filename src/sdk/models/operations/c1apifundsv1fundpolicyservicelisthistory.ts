@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiFundsV1FundPolicyServiceListHistoryRequest$outboundSchema:
     C1ApiFundsV1FundPolicyServiceListHistoryRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1FundPolicyServiceListHistoryRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundPolicyServiceListHistoryRequestToJSON(
   c1ApiFundsV1FundPolicyServiceListHistoryRequest:
@@ -74,21 +76,23 @@ export const C1ApiFundsV1FundPolicyServiceListHistoryResponse$inboundSchema:
     C1ApiFundsV1FundPolicyServiceListHistoryResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FundPolicyServiceListHistoryResponse: shared
-      .FundPolicyServiceListHistoryResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FundPolicyServiceListHistoryResponse":
-        "fundPolicyServiceListHistoryResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FundPolicyServiceListHistoryResponse: shared
+        .FundPolicyServiceListHistoryResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FundPolicyServiceListHistoryResponse":
+          "fundPolicyServiceListHistoryResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundPolicyServiceListHistoryResponseFromJSON(
   jsonString: string,

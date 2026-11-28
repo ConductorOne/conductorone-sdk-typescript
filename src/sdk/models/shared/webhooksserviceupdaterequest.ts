@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   WebhookEndpointInput,
   WebhookEndpointInput$Outbound,
@@ -28,10 +29,12 @@ export const WebhooksServiceUpdateRequest$outboundSchema: z.ZodType<
   WebhooksServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   WebhooksServiceUpdateRequest
-> = z.object({
-  updateMask: z.nullable(z.string()).optional(),
-  webhook: z.nullable(WebhookEndpointInput$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    updateMask: z.nullable(z.string()).optional(),
+    webhook: z.nullable(WebhookEndpointInput$outboundSchema).optional(),
+  })
+);
 
 export function webhooksServiceUpdateRequestToJSON(
   webhooksServiceUpdateRequest: WebhooksServiceUpdateRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   PolicyInput,
   PolicyInput$Outbound,
@@ -28,10 +29,12 @@ export const UpdatePolicyRequest$outboundSchema: z.ZodType<
   UpdatePolicyRequest$Outbound,
   z.ZodTypeDef,
   UpdatePolicyRequest
-> = z.object({
-  policy: z.nullable(PolicyInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policy: z.nullable(PolicyInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updatePolicyRequestToJSON(
   updatePolicyRequest: UpdatePolicyRequest,

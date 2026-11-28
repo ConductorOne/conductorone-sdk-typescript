@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ServicePrincipalBindingSubject,
   ServicePrincipalBindingSubject$Outbound,
@@ -37,12 +38,14 @@ export const ServicePrincipalServiceListBindingsRequest$outboundSchema:
     ServicePrincipalServiceListBindingsRequest$Outbound,
     z.ZodTypeDef,
     ServicePrincipalServiceListBindingsRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema)
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema)
+        .optional(),
+    })
+  );
 
 export function servicePrincipalServiceListBindingsRequestToJSON(
   servicePrincipalServiceListBindingsRequest:

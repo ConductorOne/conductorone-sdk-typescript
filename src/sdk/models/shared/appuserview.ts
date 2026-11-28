@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AppUser, AppUser$inboundSchema } from "./appuser.js";
@@ -32,12 +32,14 @@ export const AppUserView$inboundSchema: z.ZodType<
   AppUserView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appPath: z.string().optional(),
-  appUser: z.nullable(AppUser$inboundSchema).optional(),
-  identityUserPath: z.string().optional(),
-  lastUsagePath: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appPath: z.string().optional(),
+    appUser: z.nullable(AppUser$inboundSchema).optional(),
+    identityUserPath: z.string().optional(),
+    lastUsagePath: z.string().optional(),
+  })
+);
 
 export function appUserViewFromJSON(
   jsonString: string,

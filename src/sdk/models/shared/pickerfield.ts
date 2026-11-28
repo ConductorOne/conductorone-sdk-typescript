@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,11 +46,13 @@ export const PickerField$inboundSchema: z.ZodType<
   PickerField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appUserPicker: z.nullable(AppUserFilter$inboundSchema).optional(),
-  c1UserPicker: z.nullable(C1UserFilter$inboundSchema).optional(),
-  resourcePicker: z.nullable(AppResourceFilter$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserPicker: z.nullable(AppUserFilter$inboundSchema).optional(),
+    c1UserPicker: z.nullable(C1UserFilter$inboundSchema).optional(),
+    resourcePicker: z.nullable(AppResourceFilter$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PickerField$Outbound = {
   appUserPicker?: AppUserFilter$Outbound | null | undefined;
@@ -63,11 +65,13 @@ export const PickerField$outboundSchema: z.ZodType<
   PickerField$Outbound,
   z.ZodTypeDef,
   PickerField
-> = z.object({
-  appUserPicker: z.nullable(AppUserFilter$outboundSchema).optional(),
-  c1UserPicker: z.nullable(C1UserFilter$outboundSchema).optional(),
-  resourcePicker: z.nullable(AppResourceFilter$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserPicker: z.nullable(AppUserFilter$outboundSchema).optional(),
+    c1UserPicker: z.nullable(C1UserFilter$outboundSchema).optional(),
+    resourcePicker: z.nullable(AppResourceFilter$outboundSchema).optional(),
+  })
+);
 
 export function pickerFieldToJSON(pickerField: PickerField): string {
   return JSON.stringify(PickerField$outboundSchema.parse(pickerField));

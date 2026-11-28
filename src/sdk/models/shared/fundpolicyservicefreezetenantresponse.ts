@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FundPolicy, FundPolicy$inboundSchema } from "./fundpolicy.js";
@@ -20,9 +20,11 @@ export const FundPolicyServiceFreezeTenantResponse$inboundSchema: z.ZodType<
   FundPolicyServiceFreezeTenantResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  policy: z.nullable(FundPolicy$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policy: z.nullable(FundPolicy$inboundSchema).optional(),
+  })
+);
 
 export function fundPolicyServiceFreezeTenantResponseFromJSON(
   jsonString: string,

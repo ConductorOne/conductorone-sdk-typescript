@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -84,7 +84,7 @@ export const CurrentType$inboundSchema: z.ZodType<
   CurrentType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CurrentType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(CurrentType));
 
 /** @internal */
 export const RequestCatalogManagementServicePlanTypeChangeResponseTargetType$inboundSchema:
@@ -92,8 +92,10 @@ export const RequestCatalogManagementServicePlanTypeChangeResponseTargetType$inb
     RequestCatalogManagementServicePlanTypeChangeResponseTargetType,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(
-    RequestCatalogManagementServicePlanTypeChangeResponseTargetType,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(
+      RequestCatalogManagementServicePlanTypeChangeResponseTargetType,
+    )
   );
 
 /** @internal */
@@ -102,14 +104,16 @@ export const RequestCatalogManagementServicePlanTypeChangeResponse$inboundSchema
     RequestCatalogManagementServicePlanTypeChangeResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    currentType: CurrentType$inboundSchema.optional(),
-    impacts: z.nullable(z.array(RequestCatalogTypeChangeImpact$inboundSchema))
-      .optional(),
-    targetType:
-      RequestCatalogManagementServicePlanTypeChangeResponseTargetType$inboundSchema
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      currentType: CurrentType$inboundSchema.optional(),
+      impacts: z.nullable(z.array(RequestCatalogTypeChangeImpact$inboundSchema))
         .optional(),
-  });
+      targetType:
+        RequestCatalogManagementServicePlanTypeChangeResponseTargetType$inboundSchema
+          .optional(),
+    })
+  );
 
 export function requestCatalogManagementServicePlanTypeChangeResponseFromJSON(
   jsonString: string,

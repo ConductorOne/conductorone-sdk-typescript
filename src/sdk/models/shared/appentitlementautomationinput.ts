@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementAutomationLastRunStatusInput,
   AppEntitlementAutomationLastRunStatusInput$Outbound,
@@ -78,20 +79,23 @@ export const AppEntitlementAutomationInput$outboundSchema: z.ZodType<
   AppEntitlementAutomationInput$Outbound,
   z.ZodTypeDef,
   AppEntitlementAutomationInput
-> = z.object({
-  basic: z.nullable(AppEntitlementAutomationRuleBasic$outboundSchema)
-    .optional(),
-  cel: z.nullable(AppEntitlementAutomationRuleCEL$outboundSchema).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  entitlements: z.nullable(
-    AppEntitlementAutomationRuleEntitlement$outboundSchema,
-  ).optional(),
-  lastRunStatus: z.nullable(
-    AppEntitlementAutomationLastRunStatusInput$outboundSchema,
-  ).optional(),
-  none: z.nullable(AppEntitlementAutomationRuleNone$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    basic: z.nullable(AppEntitlementAutomationRuleBasic$outboundSchema)
+      .optional(),
+    cel: z.nullable(AppEntitlementAutomationRuleCEL$outboundSchema).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    entitlements: z.nullable(
+      AppEntitlementAutomationRuleEntitlement$outboundSchema,
+    ).optional(),
+    lastRunStatus: z.nullable(
+      AppEntitlementAutomationLastRunStatusInput$outboundSchema,
+    ).optional(),
+    none: z.nullable(AppEntitlementAutomationRuleNone$outboundSchema)
+      .optional(),
+  })
+);
 
 export function appEntitlementAutomationInputToJSON(
   appEntitlementAutomationInput: AppEntitlementAutomationInput,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessProfileOwnerApproval,
   AccessProfileOwnerApproval$Outbound,
@@ -161,30 +162,32 @@ export const ApprovalInput$outboundSchema: z.ZodType<
   ApprovalInput$Outbound,
   z.ZodTypeDef,
   ApprovalInput
-> = z.object({
-  accessProfileOwners: z.nullable(AccessProfileOwnerApproval$outboundSchema)
-    .optional(),
-  agent: z.nullable(AgentApproval$outboundSchema).optional(),
-  allowDelegation: z.boolean().optional(),
-  allowReassignment: z.boolean().optional(),
-  allowedReassignees: z.nullable(z.array(z.string())).optional(),
-  appOwners: z.nullable(AppOwnerApproval$outboundSchema).optional(),
-  entitlementOwners: z.nullable(EntitlementOwnerApproval$outboundSchema)
-    .optional(),
-  escalation: z.nullable(Escalation$outboundSchema).optional(),
-  escalationEnabled: z.boolean().optional(),
-  expression: z.nullable(ExpressionApprovalInput$outboundSchema).optional(),
-  group: z.nullable(AppGroupApproval$outboundSchema).optional(),
-  manager: z.nullable(ManagerApprovalInput$outboundSchema).optional(),
-  requireApprovalReason: z.boolean().optional(),
-  requireDenialReason: z.boolean().optional(),
-  requireReassignmentReason: z.boolean().optional(),
-  requiresStepUpProviderId: z.string().optional(),
-  resourceOwners: z.nullable(ResourceOwnerApproval$outboundSchema).optional(),
-  self: z.nullable(SelfApprovalInput$outboundSchema).optional(),
-  users: z.nullable(UserApproval$outboundSchema).optional(),
-  webhook: z.nullable(WebhookApproval$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileOwners: z.nullable(AccessProfileOwnerApproval$outboundSchema)
+      .optional(),
+    agent: z.nullable(AgentApproval$outboundSchema).optional(),
+    allowDelegation: z.boolean().optional(),
+    allowReassignment: z.boolean().optional(),
+    allowedReassignees: z.nullable(z.array(z.string())).optional(),
+    appOwners: z.nullable(AppOwnerApproval$outboundSchema).optional(),
+    entitlementOwners: z.nullable(EntitlementOwnerApproval$outboundSchema)
+      .optional(),
+    escalation: z.nullable(Escalation$outboundSchema).optional(),
+    escalationEnabled: z.boolean().optional(),
+    expression: z.nullable(ExpressionApprovalInput$outboundSchema).optional(),
+    group: z.nullable(AppGroupApproval$outboundSchema).optional(),
+    manager: z.nullable(ManagerApprovalInput$outboundSchema).optional(),
+    requireApprovalReason: z.boolean().optional(),
+    requireDenialReason: z.boolean().optional(),
+    requireReassignmentReason: z.boolean().optional(),
+    requiresStepUpProviderId: z.string().optional(),
+    resourceOwners: z.nullable(ResourceOwnerApproval$outboundSchema).optional(),
+    self: z.nullable(SelfApprovalInput$outboundSchema).optional(),
+    users: z.nullable(UserApproval$outboundSchema).optional(),
+    webhook: z.nullable(WebhookApproval$outboundSchema).optional(),
+  })
+);
 
 export function approvalInputToJSON(approvalInput: ApprovalInput): string {
   return JSON.stringify(ApprovalInput$outboundSchema.parse(approvalInput));

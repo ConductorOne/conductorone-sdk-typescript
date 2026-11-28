@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -57,17 +58,19 @@ export const RequestCatalogManagementServiceListResponseExpanded$inboundSchema:
     RequestCatalogManagementServiceListResponseExpanded,
     z.ZodTypeDef,
     unknown
-  > = collectExtraKeys$(
-    z.object({
-      "@type": z.string().optional(),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "@type": "atType",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        "@type": z.string().optional(),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "@type": "atType",
+      });
+    })
+  );
 
 export function requestCatalogManagementServiceListResponseExpandedFromJSON(
   jsonString: string,
@@ -91,15 +94,15 @@ export const RequestCatalogManagementServiceListResponse$inboundSchema:
     RequestCatalogManagementServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    expanded: z.nullable(
-      z.array(z.lazy(() =>
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      expanded: z.nullable(z.array(z.lazy(() =>
         RequestCatalogManagementServiceListResponseExpanded$inboundSchema
-      )),
-    ).optional(),
-    list: z.nullable(z.array(RequestCatalogView$inboundSchema)).optional(),
-    nextPageToken: z.string().optional(),
-  });
+      ))).optional(),
+      list: z.nullable(z.array(RequestCatalogView$inboundSchema)).optional(),
+      nextPageToken: z.string().optional(),
+    })
+  );
 
 export function requestCatalogManagementServiceListResponseFromJSON(
   jsonString: string,

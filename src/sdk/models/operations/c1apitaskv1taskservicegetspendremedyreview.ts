@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiTaskV1TaskServiceGetSpendRemedyReviewRequest$outboundSchema:
     C1ApiTaskV1TaskServiceGetSpendRemedyReviewRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskServiceGetSpendRemedyReviewRequest
-  > = z.object({
-    taskId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskServiceGetSpendRemedyReviewRequestToJSON(
   c1ApiTaskV1TaskServiceGetSpendRemedyReviewRequest:
@@ -70,21 +72,23 @@ export const C1ApiTaskV1TaskServiceGetSpendRemedyReviewResponse$inboundSchema:
     C1ApiTaskV1TaskServiceGetSpendRemedyReviewResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskServiceGetSpendRemedyReviewResponse: shared
-      .TaskServiceGetSpendRemedyReviewResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskServiceGetSpendRemedyReviewResponse":
-        "taskServiceGetSpendRemedyReviewResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskServiceGetSpendRemedyReviewResponse: shared
+        .TaskServiceGetSpendRemedyReviewResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskServiceGetSpendRemedyReviewResponse":
+          "taskServiceGetSpendRemedyReviewResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskServiceGetSpendRemedyReviewResponseFromJSON(
   jsonString: string,

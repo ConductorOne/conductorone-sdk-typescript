@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   HookRef,
   HookRef$Outbound,
@@ -44,12 +45,14 @@ export const HooksSearchRequest$outboundSchema: z.ZodType<
   HooksSearchRequest$Outbound,
   z.ZodTypeDef,
   HooksSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(HookRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(HookRef$outboundSchema)).optional(),
+  })
+);
 
 export function hooksSearchRequestToJSON(
   hooksSearchRequest: HooksSearchRequest,

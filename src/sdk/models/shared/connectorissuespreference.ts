@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const ConnectorIssuesPreference$inboundSchema: z.ZodType<
   ConnectorIssuesPreference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-  locked: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    locked: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type ConnectorIssuesPreference$Outbound = {
   enabled?: boolean | undefined;
@@ -41,10 +43,12 @@ export const ConnectorIssuesPreference$outboundSchema: z.ZodType<
   ConnectorIssuesPreference$Outbound,
   z.ZodTypeDef,
   ConnectorIssuesPreference
-> = z.object({
-  enabled: z.boolean().optional(),
-  locked: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    locked: z.boolean().optional(),
+  })
+);
 
 export function connectorIssuesPreferenceToJSON(
   connectorIssuesPreference: ConnectorIssuesPreference,

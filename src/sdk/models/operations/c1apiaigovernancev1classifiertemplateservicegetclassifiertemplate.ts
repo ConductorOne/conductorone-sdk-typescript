@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,14 +50,16 @@ export const C1ApiAiGovernanceV1ClassifierTemplateServiceGetClassifierTemplateRe
     C1ApiAiGovernanceV1ClassifierTemplateServiceGetClassifierTemplateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1ClassifierTemplateServiceGetClassifierTemplateRequest
-  > = z.object({
-    id: z.string(),
-    templateVersion: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      templateVersion: "template_version",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      templateVersion: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        templateVersion: "template_version",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ClassifierTemplateServiceGetClassifierTemplateRequestToJSON(
   c1ApiAiGovernanceV1ClassifierTemplateServiceGetClassifierTemplateRequest:
@@ -77,20 +79,22 @@ export const C1ApiAiGovernanceV1ClassifierTemplateServiceGetClassifierTemplateRe
     C1ApiAiGovernanceV1ClassifierTemplateServiceGetClassifierTemplateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetClassifierTemplateResponse: shared
-      .GetClassifierTemplateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetClassifierTemplateResponse": "getClassifierTemplateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetClassifierTemplateResponse: shared
+        .GetClassifierTemplateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetClassifierTemplateResponse": "getClassifierTemplateResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ClassifierTemplateServiceGetClassifierTemplateResponseFromJSON(
   jsonString: string,

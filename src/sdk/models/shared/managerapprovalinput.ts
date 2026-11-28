@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementReference,
   AppEntitlementReference$Outbound,
@@ -54,15 +55,18 @@ export const ManagerApprovalInput$outboundSchema: z.ZodType<
   ManagerApprovalInput$Outbound,
   z.ZodTypeDef,
   ManagerApprovalInput
-> = z.object({
-  allowSelfApproval: z.boolean().optional(),
-  fallback: z.boolean().optional(),
-  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
-    .optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
-  requireDistinctApprovers: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSelfApproval: z.boolean().optional(),
+    fallback: z.boolean().optional(),
+    fallbackGroupIds: z.nullable(
+      z.array(AppEntitlementReference$outboundSchema),
+    ).optional(),
+    fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+    isGroupFallbackEnabled: z.boolean().optional(),
+    requireDistinctApprovers: z.boolean().optional(),
+  })
+);
 
 export function managerApprovalInputToJSON(
   managerApprovalInput: ManagerApprovalInput,

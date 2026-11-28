@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,15 +49,17 @@ export const C1ApiStepupV1StepUpProviderServiceDeleteRequest$outboundSchema:
     C1ApiStepupV1StepUpProviderServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiStepupV1StepUpProviderServiceDeleteRequest
-  > = z.object({
-    id: z.string(),
-    deleteStepUpProviderRequest: shared
-      .DeleteStepUpProviderRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      deleteStepUpProviderRequest: "DeleteStepUpProviderRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      deleteStepUpProviderRequest: shared
+        .DeleteStepUpProviderRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        deleteStepUpProviderRequest: "DeleteStepUpProviderRequest",
+      });
+    })
+  );
 
 export function c1ApiStepupV1StepUpProviderServiceDeleteRequestToJSON(
   c1ApiStepupV1StepUpProviderServiceDeleteRequest:
@@ -76,20 +78,22 @@ export const C1ApiStepupV1StepUpProviderServiceDeleteResponse$inboundSchema:
     C1ApiStepupV1StepUpProviderServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteStepUpProviderResponse: shared
-      .DeleteStepUpProviderResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteStepUpProviderResponse": "deleteStepUpProviderResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteStepUpProviderResponse: shared
+        .DeleteStepUpProviderResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteStepUpProviderResponse": "deleteStepUpProviderResponse",
+      });
+    })
+  );
 
 export function c1ApiStepupV1StepUpProviderServiceDeleteResponseFromJSON(
   jsonString: string,

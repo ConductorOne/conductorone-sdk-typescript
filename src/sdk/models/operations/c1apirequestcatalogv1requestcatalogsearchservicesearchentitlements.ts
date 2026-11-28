@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -24,7 +24,7 @@ export type C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsRe
      */
     rawResponse: Response;
     /**
-     * The RequestCatalogSearchServiceSearchEntitlementsResponse message contains a list of results and a nextPageToken if applicable.
+     * A page of matching entitlements and a continuation token when more candidates remain.
      */
     requestCatalogSearchServiceSearchEntitlementsResponse?:
       | shared.RequestCatalogSearchServiceSearchEntitlementsResponse
@@ -37,22 +37,24 @@ export const C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsR
     C1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RequestCatalogSearchServiceSearchEntitlementsResponse: shared
-      .RequestCatalogSearchServiceSearchEntitlementsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RequestCatalogSearchServiceSearchEntitlementsResponse":
-        "requestCatalogSearchServiceSearchEntitlementsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RequestCatalogSearchServiceSearchEntitlementsResponse: shared
+        .RequestCatalogSearchServiceSearchEntitlementsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RequestCatalogSearchServiceSearchEntitlementsResponse":
+          "requestCatalogSearchServiceSearchEntitlementsResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogSearchServiceSearchEntitlementsResponseFromJSON(
   jsonString: string,

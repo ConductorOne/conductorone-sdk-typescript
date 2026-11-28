@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -111,40 +111,42 @@ export const SubjectType$inboundSchema: z.ZodType<
   SubjectType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SubjectType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(SubjectType));
 /** @internal */
 export const SubjectType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SubjectType
-> = openEnums.outboundSchema(SubjectType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(SubjectType));
 
 /** @internal */
 export const SSOApplication$inboundSchema: z.ZodType<
   SSOApplication,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  assertionLifetime: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  oidc: z.nullable(SSOApplicationOIDCConfig$inboundSchema).optional(),
-  saml: z.nullable(SSOApplicationSAMLConfig$inboundSchema).optional(),
-  sectorId: z.string().optional(),
-  subjectCompatibility: z.nullable(SSOSubjectCompatibility$inboundSchema)
-    .optional(),
-  subjectType: SubjectType$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    assertionLifetime: z.nullable(z.string()).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    oidc: z.nullable(SSOApplicationOIDCConfig$inboundSchema).optional(),
+    saml: z.nullable(SSOApplicationSAMLConfig$inboundSchema).optional(),
+    sectorId: z.string().optional(),
+    subjectCompatibility: z.nullable(SSOSubjectCompatibility$inboundSchema)
+      .optional(),
+    subjectType: SubjectType$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type SSOApplication$Outbound = {
   appEntitlementId?: string | undefined;
@@ -168,23 +170,25 @@ export const SSOApplication$outboundSchema: z.ZodType<
   SSOApplication$Outbound,
   z.ZodTypeDef,
   SSOApplication
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  assertionLifetime: z.nullable(z.string()).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  oidc: z.nullable(SSOApplicationOIDCConfig$outboundSchema).optional(),
-  saml: z.nullable(SSOApplicationSAMLConfig$outboundSchema).optional(),
-  sectorId: z.string().optional(),
-  subjectCompatibility: z.nullable(SSOSubjectCompatibility$outboundSchema)
-    .optional(),
-  subjectType: SubjectType$outboundSchema.optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    assertionLifetime: z.nullable(z.string()).optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    oidc: z.nullable(SSOApplicationOIDCConfig$outboundSchema).optional(),
+    saml: z.nullable(SSOApplicationSAMLConfig$outboundSchema).optional(),
+    sectorId: z.string().optional(),
+    subjectCompatibility: z.nullable(SSOSubjectCompatibility$outboundSchema)
+      .optional(),
+    subjectType: SubjectType$outboundSchema.optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function ssoApplicationToJSON(ssoApplication: SSOApplication): string {
   return JSON.stringify(SSOApplication$outboundSchema.parse(ssoApplication));

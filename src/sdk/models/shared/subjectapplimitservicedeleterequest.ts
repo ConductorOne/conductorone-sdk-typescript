@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SubjectAppLimitServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const SubjectAppLimitServiceDeleteRequest$outboundSchema: z.ZodType<
   SubjectAppLimitServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   SubjectAppLimitServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function subjectAppLimitServiceDeleteRequestToJSON(
   subjectAppLimitServiceDeleteRequest: SubjectAppLimitServiceDeleteRequest,

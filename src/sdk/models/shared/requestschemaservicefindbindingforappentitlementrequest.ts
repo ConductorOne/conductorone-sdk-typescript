@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -27,9 +28,11 @@ export const RequestSchemaServiceFindBindingForAppEntitlementRequest$outboundSch
     RequestSchemaServiceFindBindingForAppEntitlementRequest$Outbound,
     z.ZodTypeDef,
     RequestSchemaServiceFindBindingForAppEntitlementRequest
-  > = z.object({
-    entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      entitlementRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
+    })
+  );
 
 export function requestSchemaServiceFindBindingForAppEntitlementRequestToJSON(
   requestSchemaServiceFindBindingForAppEntitlementRequest:

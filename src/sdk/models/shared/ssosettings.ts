@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -94,45 +94,55 @@ export const DefaultIdTokenSignedResponseAlg$inboundSchema: z.ZodType<
   DefaultIdTokenSignedResponseAlg,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DefaultIdTokenSignedResponseAlg);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DefaultIdTokenSignedResponseAlg)
+);
 /** @internal */
 export const DefaultIdTokenSignedResponseAlg$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DefaultIdTokenSignedResponseAlg
-> = openEnums.outboundSchema(DefaultIdTokenSignedResponseAlg);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DefaultIdTokenSignedResponseAlg)
+);
 
 /** @internal */
 export const DefaultSubjectType$inboundSchema: z.ZodType<
   DefaultSubjectType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DefaultSubjectType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DefaultSubjectType)
+);
 /** @internal */
 export const DefaultSubjectType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DefaultSubjectType
-> = openEnums.outboundSchema(DefaultSubjectType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DefaultSubjectType)
+);
 
 /** @internal */
 export const SSOSettings$inboundSchema: z.ZodType<
   SSOSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  defaultAssertionLifetime: z.nullable(z.string()).optional(),
-  defaultIdTokenSignedResponseAlg: DefaultIdTokenSignedResponseAlg$inboundSchema
-    .optional(),
-  defaultSubjectType: DefaultSubjectType$inboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    defaultAssertionLifetime: z.nullable(z.string()).optional(),
+    defaultIdTokenSignedResponseAlg:
+      DefaultIdTokenSignedResponseAlg$inboundSchema.optional(),
+    defaultSubjectType: DefaultSubjectType$inboundSchema.optional(),
+    enabled: z.boolean().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type SSOSettings$Outbound = {
   createdAt?: string | null | undefined;
@@ -148,15 +158,17 @@ export const SSOSettings$outboundSchema: z.ZodType<
   SSOSettings$Outbound,
   z.ZodTypeDef,
   SSOSettings
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  defaultAssertionLifetime: z.nullable(z.string()).optional(),
-  defaultIdTokenSignedResponseAlg:
-    DefaultIdTokenSignedResponseAlg$outboundSchema.optional(),
-  defaultSubjectType: DefaultSubjectType$outboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    defaultAssertionLifetime: z.nullable(z.string()).optional(),
+    defaultIdTokenSignedResponseAlg:
+      DefaultIdTokenSignedResponseAlg$outboundSchema.optional(),
+    defaultSubjectType: DefaultSubjectType$outboundSchema.optional(),
+    enabled: z.boolean().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function ssoSettingsToJSON(ssoSettings: SSOSettings): string {
   return JSON.stringify(SSOSettings$outboundSchema.parse(ssoSettings));

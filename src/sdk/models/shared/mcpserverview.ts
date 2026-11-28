@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -86,10 +86,12 @@ export const Oauth2Mode = {
 export type Oauth2Mode = OpenEnum<typeof Oauth2Mode>;
 
 /**
- * Per-server override for tool approval on MCP servers without a saved
+ * Deprecated and ignored: set tool_enablement on the MCP registration config instead.
  *
  * @remarks
- *  registration access level. UNSPECIFIED inherits the tenant setting.
+ *  Always UNSPECIFIED in responses.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export const RequireToolApproval = {
   OptionalBoolUnspecified: "OPTIONAL_BOOL_UNSPECIFIED",
@@ -97,10 +99,12 @@ export const RequireToolApproval = {
   OptionalBoolFalse: "OPTIONAL_BOOL_FALSE",
 } as const;
 /**
- * Per-server override for tool approval on MCP servers without a saved
+ * Deprecated and ignored: set tool_enablement on the MCP registration config instead.
  *
  * @remarks
- *  registration access level. UNSPECIFIED inherits the tenant setting.
+ *  Always UNSPECIFIED in responses.
+ *
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type RequireToolApproval = OpenEnum<typeof RequireToolApproval>;
 
@@ -413,10 +417,12 @@ export type MCPServerView = {
    */
   oauth2TokenUrl?: string | undefined;
   /**
-   * Per-server override for tool approval on MCP servers without a saved
+   * Deprecated and ignored: set tool_enablement on the MCP registration config instead.
    *
    * @remarks
-   *  registration access level. UNSPECIFIED inherits the tenant setting.
+   *  Always UNSPECIFIED in responses.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   requireToolApproval?: RequireToolApproval | undefined;
   /**
@@ -514,10 +520,12 @@ export type MCPServerViewInput = {
    */
   mcpServerCatalogId?: string | undefined;
   /**
-   * Per-server override for tool approval on MCP servers without a saved
+   * Deprecated and ignored: set tool_enablement on the MCP registration config instead.
    *
    * @remarks
-   *  registration access level. UNSPECIFIED inherits the tenant setting.
+   *  Always UNSPECIFIED in responses.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   requireToolApproval?: RequireToolApproval | undefined;
   /**
@@ -543,155 +551,165 @@ export const AuthMethod$inboundSchema: z.ZodType<
   AuthMethod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AuthMethod);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AuthMethod));
 /** @internal */
 export const AuthMethod$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AuthMethod
-> = openEnums.outboundSchema(AuthMethod);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AuthMethod));
 
 /** @internal */
 export const DataSensitivity$inboundSchema: z.ZodType<
   DataSensitivity,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DataSensitivity);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DataSensitivity));
 /** @internal */
 export const DataSensitivity$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DataSensitivity
-> = openEnums.outboundSchema(DataSensitivity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DataSensitivity)
+);
 
 /** @internal */
 export const Oauth2ClientIdMode$inboundSchema: z.ZodType<
   Oauth2ClientIdMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Oauth2ClientIdMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(Oauth2ClientIdMode)
+);
 
 /** @internal */
 export const Oauth2Mode$inboundSchema: z.ZodType<
   Oauth2Mode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Oauth2Mode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Oauth2Mode));
 
 /** @internal */
 export const RequireToolApproval$inboundSchema: z.ZodType<
   RequireToolApproval,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(RequireToolApproval);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(RequireToolApproval)
+);
 /** @internal */
 export const RequireToolApproval$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   RequireToolApproval
-> = openEnums.outboundSchema(RequireToolApproval);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(RequireToolApproval)
+);
 
 /** @internal */
 export const ServerType$inboundSchema: z.ZodType<
   ServerType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ServerType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ServerType));
 /** @internal */
 export const ServerType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ServerType
-> = openEnums.outboundSchema(ServerType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ServerType));
 
 /** @internal */
 export const TokenSharing$inboundSchema: z.ZodType<
   TokenSharing,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TokenSharing);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TokenSharing));
 
 /** @internal */
 export const TransportType$inboundSchema: z.ZodType<
   TransportType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TransportType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TransportType));
 
 /** @internal */
 export const MCPServerView$inboundSchema: z.ZodType<
   MCPServerView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  authMethod: AuthMethod$inboundSchema.optional(),
-  awsAccessKeyId: z.string().optional(),
-  awsSecretAccessKeyConfigured: z.boolean().optional(),
-  awsSessionTokenConfigured: z.boolean().optional(),
-  basicAuthPasswordConfigured: z.boolean().optional(),
-  basicAuthUsername: z.string().optional(),
-  bearerTokenConfigured: z.boolean().optional(),
-  configFieldValues: z.record(z.string()).optional(),
-  connectorId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  credentialsSetupUrl: z.string().optional(),
-  customHeaderName: z.string().optional(),
-  customHeaderValueConfigured: z.boolean().optional(),
-  dataSensitivity: DataSensitivity$inboundSchema.optional(),
-  defaultToolPrefix: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  endpointUrl: z.string().optional(),
-  endpointUrlLocked: z.boolean().optional(),
-  lastCalledAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  mcpServerCatalogId: z.string().optional(),
-  oauth2AuthorizeUrl: z.string().optional(),
-  oauth2ClientId: z.string().optional(),
-  oauth2ClientIdMode: Oauth2ClientIdMode$inboundSchema.optional(),
-  oauth2ClientSecretExpiresAt: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  oauth2CodeChallengeMethodsSupported: z.nullable(z.array(z.string()))
-    .optional(),
-  oauth2CredentialsConfigured: z.boolean().optional(),
-  oauth2ExtraAuthorizeParams: z.record(z.string()).optional(),
-  oauth2ExtraTokenParams: z.record(z.string()).optional(),
-  oauth2IssuerUrl: z.string().optional(),
-  oauth2JwtAudience: z.string().optional(),
-  oauth2JwtIssuer: z.string().optional(),
-  oauth2JwtPrivateKeyConfigured: z.boolean().optional(),
-  oauth2JwtSubject: z.string().optional(),
-  oauth2Mode: Oauth2Mode$inboundSchema.optional(),
-  oauth2Pkce: z.string().optional(),
-  oauth2Scopes: z.nullable(z.array(z.string())).optional(),
-  oauth2ScopesSupported: z.nullable(z.array(z.string())).optional(),
-  oauth2ServiceAuthorized: z.boolean().optional(),
-  oauth2ServiceAuthorizedAsEmail: z.string().optional(),
-  oauth2ServiceAuthorizedAsName: z.string().optional(),
-  oauth2ServiceAuthorizedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  oauth2ServiceAuthorizedBy: z.string().optional(),
-  oauth2TokenEndpointAuthMethod: z.string().optional(),
-  oauth2TokenUrl: z.string().optional(),
-  requireToolApproval: RequireToolApproval$inboundSchema.optional(),
-  serverType: ServerType$inboundSchema.optional(),
-  sourceAppId: z.string().optional(),
-  tokenSharing: TokenSharing$inboundSchema.optional(),
-  toolPrefix: z.string().optional(),
-  transportType: TransportType$inboundSchema.optional(),
-  tunnelApplianceId: z.string().optional(),
-  tunnelBridgeId: z.string().optional(),
-  tunnelServiceName: z.string().optional(),
-  tunneled: z.boolean().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    authMethod: AuthMethod$inboundSchema.optional(),
+    awsAccessKeyId: z.string().optional(),
+    awsSecretAccessKeyConfigured: z.boolean().optional(),
+    awsSessionTokenConfigured: z.boolean().optional(),
+    basicAuthPasswordConfigured: z.boolean().optional(),
+    basicAuthUsername: z.string().optional(),
+    bearerTokenConfigured: z.boolean().optional(),
+    configFieldValues: z.record(z.string()).optional(),
+    connectorId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    credentialsSetupUrl: z.string().optional(),
+    customHeaderName: z.string().optional(),
+    customHeaderValueConfigured: z.boolean().optional(),
+    dataSensitivity: DataSensitivity$inboundSchema.optional(),
+    defaultToolPrefix: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    endpointUrl: z.string().optional(),
+    endpointUrlLocked: z.boolean().optional(),
+    lastCalledAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    mcpServerCatalogId: z.string().optional(),
+    oauth2AuthorizeUrl: z.string().optional(),
+    oauth2ClientId: z.string().optional(),
+    oauth2ClientIdMode: Oauth2ClientIdMode$inboundSchema.optional(),
+    oauth2ClientSecretExpiresAt: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    oauth2CodeChallengeMethodsSupported: z.nullable(z.array(z.string()))
+      .optional(),
+    oauth2CredentialsConfigured: z.boolean().optional(),
+    oauth2ExtraAuthorizeParams: z.record(z.string()).optional(),
+    oauth2ExtraTokenParams: z.record(z.string()).optional(),
+    oauth2IssuerUrl: z.string().optional(),
+    oauth2JwtAudience: z.string().optional(),
+    oauth2JwtIssuer: z.string().optional(),
+    oauth2JwtPrivateKeyConfigured: z.boolean().optional(),
+    oauth2JwtSubject: z.string().optional(),
+    oauth2Mode: Oauth2Mode$inboundSchema.optional(),
+    oauth2Pkce: z.string().optional(),
+    oauth2Scopes: z.nullable(z.array(z.string())).optional(),
+    oauth2ScopesSupported: z.nullable(z.array(z.string())).optional(),
+    oauth2ServiceAuthorized: z.boolean().optional(),
+    oauth2ServiceAuthorizedAsEmail: z.string().optional(),
+    oauth2ServiceAuthorizedAsName: z.string().optional(),
+    oauth2ServiceAuthorizedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    oauth2ServiceAuthorizedBy: z.string().optional(),
+    oauth2TokenEndpointAuthMethod: z.string().optional(),
+    oauth2TokenUrl: z.string().optional(),
+    requireToolApproval: RequireToolApproval$inboundSchema.optional(),
+    serverType: ServerType$inboundSchema.optional(),
+    sourceAppId: z.string().optional(),
+    tokenSharing: TokenSharing$inboundSchema.optional(),
+    toolPrefix: z.string().optional(),
+    transportType: TransportType$inboundSchema.optional(),
+    tunnelApplianceId: z.string().optional(),
+    tunnelBridgeId: z.string().optional(),
+    tunnelServiceName: z.string().optional(),
+    tunneled: z.boolean().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function mcpServerViewFromJSON(
   jsonString: string,
@@ -723,19 +741,21 @@ export const MCPServerViewInput$outboundSchema: z.ZodType<
   MCPServerViewInput$Outbound,
   z.ZodTypeDef,
   MCPServerViewInput
-> = z.object({
-  appId: z.string().optional(),
-  authMethod: AuthMethod$outboundSchema.optional(),
-  connectorId: z.string().optional(),
-  dataSensitivity: DataSensitivity$outboundSchema.optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  mcpServerCatalogId: z.string().optional(),
-  requireToolApproval: RequireToolApproval$outboundSchema.optional(),
-  serverType: ServerType$outboundSchema.optional(),
-  sourceAppId: z.string().optional(),
-  toolPrefix: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    authMethod: AuthMethod$outboundSchema.optional(),
+    connectorId: z.string().optional(),
+    dataSensitivity: DataSensitivity$outboundSchema.optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    mcpServerCatalogId: z.string().optional(),
+    requireToolApproval: RequireToolApproval$outboundSchema.optional(),
+    serverType: ServerType$outboundSchema.optional(),
+    sourceAppId: z.string().optional(),
+    toolPrefix: z.string().optional(),
+  })
+);
 
 export function mcpServerViewInputToJSON(
   mcpServerViewInput: MCPServerViewInput,

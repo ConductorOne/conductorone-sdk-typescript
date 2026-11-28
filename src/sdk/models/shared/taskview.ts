@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -12,6 +12,12 @@ import {
   Task$Outbound,
   Task$outboundSchema,
 } from "./task.js";
+import {
+  TaskAttention,
+  TaskAttention$inboundSchema,
+  TaskAttention$Outbound,
+  TaskAttention$outboundSchema,
+} from "./taskattention.js";
 import {
   UserActorObjectPermissions,
   UserActorObjectPermissions$inboundSchema,
@@ -43,10 +49,18 @@ export type TaskView = {
    * JSONPATH expression indicating the location of the ApproverUsers objects in the expanded array. These are the users who have approved or denied this task.
    */
   approversPath?: string | undefined;
+  attention?: TaskAttention | null | undefined;
   /**
    * JSONPATH expression indicating the location of the object of the User that created the ticket in the expanded array
    */
   createdByUserPath?: string | undefined;
+  /**
+   * JSONPath locating the CredentialIssueView in the response's expanded array.
+   *
+   * @remarks
+   *  Present when credential_issue expansion is requested for a credential-issuance task.
+   */
+  credentialIssuePath?: string | undefined;
   /**
    * JSONPATH expression indicating the location of the Entitlements objects in the expanded array
    */
@@ -92,26 +106,30 @@ export const TaskView$inboundSchema: z.ZodType<
   TaskView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReviewPath: z.string().optional(),
-  appPath: z.string().optional(),
-  appUserLastUsagePath: z.string().optional(),
-  appUserPath: z.string().optional(),
-  approversPath: z.string().optional(),
-  createdByUserPath: z.string().optional(),
-  entitlementsPath: z.string().optional(),
-  identityUserPath: z.string().optional(),
-  insightsPath: z.string().optional(),
-  objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
-    .optional(),
-  principalResourcePath: z.string().optional(),
-  resourceBindingsPath: z.string().optional(),
-  roleResourcePath: z.string().optional(),
-  scopeResourcePath: z.string().optional(),
-  stepApproversPath: z.string().optional(),
-  task: z.nullable(Task$inboundSchema).optional(),
-  userPath: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewPath: z.string().optional(),
+    appPath: z.string().optional(),
+    appUserLastUsagePath: z.string().optional(),
+    appUserPath: z.string().optional(),
+    approversPath: z.string().optional(),
+    attention: z.nullable(TaskAttention$inboundSchema).optional(),
+    createdByUserPath: z.string().optional(),
+    credentialIssuePath: z.string().optional(),
+    entitlementsPath: z.string().optional(),
+    identityUserPath: z.string().optional(),
+    insightsPath: z.string().optional(),
+    objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
+      .optional(),
+    principalResourcePath: z.string().optional(),
+    resourceBindingsPath: z.string().optional(),
+    roleResourcePath: z.string().optional(),
+    scopeResourcePath: z.string().optional(),
+    stepApproversPath: z.string().optional(),
+    task: z.nullable(Task$inboundSchema).optional(),
+    userPath: z.string().optional(),
+  })
+);
 /** @internal */
 export type TaskView$Outbound = {
   accessReviewPath?: string | undefined;
@@ -119,7 +137,9 @@ export type TaskView$Outbound = {
   appUserLastUsagePath?: string | undefined;
   appUserPath?: string | undefined;
   approversPath?: string | undefined;
+  attention?: TaskAttention$Outbound | null | undefined;
   createdByUserPath?: string | undefined;
+  credentialIssuePath?: string | undefined;
   entitlementsPath?: string | undefined;
   identityUserPath?: string | undefined;
   insightsPath?: string | undefined;
@@ -138,26 +158,30 @@ export const TaskView$outboundSchema: z.ZodType<
   TaskView$Outbound,
   z.ZodTypeDef,
   TaskView
-> = z.object({
-  accessReviewPath: z.string().optional(),
-  appPath: z.string().optional(),
-  appUserLastUsagePath: z.string().optional(),
-  appUserPath: z.string().optional(),
-  approversPath: z.string().optional(),
-  createdByUserPath: z.string().optional(),
-  entitlementsPath: z.string().optional(),
-  identityUserPath: z.string().optional(),
-  insightsPath: z.string().optional(),
-  objectPermissions: z.nullable(UserActorObjectPermissions$outboundSchema)
-    .optional(),
-  principalResourcePath: z.string().optional(),
-  resourceBindingsPath: z.string().optional(),
-  roleResourcePath: z.string().optional(),
-  scopeResourcePath: z.string().optional(),
-  stepApproversPath: z.string().optional(),
-  task: z.nullable(Task$outboundSchema).optional(),
-  userPath: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewPath: z.string().optional(),
+    appPath: z.string().optional(),
+    appUserLastUsagePath: z.string().optional(),
+    appUserPath: z.string().optional(),
+    approversPath: z.string().optional(),
+    attention: z.nullable(TaskAttention$outboundSchema).optional(),
+    createdByUserPath: z.string().optional(),
+    credentialIssuePath: z.string().optional(),
+    entitlementsPath: z.string().optional(),
+    identityUserPath: z.string().optional(),
+    insightsPath: z.string().optional(),
+    objectPermissions: z.nullable(UserActorObjectPermissions$outboundSchema)
+      .optional(),
+    principalResourcePath: z.string().optional(),
+    resourceBindingsPath: z.string().optional(),
+    roleResourcePath: z.string().optional(),
+    scopeResourcePath: z.string().optional(),
+    stepApproversPath: z.string().optional(),
+    task: z.nullable(Task$outboundSchema).optional(),
+    userPath: z.string().optional(),
+  })
+);
 
 export function taskViewToJSON(taskView: TaskView): string {
   return JSON.stringify(TaskView$outboundSchema.parse(taskView));

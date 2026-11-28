@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const SendGridProviderConfig$inboundSchema: z.ZodType<
   SendGridProviderConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  apiKey: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKey: z.string().optional(),
+  })
+);
 /** @internal */
 export type SendGridProviderConfig$Outbound = {
   apiKey?: string | undefined;
@@ -38,9 +40,11 @@ export const SendGridProviderConfig$outboundSchema: z.ZodType<
   SendGridProviderConfig$Outbound,
   z.ZodTypeDef,
   SendGridProviderConfig
-> = z.object({
-  apiKey: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKey: z.string().optional(),
+  })
+);
 
 export function sendGridProviderConfigToJSON(
   sendGridProviderConfig: SendGridProviderConfig,

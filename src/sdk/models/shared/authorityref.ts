@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -71,23 +71,27 @@ export const AuthorityRefKind$inboundSchema: z.ZodType<
   AuthorityRefKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AuthorityRefKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AuthorityRefKind)
+);
 
 /** @internal */
 export const AuthorityRef$inboundSchema: z.ZodType<
   AuthorityRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  absent: z.boolean().optional(),
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  kind: AuthorityRefKind$inboundSchema.optional(),
-  ruleId: z.string().optional(),
-  userId: z.string().optional(),
-  version: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    absent: z.boolean().optional(),
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    kind: AuthorityRefKind$inboundSchema.optional(),
+    ruleId: z.string().optional(),
+    userId: z.string().optional(),
+    version: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function authorityRefFromJSON(
   jsonString: string,

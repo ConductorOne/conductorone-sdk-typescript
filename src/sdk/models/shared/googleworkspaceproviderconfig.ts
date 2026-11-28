@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,10 +37,12 @@ export const GoogleWorkspaceProviderConfig$inboundSchema: z.ZodType<
   GoogleWorkspaceProviderConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  delegatedUser: z.string().optional(),
-  serviceAccountJson: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delegatedUser: z.string().optional(),
+    serviceAccountJson: z.string().optional(),
+  })
+);
 /** @internal */
 export type GoogleWorkspaceProviderConfig$Outbound = {
   delegatedUser?: string | undefined;
@@ -52,10 +54,12 @@ export const GoogleWorkspaceProviderConfig$outboundSchema: z.ZodType<
   GoogleWorkspaceProviderConfig$Outbound,
   z.ZodTypeDef,
   GoogleWorkspaceProviderConfig
-> = z.object({
-  delegatedUser: z.string().optional(),
-  serviceAccountJson: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delegatedUser: z.string().optional(),
+    serviceAccountJson: z.string().optional(),
+  })
+);
 
 export function googleWorkspaceProviderConfigToJSON(
   googleWorkspaceProviderConfig: GoogleWorkspaceProviderConfig,

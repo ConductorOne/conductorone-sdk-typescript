@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Search for app resources based on some filters.
@@ -69,18 +70,20 @@ export const SearchAppResourceTypesRequest$outboundSchema: z.ZodType<
   SearchAppResourceTypesRequest$Outbound,
   z.ZodTypeDef,
   SearchAppResourceTypesRequest
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  displayName: z.string().optional(),
-  excludeResourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    appUserIds: z.nullable(z.array(z.string())).optional(),
+    displayName: z.string().optional(),
+    excludeResourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    excludeResourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    resourceTypeTraitIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function searchAppResourceTypesRequestToJSON(
   searchAppResourceTypesRequest: SearchAppResourceTypesRequest,

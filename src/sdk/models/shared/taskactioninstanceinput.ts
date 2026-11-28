@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   BatonResourceActionRefInput,
   BatonResourceActionRefInput$Outbound,
@@ -43,12 +44,15 @@ export const TaskActionInstanceInput$outboundSchema: z.ZodType<
   TaskActionInstanceInput$Outbound,
   z.ZodTypeDef,
   TaskActionInstanceInput
-> = z.object({
-  batonResourceActionRef: z.nullable(BatonResourceActionRefInput$outboundSchema)
-    .optional(),
-  connectorActionRef: z.nullable(ConnectorActionRefInput$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batonResourceActionRef: z.nullable(
+      BatonResourceActionRefInput$outboundSchema,
+    ).optional(),
+    connectorActionRef: z.nullable(ConnectorActionRefInput$outboundSchema)
+      .optional(),
+  })
+);
 
 export function taskActionInstanceInputToJSON(
   taskActionInstanceInput: TaskActionInstanceInput,

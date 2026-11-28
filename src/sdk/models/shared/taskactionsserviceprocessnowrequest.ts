@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -26,9 +27,11 @@ export const TaskActionsServiceProcessNowRequest$outboundSchema: z.ZodType<
   TaskActionsServiceProcessNowRequest$Outbound,
   z.ZodTypeDef,
   TaskActionsServiceProcessNowRequest
-> = z.object({
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+  })
+);
 
 export function taskActionsServiceProcessNowRequestToJSON(
   taskActionsServiceProcessNowRequest: TaskActionsServiceProcessNowRequest,

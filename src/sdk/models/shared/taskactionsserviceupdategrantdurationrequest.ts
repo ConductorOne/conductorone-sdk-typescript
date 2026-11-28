@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -29,10 +30,12 @@ export const TaskActionsServiceUpdateGrantDurationRequest$outboundSchema:
     TaskActionsServiceUpdateGrantDurationRequest$Outbound,
     z.ZodTypeDef,
     TaskActionsServiceUpdateGrantDurationRequest
-  > = z.object({
-    duration: z.nullable(z.string()),
-    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      duration: z.nullable(z.string()),
+      expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+    })
+  );
 
 export function taskActionsServiceUpdateGrantDurationRequestToJSON(
   taskActionsServiceUpdateGrantDurationRequest:

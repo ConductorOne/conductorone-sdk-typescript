@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,14 +50,16 @@ export const C1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLReque
     C1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLRequest
-  > = z.object({
-    functionId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      functionId: "function_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      functionId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        functionId: "function_id",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLRequestToJSON(
   c1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLRequest:
@@ -77,22 +79,24 @@ export const C1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLRespo
     C1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FunctionsInvocationServiceGetResultDownloadURLResponse: shared
-      .FunctionsInvocationServiceGetResultDownloadURLResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FunctionsInvocationServiceGetResultDownloadURLResponse":
-        "functionsInvocationServiceGetResultDownloadURLResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FunctionsInvocationServiceGetResultDownloadURLResponse: shared
+        .FunctionsInvocationServiceGetResultDownloadURLResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FunctionsInvocationServiceGetResultDownloadURLResponse":
+          "functionsInvocationServiceGetResultDownloadURLResponse",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsInvocationServiceGetResultDownloadURLResponseFromJSON(
   jsonString: string,

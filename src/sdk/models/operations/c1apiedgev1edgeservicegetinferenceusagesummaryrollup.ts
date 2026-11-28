@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -19,6 +19,8 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupQueryParamBucke
     TbTimeBucketUnspecified: "TB_TIME_BUCKET_UNSPECIFIED",
     TbTimeBucketHour: "TB_TIME_BUCKET_HOUR",
     TbTimeBucketDay: "TB_TIME_BUCKET_DAY",
+    TbTimeBucketFiveMinutes: "TB_TIME_BUCKET_FIVE_MINUTES",
+    TbTimeBucketFifteenMinutes: "TB_TIME_BUCKET_FIFTEEN_MINUTES",
   } as const;
 /**
  * The bucket field.
@@ -66,8 +68,10 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupQueryParamBucke
     string,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupQueryParamBucket
-  > = openEnums.outboundSchema(
-    C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupQueryParamBucket,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupQueryParamBucket,
+    )
   );
 
 /** @internal */
@@ -84,13 +88,15 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupRequest$outboun
     C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupRequest
-  > = z.object({
-    bucket:
-      C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupQueryParamBucket$outboundSchema
-        .optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      bucket:
+        C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupQueryParamBucket$outboundSchema
+          .optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupRequestToJSON(
   c1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupRequest:
@@ -108,22 +114,24 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupResponse$inboun
     C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceGetInferenceUsageSummaryRollupResponse: shared
-      .EdgeServiceGetInferenceUsageSummaryRollupResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceGetInferenceUsageSummaryRollupResponse":
-        "edgeServiceGetInferenceUsageSummaryRollupResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceGetInferenceUsageSummaryRollupResponse: shared
+        .EdgeServiceGetInferenceUsageSummaryRollupResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceGetInferenceUsageSummaryRollupResponse":
+          "edgeServiceGetInferenceUsageSummaryRollupResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupResponseFromJSON(
   jsonString: string,

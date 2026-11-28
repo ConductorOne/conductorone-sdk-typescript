@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,11 +44,13 @@ export const AppUserUpdatedTrigger$inboundSchema: z.ZodType<
   AppUserUpdatedTrigger,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appIdCel: z.nullable(z.string()).optional(),
-  condition: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.nullable(z.string()).optional(),
+    appIdCel: z.nullable(z.string()).optional(),
+    condition: z.string().optional(),
+  })
+);
 /** @internal */
 export type AppUserUpdatedTrigger$Outbound = {
   appId?: string | null | undefined;
@@ -61,11 +63,13 @@ export const AppUserUpdatedTrigger$outboundSchema: z.ZodType<
   AppUserUpdatedTrigger$Outbound,
   z.ZodTypeDef,
   AppUserUpdatedTrigger
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  appIdCel: z.nullable(z.string()).optional(),
-  condition: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.nullable(z.string()).optional(),
+    appIdCel: z.nullable(z.string()).optional(),
+    condition: z.string().optional(),
+  })
+);
 
 export function appUserUpdatedTriggerToJSON(
   appUserUpdatedTrigger: AppUserUpdatedTrigger,

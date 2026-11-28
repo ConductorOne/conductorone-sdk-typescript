@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,6 +15,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
  */
 export type CredentialIssueTarget = {
   duration?: string | null | undefined;
+  fixedArgs?: { [k: string]: any } | null | undefined;
   /**
    * The app user tying the recipient to the connector identity.
    */
@@ -46,18 +47,22 @@ export const CredentialIssueTarget$inboundSchema: z.ZodType<
   CredentialIssueTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  duration: z.nullable(z.string()).optional(),
-  identityAppUserId: z.string().optional(),
-  identityResourceId: z.string().optional(),
-  identityUserId: z.string().optional(),
-  offeringId: z.string().optional(),
-  requestCatalogId: z.string().optional(),
-  scopes: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    duration: z.nullable(z.string()).optional(),
+    fixedArgs: z.nullable(z.record(z.any())).optional(),
+    identityAppUserId: z.string().optional(),
+    identityResourceId: z.string().optional(),
+    identityUserId: z.string().optional(),
+    offeringId: z.string().optional(),
+    requestCatalogId: z.string().optional(),
+    scopes: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type CredentialIssueTarget$Outbound = {
   duration?: string | null | undefined;
+  fixedArgs?: { [k: string]: any } | null | undefined;
   identityAppUserId?: string | undefined;
   identityResourceId?: string | undefined;
   identityUserId?: string | undefined;
@@ -71,15 +76,18 @@ export const CredentialIssueTarget$outboundSchema: z.ZodType<
   CredentialIssueTarget$Outbound,
   z.ZodTypeDef,
   CredentialIssueTarget
-> = z.object({
-  duration: z.nullable(z.string()).optional(),
-  identityAppUserId: z.string().optional(),
-  identityResourceId: z.string().optional(),
-  identityUserId: z.string().optional(),
-  offeringId: z.string().optional(),
-  requestCatalogId: z.string().optional(),
-  scopes: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    duration: z.nullable(z.string()).optional(),
+    fixedArgs: z.nullable(z.record(z.any())).optional(),
+    identityAppUserId: z.string().optional(),
+    identityResourceId: z.string().optional(),
+    identityUserId: z.string().optional(),
+    offeringId: z.string().optional(),
+    requestCatalogId: z.string().optional(),
+    scopes: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function credentialIssueTargetToJSON(
   credentialIssueTarget: CredentialIssueTarget,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeleteFindingTransformationRuleRequest message.
@@ -17,7 +18,7 @@ export const DeleteFindingTransformationRuleRequest$outboundSchema: z.ZodType<
   DeleteFindingTransformationRuleRequest$Outbound,
   z.ZodTypeDef,
   DeleteFindingTransformationRuleRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteFindingTransformationRuleRequestToJSON(
   deleteFindingTransformationRuleRequest:

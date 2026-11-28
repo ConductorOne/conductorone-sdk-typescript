@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,12 +31,14 @@ export const ProvisionTarget$inboundSchema: z.ZodType<
   ProvisionTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  grantDuration: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    grantDuration: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ProvisionTarget$Outbound = {
   appEntitlementId?: string | undefined;
@@ -50,12 +52,14 @@ export const ProvisionTarget$outboundSchema: z.ZodType<
   ProvisionTarget$Outbound,
   z.ZodTypeDef,
   ProvisionTarget
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  grantDuration: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    grantDuration: z.nullable(z.string()).optional(),
+  })
+);
 
 export function provisionTargetToJSON(
   provisionTarget: ProvisionTarget,

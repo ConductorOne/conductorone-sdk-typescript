@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,12 +37,14 @@ export const EdgeInferenceUnservedTarget$inboundSchema: z.ZodType<
   EdgeInferenceUnservedTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  partial: z.boolean().optional(),
-  reason: z.string().optional(),
-  routeId: z.string().optional(),
-  targetId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    partial: z.boolean().optional(),
+    reason: z.string().optional(),
+    routeId: z.string().optional(),
+    targetId: z.string().optional(),
+  })
+);
 
 export function edgeInferenceUnservedTargetFromJSON(
   jsonString: string,

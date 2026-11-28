@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   VirtualMCPServer,
   VirtualMCPServer$Outbound,
@@ -28,10 +29,12 @@ export const VirtualMCPServerServiceUpdateRequest$outboundSchema: z.ZodType<
   VirtualMCPServerServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   VirtualMCPServerServiceUpdateRequest
-> = z.object({
-  updateMask: z.nullable(z.string()).optional(),
-  virtualMcpServer: z.nullable(VirtualMCPServer$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    updateMask: z.nullable(z.string()).optional(),
+    virtualMcpServer: z.nullable(VirtualMCPServer$outboundSchema).optional(),
+  })
+);
 
 export function virtualMCPServerServiceUpdateRequestToJSON(
   virtualMCPServerServiceUpdateRequest: VirtualMCPServerServiceUpdateRequest,

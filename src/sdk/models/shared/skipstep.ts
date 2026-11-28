@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,7 +17,7 @@ export const SkipStep$inboundSchema: z.ZodType<
   SkipStep,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type SkipStep$Outbound = {};
 
@@ -26,7 +26,7 @@ export const SkipStep$outboundSchema: z.ZodType<
   SkipStep$Outbound,
   z.ZodTypeDef,
   SkipStep
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function skipStepToJSON(skipStep: SkipStep): string {
   return JSON.stringify(SkipStep$outboundSchema.parse(skipStep));

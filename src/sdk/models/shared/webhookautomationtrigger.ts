@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -50,13 +50,15 @@ export const WebhookAutomationTrigger$inboundSchema: z.ZodType<
   WebhookAutomationTrigger,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  capabilityUrl: z.nullable(WebhookListenerAuthCapabilityURL$inboundSchema)
-    .optional(),
-  hmac: z.nullable(WebhookListenerAuthHMAC$inboundSchema).optional(),
-  jwt: z.nullable(WebhookListenerAuthJWT$inboundSchema).optional(),
-  listenerId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    capabilityUrl: z.nullable(WebhookListenerAuthCapabilityURL$inboundSchema)
+      .optional(),
+    hmac: z.nullable(WebhookListenerAuthHMAC$inboundSchema).optional(),
+    jwt: z.nullable(WebhookListenerAuthJWT$inboundSchema).optional(),
+    listenerId: z.string().optional(),
+  })
+);
 /** @internal */
 export type WebhookAutomationTrigger$Outbound = {
   capabilityUrl?: WebhookListenerAuthCapabilityURL$Outbound | null | undefined;
@@ -70,13 +72,15 @@ export const WebhookAutomationTrigger$outboundSchema: z.ZodType<
   WebhookAutomationTrigger$Outbound,
   z.ZodTypeDef,
   WebhookAutomationTrigger
-> = z.object({
-  capabilityUrl: z.nullable(WebhookListenerAuthCapabilityURL$outboundSchema)
-    .optional(),
-  hmac: z.nullable(WebhookListenerAuthHMAC$outboundSchema).optional(),
-  jwt: z.nullable(WebhookListenerAuthJWT$outboundSchema).optional(),
-  listenerId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    capabilityUrl: z.nullable(WebhookListenerAuthCapabilityURL$outboundSchema)
+      .optional(),
+    hmac: z.nullable(WebhookListenerAuthHMAC$outboundSchema).optional(),
+    jwt: z.nullable(WebhookListenerAuthJWT$outboundSchema).optional(),
+    listenerId: z.string().optional(),
+  })
+);
 
 export function webhookAutomationTriggerToJSON(
   webhookAutomationTrigger: WebhookAutomationTrigger,

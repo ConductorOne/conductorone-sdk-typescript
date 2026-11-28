@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -56,36 +56,46 @@ export const CurrentAccountType$inboundSchema: z.ZodType<
   CurrentAccountType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CurrentAccountType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CurrentAccountType)
+);
 /** @internal */
 export const CurrentAccountType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CurrentAccountType
-> = openEnums.outboundSchema(CurrentAccountType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CurrentAccountType)
+);
 
 /** @internal */
 export const DetectedAccountType$inboundSchema: z.ZodType<
   DetectedAccountType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DetectedAccountType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DetectedAccountType)
+);
 /** @internal */
 export const DetectedAccountType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DetectedAccountType
-> = openEnums.outboundSchema(DetectedAccountType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DetectedAccountType)
+);
 
 /** @internal */
 export const ServiceAccountMisclassificationType$inboundSchema: z.ZodType<
   ServiceAccountMisclassificationType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  currentAccountType: CurrentAccountType$inboundSchema.optional(),
-  detectedAccountType: DetectedAccountType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currentAccountType: CurrentAccountType$inboundSchema.optional(),
+    detectedAccountType: DetectedAccountType$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ServiceAccountMisclassificationType$Outbound = {
   currentAccountType?: string | undefined;
@@ -97,10 +107,12 @@ export const ServiceAccountMisclassificationType$outboundSchema: z.ZodType<
   ServiceAccountMisclassificationType$Outbound,
   z.ZodTypeDef,
   ServiceAccountMisclassificationType
-> = z.object({
-  currentAccountType: CurrentAccountType$outboundSchema.optional(),
-  detectedAccountType: DetectedAccountType$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currentAccountType: CurrentAccountType$outboundSchema.optional(),
+    detectedAccountType: DetectedAccountType$outboundSchema.optional(),
+  })
+);
 
 export function serviceAccountMisclassificationTypeToJSON(
   serviceAccountMisclassificationType: ServiceAccountMisclassificationType,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -55,7 +56,9 @@ export const SystemLogServiceListEventsRequestSortDirection$outboundSchema:
     string,
     z.ZodTypeDef,
     SystemLogServiceListEventsRequestSortDirection
-  > = openEnums.outboundSchema(SystemLogServiceListEventsRequestSortDirection);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(SystemLogServiceListEventsRequestSortDirection)
+  );
 
 /** @internal */
 export type SystemLogServiceListEventsRequest$Outbound = {
@@ -73,16 +76,18 @@ export const SystemLogServiceListEventsRequest$outboundSchema: z.ZodType<
   SystemLogServiceListEventsRequest$Outbound,
   z.ZodTypeDef,
   SystemLogServiceListEventsRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  since: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  sinceEventUid: z.string().optional(),
-  sortDirection: SystemLogServiceListEventsRequestSortDirection$outboundSchema
-    .optional(),
-  until: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  untilEventUid: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    since: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    sinceEventUid: z.string().optional(),
+    sortDirection: SystemLogServiceListEventsRequestSortDirection$outboundSchema
+      .optional(),
+    until: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    untilEventUid: z.string().optional(),
+  })
+);
 
 export function systemLogServiceListEventsRequestToJSON(
   systemLogServiceListEventsRequest: SystemLogServiceListEventsRequest,

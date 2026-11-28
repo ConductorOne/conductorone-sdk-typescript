@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1ApiAccessreviewV1AccessReviewServiceUpdateRequest$outboundSchema:
     C1ApiAccessreviewV1AccessReviewServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAccessreviewV1AccessReviewServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    accessReviewServiceUpdateRequest: shared
-      .AccessReviewServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessReviewServiceUpdateRequest: "AccessReviewServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      accessReviewServiceUpdateRequest: shared
+        .AccessReviewServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        accessReviewServiceUpdateRequest: "AccessReviewServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewServiceUpdateRequestToJSON(
   c1ApiAccessreviewV1AccessReviewServiceUpdateRequest:
@@ -78,20 +80,23 @@ export const C1ApiAccessreviewV1AccessReviewServiceUpdateResponse$inboundSchema:
     C1ApiAccessreviewV1AccessReviewServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AccessReviewServiceUpdateResponse: shared
-      .AccessReviewServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AccessReviewServiceUpdateResponse": "accessReviewServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AccessReviewServiceUpdateResponse: shared
+        .AccessReviewServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AccessReviewServiceUpdateResponse":
+          "accessReviewServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewServiceUpdateResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,12 +23,14 @@ export const CampaignHealthSnapshot$inboundSchema: z.ZodType<
   CampaignHealthSnapshot,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  checkedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  phantomLockedCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checkedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    phantomLockedCount: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type CampaignHealthSnapshot$Outbound = {
   checkedAt?: string | null | undefined;
@@ -40,10 +42,12 @@ export const CampaignHealthSnapshot$outboundSchema: z.ZodType<
   CampaignHealthSnapshot$Outbound,
   z.ZodTypeDef,
   CampaignHealthSnapshot
-> = z.object({
-  checkedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  phantomLockedCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checkedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    phantomLockedCount: z.number().int().optional(),
+  })
+);
 
 export function campaignHealthSnapshotToJSON(
   campaignHealthSnapshot: CampaignHealthSnapshot,

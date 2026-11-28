@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,11 +28,13 @@ export const EntitlementExclusionList$inboundSchema: z.ZodType<
   EntitlementExclusionList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  excludedAppEntitlementRefs: z.nullable(
-    z.array(AppEntitlementRef$inboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    excludedAppEntitlementRefs: z.nullable(
+      z.array(AppEntitlementRef$inboundSchema),
+    ).optional(),
+  })
+);
 /** @internal */
 export type EntitlementExclusionList$Outbound = {
   excludedAppEntitlementRefs?:
@@ -46,11 +48,13 @@ export const EntitlementExclusionList$outboundSchema: z.ZodType<
   EntitlementExclusionList$Outbound,
   z.ZodTypeDef,
   EntitlementExclusionList
-> = z.object({
-  excludedAppEntitlementRefs: z.nullable(
-    z.array(AppEntitlementRef$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    excludedAppEntitlementRefs: z.nullable(
+      z.array(AppEntitlementRef$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function entitlementExclusionListToJSON(
   entitlementExclusionList: EntitlementExclusionList,

@@ -3,11 +3,23 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  AccessConflictEvidence,
+  AccessConflictEvidence$inboundSchema,
+  AccessConflictEvidence$Outbound,
+  AccessConflictEvidence$outboundSchema,
+} from "./accessconflictevidence.js";
+import {
+  AccessConflictType,
+  AccessConflictType$inboundSchema,
+  AccessConflictType$Outbound,
+  AccessConflictType$outboundSchema,
+} from "./accessconflicttype.js";
 import {
   AppResourceTarget,
   AppResourceTarget$inboundSchema,
@@ -26,6 +38,18 @@ import {
   ConnectorAnomalyDetectionDisabledType$Outbound,
   ConnectorAnomalyDetectionDisabledType$outboundSchema,
 } from "./connectoranomalydetectiondisabledtype.js";
+import {
+  ConnectorHostOutdatedEvidence,
+  ConnectorHostOutdatedEvidence$inboundSchema,
+  ConnectorHostOutdatedEvidence$Outbound,
+  ConnectorHostOutdatedEvidence$outboundSchema,
+} from "./connectorhostoutdatedevidence.js";
+import {
+  ConnectorHostOutdatedType,
+  ConnectorHostOutdatedType$inboundSchema,
+  ConnectorHostOutdatedType$Outbound,
+  ConnectorHostOutdatedType$outboundSchema,
+} from "./connectorhostoutdatedtype.js";
 import {
   ConnectorSyncFailingEvidence,
   ConnectorSyncFailingEvidence$inboundSchema,
@@ -312,6 +336,8 @@ export type FindingState = OpenEnum<typeof FindingState>;
  *   - shadowApp
  *   - mcpGatewayToolCallRisk
  *   - edgeFinding
+ *   - accessConflict
+ *   - connectorHostOutdated
  *
  * This message contains a oneof named target. Only a single field of the following list may be set at a time:
  *   - identityUserTarget
@@ -335,8 +361,12 @@ export type FindingState = OpenEnum<typeof FindingState>;
  *   - shadowMcpEvidence
  *   - mcpGatewayToolCallRiskEvidence
  *   - edgeFindingEvidence
+ *   - accessConflictEvidence
+ *   - connectorHostOutdatedEvidence
  */
 export type Finding = {
+  accessConflict?: AccessConflictType | null | undefined;
+  accessConflictEvidence?: AccessConflictEvidence | null | undefined;
   /**
    * Bounded key/value metadata bag. Limits: ≤16 entries; keys 1-128 chars
    *
@@ -360,6 +390,11 @@ export type Finding = {
   computedOwner?: FindingOwnerRef | null | undefined;
   connectorAnomalyDetectionDisabled?:
     | ConnectorAnomalyDetectionDisabledType
+    | null
+    | undefined;
+  connectorHostOutdated?: ConnectorHostOutdatedType | null | undefined;
+  connectorHostOutdatedEvidence?:
+    | ConnectorHostOutdatedEvidence
     | null
     | undefined;
   connectorSyncFailing?: ConnectorSyncFailingType | null | undefined;
@@ -513,161 +548,181 @@ export const FindingSeverity$inboundSchema: z.ZodType<
   FindingSeverity,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FindingSeverity);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(FindingSeverity));
 /** @internal */
 export const FindingSeverity$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FindingSeverity
-> = openEnums.outboundSchema(FindingSeverity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FindingSeverity)
+);
 
 /** @internal */
 export const SourceKind$inboundSchema: z.ZodType<
   SourceKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SourceKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(SourceKind));
 /** @internal */
 export const SourceKind$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SourceKind
-> = openEnums.outboundSchema(SourceKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(SourceKind));
 
 /** @internal */
 export const FindingState$inboundSchema: z.ZodType<
   FindingState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FindingState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(FindingState));
 /** @internal */
 export const FindingState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FindingState
-> = openEnums.outboundSchema(FindingState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(FindingState));
 
 /** @internal */
 export const Finding$inboundSchema: z.ZodType<Finding, z.ZodTypeDef, unknown> =
-  z.object({
-    annotations: z.record(z.string()).optional(),
-    appId: z.string().optional(),
-    appResourceTarget: z.nullable(AppResourceTarget$inboundSchema).optional(),
-    appUserTarget: z.nullable(AppUserTarget$inboundSchema).optional(),
-    assignedOwner: z.nullable(FindingOwnerRef$inboundSchema).optional(),
-    assigneeIdentityUserId: z.string().optional(),
-    computedOwner: z.nullable(FindingOwnerRef$inboundSchema).optional(),
-    connectorAnomalyDetectionDisabled: z.nullable(
-      ConnectorAnomalyDetectionDisabledType$inboundSchema,
-    ).optional(),
-    connectorSyncFailing: z.nullable(ConnectorSyncFailingType$inboundSchema)
-      .optional(),
-    connectorSyncFailingEvidence: z.nullable(
-      ConnectorSyncFailingEvidence$inboundSchema,
-    ).optional(),
-    connectorTarget: z.nullable(ConnectorTarget$inboundSchema).optional(),
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    credentialExpiring: z.nullable(CredentialExpiringType$inboundSchema)
-      .optional(),
-    credentialExpiringEvidence: z.nullable(
-      CredentialExpiringEvidence$inboundSchema,
-    ).optional(),
-    credentialPubliclyExposed: z.nullable(
-      CredentialPubliclyExposedType$inboundSchema,
-    ).optional(),
-    credentialPubliclyExposedEvidence: z.nullable(
-      CredentialPubliclyExposedEvidence$inboundSchema,
-    ).optional(),
-    custom: z.nullable(CustomFindingType$inboundSchema).optional(),
-    customSubType: z.string().optional(),
-    customTags: z.record(z.string()).optional(),
-    deactivatedOwner: z.nullable(DeactivatedOwnerType$inboundSchema).optional(),
-    deactivatedOwnerEvidence: z.nullable(DeactivatedOwnerEvidence$inboundSchema)
-      .optional(),
-    decoyCredentialUsed: z.nullable(DecoyCredentialUsedType$inboundSchema)
-      .optional(),
-    decoyPubliclyExposed: z.nullable(DecoyPubliclyExposedType$inboundSchema)
-      .optional(),
-    decoyPubliclyExposedEvidence: z.nullable(
-      DecoyPubliclyExposedEvidence$inboundSchema,
-    ).optional(),
-    decoyTarget: z.nullable(DecoyTarget$inboundSchema).optional(),
-    dedupKeyParts: z.nullable(z.array(z.string())).optional(),
-    description: z.string().optional(),
-    edgeFinding: z.nullable(EdgeFindingType$inboundSchema).optional(),
-    edgeFindingEvidence: z.nullable(EdgeFindingEvidence$inboundSchema)
-      .optional(),
-    fingerprint: z.string().optional(),
-    firstObservedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    id: z.string().optional(),
-    identityUserTarget: z.nullable(IdentityUserTarget$inboundSchema).optional(),
-    lastAppearedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    lastObservedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    mcpGatewayToolCallRisk: z.nullable(McpGatewayToolCallRiskType$inboundSchema)
-      .optional(),
-    mcpGatewayToolCallRiskEvidence: z.nullable(
-      McpGatewayToolCallRiskEvidence$inboundSchema,
-    ).optional(),
-    nhiUnowned: z.nullable(NhiUnownedType$inboundSchema).optional(),
-    nhiUnownedEvidence: z.nullable(NhiUnownedEvidence$inboundSchema).optional(),
-    objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
-      .optional(),
-    recurrenceCount: z.number().int().optional(),
-    remediationDescription: z.string().optional(),
-    resolvedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    riskAcceptanceExpiresAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    riskAcceptanceJustification: z.string().optional(),
-    riskScore: z.nullable(FindingRiskScore$inboundSchema).optional(),
-    serviceAccountMisclassification: z.nullable(
-      ServiceAccountMisclassificationType$inboundSchema,
-    ).optional(),
-    serviceAccountMisclassificationEvidence: z.nullable(
-      ServiceAccountMisclassificationEvidence$inboundSchema,
-    ).optional(),
-    serviceAccountUnowned: z.nullable(ServiceAccountUnownedType$inboundSchema)
-      .optional(),
-    severity: FindingSeverity$inboundSchema.optional(),
-    shadowApp: z.nullable(ShadowAppType$inboundSchema).optional(),
-    shadowMcp: z.nullable(ShadowMcpType$inboundSchema).optional(),
-    shadowMcpEvidence: z.nullable(ShadowMcpEvidence$inboundSchema).optional(),
-    similarUsernameMatch: z.nullable(SimilarUsernameMatchType$inboundSchema)
-      .optional(),
-    similarUsernameMatchEvidence: z.nullable(
-      SimilarUsernameMatchEvidence$inboundSchema,
-    ).optional(),
-    snoozeReason: z.string().optional(),
-    snoozeUntil: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    sourceDetectorId: z.string().optional(),
-    sourceKind: SourceKind$inboundSchema.optional(),
-    state: FindingState$inboundSchema.optional(),
-    stateUpdatedById: z.string().optional(),
-    suppressReason: z.string().optional(),
-    taskId: z.string().optional(),
-    tenantTarget: z.nullable(TenantTarget$inboundSchema).optional(),
-    unusedSecret: z.nullable(UnusedSecretType$inboundSchema).optional(),
-    unusedSecretEvidence: z.nullable(UnusedSecretEvidence$inboundSchema)
-      .optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    usageResourceTarget: z.nullable(UsageResourceRef$inboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessConflict: z.nullable(AccessConflictType$inboundSchema).optional(),
+      accessConflictEvidence: z.nullable(AccessConflictEvidence$inboundSchema)
+        .optional(),
+      annotations: z.record(z.string()).optional(),
+      appId: z.string().optional(),
+      appResourceTarget: z.nullable(AppResourceTarget$inboundSchema).optional(),
+      appUserTarget: z.nullable(AppUserTarget$inboundSchema).optional(),
+      assignedOwner: z.nullable(FindingOwnerRef$inboundSchema).optional(),
+      assigneeIdentityUserId: z.string().optional(),
+      computedOwner: z.nullable(FindingOwnerRef$inboundSchema).optional(),
+      connectorAnomalyDetectionDisabled: z.nullable(
+        ConnectorAnomalyDetectionDisabledType$inboundSchema,
+      ).optional(),
+      connectorHostOutdated: z.nullable(ConnectorHostOutdatedType$inboundSchema)
+        .optional(),
+      connectorHostOutdatedEvidence: z.nullable(
+        ConnectorHostOutdatedEvidence$inboundSchema,
+      ).optional(),
+      connectorSyncFailing: z.nullable(ConnectorSyncFailingType$inboundSchema)
+        .optional(),
+      connectorSyncFailingEvidence: z.nullable(
+        ConnectorSyncFailingEvidence$inboundSchema,
+      ).optional(),
+      connectorTarget: z.nullable(ConnectorTarget$inboundSchema).optional(),
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      credentialExpiring: z.nullable(CredentialExpiringType$inboundSchema)
+        .optional(),
+      credentialExpiringEvidence: z.nullable(
+        CredentialExpiringEvidence$inboundSchema,
+      ).optional(),
+      credentialPubliclyExposed: z.nullable(
+        CredentialPubliclyExposedType$inboundSchema,
+      ).optional(),
+      credentialPubliclyExposedEvidence: z.nullable(
+        CredentialPubliclyExposedEvidence$inboundSchema,
+      ).optional(),
+      custom: z.nullable(CustomFindingType$inboundSchema).optional(),
+      customSubType: z.string().optional(),
+      customTags: z.record(z.string()).optional(),
+      deactivatedOwner: z.nullable(DeactivatedOwnerType$inboundSchema)
+        .optional(),
+      deactivatedOwnerEvidence: z.nullable(
+        DeactivatedOwnerEvidence$inboundSchema,
+      ).optional(),
+      decoyCredentialUsed: z.nullable(DecoyCredentialUsedType$inboundSchema)
+        .optional(),
+      decoyPubliclyExposed: z.nullable(DecoyPubliclyExposedType$inboundSchema)
+        .optional(),
+      decoyPubliclyExposedEvidence: z.nullable(
+        DecoyPubliclyExposedEvidence$inboundSchema,
+      ).optional(),
+      decoyTarget: z.nullable(DecoyTarget$inboundSchema).optional(),
+      dedupKeyParts: z.nullable(z.array(z.string())).optional(),
+      description: z.string().optional(),
+      edgeFinding: z.nullable(EdgeFindingType$inboundSchema).optional(),
+      edgeFindingEvidence: z.nullable(EdgeFindingEvidence$inboundSchema)
+        .optional(),
+      fingerprint: z.string().optional(),
+      firstObservedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      id: z.string().optional(),
+      identityUserTarget: z.nullable(IdentityUserTarget$inboundSchema)
+        .optional(),
+      lastAppearedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      lastObservedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      mcpGatewayToolCallRisk: z.nullable(
+        McpGatewayToolCallRiskType$inboundSchema,
+      ).optional(),
+      mcpGatewayToolCallRiskEvidence: z.nullable(
+        McpGatewayToolCallRiskEvidence$inboundSchema,
+      ).optional(),
+      nhiUnowned: z.nullable(NhiUnownedType$inboundSchema).optional(),
+      nhiUnownedEvidence: z.nullable(NhiUnownedEvidence$inboundSchema)
+        .optional(),
+      objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
+        .optional(),
+      recurrenceCount: z.number().int().optional(),
+      remediationDescription: z.string().optional(),
+      resolvedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      riskAcceptanceExpiresAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      riskAcceptanceJustification: z.string().optional(),
+      riskScore: z.nullable(FindingRiskScore$inboundSchema).optional(),
+      serviceAccountMisclassification: z.nullable(
+        ServiceAccountMisclassificationType$inboundSchema,
+      ).optional(),
+      serviceAccountMisclassificationEvidence: z.nullable(
+        ServiceAccountMisclassificationEvidence$inboundSchema,
+      ).optional(),
+      serviceAccountUnowned: z.nullable(ServiceAccountUnownedType$inboundSchema)
+        .optional(),
+      severity: FindingSeverity$inboundSchema.optional(),
+      shadowApp: z.nullable(ShadowAppType$inboundSchema).optional(),
+      shadowMcp: z.nullable(ShadowMcpType$inboundSchema).optional(),
+      shadowMcpEvidence: z.nullable(ShadowMcpEvidence$inboundSchema).optional(),
+      similarUsernameMatch: z.nullable(SimilarUsernameMatchType$inboundSchema)
+        .optional(),
+      similarUsernameMatchEvidence: z.nullable(
+        SimilarUsernameMatchEvidence$inboundSchema,
+      ).optional(),
+      snoozeReason: z.string().optional(),
+      snoozeUntil: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      sourceDetectorId: z.string().optional(),
+      sourceKind: SourceKind$inboundSchema.optional(),
+      state: FindingState$inboundSchema.optional(),
+      stateUpdatedById: z.string().optional(),
+      suppressReason: z.string().optional(),
+      taskId: z.string().optional(),
+      tenantTarget: z.nullable(TenantTarget$inboundSchema).optional(),
+      unusedSecret: z.nullable(UnusedSecretType$inboundSchema).optional(),
+      unusedSecretEvidence: z.nullable(UnusedSecretEvidence$inboundSchema)
+        .optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      usageResourceTarget: z.nullable(UsageResourceRef$inboundSchema)
+        .optional(),
+    })
+  );
 /** @internal */
 export type Finding$Outbound = {
+  accessConflict?: AccessConflictType$Outbound | null | undefined;
+  accessConflictEvidence?: AccessConflictEvidence$Outbound | null | undefined;
   annotations?: { [k: string]: string } | undefined;
   appId?: string | undefined;
   appResourceTarget?: AppResourceTarget$Outbound | null | undefined;
@@ -677,6 +732,11 @@ export type Finding$Outbound = {
   computedOwner?: FindingOwnerRef$Outbound | null | undefined;
   connectorAnomalyDetectionDisabled?:
     | ConnectorAnomalyDetectionDisabledType$Outbound
+    | null
+    | undefined;
+  connectorHostOutdated?: ConnectorHostOutdatedType$Outbound | null | undefined;
+  connectorHostOutdatedEvidence?:
+    | ConnectorHostOutdatedEvidence$Outbound
     | null
     | undefined;
   connectorSyncFailing?: ConnectorSyncFailingType$Outbound | null | undefined;
@@ -779,111 +839,128 @@ export const Finding$outboundSchema: z.ZodType<
   Finding$Outbound,
   z.ZodTypeDef,
   Finding
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  appId: z.string().optional(),
-  appResourceTarget: z.nullable(AppResourceTarget$outboundSchema).optional(),
-  appUserTarget: z.nullable(AppUserTarget$outboundSchema).optional(),
-  assignedOwner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
-  assigneeIdentityUserId: z.string().optional(),
-  computedOwner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
-  connectorAnomalyDetectionDisabled: z.nullable(
-    ConnectorAnomalyDetectionDisabledType$outboundSchema,
-  ).optional(),
-  connectorSyncFailing: z.nullable(ConnectorSyncFailingType$outboundSchema)
-    .optional(),
-  connectorSyncFailingEvidence: z.nullable(
-    ConnectorSyncFailingEvidence$outboundSchema,
-  ).optional(),
-  connectorTarget: z.nullable(ConnectorTarget$outboundSchema).optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  credentialExpiring: z.nullable(CredentialExpiringType$outboundSchema)
-    .optional(),
-  credentialExpiringEvidence: z.nullable(
-    CredentialExpiringEvidence$outboundSchema,
-  ).optional(),
-  credentialPubliclyExposed: z.nullable(
-    CredentialPubliclyExposedType$outboundSchema,
-  ).optional(),
-  credentialPubliclyExposedEvidence: z.nullable(
-    CredentialPubliclyExposedEvidence$outboundSchema,
-  ).optional(),
-  custom: z.nullable(CustomFindingType$outboundSchema).optional(),
-  customSubType: z.string().optional(),
-  customTags: z.record(z.string()).optional(),
-  deactivatedOwner: z.nullable(DeactivatedOwnerType$outboundSchema).optional(),
-  deactivatedOwnerEvidence: z.nullable(DeactivatedOwnerEvidence$outboundSchema)
-    .optional(),
-  decoyCredentialUsed: z.nullable(DecoyCredentialUsedType$outboundSchema)
-    .optional(),
-  decoyPubliclyExposed: z.nullable(DecoyPubliclyExposedType$outboundSchema)
-    .optional(),
-  decoyPubliclyExposedEvidence: z.nullable(
-    DecoyPubliclyExposedEvidence$outboundSchema,
-  ).optional(),
-  decoyTarget: z.nullable(DecoyTarget$outboundSchema).optional(),
-  dedupKeyParts: z.nullable(z.array(z.string())).optional(),
-  description: z.string().optional(),
-  edgeFinding: z.nullable(EdgeFindingType$outboundSchema).optional(),
-  edgeFindingEvidence: z.nullable(EdgeFindingEvidence$outboundSchema)
-    .optional(),
-  fingerprint: z.string().optional(),
-  firstObservedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  id: z.string().optional(),
-  identityUserTarget: z.nullable(IdentityUserTarget$outboundSchema).optional(),
-  lastAppearedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  lastObservedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  mcpGatewayToolCallRisk: z.nullable(McpGatewayToolCallRiskType$outboundSchema)
-    .optional(),
-  mcpGatewayToolCallRiskEvidence: z.nullable(
-    McpGatewayToolCallRiskEvidence$outboundSchema,
-  ).optional(),
-  nhiUnowned: z.nullable(NhiUnownedType$outboundSchema).optional(),
-  nhiUnownedEvidence: z.nullable(NhiUnownedEvidence$outboundSchema).optional(),
-  objectPermissions: z.nullable(UserActorObjectPermissions$outboundSchema)
-    .optional(),
-  recurrenceCount: z.number().int().optional(),
-  remediationDescription: z.string().optional(),
-  resolvedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  riskAcceptanceExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  riskAcceptanceJustification: z.string().optional(),
-  riskScore: z.nullable(FindingRiskScore$outboundSchema).optional(),
-  serviceAccountMisclassification: z.nullable(
-    ServiceAccountMisclassificationType$outboundSchema,
-  ).optional(),
-  serviceAccountMisclassificationEvidence: z.nullable(
-    ServiceAccountMisclassificationEvidence$outboundSchema,
-  ).optional(),
-  serviceAccountUnowned: z.nullable(ServiceAccountUnownedType$outboundSchema)
-    .optional(),
-  severity: FindingSeverity$outboundSchema.optional(),
-  shadowApp: z.nullable(ShadowAppType$outboundSchema).optional(),
-  shadowMcp: z.nullable(ShadowMcpType$outboundSchema).optional(),
-  shadowMcpEvidence: z.nullable(ShadowMcpEvidence$outboundSchema).optional(),
-  similarUsernameMatch: z.nullable(SimilarUsernameMatchType$outboundSchema)
-    .optional(),
-  similarUsernameMatchEvidence: z.nullable(
-    SimilarUsernameMatchEvidence$outboundSchema,
-  ).optional(),
-  snoozeReason: z.string().optional(),
-  snoozeUntil: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  sourceDetectorId: z.string().optional(),
-  sourceKind: SourceKind$outboundSchema.optional(),
-  state: FindingState$outboundSchema.optional(),
-  stateUpdatedById: z.string().optional(),
-  suppressReason: z.string().optional(),
-  taskId: z.string().optional(),
-  tenantTarget: z.nullable(TenantTarget$outboundSchema).optional(),
-  unusedSecret: z.nullable(UnusedSecretType$outboundSchema).optional(),
-  unusedSecretEvidence: z.nullable(UnusedSecretEvidence$outboundSchema)
-    .optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  usageResourceTarget: z.nullable(UsageResourceRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessConflict: z.nullable(AccessConflictType$outboundSchema).optional(),
+    accessConflictEvidence: z.nullable(AccessConflictEvidence$outboundSchema)
+      .optional(),
+    annotations: z.record(z.string()).optional(),
+    appId: z.string().optional(),
+    appResourceTarget: z.nullable(AppResourceTarget$outboundSchema).optional(),
+    appUserTarget: z.nullable(AppUserTarget$outboundSchema).optional(),
+    assignedOwner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
+    assigneeIdentityUserId: z.string().optional(),
+    computedOwner: z.nullable(FindingOwnerRef$outboundSchema).optional(),
+    connectorAnomalyDetectionDisabled: z.nullable(
+      ConnectorAnomalyDetectionDisabledType$outboundSchema,
+    ).optional(),
+    connectorHostOutdated: z.nullable(ConnectorHostOutdatedType$outboundSchema)
+      .optional(),
+    connectorHostOutdatedEvidence: z.nullable(
+      ConnectorHostOutdatedEvidence$outboundSchema,
+    ).optional(),
+    connectorSyncFailing: z.nullable(ConnectorSyncFailingType$outboundSchema)
+      .optional(),
+    connectorSyncFailingEvidence: z.nullable(
+      ConnectorSyncFailingEvidence$outboundSchema,
+    ).optional(),
+    connectorTarget: z.nullable(ConnectorTarget$outboundSchema).optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    credentialExpiring: z.nullable(CredentialExpiringType$outboundSchema)
+      .optional(),
+    credentialExpiringEvidence: z.nullable(
+      CredentialExpiringEvidence$outboundSchema,
+    ).optional(),
+    credentialPubliclyExposed: z.nullable(
+      CredentialPubliclyExposedType$outboundSchema,
+    ).optional(),
+    credentialPubliclyExposedEvidence: z.nullable(
+      CredentialPubliclyExposedEvidence$outboundSchema,
+    ).optional(),
+    custom: z.nullable(CustomFindingType$outboundSchema).optional(),
+    customSubType: z.string().optional(),
+    customTags: z.record(z.string()).optional(),
+    deactivatedOwner: z.nullable(DeactivatedOwnerType$outboundSchema)
+      .optional(),
+    deactivatedOwnerEvidence: z.nullable(
+      DeactivatedOwnerEvidence$outboundSchema,
+    ).optional(),
+    decoyCredentialUsed: z.nullable(DecoyCredentialUsedType$outboundSchema)
+      .optional(),
+    decoyPubliclyExposed: z.nullable(DecoyPubliclyExposedType$outboundSchema)
+      .optional(),
+    decoyPubliclyExposedEvidence: z.nullable(
+      DecoyPubliclyExposedEvidence$outboundSchema,
+    ).optional(),
+    decoyTarget: z.nullable(DecoyTarget$outboundSchema).optional(),
+    dedupKeyParts: z.nullable(z.array(z.string())).optional(),
+    description: z.string().optional(),
+    edgeFinding: z.nullable(EdgeFindingType$outboundSchema).optional(),
+    edgeFindingEvidence: z.nullable(EdgeFindingEvidence$outboundSchema)
+      .optional(),
+    fingerprint: z.string().optional(),
+    firstObservedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    id: z.string().optional(),
+    identityUserTarget: z.nullable(IdentityUserTarget$outboundSchema)
+      .optional(),
+    lastAppearedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    lastObservedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    mcpGatewayToolCallRisk: z.nullable(
+      McpGatewayToolCallRiskType$outboundSchema,
+    ).optional(),
+    mcpGatewayToolCallRiskEvidence: z.nullable(
+      McpGatewayToolCallRiskEvidence$outboundSchema,
+    ).optional(),
+    nhiUnowned: z.nullable(NhiUnownedType$outboundSchema).optional(),
+    nhiUnownedEvidence: z.nullable(NhiUnownedEvidence$outboundSchema)
+      .optional(),
+    objectPermissions: z.nullable(UserActorObjectPermissions$outboundSchema)
+      .optional(),
+    recurrenceCount: z.number().int().optional(),
+    remediationDescription: z.string().optional(),
+    resolvedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    riskAcceptanceExpiresAt: z.nullable(
+      z.date().transform(v => v.toISOString()),
+    ).optional(),
+    riskAcceptanceJustification: z.string().optional(),
+    riskScore: z.nullable(FindingRiskScore$outboundSchema).optional(),
+    serviceAccountMisclassification: z.nullable(
+      ServiceAccountMisclassificationType$outboundSchema,
+    ).optional(),
+    serviceAccountMisclassificationEvidence: z.nullable(
+      ServiceAccountMisclassificationEvidence$outboundSchema,
+    ).optional(),
+    serviceAccountUnowned: z.nullable(ServiceAccountUnownedType$outboundSchema)
+      .optional(),
+    severity: FindingSeverity$outboundSchema.optional(),
+    shadowApp: z.nullable(ShadowAppType$outboundSchema).optional(),
+    shadowMcp: z.nullable(ShadowMcpType$outboundSchema).optional(),
+    shadowMcpEvidence: z.nullable(ShadowMcpEvidence$outboundSchema).optional(),
+    similarUsernameMatch: z.nullable(SimilarUsernameMatchType$outboundSchema)
+      .optional(),
+    similarUsernameMatchEvidence: z.nullable(
+      SimilarUsernameMatchEvidence$outboundSchema,
+    ).optional(),
+    snoozeReason: z.string().optional(),
+    snoozeUntil: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    sourceDetectorId: z.string().optional(),
+    sourceKind: SourceKind$outboundSchema.optional(),
+    state: FindingState$outboundSchema.optional(),
+    stateUpdatedById: z.string().optional(),
+    suppressReason: z.string().optional(),
+    taskId: z.string().optional(),
+    tenantTarget: z.nullable(TenantTarget$outboundSchema).optional(),
+    unusedSecret: z.nullable(UnusedSecretType$outboundSchema).optional(),
+    unusedSecretEvidence: z.nullable(UnusedSecretEvidence$outboundSchema)
+      .optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    usageResourceTarget: z.nullable(UsageResourceRef$outboundSchema).optional(),
+  })
+);
 
 export function findingToJSON(finding: Finding): string {
   return JSON.stringify(Finding$outboundSchema.parse(finding));

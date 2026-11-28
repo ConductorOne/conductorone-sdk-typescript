@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,16 +54,19 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteProviderReq
     C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteProviderRequest$Outbound,
     z.ZodTypeDef,
     C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteProviderRequest
-  > = z.object({
-    id: z.string(),
-    workloadFederationServiceDeleteProviderRequest: shared
-      .WorkloadFederationServiceDeleteProviderRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      workloadFederationServiceDeleteProviderRequest:
-        "WorkloadFederationServiceDeleteProviderRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      workloadFederationServiceDeleteProviderRequest: shared
+        .WorkloadFederationServiceDeleteProviderRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        workloadFederationServiceDeleteProviderRequest:
+          "WorkloadFederationServiceDeleteProviderRequest",
+      });
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceDeleteProviderRequestToJSON(
   c1ApiWorkloadFederationV1WorkloadFederationServiceDeleteProviderRequest:
@@ -83,21 +86,24 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteProviderRes
     C1ApiWorkloadFederationV1WorkloadFederationServiceDeleteProviderResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    WorkloadFederationServiceDeleteProviderResponse: shared
-      .WorkloadFederationServiceDeleteProviderResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "WorkloadFederationServiceDeleteProviderResponse":
-        "workloadFederationServiceDeleteProviderResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      WorkloadFederationServiceDeleteProviderResponse: shared
+        .WorkloadFederationServiceDeleteProviderResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "WorkloadFederationServiceDeleteProviderResponse":
+          "workloadFederationServiceDeleteProviderResponse",
+      });
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceDeleteProviderResponseFromJSON(
   jsonString: string,

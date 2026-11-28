@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1APIIamV1ModelAPIKeyServiceRevokeRequest$outboundSchema:
     C1APIIamV1ModelAPIKeyServiceRevokeRequest$Outbound,
     z.ZodTypeDef,
     C1APIIamV1ModelAPIKeyServiceRevokeRequest
-  > = z.object({
-    id: z.string(),
-    modelAPIKeyServiceRevokeRequest: shared
-      .ModelAPIKeyServiceRevokeRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      modelAPIKeyServiceRevokeRequest: "ModelAPIKeyServiceRevokeRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      modelAPIKeyServiceRevokeRequest: shared
+        .ModelAPIKeyServiceRevokeRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        modelAPIKeyServiceRevokeRequest: "ModelAPIKeyServiceRevokeRequest",
+      });
+    })
+  );
 
 export function c1APIIamV1ModelAPIKeyServiceRevokeRequestToJSON(
   c1APIIamV1ModelAPIKeyServiceRevokeRequest:
@@ -75,20 +77,23 @@ export function c1APIIamV1ModelAPIKeyServiceRevokeRequestToJSON(
 /** @internal */
 export const C1APIIamV1ModelAPIKeyServiceRevokeResponse$inboundSchema:
   z.ZodType<C1APIIamV1ModelAPIKeyServiceRevokeResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      ModelAPIKeyServiceRevokeResponse: shared
-        .ModelAPIKeyServiceRevokeResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "ModelAPIKeyServiceRevokeResponse": "modelAPIKeyServiceRevokeResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        ModelAPIKeyServiceRevokeResponse: shared
+          .ModelAPIKeyServiceRevokeResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "ModelAPIKeyServiceRevokeResponse":
+            "modelAPIKeyServiceRevokeResponse",
+        });
+      })
+    );
 
 export function c1APIIamV1ModelAPIKeyServiceRevokeResponseFromJSON(
   jsonString: string,

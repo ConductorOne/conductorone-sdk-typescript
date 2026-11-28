@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -66,7 +67,9 @@ export const WellKnownClients$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   WellKnownClients
-> = openEnums.outboundSchema(WellKnownClients);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(WellKnownClients)
+);
 
 /** @internal */
 export type ExternalClientSearchServiceSearchRequest$Outbound = {
@@ -83,15 +86,17 @@ export const ExternalClientSearchServiceSearchRequest$outboundSchema: z.ZodType<
   ExternalClientSearchServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   ExternalClientSearchServiceSearchRequest
-> = z.object({
-  clientIdUrls: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  users: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-  wellKnownClients: z.nullable(z.array(WellKnownClients$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientIdUrls: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    users: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+    wellKnownClients: z.nullable(z.array(WellKnownClients$outboundSchema))
+      .optional(),
+  })
+);
 
 export function externalClientSearchServiceSearchRequestToJSON(
   externalClientSearchServiceSearchRequest:

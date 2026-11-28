@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FundsAppScope, FundsAppScope$inboundSchema } from "./fundsappscope.js";
@@ -44,12 +44,14 @@ export const FundsAccountScope$inboundSchema: z.ZodType<
   FundsAccountScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  app: z.nullable(FundsAppScope$inboundSchema).optional(),
-  subject: z.nullable(FundsSubjectScope$inboundSchema).optional(),
-  subjectApp: z.nullable(FundsSubjectAppScope$inboundSchema).optional(),
-  tenant: z.nullable(FundsTenantScope$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    app: z.nullable(FundsAppScope$inboundSchema).optional(),
+    subject: z.nullable(FundsSubjectScope$inboundSchema).optional(),
+    subjectApp: z.nullable(FundsSubjectAppScope$inboundSchema).optional(),
+    tenant: z.nullable(FundsTenantScope$inboundSchema).optional(),
+  })
+);
 
 export function fundsAccountScopeFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The app resource expand mask lets you get information about related objects from the request.
@@ -24,9 +25,11 @@ export const AppResourceExpandMask$outboundSchema: z.ZodType<
   AppResourceExpandMask$Outbound,
   z.ZodTypeDef,
   AppResourceExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function appResourceExpandMaskToJSON(
   appResourceExpandMask: AppResourceExpandMask,

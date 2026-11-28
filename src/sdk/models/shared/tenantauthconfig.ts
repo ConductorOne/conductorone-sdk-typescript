@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -206,52 +206,58 @@ export const ProviderType$inboundSchema: z.ZodType<
   ProviderType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ProviderType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ProviderType));
 
 /** @internal */
 export const TenantAuthConfigStatus$inboundSchema: z.ZodType<
   TenantAuthConfigStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TenantAuthConfigStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TenantAuthConfigStatus)
+);
 /** @internal */
 export const TenantAuthConfigStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TenantAuthConfigStatus
-> = openEnums.outboundSchema(TenantAuthConfigStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TenantAuthConfigStatus)
+);
 
 /** @internal */
 export const TenantAuthConfig$inboundSchema: z.ZodType<
   TenantAuthConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bootstrapDomains: z.nullable(z.array(z.string())).optional(),
-  c1Local: z.nullable(AuthConfigC1Local$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deprecationDeadline: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deprecationMessage: z.string().optional(),
-  displayName: z.string().optional(),
-  google: z.nullable(AuthConfigGoogle$inboundSchema).optional(),
-  id: z.string().optional(),
-  isDefaultBootstrap: z.boolean().optional(),
-  jumpcloud: z.nullable(AuthConfigJumpCloud$inboundSchema).optional(),
-  microsoft: z.nullable(AuthConfigMicrosoft$inboundSchema).optional(),
-  oidc: z.nullable(AuthConfigOIDC$inboundSchema).optional(),
-  okta: z.nullable(AuthConfigOkta$inboundSchema).optional(),
-  onelogin: z.nullable(AuthConfigOneLogin$inboundSchema).optional(),
-  pingone: z.nullable(AuthConfigPingOne$inboundSchema).optional(),
-  providerType: ProviderType$inboundSchema.optional(),
-  status: TenantAuthConfigStatus$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bootstrapDomains: z.nullable(z.array(z.string())).optional(),
+    c1Local: z.nullable(AuthConfigC1Local$inboundSchema).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deprecationDeadline: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deprecationMessage: z.string().optional(),
+    displayName: z.string().optional(),
+    google: z.nullable(AuthConfigGoogle$inboundSchema).optional(),
+    id: z.string().optional(),
+    isDefaultBootstrap: z.boolean().optional(),
+    jumpcloud: z.nullable(AuthConfigJumpCloud$inboundSchema).optional(),
+    microsoft: z.nullable(AuthConfigMicrosoft$inboundSchema).optional(),
+    oidc: z.nullable(AuthConfigOIDC$inboundSchema).optional(),
+    okta: z.nullable(AuthConfigOkta$inboundSchema).optional(),
+    onelogin: z.nullable(AuthConfigOneLogin$inboundSchema).optional(),
+    pingone: z.nullable(AuthConfigPingOne$inboundSchema).optional(),
+    providerType: ProviderType$inboundSchema.optional(),
+    status: TenantAuthConfigStatus$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function tenantAuthConfigFromJSON(
   jsonString: string,
@@ -287,24 +293,26 @@ export const TenantAuthConfigInput$outboundSchema: z.ZodType<
   TenantAuthConfigInput$Outbound,
   z.ZodTypeDef,
   TenantAuthConfigInput
-> = z.object({
-  bootstrapDomains: z.nullable(z.array(z.string())).optional(),
-  c1Local: z.nullable(AuthConfigC1Local$outboundSchema).optional(),
-  deprecationDeadline: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  deprecationMessage: z.string().optional(),
-  displayName: z.string().optional(),
-  google: z.nullable(AuthConfigGoogleInput$outboundSchema).optional(),
-  id: z.string().optional(),
-  isDefaultBootstrap: z.boolean().optional(),
-  jumpcloud: z.nullable(AuthConfigJumpCloud$outboundSchema).optional(),
-  microsoft: z.nullable(AuthConfigMicrosoft$outboundSchema).optional(),
-  oidc: z.nullable(AuthConfigOIDC$outboundSchema).optional(),
-  okta: z.nullable(AuthConfigOkta$outboundSchema).optional(),
-  onelogin: z.nullable(AuthConfigOneLogin$outboundSchema).optional(),
-  pingone: z.nullable(AuthConfigPingOne$outboundSchema).optional(),
-  status: TenantAuthConfigStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bootstrapDomains: z.nullable(z.array(z.string())).optional(),
+    c1Local: z.nullable(AuthConfigC1Local$outboundSchema).optional(),
+    deprecationDeadline: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    deprecationMessage: z.string().optional(),
+    displayName: z.string().optional(),
+    google: z.nullable(AuthConfigGoogleInput$outboundSchema).optional(),
+    id: z.string().optional(),
+    isDefaultBootstrap: z.boolean().optional(),
+    jumpcloud: z.nullable(AuthConfigJumpCloud$outboundSchema).optional(),
+    microsoft: z.nullable(AuthConfigMicrosoft$outboundSchema).optional(),
+    oidc: z.nullable(AuthConfigOIDC$outboundSchema).optional(),
+    okta: z.nullable(AuthConfigOkta$outboundSchema).optional(),
+    onelogin: z.nullable(AuthConfigOneLogin$outboundSchema).optional(),
+    pingone: z.nullable(AuthConfigPingOne$outboundSchema).optional(),
+    status: TenantAuthConfigStatus$outboundSchema.optional(),
+  })
+);
 
 export function tenantAuthConfigInputToJSON(
   tenantAuthConfigInput: TenantAuthConfigInput,

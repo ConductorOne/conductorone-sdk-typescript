@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerServiceDiscoverOIDCEndpointsRequest fetches the OpenID Connect discovery
@@ -31,9 +32,11 @@ export const MCPServerServiceDiscoverOIDCEndpointsRequest$outboundSchema:
     MCPServerServiceDiscoverOIDCEndpointsRequest$Outbound,
     z.ZodTypeDef,
     MCPServerServiceDiscoverOIDCEndpointsRequest
-  > = z.object({
-    issuerUrl: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      issuerUrl: z.string().optional(),
+    })
+  );
 
 export function mcpServerServiceDiscoverOIDCEndpointsRequestToJSON(
   mcpServerServiceDiscoverOIDCEndpointsRequest:

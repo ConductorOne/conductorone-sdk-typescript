@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiSecretsV1PaperSecretAdminServiceGetRequest$outboundSchema:
     C1ApiSecretsV1PaperSecretAdminServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSecretsV1PaperSecretAdminServiceGetRequest
-  > = z.object({
-    vaultId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      vaultId: "vault_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      vaultId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        vaultId: "vault_id",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretAdminServiceGetRequestToJSON(
   c1ApiSecretsV1PaperSecretAdminServiceGetRequest:
@@ -70,21 +72,23 @@ export const C1ApiSecretsV1PaperSecretAdminServiceGetResponse$inboundSchema:
     C1ApiSecretsV1PaperSecretAdminServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PaperSecretAdminServiceGetResponse: shared
-      .PaperSecretAdminServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PaperSecretAdminServiceGetResponse":
-        "paperSecretAdminServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PaperSecretAdminServiceGetResponse: shared
+        .PaperSecretAdminServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PaperSecretAdminServiceGetResponse":
+          "paperSecretAdminServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiSecretsV1PaperSecretAdminServiceGetResponseFromJSON(
   jsonString: string,

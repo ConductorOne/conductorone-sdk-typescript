@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,14 +47,17 @@ export const AccessProfileComponentTarget$inboundSchema: z.ZodType<
   AccessProfileComponentTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessProfile: z.nullable(AccessProfileRef$inboundSchema).optional(),
-  compositionEntitlement: z.nullable(AppEntitlementRef$inboundSchema)
-    .optional(),
-  membershipEntitlement: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-  membershipRule: z.nullable(AccessProfileMembershipRule$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfile: z.nullable(AccessProfileRef$inboundSchema).optional(),
+    compositionEntitlement: z.nullable(AppEntitlementRef$inboundSchema)
+      .optional(),
+    membershipEntitlement: z.nullable(AppEntitlementRef$inboundSchema)
+      .optional(),
+    membershipRule: z.nullable(AccessProfileMembershipRule$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type AccessProfileComponentTarget$Outbound = {
   accessProfile?: AccessProfileRef$Outbound | null | undefined;
@@ -68,15 +71,17 @@ export const AccessProfileComponentTarget$outboundSchema: z.ZodType<
   AccessProfileComponentTarget$Outbound,
   z.ZodTypeDef,
   AccessProfileComponentTarget
-> = z.object({
-  accessProfile: z.nullable(AccessProfileRef$outboundSchema).optional(),
-  compositionEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
-    .optional(),
-  membershipEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
-    .optional(),
-  membershipRule: z.nullable(AccessProfileMembershipRule$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfile: z.nullable(AccessProfileRef$outboundSchema).optional(),
+    compositionEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
+      .optional(),
+    membershipEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
+      .optional(),
+    membershipRule: z.nullable(AccessProfileMembershipRule$outboundSchema)
+      .optional(),
+  })
+);
 
 export function accessProfileComponentTargetToJSON(
   accessProfileComponentTarget: AccessProfileComponentTarget,

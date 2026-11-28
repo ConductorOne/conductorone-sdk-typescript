@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskGrantSource,
   TaskGrantSource$Outbound,
@@ -26,9 +27,11 @@ export const TaskTypeGrantInput$outboundSchema: z.ZodType<
   TaskTypeGrantInput$Outbound,
   z.ZodTypeDef,
   TaskTypeGrantInput
-> = z.object({
-  source: z.nullable(TaskGrantSource$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: z.nullable(TaskGrantSource$outboundSchema).optional(),
+  })
+);
 
 export function taskTypeGrantInputToJSON(
   taskTypeGrantInput: TaskTypeGrantInput,

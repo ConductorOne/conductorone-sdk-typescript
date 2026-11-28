@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const CommentOnRequestPreference$inboundSchema: z.ZodType<
   CommentOnRequestPreference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-  locked: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    locked: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type CommentOnRequestPreference$Outbound = {
   enabled?: boolean | undefined;
@@ -41,10 +43,12 @@ export const CommentOnRequestPreference$outboundSchema: z.ZodType<
   CommentOnRequestPreference$Outbound,
   z.ZodTypeDef,
   CommentOnRequestPreference
-> = z.object({
-  enabled: z.boolean().optional(),
-  locked: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    locked: z.boolean().optional(),
+  })
+);
 
 export function commentOnRequestPreferenceToJSON(
   commentOnRequestPreference: CommentOnRequestPreference,

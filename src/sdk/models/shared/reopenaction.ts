@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ReopenAction parameters for UpdateFindingState.
@@ -17,7 +18,7 @@ export const ReopenAction$outboundSchema: z.ZodType<
   ReopenAction$Outbound,
   z.ZodTypeDef,
   ReopenAction
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function reopenActionToJSON(reopenAction: ReopenAction): string {
   return JSON.stringify(ReopenAction$outboundSchema.parse(reopenAction));

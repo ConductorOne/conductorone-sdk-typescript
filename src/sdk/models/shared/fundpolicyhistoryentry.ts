@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FundPolicy, FundPolicy$inboundSchema } from "./fundpolicy.js";
@@ -25,10 +25,12 @@ export const FundPolicyHistoryEntry$inboundSchema: z.ZodType<
   FundPolicyHistoryEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metadata: z.nullable(HistoryEntryMetadata$inboundSchema).optional(),
-  snapshot: z.nullable(FundPolicy$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metadata: z.nullable(HistoryEntryMetadata$inboundSchema).optional(),
+    snapshot: z.nullable(FundPolicy$inboundSchema).optional(),
+  })
+);
 
 export function fundPolicyHistoryEntryFromJSON(
   jsonString: string,

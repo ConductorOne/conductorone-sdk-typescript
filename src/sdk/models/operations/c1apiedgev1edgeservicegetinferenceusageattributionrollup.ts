@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -79,8 +79,10 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupQueryParamD
     string,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupQueryParamDimension
-  > = openEnums.outboundSchema(
-    C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupQueryParamDimension,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupQueryParamDimension,
+    )
   );
 
 /** @internal */
@@ -98,18 +100,20 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupRequest$out
     C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupRequest
-  > = z.object({
-    dimension:
-      C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupQueryParamDimension$outboundSchema
-        .optional(),
-    pageSize: z.number().int().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      dimension:
+        C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupQueryParamDimension$outboundSchema
+          .optional(),
+      pageSize: z.number().int().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupRequestToJSON(
   c1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupRequest:
@@ -127,22 +131,24 @@ export const C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupResponse$in
     C1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceGetInferenceUsageAttributionRollupResponse: shared
-      .EdgeServiceGetInferenceUsageAttributionRollupResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceGetInferenceUsageAttributionRollupResponse":
-        "edgeServiceGetInferenceUsageAttributionRollupResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceGetInferenceUsageAttributionRollupResponse: shared
+        .EdgeServiceGetInferenceUsageAttributionRollupResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceGetInferenceUsageAttributionRollupResponse":
+          "edgeServiceGetInferenceUsageAttributionRollupResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceGetInferenceUsageAttributionRollupResponseFromJSON(
   jsonString: string,

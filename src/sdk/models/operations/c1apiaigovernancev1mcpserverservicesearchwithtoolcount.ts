@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,17 +52,19 @@ export const C1ApiAiGovernanceV1MCPServerServiceSearchWithToolCountRequest$outbo
     C1ApiAiGovernanceV1MCPServerServiceSearchWithToolCountRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPServerServiceSearchWithToolCountRequest
-  > = z.object({
-    appId: z.string(),
-    mcpServerServiceSearchWithToolCountRequest: shared
-      .MCPServerServiceSearchWithToolCountRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      mcpServerServiceSearchWithToolCountRequest:
-        "MCPServerServiceSearchWithToolCountRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      mcpServerServiceSearchWithToolCountRequest: shared
+        .MCPServerServiceSearchWithToolCountRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        mcpServerServiceSearchWithToolCountRequest:
+          "MCPServerServiceSearchWithToolCountRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceSearchWithToolCountRequestToJSON(
   c1ApiAiGovernanceV1MCPServerServiceSearchWithToolCountRequest:
@@ -80,21 +82,23 @@ export const C1ApiAiGovernanceV1MCPServerServiceSearchWithToolCountResponse$inbo
     C1ApiAiGovernanceV1MCPServerServiceSearchWithToolCountResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPServerServiceSearchWithToolCountResponse: shared
-      .MCPServerServiceSearchWithToolCountResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPServerServiceSearchWithToolCountResponse":
-        "mcpServerServiceSearchWithToolCountResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPServerServiceSearchWithToolCountResponse: shared
+        .MCPServerServiceSearchWithToolCountResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPServerServiceSearchWithToolCountResponse":
+          "mcpServerServiceSearchWithToolCountResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPServerServiceSearchWithToolCountResponseFromJSON(
   jsonString: string,

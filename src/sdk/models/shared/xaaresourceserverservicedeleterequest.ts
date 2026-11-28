@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAResourceServerServiceDeleteRequest deletes a resource server (soft delete).
@@ -17,7 +18,7 @@ export const XAAResourceServerServiceDeleteRequest$outboundSchema: z.ZodType<
   XAAResourceServerServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   XAAResourceServerServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function xaaResourceServerServiceDeleteRequestToJSON(
   xaaResourceServerServiceDeleteRequest: XAAResourceServerServiceDeleteRequest,

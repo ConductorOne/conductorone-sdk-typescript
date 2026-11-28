@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,15 +48,17 @@ export const C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceGetRequest$outb
     C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceGetRequest
-  > = z.object({
-    xaaResourceServerId: z.string(),
-    clientKey: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      xaaResourceServerId: "xaa_resource_server_id",
-      clientKey: "client_key",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      xaaResourceServerId: z.string(),
+      clientKey: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        xaaResourceServerId: "xaa_resource_server_id",
+        clientKey: "client_key",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAClientAudienceMappingServiceGetRequestToJSON(
   c1ApiCrossAppAccessV1XAAClientAudienceMappingServiceGetRequest:
@@ -74,21 +76,23 @@ export const C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceGetResponse$inb
     C1ApiCrossAppAccessV1XAAClientAudienceMappingServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAClientAudienceMappingServiceGetResponse: shared
-      .XAAClientAudienceMappingServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAClientAudienceMappingServiceGetResponse":
-        "xaaClientAudienceMappingServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAClientAudienceMappingServiceGetResponse: shared
+        .XAAClientAudienceMappingServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAClientAudienceMappingServiceGetResponse":
+          "xaaClientAudienceMappingServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAClientAudienceMappingServiceGetResponseFromJSON(
   jsonString: string,

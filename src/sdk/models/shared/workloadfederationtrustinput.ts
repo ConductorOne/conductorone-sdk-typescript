@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   C1EdgeServiceInput,
   C1EdgeServiceInput$Outbound,
@@ -72,16 +73,18 @@ export const WorkloadFederationTrustInput$outboundSchema: z.ZodType<
   WorkloadFederationTrustInput$Outbound,
   z.ZodTypeDef,
   WorkloadFederationTrustInput
-> = z.object({
-  allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-  c1EdgeService: z.nullable(C1EdgeServiceInput$outboundSchema).optional(),
-  conditionExpression: z.string().optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  passthroughClaims: z.nullable(z.array(z.string())).optional(),
-  scopedRoleIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
+    c1EdgeService: z.nullable(C1EdgeServiceInput$outboundSchema).optional(),
+    conditionExpression: z.string().optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    passthroughClaims: z.nullable(z.array(z.string())).optional(),
+    scopedRoleIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function workloadFederationTrustInputToJSON(
   workloadFederationTrustInput: WorkloadFederationTrustInput,

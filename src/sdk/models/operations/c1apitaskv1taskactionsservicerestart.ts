@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiTaskV1TaskActionsServiceRestartRequest$outboundSchema:
     C1ApiTaskV1TaskActionsServiceRestartRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceRestartRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceRestartRequest: shared
-      .TaskActionsServiceRestartRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceRestartRequest: "TaskActionsServiceRestartRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceRestartRequest: shared
+        .TaskActionsServiceRestartRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceRestartRequest: "TaskActionsServiceRestartRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceRestartRequestToJSON(
   c1ApiTaskV1TaskActionsServiceRestartRequest:
@@ -79,20 +81,23 @@ export const C1ApiTaskV1TaskActionsServiceRestartResponse$inboundSchema:
     C1ApiTaskV1TaskActionsServiceRestartResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskActionsServiceRestartResponse: shared
-      .TaskActionsServiceRestartResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskActionsServiceRestartResponse": "taskActionsServiceRestartResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskActionsServiceRestartResponse: shared
+        .TaskActionsServiceRestartResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskActionsServiceRestartResponse":
+          "taskActionsServiceRestartResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceRestartResponseFromJSON(
   jsonString: string,

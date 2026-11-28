@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,17 +52,19 @@ export const C1ApiLocalDirectoryV1LocalDirectoryConfigServiceUpdateRequest$outbo
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceUpdateRequest
-  > = z.object({
-    appId: z.string(),
-    localDirectoryConfigServiceUpdateRequest: shared
-      .LocalDirectoryConfigServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      localDirectoryConfigServiceUpdateRequest:
-        "LocalDirectoryConfigServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      localDirectoryConfigServiceUpdateRequest: shared
+        .LocalDirectoryConfigServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        localDirectoryConfigServiceUpdateRequest:
+          "LocalDirectoryConfigServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalDirectoryConfigServiceUpdateRequestToJSON(
   c1ApiLocalDirectoryV1LocalDirectoryConfigServiceUpdateRequest:
@@ -80,21 +82,23 @@ export const C1ApiLocalDirectoryV1LocalDirectoryConfigServiceUpdateResponse$inbo
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    LocalDirectoryConfigServiceUpdateResponse: shared
-      .LocalDirectoryConfigServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "LocalDirectoryConfigServiceUpdateResponse":
-        "localDirectoryConfigServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      LocalDirectoryConfigServiceUpdateResponse: shared
+        .LocalDirectoryConfigServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "LocalDirectoryConfigServiceUpdateResponse":
+          "localDirectoryConfigServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalDirectoryConfigServiceUpdateResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,17 +52,19 @@ export const C1ApiLocalDirectoryV1LocalDirectoryConfigServiceDeleteRequest$outbo
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceDeleteRequest
-  > = z.object({
-    appId: z.string(),
-    localDirectoryConfigServiceDeleteRequest: shared
-      .LocalDirectoryConfigServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      localDirectoryConfigServiceDeleteRequest:
-        "LocalDirectoryConfigServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      localDirectoryConfigServiceDeleteRequest: shared
+        .LocalDirectoryConfigServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        localDirectoryConfigServiceDeleteRequest:
+          "LocalDirectoryConfigServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalDirectoryConfigServiceDeleteRequestToJSON(
   c1ApiLocalDirectoryV1LocalDirectoryConfigServiceDeleteRequest:
@@ -80,21 +82,23 @@ export const C1ApiLocalDirectoryV1LocalDirectoryConfigServiceDeleteResponse$inbo
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    LocalDirectoryConfigServiceDeleteResponse: shared
-      .LocalDirectoryConfigServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "LocalDirectoryConfigServiceDeleteResponse":
-        "localDirectoryConfigServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      LocalDirectoryConfigServiceDeleteResponse: shared
+        .LocalDirectoryConfigServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "LocalDirectoryConfigServiceDeleteResponse":
+          "localDirectoryConfigServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalDirectoryConfigServiceDeleteResponseFromJSON(
   jsonString: string,

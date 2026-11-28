@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * LocalDirectoryConfig is the public representation of a C1-managed local
@@ -66,16 +67,18 @@ export const LocalDirectoryConfigInput$outboundSchema: z.ZodType<
   LocalDirectoryConfigInput$Outbound,
   z.ZodTypeDef,
   LocalDirectoryConfigInput
-> = z.object({
-  allowSelfRegistration: z.boolean().optional(),
-  defaultProfileTypeId: z.string().optional(),
-  displayName: z.string().optional(),
-  invitationTtl: z.nullable(z.string()).optional(),
-  isDefault: z.boolean().optional(),
-  onboardingFlowId: z.string().optional(),
-  organizationId: z.string().optional(),
-  selfRegistrationDomains: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSelfRegistration: z.boolean().optional(),
+    defaultProfileTypeId: z.string().optional(),
+    displayName: z.string().optional(),
+    invitationTtl: z.nullable(z.string()).optional(),
+    isDefault: z.boolean().optional(),
+    onboardingFlowId: z.string().optional(),
+    organizationId: z.string().optional(),
+    selfRegistrationDomains: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function localDirectoryConfigInputToJSON(
   localDirectoryConfigInput: LocalDirectoryConfigInput,

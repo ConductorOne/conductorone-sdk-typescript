@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -106,7 +107,9 @@ export const SessionPolicyServiceCreateRequestPersistence$outboundSchema:
     string,
     z.ZodTypeDef,
     SessionPolicyServiceCreateRequestPersistence
-  > = openEnums.outboundSchema(SessionPolicyServiceCreateRequestPersistence);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(SessionPolicyServiceCreateRequestPersistence)
+  );
 
 /** @internal */
 export type SessionPolicyServiceCreateRequest$Outbound = {
@@ -137,27 +140,30 @@ export const SessionPolicyServiceCreateRequest$outboundSchema: z.ZodType<
   SessionPolicyServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   SessionPolicyServiceCreateRequest
-> = z.object({
-  accessTokenTtlSeconds: z.number().int().optional(),
-  continuousDefaultOutcome: z.nullable(
-    SessionPolicyPolicyOutcome$outboundSchema,
-  ).optional(),
-  continuousRules: z.nullable(z.array(SessionPolicyPolicyRule$outboundSchema))
-    .optional(),
-  credentialDurations: z.nullable(z.array(PerCredentialDuration$outboundSchema))
-    .optional(),
-  displayName: z.string(),
-  idleTimeoutSeconds: z.number().int().optional(),
-  maxSessionDurationSeconds: z.number().int().optional(),
-  persistence: SessionPolicyServiceCreateRequestPersistence$outboundSchema
-    .optional(),
-  priority: z.number().int().optional(),
-  refreshRotationWindowSeconds: z.number().int().optional(),
-  refreshTokenTtlSeconds: z.number().int().optional(),
-  rotateRefreshOnUse: z.boolean().optional(),
-  ssfReceive: z.nullable(SSFReceiverConfig$outboundSchema).optional(),
-  ssfTransmit: z.nullable(SSFTransmitterConfig$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessTokenTtlSeconds: z.number().int().optional(),
+    continuousDefaultOutcome: z.nullable(
+      SessionPolicyPolicyOutcome$outboundSchema,
+    ).optional(),
+    continuousRules: z.nullable(z.array(SessionPolicyPolicyRule$outboundSchema))
+      .optional(),
+    credentialDurations: z.nullable(
+      z.array(PerCredentialDuration$outboundSchema),
+    ).optional(),
+    displayName: z.string(),
+    idleTimeoutSeconds: z.number().int().optional(),
+    maxSessionDurationSeconds: z.number().int().optional(),
+    persistence: SessionPolicyServiceCreateRequestPersistence$outboundSchema
+      .optional(),
+    priority: z.number().int().optional(),
+    refreshRotationWindowSeconds: z.number().int().optional(),
+    refreshTokenTtlSeconds: z.number().int().optional(),
+    rotateRefreshOnUse: z.boolean().optional(),
+    ssfReceive: z.nullable(SSFReceiverConfig$outboundSchema).optional(),
+    ssfTransmit: z.nullable(SSFTransmitterConfig$outboundSchema).optional(),
+  })
+);
 
 export function sessionPolicyServiceCreateRequestToJSON(
   sessionPolicyServiceCreateRequest: SessionPolicyServiceCreateRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DatadogContext message.
@@ -43,14 +44,17 @@ export const DatadogContext$outboundSchema: z.ZodType<
   DatadogContext$Outbound,
   z.ZodTypeDef,
   DatadogContext
-> = z.object({
-  rumSessionId: z.string().optional(),
-  rumViewId: z.string().optional(),
-  rumViewName: z.string().optional(),
-  traceIds: z.nullable(z.array(z.string())).optional(),
-  windowEnd: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  windowStart: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rumSessionId: z.string().optional(),
+    rumViewId: z.string().optional(),
+    rumViewName: z.string().optional(),
+    traceIds: z.nullable(z.array(z.string())).optional(),
+    windowEnd: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    windowStart: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function datadogContextToJSON(datadogContext: DatadogContext): string {
   return JSON.stringify(DatadogContext$outboundSchema.parse(datadogContext));

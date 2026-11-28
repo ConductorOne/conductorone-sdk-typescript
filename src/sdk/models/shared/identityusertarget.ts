@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const IdentityUserTarget$inboundSchema: z.ZodType<
   IdentityUserTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  identityUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identityUserId: z.string().optional(),
+  })
+);
 /** @internal */
 export type IdentityUserTarget$Outbound = {
   identityUserId?: string | undefined;
@@ -35,9 +37,11 @@ export const IdentityUserTarget$outboundSchema: z.ZodType<
   IdentityUserTarget$Outbound,
   z.ZodTypeDef,
   IdentityUserTarget
-> = z.object({
-  identityUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identityUserId: z.string().optional(),
+  })
+);
 
 export function identityUserTargetToJSON(
   identityUserTarget: IdentityUserTarget,

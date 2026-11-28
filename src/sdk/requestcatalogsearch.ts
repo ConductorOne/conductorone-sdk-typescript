@@ -34,8 +34,8 @@ export class RequestCatalogSearch extends ClientSDK {
    * Search Entitlements
    *
    * @remarks
-   * Search request catalogs based on filters specified in the request body.
-   *  Rows are heavy (each entitlement carries its user bindings) — request a small page_size (≤10) and set expand_mask to only the paths you need; broad expansion inlines whole related objects and bloats the response.
+   * Search entitlements available to the signed-in user through access profiles, ordered by application ID and entitlement ID.
+   *  Results are paginated; continue with next_page_token even when a page is short or empty. Set expand_mask to only the related objects you need.
    */
   async searchEntitlements(
     request?:

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAClientAudienceMappingServiceCreateRequest creates a new mapping.
@@ -35,11 +36,13 @@ export const XAAClientAudienceMappingServiceCreateRequest$outboundSchema:
     XAAClientAudienceMappingServiceCreateRequest$Outbound,
     z.ZodTypeDef,
     XAAClientAudienceMappingServiceCreateRequest
-  > = z.object({
-    audienceClientId: z.string().optional(),
-    clientKey: z.string().optional(),
-    disabled: z.boolean().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      audienceClientId: z.string().optional(),
+      clientKey: z.string().optional(),
+      disabled: z.boolean().optional(),
+    })
+  );
 
 export function xaaClientAudienceMappingServiceCreateRequestToJSON(
   xaaClientAudienceMappingServiceCreateRequest:

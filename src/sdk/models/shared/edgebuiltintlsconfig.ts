@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,22 +50,28 @@ export const EdgeBuiltinTlsConfigKind$inboundSchema: z.ZodType<
   EdgeBuiltinTlsConfigKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeBuiltinTlsConfigKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeBuiltinTlsConfigKind)
+);
 /** @internal */
 export const EdgeBuiltinTlsConfigKind$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EdgeBuiltinTlsConfigKind
-> = openEnums.outboundSchema(EdgeBuiltinTlsConfigKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EdgeBuiltinTlsConfigKind)
+);
 
 /** @internal */
 export const EdgeBuiltinTlsConfig$inboundSchema: z.ZodType<
   EdgeBuiltinTlsConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: EdgeBuiltinTlsConfigKind$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: EdgeBuiltinTlsConfigKind$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type EdgeBuiltinTlsConfig$Outbound = {
   kind?: string | undefined;
@@ -76,9 +82,11 @@ export const EdgeBuiltinTlsConfig$outboundSchema: z.ZodType<
   EdgeBuiltinTlsConfig$Outbound,
   z.ZodTypeDef,
   EdgeBuiltinTlsConfig
-> = z.object({
-  kind: EdgeBuiltinTlsConfigKind$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: EdgeBuiltinTlsConfigKind$outboundSchema.optional(),
+  })
+);
 
 export function edgeBuiltinTlsConfigToJSON(
   edgeBuiltinTlsConfig: EdgeBuiltinTlsConfig,

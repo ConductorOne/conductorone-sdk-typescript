@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -42,9 +42,11 @@ export const C1ApiTaskV1TaskServiceGetRequest$outboundSchema: z.ZodType<
   C1ApiTaskV1TaskServiceGetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiTaskV1TaskServiceGetRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function c1ApiTaskV1TaskServiceGetRequestToJSON(
   c1ApiTaskV1TaskServiceGetRequest: C1ApiTaskV1TaskServiceGetRequest,
@@ -61,20 +63,22 @@ export const C1ApiTaskV1TaskServiceGetResponse$inboundSchema: z.ZodType<
   C1ApiTaskV1TaskServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  TaskServiceGetResponse: shared.TaskServiceGetResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "TaskServiceGetResponse": "taskServiceGetResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    TaskServiceGetResponse: shared.TaskServiceGetResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "TaskServiceGetResponse": "taskServiceGetResponse",
+    });
+  })
+);
 
 export function c1ApiTaskV1TaskServiceGetResponseFromJSON(
   jsonString: string,

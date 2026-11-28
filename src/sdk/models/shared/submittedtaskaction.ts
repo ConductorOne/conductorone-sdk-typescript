@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -86,29 +86,31 @@ export const ActionType$inboundSchema: z.ZodType<
   ActionType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ActionType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ActionType));
 
 /** @internal */
 export const SubmittedTaskAction$inboundSchema: z.ZodType<
   SubmittedTaskAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actionType: ActionType$inboundSchema.optional(),
-  bulkActionId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string().optional(),
-  policyStepId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actionType: ActionType$inboundSchema.optional(),
+    bulkActionId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string().optional(),
+    policyStepId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function submittedTaskActionFromJSON(
   jsonString: string,

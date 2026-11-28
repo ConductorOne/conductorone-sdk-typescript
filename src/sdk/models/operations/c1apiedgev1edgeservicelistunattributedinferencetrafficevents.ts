@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -73,7 +73,9 @@ export const AuthRejectionReason$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AuthRejectionReason
-> = openEnums.outboundSchema(AuthRejectionReason);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AuthRejectionReason)
+);
 
 /** @internal */
 export type C1ApiEdgeV1EdgeServiceListUnattributedInferenceTrafficEventsRequest$Outbound =
@@ -91,19 +93,21 @@ export const C1ApiEdgeV1EdgeServiceListUnattributedInferenceTrafficEventsRequest
     C1ApiEdgeV1EdgeServiceListUnattributedInferenceTrafficEventsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListUnattributedInferenceTrafficEventsRequest
-  > = z.object({
-    authRejectionReason: AuthRejectionReason$outboundSchema.optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      authRejectionReason: "auth_rejection_reason",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      authRejectionReason: AuthRejectionReason$outboundSchema.optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        authRejectionReason: "auth_rejection_reason",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListUnattributedInferenceTrafficEventsRequestToJSON(
   c1ApiEdgeV1EdgeServiceListUnattributedInferenceTrafficEventsRequest:
@@ -123,22 +127,24 @@ export const C1ApiEdgeV1EdgeServiceListUnattributedInferenceTrafficEventsRespons
     C1ApiEdgeV1EdgeServiceListUnattributedInferenceTrafficEventsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListUnattributedInferenceTrafficEventsResponse: shared
-      .EdgeServiceListUnattributedInferenceTrafficEventsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListUnattributedInferenceTrafficEventsResponse":
-        "edgeServiceListUnattributedInferenceTrafficEventsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListUnattributedInferenceTrafficEventsResponse: shared
+        .EdgeServiceListUnattributedInferenceTrafficEventsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListUnattributedInferenceTrafficEventsResponse":
+          "edgeServiceListUnattributedInferenceTrafficEventsResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListUnattributedInferenceTrafficEventsResponseFromJSON(
   jsonString: string,

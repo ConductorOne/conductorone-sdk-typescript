@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -42,17 +42,21 @@ export const AppUserStatusStatus$inboundSchema: z.ZodType<
   AppUserStatusStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AppUserStatusStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AppUserStatusStatus)
+);
 
 /** @internal */
 export const AppUserStatus$inboundSchema: z.ZodType<
   AppUserStatus,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  details: z.string().optional(),
-  status: AppUserStatusStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    details: z.string().optional(),
+    status: AppUserStatusStatus$inboundSchema.optional(),
+  })
+);
 
 export function appUserStatusFromJSON(
   jsonString: string,

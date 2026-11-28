@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,14 +25,17 @@ export const AppEntitlementServiceUpdateAutomationResponse$inboundSchema:
     AppEntitlementServiceUpdateAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    AppEntitlementAutomation: z.nullable(AppEntitlementAutomation$inboundSchema)
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "AppEntitlementAutomation": "appEntitlementAutomation",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      AppEntitlementAutomation: z.nullable(
+        AppEntitlementAutomation$inboundSchema,
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "AppEntitlementAutomation": "appEntitlementAutomation",
+      });
+    })
+  );
 
 export function appEntitlementServiceUpdateAutomationResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiEdgeV1EdgeServiceListInferenceCatalogRequest$outboundSchema:
     C1ApiEdgeV1EdgeServiceListInferenceCatalogRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListInferenceCatalogRequest
-  > = z.object({
-    includeDecisionOnly: z.boolean().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      includeDecisionOnly: "include_decision_only",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      includeDecisionOnly: z.boolean().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        includeDecisionOnly: "include_decision_only",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListInferenceCatalogRequestToJSON(
   c1ApiEdgeV1EdgeServiceListInferenceCatalogRequest:
@@ -70,21 +72,23 @@ export const C1ApiEdgeV1EdgeServiceListInferenceCatalogResponse$inboundSchema:
     C1ApiEdgeV1EdgeServiceListInferenceCatalogResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListInferenceCatalogResponse: shared
-      .EdgeServiceListInferenceCatalogResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListInferenceCatalogResponse":
-        "edgeServiceListInferenceCatalogResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListInferenceCatalogResponse: shared
+        .EdgeServiceListInferenceCatalogResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListInferenceCatalogResponse":
+          "edgeServiceListInferenceCatalogResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListInferenceCatalogResponseFromJSON(
   jsonString: string,

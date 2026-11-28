@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -57,22 +57,24 @@ export const C1ApiAppV1AppEntitlementsProxyCreateRequest$outboundSchema:
     C1ApiAppV1AppEntitlementsProxyCreateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsProxyCreateRequest
-  > = z.object({
-    srcAppId: z.string(),
-    srcAppEntitlementId: z.string(),
-    dstAppId: z.string(),
-    dstAppEntitlementId: z.string(),
-    createAppEntitlementProxyRequest: shared
-      .CreateAppEntitlementProxyRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      srcAppId: "src_app_id",
-      srcAppEntitlementId: "src_app_entitlement_id",
-      dstAppId: "dst_app_id",
-      dstAppEntitlementId: "dst_app_entitlement_id",
-      createAppEntitlementProxyRequest: "CreateAppEntitlementProxyRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      srcAppId: z.string(),
+      srcAppEntitlementId: z.string(),
+      dstAppId: z.string(),
+      dstAppEntitlementId: z.string(),
+      createAppEntitlementProxyRequest: shared
+        .CreateAppEntitlementProxyRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        srcAppId: "src_app_id",
+        srcAppEntitlementId: "src_app_entitlement_id",
+        dstAppId: "dst_app_id",
+        dstAppEntitlementId: "dst_app_entitlement_id",
+        createAppEntitlementProxyRequest: "CreateAppEntitlementProxyRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsProxyCreateRequestToJSON(
   c1ApiAppV1AppEntitlementsProxyCreateRequest:
@@ -91,20 +93,23 @@ export const C1ApiAppV1AppEntitlementsProxyCreateResponse$inboundSchema:
     C1ApiAppV1AppEntitlementsProxyCreateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    CreateAppEntitlementProxyResponse: shared
-      .CreateAppEntitlementProxyResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "CreateAppEntitlementProxyResponse": "createAppEntitlementProxyResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      CreateAppEntitlementProxyResponse: shared
+        .CreateAppEntitlementProxyResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "CreateAppEntitlementProxyResponse":
+          "createAppEntitlementProxyResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsProxyCreateResponseFromJSON(
   jsonString: string,

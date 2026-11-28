@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,12 +34,14 @@ export const ReviewSignatureConfig$inboundSchema: z.ZodType<
   ReviewSignatureConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  meaningOfSignature: z.string().optional(),
-  requireSignature: z.boolean().optional(),
-  stepUpProviderId: z.string().optional(),
-  tspUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meaningOfSignature: z.string().optional(),
+    requireSignature: z.boolean().optional(),
+    stepUpProviderId: z.string().optional(),
+    tspUrl: z.string().optional(),
+  })
+);
 /** @internal */
 export type ReviewSignatureConfig$Outbound = {
   meaningOfSignature?: string | undefined;
@@ -53,12 +55,14 @@ export const ReviewSignatureConfig$outboundSchema: z.ZodType<
   ReviewSignatureConfig$Outbound,
   z.ZodTypeDef,
   ReviewSignatureConfig
-> = z.object({
-  meaningOfSignature: z.string().optional(),
-  requireSignature: z.boolean().optional(),
-  stepUpProviderId: z.string().optional(),
-  tspUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    meaningOfSignature: z.string().optional(),
+    requireSignature: z.boolean().optional(),
+    stepUpProviderId: z.string().optional(),
+    tspUrl: z.string().optional(),
+  })
+);
 
 export function reviewSignatureConfigToJSON(
   reviewSignatureConfig: ReviewSignatureConfig,

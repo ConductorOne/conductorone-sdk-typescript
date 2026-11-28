@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Assignment, Assignment$inboundSchema } from "./assignment.js";
@@ -28,10 +28,12 @@ export const SessionPolicyServiceListAssignmentsResponse$inboundSchema:
     SessionPolicyServiceListAssignmentsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    assignments: z.nullable(z.array(Assignment$inboundSchema)).optional(),
-    nextPageToken: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      assignments: z.nullable(z.array(Assignment$inboundSchema)).optional(),
+      nextPageToken: z.string().optional(),
+    })
+  );
 
 export function sessionPolicyServiceListAssignmentsResponseFromJSON(
   jsonString: string,

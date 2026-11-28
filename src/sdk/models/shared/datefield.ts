@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -53,13 +53,15 @@ export const DateField$inboundSchema: z.ZodType<
   DateField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  defaultToToday: z.boolean().optional(),
-  maxDate: z.string().optional(),
-  maxDaysFromToday: z.nullable(z.number().int()).optional(),
-  minDate: z.string().optional(),
-  minDaysFromToday: z.nullable(z.number().int()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultToToday: z.boolean().optional(),
+    maxDate: z.string().optional(),
+    maxDaysFromToday: z.nullable(z.number().int()).optional(),
+    minDate: z.string().optional(),
+    minDaysFromToday: z.nullable(z.number().int()).optional(),
+  })
+);
 /** @internal */
 export type DateField$Outbound = {
   defaultToToday?: boolean | undefined;
@@ -74,13 +76,15 @@ export const DateField$outboundSchema: z.ZodType<
   DateField$Outbound,
   z.ZodTypeDef,
   DateField
-> = z.object({
-  defaultToToday: z.boolean().optional(),
-  maxDate: z.string().optional(),
-  maxDaysFromToday: z.nullable(z.number().int()).optional(),
-  minDate: z.string().optional(),
-  minDaysFromToday: z.nullable(z.number().int()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultToToday: z.boolean().optional(),
+    maxDate: z.string().optional(),
+    maxDaysFromToday: z.nullable(z.number().int()).optional(),
+    minDate: z.string().optional(),
+    minDaysFromToday: z.nullable(z.number().int()).optional(),
+  })
+);
 
 export function dateFieldToJSON(dateField: DateField): string {
   return JSON.stringify(DateField$outboundSchema.parse(dateField));

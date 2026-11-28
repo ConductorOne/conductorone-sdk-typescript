@@ -4,10 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type C1ApiLlmGatewayV1GatewayKeyServiceListRequest = {
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+};
 
 export type C1ApiLlmGatewayV1GatewayKeyServiceListResponse = {
   /**
@@ -29,25 +34,62 @@ export type C1ApiLlmGatewayV1GatewayKeyServiceListResponse = {
 };
 
 /** @internal */
+export type C1ApiLlmGatewayV1GatewayKeyServiceListRequest$Outbound = {
+  page_size?: number | undefined;
+  page_token?: string | undefined;
+};
+
+/** @internal */
+export const C1ApiLlmGatewayV1GatewayKeyServiceListRequest$outboundSchema:
+  z.ZodType<
+    C1ApiLlmGatewayV1GatewayKeyServiceListRequest$Outbound,
+    z.ZodTypeDef,
+    C1ApiLlmGatewayV1GatewayKeyServiceListRequest
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
+
+export function c1ApiLlmGatewayV1GatewayKeyServiceListRequestToJSON(
+  c1ApiLlmGatewayV1GatewayKeyServiceListRequest:
+    C1ApiLlmGatewayV1GatewayKeyServiceListRequest,
+): string {
+  return JSON.stringify(
+    C1ApiLlmGatewayV1GatewayKeyServiceListRequest$outboundSchema.parse(
+      c1ApiLlmGatewayV1GatewayKeyServiceListRequest,
+    ),
+  );
+}
+
+/** @internal */
 export const C1ApiLlmGatewayV1GatewayKeyServiceListResponse$inboundSchema:
   z.ZodType<
     C1ApiLlmGatewayV1GatewayKeyServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListGatewayKeysResponse: shared.ListGatewayKeysResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListGatewayKeysResponse": "listGatewayKeysResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListGatewayKeysResponse: shared.ListGatewayKeysResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListGatewayKeysResponse": "listGatewayKeysResponse",
+      });
+    })
+  );
 
 export function c1ApiLlmGatewayV1GatewayKeyServiceListResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -50,23 +50,29 @@ export const DecoyCredentialUsedTypeKind$inboundSchema: z.ZodType<
   DecoyCredentialUsedTypeKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DecoyCredentialUsedTypeKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DecoyCredentialUsedTypeKind)
+);
 /** @internal */
 export const DecoyCredentialUsedTypeKind$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DecoyCredentialUsedTypeKind
-> = openEnums.outboundSchema(DecoyCredentialUsedTypeKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DecoyCredentialUsedTypeKind)
+);
 
 /** @internal */
 export const DecoyCredentialUsedType$inboundSchema: z.ZodType<
   DecoyCredentialUsedType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  decoyId: z.string().optional(),
-  kind: DecoyCredentialUsedTypeKind$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decoyId: z.string().optional(),
+    kind: DecoyCredentialUsedTypeKind$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type DecoyCredentialUsedType$Outbound = {
   decoyId?: string | undefined;
@@ -78,10 +84,12 @@ export const DecoyCredentialUsedType$outboundSchema: z.ZodType<
   DecoyCredentialUsedType$Outbound,
   z.ZodTypeDef,
   DecoyCredentialUsedType
-> = z.object({
-  decoyId: z.string().optional(),
-  kind: DecoyCredentialUsedTypeKind$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decoyId: z.string().optional(),
+    kind: DecoyCredentialUsedTypeKind$outboundSchema.optional(),
+  })
+);
 
 export function decoyCredentialUsedTypeToJSON(
   decoyCredentialUsedType: DecoyCredentialUsedType,

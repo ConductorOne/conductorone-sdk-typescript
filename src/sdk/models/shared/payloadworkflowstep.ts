@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,12 +31,14 @@ export const PayloadWorkflowStep$inboundSchema: z.ZodType<
   PayloadWorkflowStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  context: z.nullable(z.record(z.any())).optional(),
-  workflowExecutionId: z.string().transform(v => parseInt(v, 10)).optional(),
-  workflowExecutionStepId: z.string().optional(),
-  workflowId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    context: z.nullable(z.record(z.any())).optional(),
+    workflowExecutionId: z.string().transform(v => parseInt(v, 10)).optional(),
+    workflowExecutionStepId: z.string().optional(),
+    workflowId: z.string().optional(),
+  })
+);
 /** @internal */
 export type PayloadWorkflowStep$Outbound = {
   context?: { [k: string]: any } | null | undefined;
@@ -50,12 +52,14 @@ export const PayloadWorkflowStep$outboundSchema: z.ZodType<
   PayloadWorkflowStep$Outbound,
   z.ZodTypeDef,
   PayloadWorkflowStep
-> = z.object({
-  context: z.nullable(z.record(z.any())).optional(),
-  workflowExecutionId: z.number().int().transform(v => `${v}`).optional(),
-  workflowExecutionStepId: z.string().optional(),
-  workflowId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    context: z.nullable(z.record(z.any())).optional(),
+    workflowExecutionId: z.number().int().transform(v => `${v}`).optional(),
+    workflowExecutionStepId: z.string().optional(),
+    workflowId: z.string().optional(),
+  })
+);
 
 export function payloadWorkflowStepToJSON(
   payloadWorkflowStep: PayloadWorkflowStep,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,9 +45,11 @@ export const C1ApiSSFReceiverV1SSFReceiverStreamServiceGetRequest$outboundSchema
     C1ApiSSFReceiverV1SSFReceiverStreamServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSSFReceiverV1SSFReceiverStreamServiceGetRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiSSFReceiverV1SSFReceiverStreamServiceGetRequestToJSON(
   c1ApiSSFReceiverV1SSFReceiverStreamServiceGetRequest:
@@ -66,21 +68,23 @@ export const C1ApiSSFReceiverV1SSFReceiverStreamServiceGetResponse$inboundSchema
     C1ApiSSFReceiverV1SSFReceiverStreamServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSFReceiverStreamServiceGetResponse: shared
-      .SSFReceiverStreamServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSFReceiverStreamServiceGetResponse":
-        "ssfReceiverStreamServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSFReceiverStreamServiceGetResponse: shared
+        .SSFReceiverStreamServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSFReceiverStreamServiceGetResponse":
+          "ssfReceiverStreamServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiSSFReceiverV1SSFReceiverStreamServiceGetResponseFromJSON(
   jsonString: string,

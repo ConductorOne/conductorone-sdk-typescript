@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -267,114 +267,128 @@ export const AllowedClientTypes$inboundSchema: z.ZodType<
   AllowedClientTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AllowedClientTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AllowedClientTypes)
+);
 /** @internal */
 export const AllowedClientTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AllowedClientTypes
-> = openEnums.outboundSchema(AllowedClientTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AllowedClientTypes)
+);
 
 /** @internal */
 export const Classification$inboundSchema: z.ZodType<
   Classification,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Classification);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Classification));
 /** @internal */
 export const Classification$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Classification
-> = openEnums.outboundSchema(Classification);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Classification));
 
 /** @internal */
 export const DefaultClassification$inboundSchema: z.ZodType<
   DefaultClassification,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DefaultClassification);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DefaultClassification)
+);
 /** @internal */
 export const DefaultClassification$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DefaultClassification
-> = openEnums.outboundSchema(DefaultClassification);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DefaultClassification)
+);
 
 /** @internal */
 export const DefaultVisibility$inboundSchema: z.ZodType<
   DefaultVisibility,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DefaultVisibility);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DefaultVisibility)
+);
 /** @internal */
 export const DefaultVisibility$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DefaultVisibility
-> = openEnums.outboundSchema(DefaultVisibility);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DefaultVisibility)
+);
 
 /** @internal */
 export const MCPToolState$inboundSchema: z.ZodType<
   MCPToolState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MCPToolState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(MCPToolState));
 /** @internal */
 export const MCPToolState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPToolState
-> = openEnums.outboundSchema(MCPToolState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(MCPToolState));
 
 /** @internal */
 export const Visibility$inboundSchema: z.ZodType<
   Visibility,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Visibility);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Visibility));
 /** @internal */
 export const Visibility$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Visibility
-> = openEnums.outboundSchema(Visibility);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Visibility));
 
 /** @internal */
 export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
-  z.object({
-    allowedClientTypes: z.nullable(z.array(AllowedClientTypes$inboundSchema))
-      .optional(),
-    appEntitlementId: z.string().optional(),
-    appId: z.string().optional(),
-    classification: Classification$inboundSchema.optional(),
-    connectorId: z.string().optional(),
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    defaultClassification: DefaultClassification$inboundSchema.optional(),
-    defaultDisplayName: z.string().optional(),
-    defaultVisibility: DefaultVisibility$inboundSchema.optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    description: z.string().optional(),
-    discoveryHash: z.string().optional(),
-    displayName: z.string().optional(),
-    id: z.string().optional(),
-    inputSchemaJson: z.string().optional(),
-    lastCalledAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    requestable: z.boolean().optional(),
-    requestableViaToolset: z.boolean().optional(),
-    state: MCPToolState$inboundSchema.optional(),
-    toolName: z.string().optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    visibility: Visibility$inboundSchema.optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      allowedClientTypes: z.nullable(z.array(AllowedClientTypes$inboundSchema))
+        .optional(),
+      appEntitlementId: z.string().optional(),
+      appId: z.string().optional(),
+      classification: Classification$inboundSchema.optional(),
+      connectorId: z.string().optional(),
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      defaultClassification: DefaultClassification$inboundSchema.optional(),
+      defaultDisplayName: z.string().optional(),
+      defaultVisibility: DefaultVisibility$inboundSchema.optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      description: z.string().optional(),
+      discoveryHash: z.string().optional(),
+      displayName: z.string().optional(),
+      id: z.string().optional(),
+      inputSchemaJson: z.string().optional(),
+      lastCalledAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      requestable: z.boolean().optional(),
+      requestableViaToolset: z.boolean().optional(),
+      state: MCPToolState$inboundSchema.optional(),
+      toolName: z.string().optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      visibility: Visibility$inboundSchema.optional(),
+    })
+  );
 
 export function mcpToolFromJSON(
   jsonString: string,
@@ -414,28 +428,30 @@ export const MCPToolInput$outboundSchema: z.ZodType<
   MCPToolInput$Outbound,
   z.ZodTypeDef,
   MCPToolInput
-> = z.object({
-  allowedClientTypes: z.nullable(z.array(AllowedClientTypes$outboundSchema))
-    .optional(),
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  classification: Classification$outboundSchema.optional(),
-  connectorId: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  defaultClassification: DefaultClassification$outboundSchema.optional(),
-  defaultDisplayName: z.string().optional(),
-  defaultVisibility: DefaultVisibility$outboundSchema.optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  discoveryHash: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  inputSchemaJson: z.string().optional(),
-  state: MCPToolState$outboundSchema.optional(),
-  toolName: z.string().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  visibility: Visibility$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedClientTypes: z.nullable(z.array(AllowedClientTypes$outboundSchema))
+      .optional(),
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    classification: Classification$outboundSchema.optional(),
+    connectorId: z.string().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    defaultClassification: DefaultClassification$outboundSchema.optional(),
+    defaultDisplayName: z.string().optional(),
+    defaultVisibility: DefaultVisibility$outboundSchema.optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    discoveryHash: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    inputSchemaJson: z.string().optional(),
+    state: MCPToolState$outboundSchema.optional(),
+    toolName: z.string().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    visibility: Visibility$outboundSchema.optional(),
+  })
+);
 
 export function mcpToolInputToJSON(mcpToolInput: MCPToolInput): string {
   return JSON.stringify(MCPToolInput$outboundSchema.parse(mcpToolInput));

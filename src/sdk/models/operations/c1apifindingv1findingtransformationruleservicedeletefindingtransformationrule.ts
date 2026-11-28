@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,16 +54,18 @@ export const C1ApiFindingV1FindingTransformationRuleServiceDeleteFindingTransfor
     C1ApiFindingV1FindingTransformationRuleServiceDeleteFindingTransformationRuleRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFindingV1FindingTransformationRuleServiceDeleteFindingTransformationRuleRequest
-  > = z.object({
-    id: z.string(),
-    deleteFindingTransformationRuleRequest: shared
-      .DeleteFindingTransformationRuleRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      deleteFindingTransformationRuleRequest:
-        "DeleteFindingTransformationRuleRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      deleteFindingTransformationRuleRequest: shared
+        .DeleteFindingTransformationRuleRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        deleteFindingTransformationRuleRequest:
+          "DeleteFindingTransformationRuleRequest",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingTransformationRuleServiceDeleteFindingTransformationRuleRequestToJSON(
   c1ApiFindingV1FindingTransformationRuleServiceDeleteFindingTransformationRuleRequest:
@@ -83,21 +85,23 @@ export const C1ApiFindingV1FindingTransformationRuleServiceDeleteFindingTransfor
     C1ApiFindingV1FindingTransformationRuleServiceDeleteFindingTransformationRuleResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteFindingTransformationRuleResponse: shared
-      .DeleteFindingTransformationRuleResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteFindingTransformationRuleResponse":
-        "deleteFindingTransformationRuleResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteFindingTransformationRuleResponse: shared
+        .DeleteFindingTransformationRuleResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteFindingTransformationRuleResponse":
+          "deleteFindingTransformationRuleResponse",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingTransformationRuleServiceDeleteFindingTransformationRuleResponseFromJSON(
   jsonString: string,

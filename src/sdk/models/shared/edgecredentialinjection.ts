@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -46,15 +46,17 @@ export const EdgeCredentialInjection$inboundSchema: z.ZodType<
   EdgeCredentialInjection,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  contentType: z.string().optional(),
-  headerName: z.string().optional(),
-  hostPattern: z.string().optional(),
-  pathPattern: z.string().optional(),
-  secretId: z.string().optional(),
-  valuePrefix: z.string().optional(),
-  vaultId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    contentType: z.string().optional(),
+    headerName: z.string().optional(),
+    hostPattern: z.string().optional(),
+    pathPattern: z.string().optional(),
+    secretId: z.string().optional(),
+    valuePrefix: z.string().optional(),
+    vaultId: z.string().optional(),
+  })
+);
 /** @internal */
 export type EdgeCredentialInjection$Outbound = {
   contentType?: string | undefined;
@@ -71,15 +73,17 @@ export const EdgeCredentialInjection$outboundSchema: z.ZodType<
   EdgeCredentialInjection$Outbound,
   z.ZodTypeDef,
   EdgeCredentialInjection
-> = z.object({
-  contentType: z.string().optional(),
-  headerName: z.string().optional(),
-  hostPattern: z.string().optional(),
-  pathPattern: z.string().optional(),
-  secretId: z.string().optional(),
-  valuePrefix: z.string().optional(),
-  vaultId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    contentType: z.string().optional(),
+    headerName: z.string().optional(),
+    hostPattern: z.string().optional(),
+    pathPattern: z.string().optional(),
+    secretId: z.string().optional(),
+    valuePrefix: z.string().optional(),
+    vaultId: z.string().optional(),
+  })
+);
 
 export function edgeCredentialInjectionToJSON(
   edgeCredentialInjection: EdgeCredentialInjection,

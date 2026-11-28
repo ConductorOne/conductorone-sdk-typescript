@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiAiGovernanceV1VirtualMCPToolBindingServiceCreateBindingsReques
     C1ApiAiGovernanceV1VirtualMCPToolBindingServiceCreateBindingsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1VirtualMCPToolBindingServiceCreateBindingsRequest
-  > = z.object({
-    virtualMcpServerId: z.string(),
-    virtualMCPToolBindingServiceCreateBindingsRequest: shared
-      .VirtualMCPToolBindingServiceCreateBindingsRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      virtualMcpServerId: "virtual_mcp_server_id",
-      virtualMCPToolBindingServiceCreateBindingsRequest:
-        "VirtualMCPToolBindingServiceCreateBindingsRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      virtualMcpServerId: z.string(),
+      virtualMCPToolBindingServiceCreateBindingsRequest: shared
+        .VirtualMCPToolBindingServiceCreateBindingsRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        virtualMcpServerId: "virtual_mcp_server_id",
+        virtualMCPToolBindingServiceCreateBindingsRequest:
+          "VirtualMCPToolBindingServiceCreateBindingsRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1VirtualMCPToolBindingServiceCreateBindingsRequestToJSON(
   c1ApiAiGovernanceV1VirtualMCPToolBindingServiceCreateBindingsRequest:
@@ -85,22 +87,24 @@ export const C1ApiAiGovernanceV1VirtualMCPToolBindingServiceCreateBindingsRespon
     C1ApiAiGovernanceV1VirtualMCPToolBindingServiceCreateBindingsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    VirtualMCPToolBindingServiceCreateBindingsResponse: shared
-      .VirtualMCPToolBindingServiceCreateBindingsResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "VirtualMCPToolBindingServiceCreateBindingsResponse":
-        "virtualMCPToolBindingServiceCreateBindingsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      VirtualMCPToolBindingServiceCreateBindingsResponse: shared
+        .VirtualMCPToolBindingServiceCreateBindingsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "VirtualMCPToolBindingServiceCreateBindingsResponse":
+          "virtualMCPToolBindingServiceCreateBindingsResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1VirtualMCPToolBindingServiceCreateBindingsResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -67,17 +67,19 @@ export const SSOApplicationServiceBatchImportSubjectCompatibilityResponse$inboun
     SSOApplicationServiceBatchImportSubjectCompatibilityResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    blockingUserIds: z.nullable(z.array(z.string())).optional(),
-    importedRows: z.number().int().optional(),
-    importedUserIds: z.nullable(z.array(z.string())).optional(),
-    issues: z.nullable(
-      z.array(SSOSubjectCompatibilityImportIssue$inboundSchema),
-    ).optional(),
-    recoverableUserIds: z.nullable(z.array(z.string())).optional(),
-    totalRows: z.number().int().optional(),
-    validRows: z.number().int().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      blockingUserIds: z.nullable(z.array(z.string())).optional(),
+      importedRows: z.number().int().optional(),
+      importedUserIds: z.nullable(z.array(z.string())).optional(),
+      issues: z.nullable(
+        z.array(SSOSubjectCompatibilityImportIssue$inboundSchema),
+      ).optional(),
+      recoverableUserIds: z.nullable(z.array(z.string())).optional(),
+      totalRows: z.number().int().optional(),
+      validRows: z.number().int().optional(),
+    })
+  );
 
 export function ssoApplicationServiceBatchImportSubjectCompatibilityResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -43,9 +43,11 @@ export const C1ApiFindingV1FindingServiceGetFindingRequest$outboundSchema:
     C1ApiFindingV1FindingServiceGetFindingRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFindingV1FindingServiceGetFindingRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiFindingV1FindingServiceGetFindingRequestToJSON(
   c1ApiFindingV1FindingServiceGetFindingRequest:
@@ -64,19 +66,21 @@ export const C1ApiFindingV1FindingServiceGetFindingResponse$inboundSchema:
     C1ApiFindingV1FindingServiceGetFindingResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetFindingResponse: shared.GetFindingResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetFindingResponse": "getFindingResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetFindingResponse: shared.GetFindingResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetFindingResponse": "getFindingResponse",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingServiceGetFindingResponseFromJSON(
   jsonString: string,

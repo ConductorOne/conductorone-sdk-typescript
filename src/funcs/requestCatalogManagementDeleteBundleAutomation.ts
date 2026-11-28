@@ -8,9 +8,8 @@ import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { RequestOptions } from "../lib/sdks.js";
+import { encodePath, RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
-import { pathToFunc } from "../lib/url.js";
 import { ConductoroneSDKTypescriptError } from "../sdk/models/errors/conductoronesdktypescripterror.js";
 import {
   ConnectionError,
@@ -30,6 +29,7 @@ import { Result } from "../sdk/types/fp.js";
  *
  * @remarks
  * Delete the bundle automation rule for a catalog, stopping automatic membership syncing.
+ *  A deleted bundle automation is no longer returned or reconciled; set it again to create a new one.
  */
 export function requestCatalogManagementDeleteBundleAutomation(
   client: ConductoroneSDKTypescriptCore,
@@ -100,9 +100,14 @@ async function $do(
       { explode: false, charEncoding: "percent" },
     ),
   };
-  const path = pathToFunc(
+  const pathResult = encodePath(
     "/api/v1/catalogs/{request_catalog_id}/bundle_automation",
-  )(pathParams);
+    pathParams,
+  );
+  if (!pathResult.ok) {
+    return [pathResult, { status: "invalid" }];
+  }
+  const path = pathResult.value;
 
   const headers = new Headers(compactMap({
     "Content-Type": "application/json",

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -147,6 +147,8 @@ export const ErrorState = {
   AccessReviewErrorStateUnspecified: "ACCESS_REVIEW_ERROR_STATE_UNSPECIFIED",
   AccessReviewErrorStateSelectionQuotaExceedError:
     "ACCESS_REVIEW_ERROR_STATE_SELECTION_QUOTA_EXCEED_ERROR",
+  AccessReviewErrorStateDuplicationFailed:
+    "ACCESS_REVIEW_ERROR_STATE_DUPLICATION_FAILED",
 } as const;
 /**
  * Error state set when a prepare action fails with a recoverable condition.
@@ -471,140 +473,158 @@ export const AccuracyIssueAction$inboundSchema: z.ZodType<
   AccuracyIssueAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccuracyIssueAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccuracyIssueAction)
+);
 /** @internal */
 export const AccuracyIssueAction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccuracyIssueAction
-> = openEnums.outboundSchema(AccuracyIssueAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccuracyIssueAction)
+);
 
 /** @internal */
 export const AutoCloseDecision$inboundSchema: z.ZodType<
   AutoCloseDecision,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AutoCloseDecision);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AutoCloseDecision)
+);
 /** @internal */
 export const AutoCloseDecision$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AutoCloseDecision
-> = openEnums.outboundSchema(AutoCloseDecision);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AutoCloseDecision)
+);
 
 /** @internal */
 export const DefaultView$inboundSchema: z.ZodType<
   DefaultView,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DefaultView);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DefaultView));
 /** @internal */
 export const DefaultView$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DefaultView
-> = openEnums.outboundSchema(DefaultView);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(DefaultView));
 
 /** @internal */
 export const ErrorState$inboundSchema: z.ZodType<
   ErrorState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ErrorState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ErrorState));
 
 /** @internal */
 export const AccessReviewScopeType$inboundSchema: z.ZodType<
   AccessReviewScopeType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewScopeType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewScopeType)
+);
 /** @internal */
 export const AccessReviewScopeType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessReviewScopeType
-> = openEnums.outboundSchema(AccessReviewScopeType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccessReviewScopeType)
+);
 
 /** @internal */
 export const AccessReviewState$inboundSchema: z.ZodType<
   AccessReviewState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewState)
+);
 /** @internal */
 export const AccessReviewState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessReviewState
-> = openEnums.outboundSchema(AccessReviewState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccessReviewState)
+);
 
 /** @internal */
 export const AccessReview$inboundSchema: z.ZodType<
   AccessReview,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReviewTemplateId: z.string().optional(),
-  accuracyIssueAction: AccuracyIssueAction$inboundSchema.optional(),
-  autoCloseCampaign: z.boolean().optional(),
-  autoCloseDecision: AutoCloseDecision$inboundSchema.optional(),
-  autoGenerateReport: z.boolean().optional(),
-  autoResolve: z.boolean().optional(),
-  autoStartCampaign: z.boolean().optional(),
-  bindings: z.nullable(BindingObjectSetup$inboundSchema).optional(),
-  campaignHealth: z.nullable(CampaignHealthSnapshot$inboundSchema).optional(),
-  campaignInsights: z.nullable(CampaignInsights$inboundSchema).optional(),
-  campaignSchedule: z.nullable(CampaignSchedule$inboundSchema).optional(),
-  closedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  columnConfig: z.nullable(AccessReviewColumnConfig$inboundSchema).optional(),
-  completionDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  connectorSourcesFrozenAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdById: z.string().optional(),
-  defaultView: DefaultView$inboundSchema.optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  errorState: ErrorState$inboundSchema.optional(),
-  exclusionScope: z.nullable(AccessReviewExclusionScope$inboundSchema)
-    .optional(),
-  exemptCertifiedAccessConflicts: z.boolean().optional(),
-  expectedTicketCount: z.number().int().optional(),
-  hasAccuracySupport: z.boolean().optional(),
-  id: z.string().optional(),
-  inclusionScope: z.nullable(AccessReviewInclusionScope$inboundSchema)
-    .optional(),
-  multiApp: z.nullable(MultiAppSetup$inboundSchema).optional(),
-  notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
-  policyId: z.string().optional(),
-  reviewInstructions: z.string().optional(),
-  reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$inboundSchema)
-    .optional(),
-  scheduledStartDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  scope: z.nullable(AccessReviewScope$inboundSchema).optional(),
-  scopeType: AccessReviewScopeType$inboundSchema.optional(),
-  scopeV2: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
-  scopingVersion: z.string().transform(v => parseInt(v, 10)).optional(),
-  signatureConfig: z.nullable(ReviewSignatureConfig$inboundSchema).optional(),
-  singleApp: z.nullable(SingleAppSetup$inboundSchema).optional(),
-  startedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  state: AccessReviewState$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  usePolicyOverride: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewTemplateId: z.string().optional(),
+    accuracyIssueAction: AccuracyIssueAction$inboundSchema.optional(),
+    autoCloseCampaign: z.boolean().optional(),
+    autoCloseDecision: AutoCloseDecision$inboundSchema.optional(),
+    autoGenerateReport: z.boolean().optional(),
+    autoResolve: z.boolean().optional(),
+    autoStartCampaign: z.boolean().optional(),
+    bindings: z.nullable(BindingObjectSetup$inboundSchema).optional(),
+    campaignHealth: z.nullable(CampaignHealthSnapshot$inboundSchema).optional(),
+    campaignInsights: z.nullable(CampaignInsights$inboundSchema).optional(),
+    campaignSchedule: z.nullable(CampaignSchedule$inboundSchema).optional(),
+    closedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    columnConfig: z.nullable(AccessReviewColumnConfig$inboundSchema).optional(),
+    completionDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    connectorSourcesFrozenAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdById: z.string().optional(),
+    defaultView: DefaultView$inboundSchema.optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    errorState: ErrorState$inboundSchema.optional(),
+    exclusionScope: z.nullable(AccessReviewExclusionScope$inboundSchema)
+      .optional(),
+    exemptCertifiedAccessConflicts: z.boolean().optional(),
+    expectedTicketCount: z.number().int().optional(),
+    hasAccuracySupport: z.boolean().optional(),
+    id: z.string().optional(),
+    inclusionScope: z.nullable(AccessReviewInclusionScope$inboundSchema)
+      .optional(),
+    multiApp: z.nullable(MultiAppSetup$inboundSchema).optional(),
+    notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
+    policyId: z.string().optional(),
+    reviewInstructions: z.string().optional(),
+    reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$inboundSchema)
+      .optional(),
+    scheduledStartDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    scope: z.nullable(AccessReviewScope$inboundSchema).optional(),
+    scopeType: AccessReviewScopeType$inboundSchema.optional(),
+    scopeV2: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
+    scopingVersion: z.string().transform(v => parseInt(v, 10)).optional(),
+    signatureConfig: z.nullable(ReviewSignatureConfig$inboundSchema).optional(),
+    singleApp: z.nullable(SingleAppSetup$inboundSchema).optional(),
+    startedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    state: AccessReviewState$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    usePolicyOverride: z.boolean().optional(),
+  })
+);
 
 export function accessReviewFromJSON(
   jsonString: string,
@@ -665,54 +685,61 @@ export const AccessReviewInput$outboundSchema: z.ZodType<
   AccessReviewInput$Outbound,
   z.ZodTypeDef,
   AccessReviewInput
-> = z.object({
-  accessReviewTemplateId: z.string().optional(),
-  accuracyIssueAction: AccuracyIssueAction$outboundSchema.optional(),
-  autoCloseCampaign: z.boolean().optional(),
-  autoCloseDecision: AutoCloseDecision$outboundSchema.optional(),
-  autoGenerateReport: z.boolean().optional(),
-  autoResolve: z.boolean().optional(),
-  autoStartCampaign: z.boolean().optional(),
-  bindings: z.nullable(BindingObjectSetup$outboundSchema).optional(),
-  campaignHealth: z.nullable(CampaignHealthSnapshot$outboundSchema).optional(),
-  campaignInsights: z.nullable(CampaignInsights$outboundSchema).optional(),
-  campaignSchedule: z.nullable(CampaignSchedule$outboundSchema).optional(),
-  closedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema).optional(),
-  completionDate: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  connectorSourcesFrozenAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  createdById: z.string().optional(),
-  defaultView: DefaultView$outboundSchema.optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  exclusionScope: z.nullable(AccessReviewExclusionScope$outboundSchema)
-    .optional(),
-  exemptCertifiedAccessConflicts: z.boolean().optional(),
-  expectedTicketCount: z.number().int().optional(),
-  hasAccuracySupport: z.boolean().optional(),
-  id: z.string().optional(),
-  inclusionScope: z.nullable(AccessReviewInclusionScope$outboundSchema)
-    .optional(),
-  multiApp: z.nullable(MultiAppSetup$outboundSchema).optional(),
-  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
-  policyId: z.string().optional(),
-  reviewInstructions: z.string().optional(),
-  reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$outboundSchema)
-    .optional(),
-  scheduledStartDate: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  scope: z.nullable(AccessReviewScope$outboundSchema).optional(),
-  scopeType: AccessReviewScopeType$outboundSchema.optional(),
-  scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
-  scopingVersion: z.number().int().transform(v => `${v}`).optional(),
-  signatureConfig: z.nullable(ReviewSignatureConfig$outboundSchema).optional(),
-  singleApp: z.nullable(SingleAppSetup$outboundSchema).optional(),
-  startedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  state: AccessReviewState$outboundSchema.optional(),
-  usePolicyOverride: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewTemplateId: z.string().optional(),
+    accuracyIssueAction: AccuracyIssueAction$outboundSchema.optional(),
+    autoCloseCampaign: z.boolean().optional(),
+    autoCloseDecision: AutoCloseDecision$outboundSchema.optional(),
+    autoGenerateReport: z.boolean().optional(),
+    autoResolve: z.boolean().optional(),
+    autoStartCampaign: z.boolean().optional(),
+    bindings: z.nullable(BindingObjectSetup$outboundSchema).optional(),
+    campaignHealth: z.nullable(CampaignHealthSnapshot$outboundSchema)
+      .optional(),
+    campaignInsights: z.nullable(CampaignInsights$outboundSchema).optional(),
+    campaignSchedule: z.nullable(CampaignSchedule$outboundSchema).optional(),
+    closedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema)
+      .optional(),
+    completionDate: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    connectorSourcesFrozenAt: z.nullable(
+      z.date().transform(v => v.toISOString()),
+    ).optional(),
+    createdById: z.string().optional(),
+    defaultView: DefaultView$outboundSchema.optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    exclusionScope: z.nullable(AccessReviewExclusionScope$outboundSchema)
+      .optional(),
+    exemptCertifiedAccessConflicts: z.boolean().optional(),
+    expectedTicketCount: z.number().int().optional(),
+    hasAccuracySupport: z.boolean().optional(),
+    id: z.string().optional(),
+    inclusionScope: z.nullable(AccessReviewInclusionScope$outboundSchema)
+      .optional(),
+    multiApp: z.nullable(MultiAppSetup$outboundSchema).optional(),
+    notificationConfig: z.nullable(NotificationConfig$outboundSchema)
+      .optional(),
+    policyId: z.string().optional(),
+    reviewInstructions: z.string().optional(),
+    reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$outboundSchema)
+      .optional(),
+    scheduledStartDate: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    scope: z.nullable(AccessReviewScope$outboundSchema).optional(),
+    scopeType: AccessReviewScopeType$outboundSchema.optional(),
+    scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
+    scopingVersion: z.number().int().transform(v => `${v}`).optional(),
+    signatureConfig: z.nullable(ReviewSignatureConfig$outboundSchema)
+      .optional(),
+    singleApp: z.nullable(SingleAppSetup$outboundSchema).optional(),
+    startedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    state: AccessReviewState$outboundSchema.optional(),
+    usePolicyOverride: z.boolean().optional(),
+  })
+);
 
 export function accessReviewInputToJSON(
   accessReviewInput: AccessReviewInput,

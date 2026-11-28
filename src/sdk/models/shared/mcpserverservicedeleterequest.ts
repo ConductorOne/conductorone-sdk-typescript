@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerServiceDeleteRequest soft-deletes an MCP server.
@@ -17,7 +18,7 @@ export const MCPServerServiceDeleteRequest$outboundSchema: z.ZodType<
   MCPServerServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   MCPServerServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpServerServiceDeleteRequestToJSON(
   mcpServerServiceDeleteRequest: MCPServerServiceDeleteRequest,

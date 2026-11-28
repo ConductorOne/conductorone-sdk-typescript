@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   SignInPolicyInput,
   SignInPolicyInput$Outbound,
@@ -28,10 +29,12 @@ export const SignInPolicyServiceUpdateRequest$outboundSchema: z.ZodType<
   SignInPolicyServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   SignInPolicyServiceUpdateRequest
-> = z.object({
-  signInPolicy: z.nullable(SignInPolicyInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    signInPolicy: z.nullable(SignInPolicyInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function signInPolicyServiceUpdateRequestToJSON(
   signInPolicyServiceUpdateRequest: SignInPolicyServiceUpdateRequest,

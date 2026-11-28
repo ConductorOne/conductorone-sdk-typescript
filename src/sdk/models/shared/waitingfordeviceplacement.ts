@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const WaitingForDevicePlacement$inboundSchema: z.ZodType<
   WaitingForDevicePlacement,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  recipientUserId: z.string().optional(),
-  vaultBoundaryId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    recipientUserId: z.string().optional(),
+    vaultBoundaryId: z.string().optional(),
+  })
+);
 /** @internal */
 export type WaitingForDevicePlacement$Outbound = {
   recipientUserId?: string | undefined;
@@ -41,10 +43,12 @@ export const WaitingForDevicePlacement$outboundSchema: z.ZodType<
   WaitingForDevicePlacement$Outbound,
   z.ZodTypeDef,
   WaitingForDevicePlacement
-> = z.object({
-  recipientUserId: z.string().optional(),
-  vaultBoundaryId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    recipientUserId: z.string().optional(),
+    vaultBoundaryId: z.string().optional(),
+  })
+);
 
 export function waitingForDevicePlacementToJSON(
   waitingForDevicePlacement: WaitingForDevicePlacement,

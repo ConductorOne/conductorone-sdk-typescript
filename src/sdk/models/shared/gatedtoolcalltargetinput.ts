@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The GatedToolCallTarget message.
@@ -17,7 +18,7 @@ export const GatedToolCallTargetInput$outboundSchema: z.ZodType<
   GatedToolCallTargetInput$Outbound,
   z.ZodTypeDef,
   GatedToolCallTargetInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function gatedToolCallTargetInputToJSON(
   gatedToolCallTargetInput: GatedToolCallTargetInput,

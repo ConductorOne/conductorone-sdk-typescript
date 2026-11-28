@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,20 +51,22 @@ export const C1ApiAppV2AppOwnersCreateUserOwnerRequest$outboundSchema:
     C1ApiAppV2AppOwnersCreateUserOwnerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2AppOwnersCreateUserOwnerRequest
-  > = z.object({
-    appId: z.string(),
-    roleSlug: z.string(),
-    userRefId: z.string(),
-    createAppUserOwnerRequest: shared.CreateAppUserOwnerRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      roleSlug: "role_slug",
-      userRefId: "user_ref_id",
-      createAppUserOwnerRequest: "CreateAppUserOwnerRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      roleSlug: z.string(),
+      userRefId: z.string(),
+      createAppUserOwnerRequest: shared.CreateAppUserOwnerRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        roleSlug: "role_slug",
+        userRefId: "user_ref_id",
+        createAppUserOwnerRequest: "CreateAppUserOwnerRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppOwnersCreateUserOwnerRequestToJSON(
   c1ApiAppV2AppOwnersCreateUserOwnerRequest:
@@ -80,20 +82,22 @@ export function c1ApiAppV2AppOwnersCreateUserOwnerRequestToJSON(
 /** @internal */
 export const C1ApiAppV2AppOwnersCreateUserOwnerResponse$inboundSchema:
   z.ZodType<C1ApiAppV2AppOwnersCreateUserOwnerResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      CreateAppUserOwnerResponse: shared
-        .CreateAppUserOwnerResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "CreateAppUserOwnerResponse": "createAppUserOwnerResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        CreateAppUserOwnerResponse: shared
+          .CreateAppUserOwnerResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "CreateAppUserOwnerResponse": "createAppUserOwnerResponse",
+        });
+      })
+    );
 
 export function c1ApiAppV2AppOwnersCreateUserOwnerResponseFromJSON(
   jsonString: string,

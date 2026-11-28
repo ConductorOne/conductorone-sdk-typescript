@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The LocalUserInvitationServiceRevokeRequest message.
@@ -17,7 +18,7 @@ export const LocalUserInvitationServiceRevokeRequest$outboundSchema: z.ZodType<
   LocalUserInvitationServiceRevokeRequest$Outbound,
   z.ZodTypeDef,
   LocalUserInvitationServiceRevokeRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function localUserInvitationServiceRevokeRequestToJSON(
   localUserInvitationServiceRevokeRequest:

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -78,28 +78,30 @@ export const DecoyKind$inboundSchema: z.ZodType<
   DecoyKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DecoyKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DecoyKind));
 
 /** @internal */
-export const Decoy$inboundSchema: z.ZodType<Decoy, z.ZodTypeDef, unknown> = z
-  .object({
-    annotations: z.record(z.string()).optional(),
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    description: z.string().optional(),
-    disabled: z.boolean().optional(),
-    displayName: z.string().optional(),
-    id: z.string().optional(),
-    kind: DecoyKind$inboundSchema.optional(),
-    lastUsedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    materialFingerprintSha256: z.string().optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
+export const Decoy$inboundSchema: z.ZodType<Decoy, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      annotations: z.record(z.string()).optional(),
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      description: z.string().optional(),
+      disabled: z.boolean().optional(),
+      displayName: z.string().optional(),
+      id: z.string().optional(),
+      kind: DecoyKind$inboundSchema.optional(),
+      lastUsedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      materialFingerprintSha256: z.string().optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    })
+  );
 
 export function decoyFromJSON(
   jsonString: string,

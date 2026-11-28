@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   MCPToolRef,
   MCPToolRef$Outbound,
@@ -30,9 +31,11 @@ export const VirtualMCPToolBindingServiceCreateBindingsRequest$outboundSchema:
     VirtualMCPToolBindingServiceCreateBindingsRequest$Outbound,
     z.ZodTypeDef,
     VirtualMCPToolBindingServiceCreateBindingsRequest
-  > = z.object({
-    mcpTools: z.nullable(z.array(MCPToolRef$outboundSchema)).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      mcpTools: z.nullable(z.array(MCPToolRef$outboundSchema)).optional(),
+    })
+  );
 
 export function virtualMCPToolBindingServiceCreateBindingsRequestToJSON(
   virtualMCPToolBindingServiceCreateBindingsRequest:

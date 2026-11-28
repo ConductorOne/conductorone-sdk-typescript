@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -57,18 +57,21 @@ export const C1ApiSsov1SSOApplicationServiceRotateClientSecretRequest$outboundSc
     C1ApiSsov1SSOApplicationServiceRotateClientSecretRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSsov1SSOApplicationServiceRotateClientSecretRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    ssoApplicationServiceRotateClientSecretRequest: shared
-      .SSOApplicationServiceRotateClientSecretRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      ssoApplicationServiceRotateClientSecretRequest:
-        "SSOApplicationServiceRotateClientSecretRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      ssoApplicationServiceRotateClientSecretRequest: shared
+        .SSOApplicationServiceRotateClientSecretRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        ssoApplicationServiceRotateClientSecretRequest:
+          "SSOApplicationServiceRotateClientSecretRequest",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceRotateClientSecretRequestToJSON(
   c1ApiSsov1SSOApplicationServiceRotateClientSecretRequest:
@@ -86,21 +89,24 @@ export const C1ApiSsov1SSOApplicationServiceRotateClientSecretResponse$inboundSc
     C1ApiSsov1SSOApplicationServiceRotateClientSecretResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSOApplicationServiceRotateClientSecretResponse: shared
-      .SSOApplicationServiceRotateClientSecretResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSOApplicationServiceRotateClientSecretResponse":
-        "ssoApplicationServiceRotateClientSecretResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSOApplicationServiceRotateClientSecretResponse: shared
+        .SSOApplicationServiceRotateClientSecretResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSOApplicationServiceRotateClientSecretResponse":
+          "ssoApplicationServiceRotateClientSecretResponse",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceRotateClientSecretResponseFromJSON(
   jsonString: string,

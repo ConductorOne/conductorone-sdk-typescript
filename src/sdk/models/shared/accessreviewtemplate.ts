@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -365,104 +365,122 @@ export const AccessReviewTemplateAccuracyIssueAction$inboundSchema: z.ZodType<
   AccessReviewTemplateAccuracyIssueAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewTemplateAccuracyIssueAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewTemplateAccuracyIssueAction)
+);
 /** @internal */
 export const AccessReviewTemplateAccuracyIssueAction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessReviewTemplateAccuracyIssueAction
-> = openEnums.outboundSchema(AccessReviewTemplateAccuracyIssueAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccessReviewTemplateAccuracyIssueAction)
+);
 
 /** @internal */
 export const AccessReviewTemplateAutoCloseDecision$inboundSchema: z.ZodType<
   AccessReviewTemplateAutoCloseDecision,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewTemplateAutoCloseDecision);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewTemplateAutoCloseDecision)
+);
 /** @internal */
 export const AccessReviewTemplateAutoCloseDecision$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessReviewTemplateAutoCloseDecision
-> = openEnums.outboundSchema(AccessReviewTemplateAutoCloseDecision);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccessReviewTemplateAutoCloseDecision)
+);
 
 /** @internal */
 export const AccessReviewTemplateDefaultView$inboundSchema: z.ZodType<
   AccessReviewTemplateDefaultView,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewTemplateDefaultView);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewTemplateDefaultView)
+);
 /** @internal */
 export const AccessReviewTemplateDefaultView$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessReviewTemplateDefaultView
-> = openEnums.outboundSchema(AccessReviewTemplateDefaultView);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccessReviewTemplateDefaultView)
+);
 
 /** @internal */
 export const AccessReviewTemplateScopeType$inboundSchema: z.ZodType<
   AccessReviewTemplateScopeType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccessReviewTemplateScopeType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AccessReviewTemplateScopeType)
+);
 /** @internal */
 export const AccessReviewTemplateScopeType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessReviewTemplateScopeType
-> = openEnums.outboundSchema(AccessReviewTemplateScopeType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccessReviewTemplateScopeType)
+);
 
 /** @internal */
 export const AccessReviewTemplate$inboundSchema: z.ZodType<
   AccessReviewTemplate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReviewDuration: z.nullable(z.string()).optional(),
-  accuracyIssueAction: AccessReviewTemplateAccuracyIssueAction$inboundSchema
-    .optional(),
-  annotations: z.record(z.string()).optional(),
-  autoCloseCampaign: z.boolean().optional(),
-  autoCloseDecision: AccessReviewTemplateAutoCloseDecision$inboundSchema
-    .optional(),
-  autoGenerateReport: z.boolean().optional(),
-  autoStartCampaign: z.boolean().optional(),
-  campaignSchedule: z.nullable(CampaignSchedule$inboundSchema).optional(),
-  columnConfig: z.nullable(AccessReviewColumnConfig$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  defaultView: AccessReviewTemplateDefaultView$inboundSchema.optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  exemptCertifiedAccessConflicts: z.boolean().optional(),
-  id: z.string().optional(),
-  inclusionScope: z.nullable(AccessReviewInclusionScope$inboundSchema)
-    .optional(),
-  isCampaignScheduleEnabled: z.boolean().optional(),
-  msTeamsChannel: z.nullable(MSTeamsChannel$inboundSchema).optional(),
-  nextScheduledCampaignAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
-  occurrences: z.number().int().optional(),
-  policyId: z.string().optional(),
-  recurrenceRule: z.nullable(RecurrenceRule$inboundSchema).optional(),
-  reviewInstructions: z.string().optional(),
-  reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$inboundSchema)
-    .optional(),
-  scope: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
-  scopeType: AccessReviewTemplateScopeType$inboundSchema.optional(),
-  signatureConfig: z.nullable(ReviewSignatureConfig$inboundSchema).optional(),
-  slackChannel: z.nullable(SlackChannel$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  usePolicyOverride: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewDuration: z.nullable(z.string()).optional(),
+    accuracyIssueAction: AccessReviewTemplateAccuracyIssueAction$inboundSchema
+      .optional(),
+    annotations: z.record(z.string()).optional(),
+    autoCloseCampaign: z.boolean().optional(),
+    autoCloseDecision: AccessReviewTemplateAutoCloseDecision$inboundSchema
+      .optional(),
+    autoGenerateReport: z.boolean().optional(),
+    autoStartCampaign: z.boolean().optional(),
+    campaignSchedule: z.nullable(CampaignSchedule$inboundSchema).optional(),
+    columnConfig: z.nullable(AccessReviewColumnConfig$inboundSchema).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    defaultView: AccessReviewTemplateDefaultView$inboundSchema.optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    exemptCertifiedAccessConflicts: z.boolean().optional(),
+    id: z.string().optional(),
+    inclusionScope: z.nullable(AccessReviewInclusionScope$inboundSchema)
+      .optional(),
+    isCampaignScheduleEnabled: z.boolean().optional(),
+    msTeamsChannel: z.nullable(MSTeamsChannel$inboundSchema).optional(),
+    nextScheduledCampaignAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    notificationConfig: z.nullable(NotificationConfig$inboundSchema).optional(),
+    occurrences: z.number().int().optional(),
+    policyId: z.string().optional(),
+    recurrenceRule: z.nullable(RecurrenceRule$inboundSchema).optional(),
+    reviewInstructions: z.string().optional(),
+    reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$inboundSchema)
+      .optional(),
+    scope: z.nullable(AccessReviewScopeV2$inboundSchema).optional(),
+    scopeType: AccessReviewTemplateScopeType$inboundSchema.optional(),
+    signatureConfig: z.nullable(ReviewSignatureConfig$inboundSchema).optional(),
+    slackChannel: z.nullable(SlackChannel$inboundSchema).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    usePolicyOverride: z.boolean().optional(),
+  })
+);
 
 export function accessReviewTemplateFromJSON(
   jsonString: string,
@@ -512,42 +530,48 @@ export const AccessReviewTemplateInput$outboundSchema: z.ZodType<
   AccessReviewTemplateInput$Outbound,
   z.ZodTypeDef,
   AccessReviewTemplateInput
-> = z.object({
-  accessReviewDuration: z.nullable(z.string()).optional(),
-  accuracyIssueAction: AccessReviewTemplateAccuracyIssueAction$outboundSchema
-    .optional(),
-  annotations: z.record(z.string()).optional(),
-  autoCloseCampaign: z.boolean().optional(),
-  autoCloseDecision: AccessReviewTemplateAutoCloseDecision$outboundSchema
-    .optional(),
-  autoGenerateReport: z.boolean().optional(),
-  autoStartCampaign: z.boolean().optional(),
-  campaignSchedule: z.nullable(CampaignSchedule$outboundSchema).optional(),
-  columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema).optional(),
-  defaultView: AccessReviewTemplateDefaultView$outboundSchema.optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  exemptCertifiedAccessConflicts: z.boolean().optional(),
-  id: z.string().optional(),
-  inclusionScope: z.nullable(AccessReviewInclusionScope$outboundSchema)
-    .optional(),
-  isCampaignScheduleEnabled: z.boolean().optional(),
-  msTeamsChannel: z.nullable(MSTeamsChannel$outboundSchema).optional(),
-  nextScheduledCampaignAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  notificationConfig: z.nullable(NotificationConfig$outboundSchema).optional(),
-  occurrences: z.number().int().optional(),
-  policyId: z.string().optional(),
-  recurrenceRule: z.nullable(RecurrenceRule$outboundSchema).optional(),
-  reviewInstructions: z.string().optional(),
-  reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$outboundSchema)
-    .optional(),
-  scope: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
-  scopeType: AccessReviewTemplateScopeType$outboundSchema.optional(),
-  signatureConfig: z.nullable(ReviewSignatureConfig$outboundSchema).optional(),
-  slackChannel: z.nullable(SlackChannel$outboundSchema).optional(),
-  usePolicyOverride: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewDuration: z.nullable(z.string()).optional(),
+    accuracyIssueAction: AccessReviewTemplateAccuracyIssueAction$outboundSchema
+      .optional(),
+    annotations: z.record(z.string()).optional(),
+    autoCloseCampaign: z.boolean().optional(),
+    autoCloseDecision: AccessReviewTemplateAutoCloseDecision$outboundSchema
+      .optional(),
+    autoGenerateReport: z.boolean().optional(),
+    autoStartCampaign: z.boolean().optional(),
+    campaignSchedule: z.nullable(CampaignSchedule$outboundSchema).optional(),
+    columnConfig: z.nullable(AccessReviewColumnConfig$outboundSchema)
+      .optional(),
+    defaultView: AccessReviewTemplateDefaultView$outboundSchema.optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    exemptCertifiedAccessConflicts: z.boolean().optional(),
+    id: z.string().optional(),
+    inclusionScope: z.nullable(AccessReviewInclusionScope$outboundSchema)
+      .optional(),
+    isCampaignScheduleEnabled: z.boolean().optional(),
+    msTeamsChannel: z.nullable(MSTeamsChannel$outboundSchema).optional(),
+    nextScheduledCampaignAt: z.nullable(
+      z.date().transform(v => v.toISOString()),
+    ).optional(),
+    notificationConfig: z.nullable(NotificationConfig$outboundSchema)
+      .optional(),
+    occurrences: z.number().int().optional(),
+    policyId: z.string().optional(),
+    recurrenceRule: z.nullable(RecurrenceRule$outboundSchema).optional(),
+    reviewInstructions: z.string().optional(),
+    reviewerAttributeConfig: z.nullable(ReviewerAttributeConfig$outboundSchema)
+      .optional(),
+    scope: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
+    scopeType: AccessReviewTemplateScopeType$outboundSchema.optional(),
+    signatureConfig: z.nullable(ReviewSignatureConfig$outboundSchema)
+      .optional(),
+    slackChannel: z.nullable(SlackChannel$outboundSchema).optional(),
+    usePolicyOverride: z.boolean().optional(),
+  })
+);
 
 export function accessReviewTemplateInputToJSON(
   accessReviewTemplateInput: AccessReviewTemplateInput,

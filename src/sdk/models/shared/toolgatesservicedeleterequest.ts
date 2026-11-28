@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ToolGatesServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const ToolGatesServiceDeleteRequest$outboundSchema: z.ZodType<
   ToolGatesServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   ToolGatesServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function toolGatesServiceDeleteRequestToJSON(
   toolGatesServiceDeleteRequest: ToolGatesServiceDeleteRequest,

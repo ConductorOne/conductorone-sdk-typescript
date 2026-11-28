@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,12 +37,14 @@ export const SSFOutboundAuthOAuth2$inboundSchema: z.ZodType<
   SSFOutboundAuthOAuth2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  clientId: z.string().optional(),
-  clientSecret: z.string().optional(),
-  scopes: z.nullable(z.array(z.string())).optional(),
-  tokenUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string().optional(),
+    clientSecret: z.string().optional(),
+    scopes: z.nullable(z.array(z.string())).optional(),
+    tokenUrl: z.string().optional(),
+  })
+);
 /** @internal */
 export type SSFOutboundAuthOAuth2$Outbound = {
   clientId?: string | undefined;
@@ -56,12 +58,14 @@ export const SSFOutboundAuthOAuth2$outboundSchema: z.ZodType<
   SSFOutboundAuthOAuth2$Outbound,
   z.ZodTypeDef,
   SSFOutboundAuthOAuth2
-> = z.object({
-  clientId: z.string().optional(),
-  clientSecret: z.string().optional(),
-  scopes: z.nullable(z.array(z.string())).optional(),
-  tokenUrl: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string().optional(),
+    clientSecret: z.string().optional(),
+    scopes: z.nullable(z.array(z.string())).optional(),
+    tokenUrl: z.string().optional(),
+  })
+);
 
 export function ssfOutboundAuthOAuth2ToJSON(
   ssfOutboundAuthOAuth2: SSFOutboundAuthOAuth2,

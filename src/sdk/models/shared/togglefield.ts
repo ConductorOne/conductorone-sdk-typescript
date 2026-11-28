@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,7 +17,7 @@ export const ToggleField$inboundSchema: z.ZodType<
   ToggleField,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ToggleField$Outbound = {};
 
@@ -26,7 +26,7 @@ export const ToggleField$outboundSchema: z.ZodType<
   ToggleField$Outbound,
   z.ZodTypeDef,
   ToggleField
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function toggleFieldToJSON(toggleField: ToggleField): string {
   return JSON.stringify(ToggleField$outboundSchema.parse(toggleField));

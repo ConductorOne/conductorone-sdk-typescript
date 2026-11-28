@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TestStepUpProviderRequest message.
@@ -17,7 +18,7 @@ export const TestStepUpProviderRequest$outboundSchema: z.ZodType<
   TestStepUpProviderRequest$Outbound,
   z.ZodTypeDef,
   TestStepUpProviderRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function testStepUpProviderRequestToJSON(
   testStepUpProviderRequest: TestStepUpProviderRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -15,9 +15,17 @@ import {
   EdgeInferenceCatalogEntry$inboundSchema,
 } from "./edgeinferencecatalogentry.js";
 import {
+  EdgeInferenceConnectionDiscoveredModels,
+  EdgeInferenceConnectionDiscoveredModels$inboundSchema,
+} from "./edgeinferenceconnectiondiscoveredmodels.js";
+import {
   EdgeInferenceModelFamily,
   EdgeInferenceModelFamily$inboundSchema,
 } from "./edgeinferencemodelfamily.js";
+import {
+  EdgeInferenceTargetDiscoveredModels,
+  EdgeInferenceTargetDiscoveredModels$inboundSchema,
+} from "./edgeinferencetargetdiscoveredmodels.js";
 import {
   EdgeInferenceTierOption,
   EdgeInferenceTierOption$inboundSchema,
@@ -28,6 +36,26 @@ import {
  */
 export type EdgeServiceListInferenceCatalogResponse = {
   capabilitySummary?: EdgeCapabilitySummary | null | undefined;
+  /**
+   * Models each saved provider connection reported through its Edge, as last discovered, including for an Edge
+   *
+   * @remarks
+   *  that is off. Only suggestions. Empty unless model discovery is enabled for the tenant.
+   */
+  discoveredConnectionModels?:
+    | Array<EdgeInferenceConnectionDiscoveredModels>
+    | null
+    | undefined;
+  /**
+   * Models each saved inference target reported through its Edge, as last discovered. Only suggestions: an
+   *
+   * @remarks
+   *  entry here does not change how a route is served. Empty unless model discovery is enabled for the tenant.
+   */
+  discoveredTargetModels?:
+    | Array<EdgeInferenceTargetDiscoveredModels>
+    | null
+    | undefined;
   /**
    * The entries field.
    */
@@ -47,14 +75,24 @@ export const EdgeServiceListInferenceCatalogResponse$inboundSchema: z.ZodType<
   EdgeServiceListInferenceCatalogResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  capabilitySummary: z.nullable(EdgeCapabilitySummary$inboundSchema).optional(),
-  entries: z.nullable(z.array(EdgeInferenceCatalogEntry$inboundSchema))
-    .optional(),
-  families: z.nullable(z.array(EdgeInferenceModelFamily$inboundSchema))
-    .optional(),
-  tiers: z.nullable(z.array(EdgeInferenceTierOption$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    capabilitySummary: z.nullable(EdgeCapabilitySummary$inboundSchema)
+      .optional(),
+    discoveredConnectionModels: z.nullable(
+      z.array(EdgeInferenceConnectionDiscoveredModels$inboundSchema),
+    ).optional(),
+    discoveredTargetModels: z.nullable(
+      z.array(EdgeInferenceTargetDiscoveredModels$inboundSchema),
+    ).optional(),
+    entries: z.nullable(z.array(EdgeInferenceCatalogEntry$inboundSchema))
+      .optional(),
+    families: z.nullable(z.array(EdgeInferenceModelFamily$inboundSchema))
+      .optional(),
+    tiers: z.nullable(z.array(EdgeInferenceTierOption$inboundSchema))
+      .optional(),
+  })
+);
 
 export function edgeServiceListInferenceCatalogResponseFromJSON(
   jsonString: string,

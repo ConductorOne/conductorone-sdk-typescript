@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,13 +50,15 @@ export const C1ApiSessionPolicyV1SessionPolicyServiceListUserPoliciesRequest$out
     C1ApiSessionPolicyV1SessionPolicyServiceListUserPoliciesRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSessionPolicyV1SessionPolicyServiceListUserPoliciesRequest
-  > = z.object({
-    userId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+      });
+    })
+  );
 
 export function c1ApiSessionPolicyV1SessionPolicyServiceListUserPoliciesRequestToJSON(
   c1ApiSessionPolicyV1SessionPolicyServiceListUserPoliciesRequest:
@@ -74,21 +76,23 @@ export const C1ApiSessionPolicyV1SessionPolicyServiceListUserPoliciesResponse$in
     C1ApiSessionPolicyV1SessionPolicyServiceListUserPoliciesResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SessionPolicyServiceListUserPoliciesResponse: shared
-      .SessionPolicyServiceListUserPoliciesResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SessionPolicyServiceListUserPoliciesResponse":
-        "sessionPolicyServiceListUserPoliciesResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SessionPolicyServiceListUserPoliciesResponse: shared
+        .SessionPolicyServiceListUserPoliciesResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SessionPolicyServiceListUserPoliciesResponse":
+          "sessionPolicyServiceListUserPoliciesResponse",
+      });
+    })
+  );
 
 export function c1ApiSessionPolicyV1SessionPolicyServiceListUserPoliciesResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Hook, Hook$inboundSchema } from "./hook.js";
@@ -20,9 +20,11 @@ export const HooksServiceGetResponse$inboundSchema: z.ZodType<
   HooksServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hook: z.nullable(Hook$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hook: z.nullable(Hook$inboundSchema).optional(),
+  })
+);
 
 export function hooksServiceGetResponseFromJSON(
   jsonString: string,

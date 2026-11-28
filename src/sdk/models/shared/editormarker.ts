@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -12,7 +12,7 @@ import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 /**
  * The severity field.
  */
-export const Severity = {
+export const EditorMarkerSeverity = {
   Unknown: "UNKNOWN",
   Hint: "HINT",
   Info: "INFO",
@@ -22,7 +22,7 @@ export const Severity = {
 /**
  * The severity field.
  */
-export type Severity = OpenEnum<typeof Severity>;
+export type EditorMarkerSeverity = OpenEnum<typeof EditorMarkerSeverity>;
 
 /**
  * The EditorMarker message.
@@ -43,7 +43,7 @@ export type EditorMarker = {
   /**
    * The severity field.
    */
-  severity?: Severity | undefined;
+  severity?: EditorMarkerSeverity | undefined;
   /**
    * The startColumn field.
    */
@@ -55,25 +55,29 @@ export type EditorMarker = {
 };
 
 /** @internal */
-export const Severity$inboundSchema: z.ZodType<
-  Severity,
+export const EditorMarkerSeverity$inboundSchema: z.ZodType<
+  EditorMarkerSeverity,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Severity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EditorMarkerSeverity)
+);
 
 /** @internal */
 export const EditorMarker$inboundSchema: z.ZodType<
   EditorMarker,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  endColumn: z.number().int().optional(),
-  endLineNumber: z.number().int().optional(),
-  message: z.string().optional(),
-  severity: Severity$inboundSchema.optional(),
-  startColumn: z.number().int().optional(),
-  startLineNumber: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endColumn: z.number().int().optional(),
+    endLineNumber: z.number().int().optional(),
+    message: z.string().optional(),
+    severity: EditorMarkerSeverity$inboundSchema.optional(),
+    startColumn: z.number().int().optional(),
+    startLineNumber: z.number().int().optional(),
+  })
+);
 
 export function editorMarkerFromJSON(
   jsonString: string,

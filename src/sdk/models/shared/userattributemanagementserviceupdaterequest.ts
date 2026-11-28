@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   UserAttributeMapConfigExpandMask,
   UserAttributeMapConfigExpandMask$Outbound,
@@ -51,15 +52,18 @@ export const UserAttributeManagementServiceUpdateRequest$outboundSchema:
     UserAttributeManagementServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     UserAttributeManagementServiceUpdateRequest
-  > = z.object({
-    attributeType: z.nullable(UserAttributeType$outboundSchema),
-    expandMask: z.nullable(UserAttributeMapConfigExpandMask$outboundSchema)
-      .optional(),
-    fallbacks: z.nullable(z.array(UserAttributeMappingFallback$outboundSchema))
-      .optional(),
-    profileTypeIds: z.nullable(z.array(z.string())).optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      attributeType: z.nullable(UserAttributeType$outboundSchema),
+      expandMask: z.nullable(UserAttributeMapConfigExpandMask$outboundSchema)
+        .optional(),
+      fallbacks: z.nullable(
+        z.array(UserAttributeMappingFallback$outboundSchema),
+      ).optional(),
+      profileTypeIds: z.nullable(z.array(z.string())).optional(),
+      updateMask: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function userAttributeManagementServiceUpdateRequestToJSON(
   userAttributeManagementServiceUpdateRequest:

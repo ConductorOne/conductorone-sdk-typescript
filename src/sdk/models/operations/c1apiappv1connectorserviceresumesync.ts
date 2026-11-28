@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,17 +47,19 @@ export const C1ApiAppV1ConnectorServiceResumeSyncRequest$outboundSchema:
     C1ApiAppV1ConnectorServiceResumeSyncRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1ConnectorServiceResumeSyncRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    resumeSyncRequest: shared.ResumeSyncRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      resumeSyncRequest: "ResumeSyncRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      resumeSyncRequest: shared.ResumeSyncRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        resumeSyncRequest: "ResumeSyncRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1ConnectorServiceResumeSyncRequestToJSON(
   c1ApiAppV1ConnectorServiceResumeSyncRequest:
@@ -76,19 +78,21 @@ export const C1ApiAppV1ConnectorServiceResumeSyncResponse$inboundSchema:
     C1ApiAppV1ConnectorServiceResumeSyncResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ResumeSyncResponse: shared.ResumeSyncResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ResumeSyncResponse": "resumeSyncResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ResumeSyncResponse: shared.ResumeSyncResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ResumeSyncResponse": "resumeSyncResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1ConnectorServiceResumeSyncResponseFromJSON(
   jsonString: string,

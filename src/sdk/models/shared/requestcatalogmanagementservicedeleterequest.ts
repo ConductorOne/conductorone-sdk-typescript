@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Delete a request catalog by Id. It uses URL value for input.
@@ -18,7 +19,7 @@ export const RequestCatalogManagementServiceDeleteRequest$outboundSchema:
     RequestCatalogManagementServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     RequestCatalogManagementServiceDeleteRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function requestCatalogManagementServiceDeleteRequestToJSON(
   requestCatalogManagementServiceDeleteRequest:

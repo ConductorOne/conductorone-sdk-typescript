@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -57,7 +58,9 @@ export const SearchStepUpProvidersRequestProviderType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SearchStepUpProvidersRequestProviderType
-> = openEnums.outboundSchema(SearchStepUpProvidersRequestProviderType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SearchStepUpProvidersRequestProviderType)
+);
 
 /** @internal */
 export type SearchStepUpProvidersRequest$Outbound = {
@@ -73,14 +76,16 @@ export const SearchStepUpProvidersRequest$outboundSchema: z.ZodType<
   SearchStepUpProvidersRequest$Outbound,
   z.ZodTypeDef,
   SearchStepUpProvidersRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  providerType: SearchStepUpProvidersRequestProviderType$outboundSchema
-    .optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(StepUpProviderRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    providerType: SearchStepUpProvidersRequestProviderType$outboundSchema
+      .optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(StepUpProviderRef$outboundSchema)).optional(),
+  })
+);
 
 export function searchStepUpProvidersRequestToJSON(
   searchStepUpProvidersRequest: SearchStepUpProvidersRequest,

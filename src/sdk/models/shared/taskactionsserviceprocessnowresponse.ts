@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -43,17 +44,19 @@ export const TaskActionsServiceProcessNowResponseExpanded$inboundSchema:
     TaskActionsServiceProcessNowResponseExpanded,
     z.ZodTypeDef,
     unknown
-  > = collectExtraKeys$(
-    z.object({
-      "@type": z.string().optional(),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "@type": "atType",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        "@type": z.string().optional(),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "@type": "atType",
+      });
+    })
+  );
 
 export function taskActionsServiceProcessNowResponseExpandedFromJSON(
   jsonString: string,
@@ -76,14 +79,14 @@ export const TaskActionsServiceProcessNowResponse$inboundSchema: z.ZodType<
   TaskActionsServiceProcessNowResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() =>
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expanded: z.nullable(z.array(z.lazy(() =>
       TaskActionsServiceProcessNowResponseExpanded$inboundSchema
-    )),
-  ).optional(),
-  taskView: z.nullable(TaskView$inboundSchema).optional(),
-});
+    ))).optional(),
+    taskView: z.nullable(TaskView$inboundSchema).optional(),
+  })
+);
 
 export function taskActionsServiceProcessNowResponseFromJSON(
   jsonString: string,

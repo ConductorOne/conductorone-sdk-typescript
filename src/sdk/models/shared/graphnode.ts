@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -65,21 +65,23 @@ export const GraphNodeType$inboundSchema: z.ZodType<
   GraphNodeType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GraphNodeType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(GraphNodeType));
 
 /** @internal */
 export const GraphNode$inboundSchema: z.ZodType<
   GraphNode,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  resourceTypeId: z.string().optional(),
-  secondaryText: z.string().optional(),
-  type: GraphNodeType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    resourceTypeId: z.string().optional(),
+    secondaryText: z.string().optional(),
+    type: GraphNodeType$inboundSchema.optional(),
+  })
+);
 
 export function graphNodeFromJSON(
   jsonString: string,

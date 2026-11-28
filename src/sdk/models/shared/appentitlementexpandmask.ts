@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The app entitlement expand mask allows the user to get additional information when getting responses containing app entitlement views.
@@ -24,9 +25,11 @@ export const AppEntitlementExpandMask$outboundSchema: z.ZodType<
   AppEntitlementExpandMask$Outbound,
   z.ZodTypeDef,
   AppEntitlementExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function appEntitlementExpandMaskToJSON(
   appEntitlementExpandMask: AppEntitlementExpandMask,

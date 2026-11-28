@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -32,10 +33,9 @@ import {
 } from "./mcpserverauthoauth2.js";
 
 /**
- * Optional per-server override for tool approval when registering without an
+ * Deprecated and ignored: set tool_enablement on the register request instead.
  *
- * @remarks
- *  access level. See MCPServerView.require_tool_approval for semantics.
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export const MCPServerExternalConfigRequireToolApproval = {
   OptionalBoolUnspecified: "OPTIONAL_BOOL_UNSPECIFIED",
@@ -43,10 +43,9 @@ export const MCPServerExternalConfigRequireToolApproval = {
   OptionalBoolFalse: "OPTIONAL_BOOL_FALSE",
 } as const;
 /**
- * Optional per-server override for tool approval when registering without an
+ * Deprecated and ignored: set tool_enablement on the register request instead.
  *
- * @remarks
- *  access level. See MCPServerView.require_tool_approval for semantics.
+ * @deprecated enum: This will be removed in a future release, please migrate away from it as soon as possible.
  */
 export type MCPServerExternalConfigRequireToolApproval = OpenEnum<
   typeof MCPServerExternalConfigRequireToolApproval
@@ -113,10 +112,9 @@ export type MCPServerExternalConfig = {
   none?: MCPServerAuthNone | null | undefined;
   oauth2?: MCPServerAuthOAuth2 | null | undefined;
   /**
-   * Optional per-server override for tool approval when registering without an
+   * Deprecated and ignored: set tool_enablement on the register request instead.
    *
-   * @remarks
-   *  access level. See MCPServerView.require_tool_approval for semantics.
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   requireToolApproval?: MCPServerExternalConfigRequireToolApproval | undefined;
   /**
@@ -141,21 +139,27 @@ export type MCPServerExternalConfig = {
 /** @internal */
 export const MCPServerExternalConfigRequireToolApproval$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, MCPServerExternalConfigRequireToolApproval> =
-    openEnums.outboundSchema(MCPServerExternalConfigRequireToolApproval);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(MCPServerExternalConfigRequireToolApproval)
+    );
 
 /** @internal */
 export const MCPServerExternalConfigTokenSharing$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPServerExternalConfigTokenSharing
-> = openEnums.outboundSchema(MCPServerExternalConfigTokenSharing);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPServerExternalConfigTokenSharing)
+);
 
 /** @internal */
 export const MCPServerExternalConfigTransportType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   MCPServerExternalConfigTransportType
-> = openEnums.outboundSchema(MCPServerExternalConfigTransportType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(MCPServerExternalConfigTransportType)
+);
 
 /** @internal */
 export type MCPServerExternalConfig$Outbound = {
@@ -175,18 +179,22 @@ export const MCPServerExternalConfig$outboundSchema: z.ZodType<
   MCPServerExternalConfig$Outbound,
   z.ZodTypeDef,
   MCPServerExternalConfig
-> = z.object({
-  basicAuth: z.nullable(MCPServerAuthBasicAuth$outboundSchema).optional(),
-  bearerToken: z.nullable(MCPServerAuthBearerToken$outboundSchema).optional(),
-  customHeader: z.nullable(MCPServerAuthCustomHeader$outboundSchema).optional(),
-  none: z.nullable(MCPServerAuthNone$outboundSchema).optional(),
-  oauth2: z.nullable(MCPServerAuthOAuth2$outboundSchema).optional(),
-  requireToolApproval: MCPServerExternalConfigRequireToolApproval$outboundSchema
-    .optional(),
-  tokenSharing: MCPServerExternalConfigTokenSharing$outboundSchema.optional(),
-  transportType: MCPServerExternalConfigTransportType$outboundSchema.optional(),
-  url: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    basicAuth: z.nullable(MCPServerAuthBasicAuth$outboundSchema).optional(),
+    bearerToken: z.nullable(MCPServerAuthBearerToken$outboundSchema).optional(),
+    customHeader: z.nullable(MCPServerAuthCustomHeader$outboundSchema)
+      .optional(),
+    none: z.nullable(MCPServerAuthNone$outboundSchema).optional(),
+    oauth2: z.nullable(MCPServerAuthOAuth2$outboundSchema).optional(),
+    requireToolApproval:
+      MCPServerExternalConfigRequireToolApproval$outboundSchema.optional(),
+    tokenSharing: MCPServerExternalConfigTokenSharing$outboundSchema.optional(),
+    transportType: MCPServerExternalConfigTransportType$outboundSchema
+      .optional(),
+    url: z.string().optional(),
+  })
+);
 
 export function mcpServerExternalConfigToJSON(
   mcpServerExternalConfig: MCPServerExternalConfig,

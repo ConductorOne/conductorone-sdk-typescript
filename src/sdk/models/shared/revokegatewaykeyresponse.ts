@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { GatewayKey, GatewayKey$inboundSchema } from "./gatewaykey.js";
@@ -20,9 +20,11 @@ export const RevokeGatewayKeyResponse$inboundSchema: z.ZodType<
   RevokeGatewayKeyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  gatewayKey: z.nullable(GatewayKey$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    gatewayKey: z.nullable(GatewayKey$inboundSchema).optional(),
+  })
+);
 
 export function revokeGatewayKeyResponseFromJSON(
   jsonString: string,

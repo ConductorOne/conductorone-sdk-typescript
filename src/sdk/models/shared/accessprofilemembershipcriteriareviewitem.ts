@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,10 +39,13 @@ export const AccessProfileMembershipCriteriaReviewItem$inboundSchema: z.ZodType<
   AccessProfileMembershipCriteriaReviewItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  membershipCel: z.nullable(z.string()).optional(),
-  membershipEntitlement: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    membershipCel: z.nullable(z.string()).optional(),
+    membershipEntitlement: z.nullable(AppEntitlementRef$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type AccessProfileMembershipCriteriaReviewItem$Outbound = {
   membershipCel?: string | null | undefined;
@@ -55,11 +58,13 @@ export const AccessProfileMembershipCriteriaReviewItem$outboundSchema:
     AccessProfileMembershipCriteriaReviewItem$Outbound,
     z.ZodTypeDef,
     AccessProfileMembershipCriteriaReviewItem
-  > = z.object({
-    membershipCel: z.nullable(z.string()).optional(),
-    membershipEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      membershipCel: z.nullable(z.string()).optional(),
+      membershipEntitlement: z.nullable(AppEntitlementRef$outboundSchema)
+        .optional(),
+    })
+  );
 
 export function accessProfileMembershipCriteriaReviewItemToJSON(
   accessProfileMembershipCriteriaReviewItem:

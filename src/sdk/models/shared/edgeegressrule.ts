@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -61,6 +61,32 @@ export const ExemptResponseCredentialKinds = {
 } as const;
 export type ExemptResponseCredentialKinds = OpenEnum<
   typeof ExemptResponseCredentialKinds
+>;
+
+/**
+ * Response-body inspection override, only applied to ALLOW rules.
+ *
+ * @remarks
+ *  Unspecified inherits the Edge's profile; DENY and AUTHZEN clear this field.
+ *  Requests always use strict inspection.
+ */
+export const ResponseInspectionProfile = {
+  EdgeResponseInspectionProfileUnspecified:
+    "EDGE_RESPONSE_INSPECTION_PROFILE_UNSPECIFIED",
+  EdgeResponseInspectionProfileStrict:
+    "EDGE_RESPONSE_INSPECTION_PROFILE_STRICT",
+  EdgeResponseInspectionProfileWebBalanced:
+    "EDGE_RESPONSE_INSPECTION_PROFILE_WEB_BALANCED",
+} as const;
+/**
+ * Response-body inspection override, only applied to ALLOW rules.
+ *
+ * @remarks
+ *  Unspecified inherits the Edge's profile; DENY and AUTHZEN clear this field.
+ *  Requests always use strict inspection.
+ */
+export type ResponseInspectionProfile = OpenEnum<
+  typeof ResponseInspectionProfile
 >;
 
 /**
@@ -141,6 +167,14 @@ export type EdgeEgressRule = {
   principal?: EdgeEgressPrincipal | null | undefined;
   request?: EdgeEgressRequestMatch | null | undefined;
   /**
+   * Response-body inspection override, only applied to ALLOW rules.
+   *
+   * @remarks
+   *  Unspecified inherits the Edge's profile; DENY and AUTHZEN clear this field.
+   *  Requests always use strict inspection.
+   */
+  responseInspectionProfile?: ResponseInspectionProfile | undefined;
+  /**
    * When true, decoding is optional for destinations matching this rule; inspection
    *
    * @remarks
@@ -159,59 +193,88 @@ export type EdgeEgressRule = {
 
 /** @internal */
 export const Effect$inboundSchema: z.ZodType<Effect, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Effect);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Effect));
 /** @internal */
 export const Effect$outboundSchema: z.ZodType<string, z.ZodTypeDef, Effect> =
-  openEnums.outboundSchema(Effect);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Effect));
 
 /** @internal */
 export const ExemptCredentialKinds$inboundSchema: z.ZodType<
   ExemptCredentialKinds,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ExemptCredentialKinds);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ExemptCredentialKinds)
+);
 /** @internal */
 export const ExemptCredentialKinds$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ExemptCredentialKinds
-> = openEnums.outboundSchema(ExemptCredentialKinds);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ExemptCredentialKinds)
+);
 
 /** @internal */
 export const ExemptResponseCredentialKinds$inboundSchema: z.ZodType<
   ExemptResponseCredentialKinds,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ExemptResponseCredentialKinds);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ExemptResponseCredentialKinds)
+);
 /** @internal */
 export const ExemptResponseCredentialKinds$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ExemptResponseCredentialKinds
-> = openEnums.outboundSchema(ExemptResponseCredentialKinds);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ExemptResponseCredentialKinds)
+);
+
+/** @internal */
+export const ResponseInspectionProfile$inboundSchema: z.ZodType<
+  ResponseInspectionProfile,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ResponseInspectionProfile)
+);
+/** @internal */
+export const ResponseInspectionProfile$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ResponseInspectionProfile
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ResponseInspectionProfile)
+);
 
 /** @internal */
 export const EdgeEgressRule$inboundSchema: z.ZodType<
   EdgeEgressRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowEmptyEncodedBody: z.boolean().optional(),
-  allowResponseDecodeRefusals: z.boolean().optional(),
-  authzen: z.nullable(AuthzenRef$inboundSchema).optional(),
-  effect: Effect$inboundSchema.optional(),
-  endpointPattern: z.string().optional(),
-  exemptCredentialKinds: z.nullable(
-    z.array(ExemptCredentialKinds$inboundSchema),
-  ).optional(),
-  exemptResponseCredentialKinds: z.nullable(
-    z.array(ExemptResponseCredentialKinds$inboundSchema),
-  ).optional(),
-  maxInspectedBodyBytes: z.string().optional(),
-  principal: z.nullable(EdgeEgressPrincipal$inboundSchema).optional(),
-  request: z.nullable(EdgeEgressRequestMatch$inboundSchema).optional(),
-  skipContentInspection: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowEmptyEncodedBody: z.boolean().optional(),
+    allowResponseDecodeRefusals: z.boolean().optional(),
+    authzen: z.nullable(AuthzenRef$inboundSchema).optional(),
+    effect: Effect$inboundSchema.optional(),
+    endpointPattern: z.string().optional(),
+    exemptCredentialKinds: z.nullable(
+      z.array(ExemptCredentialKinds$inboundSchema),
+    ).optional(),
+    exemptResponseCredentialKinds: z.nullable(
+      z.array(ExemptResponseCredentialKinds$inboundSchema),
+    ).optional(),
+    maxInspectedBodyBytes: z.string().optional(),
+    principal: z.nullable(EdgeEgressPrincipal$inboundSchema).optional(),
+    request: z.nullable(EdgeEgressRequestMatch$inboundSchema).optional(),
+    responseInspectionProfile: ResponseInspectionProfile$inboundSchema
+      .optional(),
+    skipContentInspection: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type EdgeEgressRule$Outbound = {
   allowEmptyEncodedBody?: boolean | undefined;
@@ -224,6 +287,7 @@ export type EdgeEgressRule$Outbound = {
   maxInspectedBodyBytes?: string | undefined;
   principal?: EdgeEgressPrincipal$Outbound | null | undefined;
   request?: EdgeEgressRequestMatch$Outbound | null | undefined;
+  responseInspectionProfile?: string | undefined;
   skipContentInspection?: boolean | undefined;
 };
 
@@ -232,23 +296,27 @@ export const EdgeEgressRule$outboundSchema: z.ZodType<
   EdgeEgressRule$Outbound,
   z.ZodTypeDef,
   EdgeEgressRule
-> = z.object({
-  allowEmptyEncodedBody: z.boolean().optional(),
-  allowResponseDecodeRefusals: z.boolean().optional(),
-  authzen: z.nullable(AuthzenRef$outboundSchema).optional(),
-  effect: Effect$outboundSchema.optional(),
-  endpointPattern: z.string().optional(),
-  exemptCredentialKinds: z.nullable(
-    z.array(ExemptCredentialKinds$outboundSchema),
-  ).optional(),
-  exemptResponseCredentialKinds: z.nullable(
-    z.array(ExemptResponseCredentialKinds$outboundSchema),
-  ).optional(),
-  maxInspectedBodyBytes: z.string().optional(),
-  principal: z.nullable(EdgeEgressPrincipal$outboundSchema).optional(),
-  request: z.nullable(EdgeEgressRequestMatch$outboundSchema).optional(),
-  skipContentInspection: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowEmptyEncodedBody: z.boolean().optional(),
+    allowResponseDecodeRefusals: z.boolean().optional(),
+    authzen: z.nullable(AuthzenRef$outboundSchema).optional(),
+    effect: Effect$outboundSchema.optional(),
+    endpointPattern: z.string().optional(),
+    exemptCredentialKinds: z.nullable(
+      z.array(ExemptCredentialKinds$outboundSchema),
+    ).optional(),
+    exemptResponseCredentialKinds: z.nullable(
+      z.array(ExemptResponseCredentialKinds$outboundSchema),
+    ).optional(),
+    maxInspectedBodyBytes: z.string().optional(),
+    principal: z.nullable(EdgeEgressPrincipal$outboundSchema).optional(),
+    request: z.nullable(EdgeEgressRequestMatch$outboundSchema).optional(),
+    responseInspectionProfile: ResponseInspectionProfile$outboundSchema
+      .optional(),
+    skipContentInspection: z.boolean().optional(),
+  })
+);
 
 export function edgeEgressRuleToJSON(edgeEgressRule: EdgeEgressRule): string {
   return JSON.stringify(EdgeEgressRule$outboundSchema.parse(edgeEgressRule));

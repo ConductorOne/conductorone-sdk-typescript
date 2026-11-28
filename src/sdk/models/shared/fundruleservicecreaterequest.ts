@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -43,12 +44,14 @@ export const FundRuleServiceCreateRequest$outboundSchema: z.ZodType<
   FundRuleServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   FundRuleServiceCreateRequest
-> = z.object({
-  displayName: z.string().optional(),
-  grant: z.nullable(FundsSpendLimit$outboundSchema).optional(),
-  groupRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    grant: z.nullable(FundsSpendLimit$outboundSchema).optional(),
+    groupRef: z.nullable(AppEntitlementRef$outboundSchema).optional(),
+    reason: z.string().optional(),
+  })
+);
 
 export function fundRuleServiceCreateRequestToJSON(
   fundRuleServiceCreateRequest: FundRuleServiceCreateRequest,

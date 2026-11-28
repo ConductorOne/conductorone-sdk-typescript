@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,9 +28,11 @@ export const AccessScopeGroups$inboundSchema: z.ZodType<
   AccessScopeGroups,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  clauses: z.nullable(z.array(AccessScopeClause$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clauses: z.nullable(z.array(AccessScopeClause$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type AccessScopeGroups$Outbound = {
   clauses?: Array<AccessScopeClause$Outbound> | null | undefined;
@@ -41,9 +43,11 @@ export const AccessScopeGroups$outboundSchema: z.ZodType<
   AccessScopeGroups$Outbound,
   z.ZodTypeDef,
   AccessScopeGroups
-> = z.object({
-  clauses: z.nullable(z.array(AccessScopeClause$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clauses: z.nullable(z.array(AccessScopeClause$outboundSchema)).optional(),
+  })
+);
 
 export function accessScopeGroupsToJSON(
   accessScopeGroups: AccessScopeGroups,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AppSecretRef message.
@@ -34,11 +35,13 @@ export const AppSecretRef$outboundSchema: z.ZodType<
   AppSecretRef$Outbound,
   z.ZodTypeDef,
   AppSecretRef
-> = z.object({
-  appId: z.string().optional(),
-  appResourceTypeId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appResourceTypeId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function appSecretRefToJSON(appSecretRef: AppSecretRef): string {
   return JSON.stringify(AppSecretRef$outboundSchema.parse(appSecretRef));

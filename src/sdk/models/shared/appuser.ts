@@ -3,11 +3,12 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import { AppUserSource, AppUserSource$inboundSchema } from "./appusersource.js";
 import { AppUserStatus, AppUserStatus$inboundSchema } from "./appuserstatus.js";
 import {
   AppUserStatusInput,
@@ -133,6 +134,14 @@ export type AppUser = {
    */
   nhiType?: NhiType | undefined;
   profile?: { [k: string]: any } | null | undefined;
+  /**
+   * The connectors and other applications this account has records from, with each record's ID: the
+   *
+   * @remarks
+   *  application's connectors first, then other applications, each sorted by ID. Reasons aren't included here;
+   *  ListSources returns each record with the reason it's on the account.
+   */
+  sources?: Array<AppUserSource> | null | undefined;
   status?: AppUserStatus | null | undefined;
   updatedAt?: Date | null | undefined;
   /**
@@ -161,54 +170,57 @@ export const AgentStatus$inboundSchema: z.ZodType<
   AgentStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AgentStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AgentStatus));
 
 /** @internal */
 export const AppUserType$inboundSchema: z.ZodType<
   AppUserType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AppUserType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AppUserType));
 /** @internal */
 export const AppUserType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppUserType
-> = openEnums.outboundSchema(AppUserType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AppUserType));
 
 /** @internal */
 export const NhiType$inboundSchema: z.ZodType<NhiType, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(NhiType);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(NhiType));
 
 /** @internal */
 export const AppUser$inboundSchema: z.ZodType<AppUser, z.ZodTypeDef, unknown> =
-  z.object({
-    agentStatus: AgentStatus$inboundSchema.optional(),
-    appId: z.string().optional(),
-    appUserType: AppUserType$inboundSchema.optional(),
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    displayName: z.string().optional(),
-    email: z.string().optional(),
-    emails: z.nullable(z.array(z.string())).optional(),
-    employeeIds: z.nullable(z.array(z.string())).optional(),
-    id: z.string().optional(),
-    identityUserId: z.string().optional(),
-    isExternal: z.boolean().optional(),
-    nhiDetail: z.string().optional(),
-    nhiType: NhiType$inboundSchema.optional(),
-    profile: z.nullable(z.record(z.any())).optional(),
-    status: z.nullable(AppUserStatus$inboundSchema).optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    username: z.string().optional(),
-    usernames: z.nullable(z.array(z.string())).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      agentStatus: AgentStatus$inboundSchema.optional(),
+      appId: z.string().optional(),
+      appUserType: AppUserType$inboundSchema.optional(),
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      displayName: z.string().optional(),
+      email: z.string().optional(),
+      emails: z.nullable(z.array(z.string())).optional(),
+      employeeIds: z.nullable(z.array(z.string())).optional(),
+      id: z.string().optional(),
+      identityUserId: z.string().optional(),
+      isExternal: z.boolean().optional(),
+      nhiDetail: z.string().optional(),
+      nhiType: NhiType$inboundSchema.optional(),
+      profile: z.nullable(z.record(z.any())).optional(),
+      sources: z.nullable(z.array(AppUserSource$inboundSchema)).optional(),
+      status: z.nullable(AppUserStatus$inboundSchema).optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      username: z.string().optional(),
+      usernames: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function appUserFromJSON(
   jsonString: string,
@@ -231,10 +243,12 @@ export const AppUserInput$outboundSchema: z.ZodType<
   AppUserInput$Outbound,
   z.ZodTypeDef,
   AppUserInput
-> = z.object({
-  appUserType: AppUserType$outboundSchema.optional(),
-  status: z.nullable(AppUserStatusInput$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserType: AppUserType$outboundSchema.optional(),
+    status: z.nullable(AppUserStatusInput$outboundSchema).optional(),
+  })
+);
 
 export function appUserInputToJSON(appUserInput: AppUserInput): string {
   return JSON.stringify(AppUserInput$outboundSchema.parse(appUserInput));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   XAASettings,
   XAASettings$Outbound,
@@ -31,10 +32,12 @@ export const XAASettingsServiceUpdateRequest$outboundSchema: z.ZodType<
   XAASettingsServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   XAASettingsServiceUpdateRequest
-> = z.object({
-  settings: z.nullable(XAASettings$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    settings: z.nullable(XAASettings$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function xaaSettingsServiceUpdateRequestToJSON(
   xaaSettingsServiceUpdateRequest: XAASettingsServiceUpdateRequest,

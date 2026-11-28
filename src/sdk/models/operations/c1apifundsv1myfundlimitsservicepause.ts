@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiFundsV1MyFundLimitsServicePauseRequest$outboundSchema:
     C1ApiFundsV1MyFundLimitsServicePauseRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1MyFundLimitsServicePauseRequest
-  > = z.object({
-    appId: z.string(),
-    myFundLimitsServicePauseRequest: shared
-      .MyFundLimitsServicePauseRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      myFundLimitsServicePauseRequest: "MyFundLimitsServicePauseRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      myFundLimitsServicePauseRequest: shared
+        .MyFundLimitsServicePauseRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        myFundLimitsServicePauseRequest: "MyFundLimitsServicePauseRequest",
+      });
+    })
+  );
 
 export function c1ApiFundsV1MyFundLimitsServicePauseRequestToJSON(
   c1ApiFundsV1MyFundLimitsServicePauseRequest:
@@ -79,20 +81,22 @@ export const C1ApiFundsV1MyFundLimitsServicePauseResponse$inboundSchema:
     C1ApiFundsV1MyFundLimitsServicePauseResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MyFundLimitsServicePauseResponse: shared
-      .MyFundLimitsServicePauseResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MyFundLimitsServicePauseResponse": "myFundLimitsServicePauseResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MyFundLimitsServicePauseResponse: shared
+        .MyFundLimitsServicePauseResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MyFundLimitsServicePauseResponse": "myFundLimitsServicePauseResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1MyFundLimitsServicePauseResponseFromJSON(
   jsonString: string,

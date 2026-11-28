@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const PIIRedactionConfig$inboundSchema: z.ZodType<
   PIIRedactionConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  redactFields: z.nullable(z.array(z.string())).optional(),
-  replacement: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    redactFields: z.nullable(z.array(z.string())).optional(),
+    replacement: z.string().optional(),
+  })
+);
 /** @internal */
 export type PIIRedactionConfig$Outbound = {
   redactFields?: Array<string> | null | undefined;
@@ -41,10 +43,12 @@ export const PIIRedactionConfig$outboundSchema: z.ZodType<
   PIIRedactionConfig$Outbound,
   z.ZodTypeDef,
   PIIRedactionConfig
-> = z.object({
-  redactFields: z.nullable(z.array(z.string())).optional(),
-  replacement: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    redactFields: z.nullable(z.array(z.string())).optional(),
+    replacement: z.string().optional(),
+  })
+);
 
 export function piiRedactionConfigToJSON(
   piiRedactionConfig: PIIRedactionConfig,

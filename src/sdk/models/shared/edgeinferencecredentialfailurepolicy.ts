@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -80,50 +80,56 @@ export const NotApplicable$inboundSchema: z.ZodType<
   NotApplicable,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(NotApplicable);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(NotApplicable));
 /** @internal */
 export const NotApplicable$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   NotApplicable
-> = openEnums.outboundSchema(NotApplicable);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(NotApplicable));
 
 /** @internal */
 export const Rejected401$inboundSchema: z.ZodType<
   Rejected401,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Rejected401);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Rejected401));
 /** @internal */
 export const Rejected401$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Rejected401
-> = openEnums.outboundSchema(Rejected401);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Rejected401));
 
 /** @internal */
 export const UnavailableOrExpired$inboundSchema: z.ZodType<
   UnavailableOrExpired,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(UnavailableOrExpired);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(UnavailableOrExpired)
+);
 /** @internal */
 export const UnavailableOrExpired$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UnavailableOrExpired
-> = openEnums.outboundSchema(UnavailableOrExpired);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(UnavailableOrExpired)
+);
 
 /** @internal */
 export const EdgeInferenceCredentialFailurePolicy$inboundSchema: z.ZodType<
   EdgeInferenceCredentialFailurePolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  notApplicable: NotApplicable$inboundSchema.optional(),
-  rejected401: Rejected401$inboundSchema.optional(),
-  unavailableOrExpired: UnavailableOrExpired$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    notApplicable: NotApplicable$inboundSchema.optional(),
+    rejected401: Rejected401$inboundSchema.optional(),
+    unavailableOrExpired: UnavailableOrExpired$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type EdgeInferenceCredentialFailurePolicy$Outbound = {
   notApplicable?: string | undefined;
@@ -136,11 +142,13 @@ export const EdgeInferenceCredentialFailurePolicy$outboundSchema: z.ZodType<
   EdgeInferenceCredentialFailurePolicy$Outbound,
   z.ZodTypeDef,
   EdgeInferenceCredentialFailurePolicy
-> = z.object({
-  notApplicable: NotApplicable$outboundSchema.optional(),
-  rejected401: Rejected401$outboundSchema.optional(),
-  unavailableOrExpired: UnavailableOrExpired$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    notApplicable: NotApplicable$outboundSchema.optional(),
+    rejected401: Rejected401$outboundSchema.optional(),
+    unavailableOrExpired: UnavailableOrExpired$outboundSchema.optional(),
+  })
+);
 
 export function edgeInferenceCredentialFailurePolicyToJSON(
   edgeInferenceCredentialFailurePolicy: EdgeInferenceCredentialFailurePolicy,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,12 @@ export const AppEntitlementAutomationRuleEntitlement$inboundSchema: z.ZodType<
   AppEntitlementAutomationRuleEntitlement,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type AppEntitlementAutomationRuleEntitlement$Outbound = {
   entitlementRefs?: Array<AppEntitlementRef$Outbound> | null | undefined;
@@ -42,10 +44,12 @@ export const AppEntitlementAutomationRuleEntitlement$outboundSchema: z.ZodType<
   AppEntitlementAutomationRuleEntitlement$Outbound,
   z.ZodTypeDef,
   AppEntitlementAutomationRuleEntitlement
-> = z.object({
-  entitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+      .optional(),
+  })
+);
 
 export function appEntitlementAutomationRuleEntitlementToJSON(
   appEntitlementAutomationRuleEntitlement:

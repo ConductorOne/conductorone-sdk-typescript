@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,14 +34,16 @@ export const ForecastRollup$inboundSchema: z.ZodType<
   ForecastRollup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  p10: z.string().transform(v => parseInt(v, 10)).optional(),
-  p50: z.string().transform(v => parseInt(v, 10)).optional(),
-  p90: z.string().transform(v => parseInt(v, 10)).optional(),
-  timestamp: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    p10: z.string().transform(v => parseInt(v, 10)).optional(),
+    p50: z.string().transform(v => parseInt(v, 10)).optional(),
+    p90: z.string().transform(v => parseInt(v, 10)).optional(),
+    timestamp: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function forecastRollupFromJSON(
   jsonString: string,

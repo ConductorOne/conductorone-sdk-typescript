@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const GoLinkActionTarget$inboundSchema: z.ZodType<
   GoLinkActionTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actionId: z.string().optional(),
+  })
+);
 /** @internal */
 export type GoLinkActionTarget$Outbound = {
   actionId?: string | undefined;
@@ -35,9 +37,11 @@ export const GoLinkActionTarget$outboundSchema: z.ZodType<
   GoLinkActionTarget$Outbound,
   z.ZodTypeDef,
   GoLinkActionTarget
-> = z.object({
-  actionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actionId: z.string().optional(),
+  })
+);
 
 export function goLinkActionTargetToJSON(
   goLinkActionTarget: GoLinkActionTarget,

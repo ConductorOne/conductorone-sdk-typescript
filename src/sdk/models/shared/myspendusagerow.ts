@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -97,39 +97,43 @@ export const MySpendUsageRowOutcome$inboundSchema: z.ZodType<
   MySpendUsageRowOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MySpendUsageRowOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MySpendUsageRowOutcome)
+);
 
 /** @internal */
 export const MySpendUsageRow$inboundSchema: z.ZodType<
   MySpendUsageRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  cacheReadTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  cacheWriteTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  conversationId: z.string().optional(),
-  costNano: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  currencyCode: z.string().optional(),
-  finalizedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  inputTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  modelId: z.string().optional(),
-  outcome: MySpendUsageRowOutcome$inboundSchema.optional(),
-  outputTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  reasoningTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
-    .optional(),
-  usageId: z.string().optional(),
-  usageIncomplete: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    cacheReadTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
+      .optional(),
+    cacheWriteTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
+      .optional(),
+    conversationId: z.string().optional(),
+    costNano: z.nullable(z.string().transform(v => parseInt(v, 10))).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    currencyCode: z.string().optional(),
+    finalizedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    inputTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
+      .optional(),
+    modelId: z.string().optional(),
+    outcome: MySpendUsageRowOutcome$inboundSchema.optional(),
+    outputTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
+      .optional(),
+    reasoningTokens: z.nullable(z.string().transform(v => parseInt(v, 10)))
+      .optional(),
+    usageId: z.string().optional(),
+    usageIncomplete: z.boolean().optional(),
+  })
+);
 
 export function mySpendUsageRowFromJSON(
   jsonString: string,

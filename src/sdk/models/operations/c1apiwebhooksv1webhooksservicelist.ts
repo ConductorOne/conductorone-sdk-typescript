@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,15 +45,17 @@ export const C1ApiWebhooksV1WebhooksServiceListRequest$outboundSchema:
     C1ApiWebhooksV1WebhooksServiceListRequest$Outbound,
     z.ZodTypeDef,
     C1ApiWebhooksV1WebhooksServiceListRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiWebhooksV1WebhooksServiceListRequestToJSON(
   c1ApiWebhooksV1WebhooksServiceListRequest:
@@ -69,20 +71,22 @@ export function c1ApiWebhooksV1WebhooksServiceListRequestToJSON(
 /** @internal */
 export const C1ApiWebhooksV1WebhooksServiceListResponse$inboundSchema:
   z.ZodType<C1ApiWebhooksV1WebhooksServiceListResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      WebhooksServiceListResponse: shared
-        .WebhooksServiceListResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "WebhooksServiceListResponse": "webhooksServiceListResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        WebhooksServiceListResponse: shared
+          .WebhooksServiceListResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "WebhooksServiceListResponse": "webhooksServiceListResponse",
+        });
+      })
+    );
 
 export function c1ApiWebhooksV1WebhooksServiceListResponseFromJSON(
   jsonString: string,

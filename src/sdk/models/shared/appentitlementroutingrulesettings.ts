@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,13 +35,15 @@ export const AppEntitlementRoutingRuleSettings$inboundSchema: z.ZodType<
   AppEntitlementRoutingRuleSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  emergencyGrantEnabled: z.boolean().optional(),
-  emergencyGrantPolicyId: z.string().optional(),
-  maxGrantDuration: z.nullable(z.string()).optional(),
-  requestPolicyId: z.string().optional(),
-  requestSchemaId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    emergencyGrantEnabled: z.boolean().optional(),
+    emergencyGrantPolicyId: z.string().optional(),
+    maxGrantDuration: z.nullable(z.string()).optional(),
+    requestPolicyId: z.string().optional(),
+    requestSchemaId: z.string().optional(),
+  })
+);
 /** @internal */
 export type AppEntitlementRoutingRuleSettings$Outbound = {
   emergencyGrantEnabled?: boolean | undefined;
@@ -56,13 +58,15 @@ export const AppEntitlementRoutingRuleSettings$outboundSchema: z.ZodType<
   AppEntitlementRoutingRuleSettings$Outbound,
   z.ZodTypeDef,
   AppEntitlementRoutingRuleSettings
-> = z.object({
-  emergencyGrantEnabled: z.boolean().optional(),
-  emergencyGrantPolicyId: z.string().optional(),
-  maxGrantDuration: z.nullable(z.string()).optional(),
-  requestPolicyId: z.string().optional(),
-  requestSchemaId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    emergencyGrantEnabled: z.boolean().optional(),
+    emergencyGrantPolicyId: z.string().optional(),
+    maxGrantDuration: z.nullable(z.string()).optional(),
+    requestPolicyId: z.string().optional(),
+    requestSchemaId: z.string().optional(),
+  })
+);
 
 export function appEntitlementRoutingRuleSettingsToJSON(
   appEntitlementRoutingRuleSettings: AppEntitlementRoutingRuleSettings,

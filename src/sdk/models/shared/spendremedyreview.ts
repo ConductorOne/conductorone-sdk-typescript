@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -119,48 +119,55 @@ export const SpendRemedyReviewPeriod$inboundSchema: z.ZodType<
   SpendRemedyReviewPeriod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SpendRemedyReviewPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SpendRemedyReviewPeriod)
+);
 
 /** @internal */
 export const SpendRemedyReview$inboundSchema: z.ZodType<
   SpendRemedyReview,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  appIncrease: z.nullable(SpendRemedySharedIncreaseRequest$inboundSchema)
-    .optional(),
-  appResume: z.nullable(SpendRemedyResumeRequest$inboundSchema).optional(),
-  appliedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  authorityMatches: z.nullable(z.boolean()).optional(),
-  beneficiaryUserId: z.string().optional(),
-  blockId: z.string().optional(),
-  capturedEffectiveLimit: z.nullable(FundsSpendLimit$inboundSchema).optional(),
-  capturedTarget: z.nullable(SpendRemedyReviewTarget$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  currentEffectiveLimit: z.nullable(FundsSpendLimit$inboundSchema).optional(),
-  currentTarget: z.nullable(SpendRemedyReviewTarget$inboundSchema).optional(),
-  orgIncrease: z.nullable(SpendRemedySharedIncreaseRequest$inboundSchema)
-    .optional(),
-  orgUnfreeze: z.nullable(SpendRemedyResumeRequest$inboundSchema).optional(),
-  period: SpendRemedyReviewPeriod$inboundSchema.optional(),
-  periodEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  periodKey: z.string().optional(),
-  personalExtension: z.nullable(
-    SpendRemedyPersonalExtensionRequest$inboundSchema,
-  ).optional(),
-  personalResume: z.nullable(SpendRemedyResumeRequest$inboundSchema).optional(),
-  reason: z.string().optional(),
-  requestPolicyId: z.string().optional(),
-  requesterUserId: z.string().optional(),
-  taskId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appIncrease: z.nullable(SpendRemedySharedIncreaseRequest$inboundSchema)
+      .optional(),
+    appResume: z.nullable(SpendRemedyResumeRequest$inboundSchema).optional(),
+    appliedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    authorityMatches: z.nullable(z.boolean()).optional(),
+    beneficiaryUserId: z.string().optional(),
+    blockId: z.string().optional(),
+    capturedEffectiveLimit: z.nullable(FundsSpendLimit$inboundSchema)
+      .optional(),
+    capturedTarget: z.nullable(SpendRemedyReviewTarget$inboundSchema)
+      .optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    currentEffectiveLimit: z.nullable(FundsSpendLimit$inboundSchema).optional(),
+    currentTarget: z.nullable(SpendRemedyReviewTarget$inboundSchema).optional(),
+    orgIncrease: z.nullable(SpendRemedySharedIncreaseRequest$inboundSchema)
+      .optional(),
+    orgUnfreeze: z.nullable(SpendRemedyResumeRequest$inboundSchema).optional(),
+    period: SpendRemedyReviewPeriod$inboundSchema.optional(),
+    periodEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    periodKey: z.string().optional(),
+    personalExtension: z.nullable(
+      SpendRemedyPersonalExtensionRequest$inboundSchema,
+    ).optional(),
+    personalResume: z.nullable(SpendRemedyResumeRequest$inboundSchema)
+      .optional(),
+    reason: z.string().optional(),
+    requestPolicyId: z.string().optional(),
+    requesterUserId: z.string().optional(),
+    taskId: z.string().optional(),
+  })
+);
 
 export function spendRemedyReviewFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Automation, Automation$inboundSchema } from "./automation.js";
@@ -13,6 +13,10 @@ import { Automation, Automation$inboundSchema } from "./automation.js";
  */
 export type UpdateAutomationResponse = {
   automation?: Automation | null | undefined;
+  /**
+   * Set when turning the automation off started a bulk cancel of its queued runs.
+   */
+  bulkActionId?: string | undefined;
   /**
    * One-time absolute webhook URL for capability URL authentication, shown once when the trigger is saved.
    *
@@ -35,11 +39,14 @@ export const UpdateAutomationResponse$inboundSchema: z.ZodType<
   UpdateAutomationResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  automation: z.nullable(Automation$inboundSchema).optional(),
-  webhookCapabilityUrl: z.string().optional(),
-  webhookHmacSecret: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automation: z.nullable(Automation$inboundSchema).optional(),
+    bulkActionId: z.string().optional(),
+    webhookCapabilityUrl: z.string().optional(),
+    webhookHmacSecret: z.string().optional(),
+  })
+);
 
 export function updateAutomationResponseFromJSON(
   jsonString: string,

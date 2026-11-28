@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPToolServiceDeleteRequest deletes an MCP tool (soft delete).
@@ -17,7 +18,7 @@ export const MCPToolServiceDeleteRequest$outboundSchema: z.ZodType<
   MCPToolServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   MCPToolServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpToolServiceDeleteRequestToJSON(
   mcpToolServiceDeleteRequest: MCPToolServiceDeleteRequest,

@@ -15,6 +15,7 @@ import { AccountProvisionPolicyTest } from "./accountprovisionpolicytest.js";
 import { AgentClassifier } from "./agentclassifier.js";
 import { AIGovernanceSettings } from "./aigovernancesettings.js";
 import { APIKeySearch } from "./apikeysearch.js";
+import { APIKeyUsage } from "./apikeyusage.js";
 import { AppAccessRequestsDefaults } from "./appaccessrequestsdefaults.js";
 import { AppCap } from "./appcap.js";
 import { AppEntitlementMonitorBinding } from "./appentitlementmonitorbinding.js";
@@ -41,6 +42,7 @@ import { AppSecretAdmin } from "./appsecretadmin.js";
 import { AppSecretSearch } from "./appsecretsearch.js";
 import { AppUsageControls } from "./appusagecontrols.js";
 import { AppUser } from "./appuser.js";
+import { AppUserMergeRules } from "./appusermergerules.js";
 import { AppUserOwnersV2 } from "./appuserownersv2.js";
 import { Artifact } from "./artifact.js";
 import { Attributes } from "./attributes.js";
@@ -56,15 +58,19 @@ import { AWSExternalIDSettings } from "./awsexternalidsettings.js";
 import { Classifier } from "./classifier.js";
 import { ClassifierTemplate } from "./classifiertemplate.js";
 import { Connector } from "./connector.js";
+import { ConnectorAuthoring } from "./connectorauthoring.js";
 import { ConnectorAuthoringActivation } from "./connectorauthoringactivation.js";
 import { ConnectorCatalog } from "./connectorcatalog.js";
 import { ConnectorOwnersV2 } from "./connectorownersv2.js";
+import { ConnectorSyncDiagnostics } from "./connectorsyncdiagnostics.js";
 import { Contacts } from "./contacts.js";
 import { CredentialInventoryPolicy } from "./credentialinventorypolicy.js";
 import { Decoy } from "./decoy.js";
 import { DecoySearch } from "./decoysearch.js";
 import { Directory } from "./directory.js";
+import { DirectoryMergeRule } from "./directorymergerule.js";
 import { Edge } from "./edge.js";
+import { EdgeIntegration } from "./edgeintegration.js";
 import { EmailCapabilities } from "./emailcapabilities.js";
 import { Export } from "./export.js";
 import { ExportsSearch } from "./exportssearch.js";
@@ -94,11 +100,15 @@ import { LocalDirectoryConfig } from "./localdirectoryconfig.js";
 import { LocalUserInvitation } from "./localuserinvitation.js";
 import { MCPAccessProfile } from "./mcpaccessprofile.js";
 import { MCPAccessProfileToolBinding } from "./mcpaccessprofiletoolbinding.js";
+import { MCPPrompt } from "./mcpprompt.js";
 import { MCPResource } from "./mcpresource.js";
 import { MCPServer } from "./mcpserver.js";
 import { MCPTool } from "./mcptool.js";
 import { ModelAPIKey } from "./modelapikey.js";
 import { MyFundLimits } from "./myfundlimits.js";
+import { MyRateLimit } from "./myratelimit.js";
+import { OAuthAuthorization } from "./oauthauthorization.js";
+import { OAuthAuthorizationMy } from "./oauthauthorizationmy.js";
 import { OnboardingSettings } from "./onboardingsettings.js";
 import { OrgDomain } from "./orgdomain.js";
 import { OrgNotificationSettings } from "./orgnotificationsettings.js";
@@ -112,6 +122,7 @@ import { PolicySearch } from "./policysearch.js";
 import { PolicyValidate } from "./policyvalidate.js";
 import { Principal } from "./principal.js";
 import { ProviderCredential } from "./providercredential.js";
+import { RateLimit } from "./ratelimit.js";
 import { RecoveryPolicy } from "./recoverypolicy.js";
 import { Reporting } from "./reporting.js";
 import { RequestCatalogManagement } from "./requestcatalogmanagement.js";
@@ -243,6 +254,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     ));
   }
 
+  private _appUserMergeRules?: AppUserMergeRules;
+  get appUserMergeRules(): AppUserMergeRules {
+    return (this._appUserMergeRules ??= new AppUserMergeRules(this._options));
+  }
+
   private _authzenServer?: AuthzenServer;
   get authzenServer(): AuthzenServer {
     return (this._authzenServer ??= new AuthzenServer(this._options));
@@ -251,6 +267,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _connector?: Connector;
   get connector(): Connector {
     return (this._connector ??= new Connector(this._options));
+  }
+
+  private _mcpPrompt?: MCPPrompt;
+  get mcpPrompt(): MCPPrompt {
+    return (this._mcpPrompt ??= new MCPPrompt(this._options));
   }
 
   private _mcpResource?: MCPResource;
@@ -274,6 +295,18 @@ export class ConductoroneSDKTypescript extends ClientSDK {
       new MCPAccessProfileToolBinding(this._options));
   }
 
+  private _connectorSyncDiagnostics?: ConnectorSyncDiagnostics;
+  get connectorSyncDiagnostics(): ConnectorSyncDiagnostics {
+    return (this._connectorSyncDiagnostics ??= new ConnectorSyncDiagnostics(
+      this._options,
+    ));
+  }
+
+  private _edgeIntegration?: EdgeIntegration;
+  get edgeIntegration(): EdgeIntegration {
+    return (this._edgeIntegration ??= new EdgeIntegration(this._options));
+  }
+
   private _edge?: Edge;
   get edge(): Edge {
     return (this._edge ??= new Edge(this._options));
@@ -284,6 +317,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._appEntitlementRoutingRule ??= new AppEntitlementRoutingRule(
       this._options,
     ));
+  }
+
+  private _appResource?: AppResource;
+  get appResource(): AppResource {
+    return (this._appResource ??= new AppResource(this._options));
   }
 
   private _appEntitlements?: AppEntitlements;
@@ -340,11 +378,6 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _appResourceType?: AppResourceType;
   get appResourceType(): AppResourceType {
     return (this._appResourceType ??= new AppResourceType(this._options));
-  }
-
-  private _appResource?: AppResource;
-  get appResource(): AppResource {
-    return (this._appResource ??= new AppResource(this._options));
   }
 
   private _appManagedState?: AppManagedState;
@@ -457,6 +490,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
       new ConnectorAuthoringActivation(this._options));
   }
 
+  private _connectorAuthoring?: ConnectorAuthoring;
+  get connectorAuthoring(): ConnectorAuthoring {
+    return (this._connectorAuthoring ??= new ConnectorAuthoring(this._options));
+  }
+
   private _connectorCatalog?: ConnectorCatalog;
   get connectorCatalog(): ConnectorCatalog {
     return (this._connectorCatalog ??= new ConnectorCatalog(this._options));
@@ -487,6 +525,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _directory?: Directory;
   get directory(): Directory {
     return (this._directory ??= new Directory(this._options));
+  }
+
+  private _directoryMergeRule?: DirectoryMergeRule;
+  get directoryMergeRule(): DirectoryMergeRule {
+    return (this._directoryMergeRule ??= new DirectoryMergeRule(this._options));
   }
 
   private _feedback?: Feedback;
@@ -570,16 +613,6 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._subjectAppLimit ??= new SubjectAppLimit(this._options));
   }
 
-  private _goLink?: GoLink;
-  get goLink(): GoLink {
-    return (this._goLink ??= new GoLink(this._options));
-  }
-
-  private _goLinkSearch?: GoLinkSearch;
-  get goLinkSearch(): GoLinkSearch {
-    return (this._goLinkSearch ??= new GoLinkSearch(this._options));
-  }
-
   private _hooks?: Hooks;
   get hooks(): Hooks {
     return (this._hooks ??= new Hooks(this._options));
@@ -595,6 +628,18 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _modelAPIKey?: ModelAPIKey;
   get modelAPIKey(): ModelAPIKey {
     return (this._modelAPIKey ??= new ModelAPIKey(this._options));
+  }
+
+  private _oAuthAuthorizationMy?: OAuthAuthorizationMy;
+  get oAuthAuthorizationMy(): OAuthAuthorizationMy {
+    return (this._oAuthAuthorizationMy ??= new OAuthAuthorizationMy(
+      this._options,
+    ));
+  }
+
+  private _oAuthAuthorization?: OAuthAuthorization;
+  get oAuthAuthorization(): OAuthAuthorization {
+    return (this._oAuthAuthorization ??= new OAuthAuthorization(this._options));
   }
 
   private _personalClient?: PersonalClient;
@@ -656,6 +701,21 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _policyValidate?: PolicyValidate;
   get policyValidate(): PolicyValidate {
     return (this._policyValidate ??= new PolicyValidate(this._options));
+  }
+
+  private _rateLimit?: RateLimit;
+  get rateLimit(): RateLimit {
+    return (this._rateLimit ??= new RateLimit(this._options));
+  }
+
+  private _apiKeyUsage?: APIKeyUsage;
+  get apiKeyUsage(): APIKeyUsage {
+    return (this._apiKeyUsage ??= new APIKeyUsage(this._options));
+  }
+
+  private _myRateLimit?: MyRateLimit;
+  get myRateLimit(): MyRateLimit {
+    return (this._myRateLimit ??= new MyRateLimit(this._options));
   }
 
   private _recoveryPolicy?: RecoveryPolicy;
@@ -831,6 +891,11 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._userSearch ??= new UserSearch(this._options));
   }
 
+  private _virtualMCPServer?: VirtualMCPServer;
+  get virtualMCPServer(): VirtualMCPServer {
+    return (this._virtualMCPServer ??= new VirtualMCPServer(this._options));
+  }
+
   private _webhooksSearch?: WebhooksSearch;
   get webhooksSearch(): WebhooksSearch {
     return (this._webhooksSearch ??= new WebhooksSearch(this._options));
@@ -946,6 +1011,16 @@ export class ConductoroneSDKTypescript extends ClientSDK {
     return (this._ssoSettings ??= new SSOSettings(this._options));
   }
 
+  private _goLink?: GoLink;
+  get goLink(): GoLink {
+    return (this._goLink ??= new GoLink(this._options));
+  }
+
+  private _goLinkSearch?: GoLinkSearch;
+  get goLinkSearch(): GoLinkSearch {
+    return (this._goLinkSearch ??= new GoLinkSearch(this._options));
+  }
+
   private _spendInsights?: SpendInsights;
   get spendInsights(): SpendInsights {
     return (this._spendInsights ??= new SpendInsights(this._options));
@@ -1011,11 +1086,6 @@ export class ConductoroneSDKTypescript extends ClientSDK {
   private _vault?: Vault;
   get vault(): Vault {
     return (this._vault ??= new Vault(this._options));
-  }
-
-  private _virtualMCPServer?: VirtualMCPServer;
-  get virtualMCPServer(): VirtualMCPServer {
-    return (this._virtualMCPServer ??= new VirtualMCPServer(this._options));
   }
 
   private _virtualMCPToolBinding?: VirtualMCPToolBinding;

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * A2UIServiceSubmitActionRequest submits a user action.
@@ -46,15 +47,17 @@ export const A2UIServiceSubmitActionRequest$outboundSchema: z.ZodType<
   A2UIServiceSubmitActionRequest$Outbound,
   z.ZodTypeDef,
   A2UIServiceSubmitActionRequest
-> = z.object({
-  actionName: z.string().optional(),
-  clientTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  context: z.record(z.string()).optional(),
-  conversationId: z.string().optional(),
-  dataModelJson: z.string().optional(),
-  sourceComponentId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actionName: z.string().optional(),
+    clientTimestamp: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    context: z.record(z.string()).optional(),
+    conversationId: z.string().optional(),
+    dataModelJson: z.string().optional(),
+    sourceComponentId: z.string().optional(),
+  })
+);
 
 export function a2UIServiceSubmitActionRequestToJSON(
   a2UIServiceSubmitActionRequest: A2UIServiceSubmitActionRequest,

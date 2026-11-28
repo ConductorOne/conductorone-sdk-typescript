@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,16 +44,18 @@ export const C1ApiUserV2UserOwnersV2SetRequest$outboundSchema: z.ZodType<
   C1ApiUserV2UserOwnersV2SetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiUserV2UserOwnersV2SetRequest
-> = z.object({
-  userId: z.string(),
-  setUserOwnersV2Request: shared.SetUserOwnersV2Request$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    userId: "user_id",
-    setUserOwnersV2Request: "SetUserOwnersV2Request",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+    setUserOwnersV2Request: shared.SetUserOwnersV2Request$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      userId: "user_id",
+      setUserOwnersV2Request: "SetUserOwnersV2Request",
+    });
+  })
+);
 
 export function c1ApiUserV2UserOwnersV2SetRequestToJSON(
   c1ApiUserV2UserOwnersV2SetRequest: C1ApiUserV2UserOwnersV2SetRequest,
@@ -70,20 +72,22 @@ export const C1ApiUserV2UserOwnersV2SetResponse$inboundSchema: z.ZodType<
   C1ApiUserV2UserOwnersV2SetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  SetUserOwnersV2Response: shared.SetUserOwnersV2Response$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "SetUserOwnersV2Response": "setUserOwnersV2Response",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    SetUserOwnersV2Response: shared.SetUserOwnersV2Response$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "SetUserOwnersV2Response": "setUserOwnersV2Response",
+    });
+  })
+);
 
 export function c1ApiUserV2UserOwnersV2SetResponseFromJSON(
   jsonString: string,

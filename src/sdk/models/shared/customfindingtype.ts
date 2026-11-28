@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,7 +21,7 @@ export const CustomFindingType$inboundSchema: z.ZodType<
   CustomFindingType,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type CustomFindingType$Outbound = {};
 
@@ -30,7 +30,7 @@ export const CustomFindingType$outboundSchema: z.ZodType<
   CustomFindingType$Outbound,
   z.ZodTypeDef,
   CustomFindingType
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function customFindingTypeToJSON(
   customFindingType: CustomFindingType,

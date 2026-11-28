@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,17 +52,20 @@ export const C1ApiFundsV1MyFundLimitsServiceClearTemporaryLimitRequest$outboundS
     C1ApiFundsV1MyFundLimitsServiceClearTemporaryLimitRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1MyFundLimitsServiceClearTemporaryLimitRequest
-  > = z.object({
-    appId: z.string(),
-    myFundLimitsServiceClearTemporaryLimitRequest: shared
-      .MyFundLimitsServiceClearTemporaryLimitRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      myFundLimitsServiceClearTemporaryLimitRequest:
-        "MyFundLimitsServiceClearTemporaryLimitRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      myFundLimitsServiceClearTemporaryLimitRequest: shared
+        .MyFundLimitsServiceClearTemporaryLimitRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        myFundLimitsServiceClearTemporaryLimitRequest:
+          "MyFundLimitsServiceClearTemporaryLimitRequest",
+      });
+    })
+  );
 
 export function c1ApiFundsV1MyFundLimitsServiceClearTemporaryLimitRequestToJSON(
   c1ApiFundsV1MyFundLimitsServiceClearTemporaryLimitRequest:
@@ -80,21 +83,24 @@ export const C1ApiFundsV1MyFundLimitsServiceClearTemporaryLimitResponse$inboundS
     C1ApiFundsV1MyFundLimitsServiceClearTemporaryLimitResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MyFundLimitsServiceClearTemporaryLimitResponse: shared
-      .MyFundLimitsServiceClearTemporaryLimitResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MyFundLimitsServiceClearTemporaryLimitResponse":
-        "myFundLimitsServiceClearTemporaryLimitResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MyFundLimitsServiceClearTemporaryLimitResponse: shared
+        .MyFundLimitsServiceClearTemporaryLimitResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MyFundLimitsServiceClearTemporaryLimitResponse":
+          "myFundLimitsServiceClearTemporaryLimitResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1MyFundLimitsServiceClearTemporaryLimitResponseFromJSON(
   jsonString: string,

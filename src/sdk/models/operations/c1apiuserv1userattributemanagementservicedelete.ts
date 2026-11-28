@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiUserV1UserAttributeManagementServiceDeleteRequest$outboundSche
     C1ApiUserV1UserAttributeManagementServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiUserV1UserAttributeManagementServiceDeleteRequest
-  > = z.object({
-    id: z.string(),
-    userAttributeManagementServiceDeleteRequest: shared
-      .UserAttributeManagementServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userAttributeManagementServiceDeleteRequest:
-        "UserAttributeManagementServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      userAttributeManagementServiceDeleteRequest: shared
+        .UserAttributeManagementServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userAttributeManagementServiceDeleteRequest:
+          "UserAttributeManagementServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiUserV1UserAttributeManagementServiceDeleteRequestToJSON(
   c1ApiUserV1UserAttributeManagementServiceDeleteRequest:
@@ -79,21 +81,23 @@ export const C1ApiUserV1UserAttributeManagementServiceDeleteResponse$inboundSche
     C1ApiUserV1UserAttributeManagementServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UserAttributeManagementServiceDeleteResponse: shared
-      .UserAttributeManagementServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UserAttributeManagementServiceDeleteResponse":
-        "userAttributeManagementServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UserAttributeManagementServiceDeleteResponse: shared
+        .UserAttributeManagementServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UserAttributeManagementServiceDeleteResponse":
+          "userAttributeManagementServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiUserV1UserAttributeManagementServiceDeleteResponseFromJSON(
   jsonString: string,

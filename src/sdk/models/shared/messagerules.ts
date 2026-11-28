@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,10 +32,12 @@ export const MessageRules$inboundSchema: z.ZodType<
   MessageRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  required: z.boolean().optional(),
-  skip: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required: z.boolean().optional(),
+    skip: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type MessageRules$Outbound = {
   required?: boolean | undefined;
@@ -47,10 +49,12 @@ export const MessageRules$outboundSchema: z.ZodType<
   MessageRules$Outbound,
   z.ZodTypeDef,
   MessageRules
-> = z.object({
-  required: z.boolean().optional(),
-  skip: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required: z.boolean().optional(),
+    skip: z.boolean().optional(),
+  })
+);
 
 export function messageRulesToJSON(messageRules: MessageRules): string {
   return JSON.stringify(MessageRules$outboundSchema.parse(messageRules));

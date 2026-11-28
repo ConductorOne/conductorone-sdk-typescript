@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAAccessProfileScopeBindingRef is a lightweight reference to a binding, used
@@ -37,11 +38,13 @@ export const XAAAccessProfileScopeBindingRef$outboundSchema: z.ZodType<
   XAAAccessProfileScopeBindingRef$Outbound,
   z.ZodTypeDef,
   XAAAccessProfileScopeBindingRef
-> = z.object({
-  accessProfileId: z.string().optional(),
-  appId: z.string().optional(),
-  xaaScopeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileId: z.string().optional(),
+    appId: z.string().optional(),
+    xaaScopeId: z.string().optional(),
+  })
+);
 
 export function xaaAccessProfileScopeBindingRefToJSON(
   xaaAccessProfileScopeBindingRef: XAAAccessProfileScopeBindingRef,

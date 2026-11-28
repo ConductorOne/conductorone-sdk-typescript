@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -42,17 +43,19 @@ export const AccessReviewServiceGetResponseExpanded$inboundSchema: z.ZodType<
   AccessReviewServiceGetResponseExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 
 export function accessReviewServiceGetResponseExpandedFromJSON(
   jsonString: string,
@@ -70,12 +73,16 @@ export const AccessReviewServiceGetResponse$inboundSchema: z.ZodType<
   AccessReviewServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReview: z.nullable(AccessReviewView$inboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => AccessReviewServiceGetResponseExpanded$inboundSchema)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReview: z.nullable(AccessReviewView$inboundSchema).optional(),
+    expanded: z.nullable(
+      z.array(
+        z.lazy(() => AccessReviewServiceGetResponseExpanded$inboundSchema),
+      ),
+    ).optional(),
+  })
+);
 
 export function accessReviewServiceGetResponseFromJSON(
   jsonString: string,

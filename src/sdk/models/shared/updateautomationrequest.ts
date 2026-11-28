@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AutomationInput,
   AutomationInput$Outbound,
@@ -28,10 +29,12 @@ export const UpdateAutomationRequest$outboundSchema: z.ZodType<
   UpdateAutomationRequest$Outbound,
   z.ZodTypeDef,
   UpdateAutomationRequest
-> = z.object({
-  automation: z.nullable(AutomationInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automation: z.nullable(AutomationInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateAutomationRequestToJSON(
   updateAutomationRequest: UpdateAutomationRequest,

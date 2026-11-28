@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { UserOwnerUser, UserOwnerUser$inboundSchema } from "./userowneruser.js";
@@ -20,9 +20,11 @@ export const CreateUserUserOwnerResponse$inboundSchema: z.ZodType<
   CreateUserUserOwnerResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  userOwnerUser: z.nullable(UserOwnerUser$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userOwnerUser: z.nullable(UserOwnerUser$inboundSchema).optional(),
+  })
+);
 
 export function createUserUserOwnerResponseFromJSON(
   jsonString: string,

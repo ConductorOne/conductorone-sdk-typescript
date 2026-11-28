@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,14 +54,16 @@ export const EntitlementInclusionCriteria$inboundSchema: z.ZodType<
   EntitlementInclusionCriteria,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$inboundSchema))
-    .optional(),
-  riskLevelIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
+    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$inboundSchema))
+      .optional(),
+    riskLevelIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type EntitlementInclusionCriteria$Outbound = {
   appIds?: Array<string> | null | undefined;
@@ -76,14 +78,16 @@ export const EntitlementInclusionCriteria$outboundSchema: z.ZodType<
   EntitlementInclusionCriteria$Outbound,
   z.ZodTypeDef,
   EntitlementInclusionCriteria
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
-    .optional(),
-  riskLevelIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    complianceFrameworkIds: z.nullable(z.array(z.string())).optional(),
+    resourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
+      .optional(),
+    riskLevelIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function entitlementInclusionCriteriaToJSON(
   entitlementInclusionCriteria: EntitlementInclusionCriteria,

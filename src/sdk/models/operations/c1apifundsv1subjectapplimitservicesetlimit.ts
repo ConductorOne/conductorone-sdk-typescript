@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,19 +53,21 @@ export const C1ApiFundsV1SubjectAppLimitServiceSetLimitRequest$outboundSchema:
     C1ApiFundsV1SubjectAppLimitServiceSetLimitRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1SubjectAppLimitServiceSetLimitRequest
-  > = z.object({
-    userId: z.string(),
-    appId: z.string(),
-    subjectAppLimitServiceSetLimitRequest: shared
-      .SubjectAppLimitServiceSetLimitRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      appId: "app_id",
-      subjectAppLimitServiceSetLimitRequest:
-        "SubjectAppLimitServiceSetLimitRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      appId: z.string(),
+      subjectAppLimitServiceSetLimitRequest: shared
+        .SubjectAppLimitServiceSetLimitRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        appId: "app_id",
+        subjectAppLimitServiceSetLimitRequest:
+          "SubjectAppLimitServiceSetLimitRequest",
+      });
+    })
+  );
 
 export function c1ApiFundsV1SubjectAppLimitServiceSetLimitRequestToJSON(
   c1ApiFundsV1SubjectAppLimitServiceSetLimitRequest:
@@ -84,21 +86,23 @@ export const C1ApiFundsV1SubjectAppLimitServiceSetLimitResponse$inboundSchema:
     C1ApiFundsV1SubjectAppLimitServiceSetLimitResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SubjectAppLimitServiceSetLimitResponse: shared
-      .SubjectAppLimitServiceSetLimitResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SubjectAppLimitServiceSetLimitResponse":
-        "subjectAppLimitServiceSetLimitResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SubjectAppLimitServiceSetLimitResponse: shared
+        .SubjectAppLimitServiceSetLimitResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SubjectAppLimitServiceSetLimitResponse":
+          "subjectAppLimitServiceSetLimitResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1SubjectAppLimitServiceSetLimitResponseFromJSON(
   jsonString: string,

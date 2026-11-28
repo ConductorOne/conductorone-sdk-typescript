@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The FundAssignmentServiceClearExtensionRequest message.
@@ -18,7 +19,7 @@ export const FundAssignmentServiceClearExtensionRequest$outboundSchema:
     FundAssignmentServiceClearExtensionRequest$Outbound,
     z.ZodTypeDef,
     FundAssignmentServiceClearExtensionRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function fundAssignmentServiceClearExtensionRequestToJSON(
   fundAssignmentServiceClearExtensionRequest:

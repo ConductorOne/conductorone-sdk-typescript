@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,15 +52,18 @@ export const C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$outbound
     C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationServiceDeleteAutomationRequest
-  > = z.object({
-    id: z.string(),
-    automationsDeleteAutomationRequest: shared
-      .AutomationsDeleteAutomationRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      automationsDeleteAutomationRequest: "AutomationsDeleteAutomationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      automationsDeleteAutomationRequest: shared
+        .AutomationsDeleteAutomationRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        automationsDeleteAutomationRequest:
+          "AutomationsDeleteAutomationRequest",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceDeleteAutomationRequestToJSON(
   c1ApiAutomationsV1AutomationServiceDeleteAutomationRequest:
@@ -78,21 +81,23 @@ export const C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse$inbound
     C1ApiAutomationsV1AutomationServiceDeleteAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AutomationsDeleteAutomationResponse: shared
-      .AutomationsDeleteAutomationResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AutomationsDeleteAutomationResponse":
-        "automationsDeleteAutomationResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AutomationsDeleteAutomationResponse: shared
+        .AutomationsDeleteAutomationResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AutomationsDeleteAutomationResponse":
+          "automationsDeleteAutomationResponse",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationServiceDeleteAutomationResponseFromJSON(
   jsonString: string,

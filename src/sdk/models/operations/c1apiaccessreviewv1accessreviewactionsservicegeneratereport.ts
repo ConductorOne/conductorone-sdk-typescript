@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiAccessreviewV1AccessReviewActionsServiceGenerateReportRequest$
     C1ApiAccessreviewV1AccessReviewActionsServiceGenerateReportRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAccessreviewV1AccessReviewActionsServiceGenerateReportRequest
-  > = z.object({
-    accessReviewId: z.string(),
-    accessReviewActionsServiceGenerateReportRequest: shared
-      .AccessReviewActionsServiceGenerateReportRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessReviewId: "access_review_id",
-      accessReviewActionsServiceGenerateReportRequest:
-        "AccessReviewActionsServiceGenerateReportRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessReviewId: z.string(),
+      accessReviewActionsServiceGenerateReportRequest: shared
+        .AccessReviewActionsServiceGenerateReportRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        accessReviewId: "access_review_id",
+        accessReviewActionsServiceGenerateReportRequest:
+          "AccessReviewActionsServiceGenerateReportRequest",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewActionsServiceGenerateReportRequestToJSON(
   c1ApiAccessreviewV1AccessReviewActionsServiceGenerateReportRequest:
@@ -85,22 +87,24 @@ export const C1ApiAccessreviewV1AccessReviewActionsServiceGenerateReportResponse
     C1ApiAccessreviewV1AccessReviewActionsServiceGenerateReportResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AccessReviewActionsServiceGenerateReportResponse: shared
-      .AccessReviewActionsServiceGenerateReportResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AccessReviewActionsServiceGenerateReportResponse":
-        "accessReviewActionsServiceGenerateReportResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AccessReviewActionsServiceGenerateReportResponse: shared
+        .AccessReviewActionsServiceGenerateReportResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AccessReviewActionsServiceGenerateReportResponse":
+          "accessReviewActionsServiceGenerateReportResponse",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewActionsServiceGenerateReportResponseFromJSON(
   jsonString: string,

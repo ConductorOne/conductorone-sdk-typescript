@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -39,17 +40,19 @@ export const DirectoryServiceCreateResponseExpanded$inboundSchema: z.ZodType<
   DirectoryServiceCreateResponseExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 
 export function directoryServiceCreateResponseExpandedFromJSON(
   jsonString: string,
@@ -67,12 +70,16 @@ export const DirectoryServiceCreateResponse$inboundSchema: z.ZodType<
   DirectoryServiceCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  directoryView: z.nullable(DirectoryView$inboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => DirectoryServiceCreateResponseExpanded$inboundSchema)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    directoryView: z.nullable(DirectoryView$inboundSchema).optional(),
+    expanded: z.nullable(
+      z.array(
+        z.lazy(() => DirectoryServiceCreateResponseExpanded$inboundSchema),
+      ),
+    ).optional(),
+  })
+);
 
 export function directoryServiceCreateResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -12,6 +12,8 @@ import * as shared from "../shared/index.js";
 export type C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest = {
   appId: string;
   appEntitlementId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse = {
@@ -40,6 +42,8 @@ export type C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$Outbound =
   {
     app_id: string;
     app_entitlement_id: string;
+    page_size?: number | undefined;
+    page_token?: string | undefined;
   };
 
 /** @internal */
@@ -48,15 +52,21 @@ export const C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$outboundSc
     C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsListAutomationExclusionsRequest
-  > = z.object({
-    appId: z.string(),
-    appEntitlementId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appEntitlementId: "app_entitlement_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appEntitlementId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appEntitlementId: "app_entitlement_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsListAutomationExclusionsRequestToJSON(
   c1ApiAppV1AppEntitlementsListAutomationExclusionsRequest:
@@ -74,20 +84,22 @@ export const C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse$inboundSc
     C1ApiAppV1AppEntitlementsListAutomationExclusionsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListAutomationExclusionsResponse: shared
-      .ListAutomationExclusionsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListAutomationExclusionsResponse": "listAutomationExclusionsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListAutomationExclusionsResponse: shared
+        .ListAutomationExclusionsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListAutomationExclusionsResponse": "listAutomationExclusionsResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsListAutomationExclusionsResponseFromJSON(
   jsonString: string,

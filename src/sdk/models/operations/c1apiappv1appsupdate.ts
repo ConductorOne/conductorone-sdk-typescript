@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,14 +44,16 @@ export const C1ApiAppV1AppsUpdateRequest$outboundSchema: z.ZodType<
   C1ApiAppV1AppsUpdateRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV1AppsUpdateRequest
-> = z.object({
-  id: z.string(),
-  updateAppRequest: shared.UpdateAppRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    updateAppRequest: "UpdateAppRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    updateAppRequest: shared.UpdateAppRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      updateAppRequest: "UpdateAppRequest",
+    });
+  })
+);
 
 export function c1ApiAppV1AppsUpdateRequestToJSON(
   c1ApiAppV1AppsUpdateRequest: C1ApiAppV1AppsUpdateRequest,
@@ -68,19 +70,21 @@ export const C1ApiAppV1AppsUpdateResponse$inboundSchema: z.ZodType<
   C1ApiAppV1AppsUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  UpdateAppResponse: shared.UpdateAppResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "UpdateAppResponse": "updateAppResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    UpdateAppResponse: shared.UpdateAppResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "UpdateAppResponse": "updateAppResponse",
+    });
+  })
+);
 
 export function c1ApiAppV1AppsUpdateResponseFromJSON(
   jsonString: string,

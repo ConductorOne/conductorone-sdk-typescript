@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,15 +46,17 @@ export const C1ApiSpendinsightsV1SpendInsightsServiceGetMySpendStatusRequest$out
     C1ApiSpendinsightsV1SpendInsightsServiceGetMySpendStatusRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSpendinsightsV1SpendInsightsServiceGetMySpendStatusRequest
-  > = z.object({
-    appId: z.string().optional(),
-    blockId: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      blockId: "block_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string().optional(),
+      blockId: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        blockId: "block_id",
+      });
+    })
+  );
 
 export function c1ApiSpendinsightsV1SpendInsightsServiceGetMySpendStatusRequestToJSON(
   c1ApiSpendinsightsV1SpendInsightsServiceGetMySpendStatusRequest:
@@ -72,20 +74,22 @@ export const C1ApiSpendinsightsV1SpendInsightsServiceGetMySpendStatusResponse$in
     C1ApiSpendinsightsV1SpendInsightsServiceGetMySpendStatusResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetMySpendStatusResponse: shared.GetMySpendStatusResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetMySpendStatusResponse": "getMySpendStatusResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetMySpendStatusResponse: shared.GetMySpendStatusResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetMySpendStatusResponse": "getMySpendStatusResponse",
+      });
+    })
+  );
 
 export function c1ApiSpendinsightsV1SpendInsightsServiceGetMySpendStatusResponseFromJSON(
   jsonString: string,

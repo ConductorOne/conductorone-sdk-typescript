@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -79,27 +79,31 @@ export const PersonalDeviceStatus$inboundSchema: z.ZodType<
   PersonalDeviceStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PersonalDeviceStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(PersonalDeviceStatus)
+);
 
 /** @internal */
 export const PersonalDevice$inboundSchema: z.ZodType<
   PersonalDevice,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deviceId: z.string().optional(),
-  deviceOs: z.string().optional(),
-  deviceSurface: z.string().optional(),
-  displayName: z.string().optional(),
-  status: PersonalDeviceStatus$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deviceId: z.string().optional(),
+    deviceOs: z.string().optional(),
+    deviceSurface: z.string().optional(),
+    displayName: z.string().optional(),
+    status: PersonalDeviceStatus$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function personalDeviceFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -12,6 +12,12 @@ import {
   ChipsField$Outbound,
   ChipsField$outboundSchema,
 } from "./chipsfield.js";
+import {
+  MultiSelectField,
+  MultiSelectField$inboundSchema,
+  MultiSelectField$Outbound,
+  MultiSelectField$outboundSchema,
+} from "./multiselectfield.js";
 import {
   PickerField,
   PickerField$inboundSchema,
@@ -32,6 +38,7 @@ import {
  *
  * This message contains a oneof named view. Only a single field of the following list may be set at a time:
  *   - chipsField
+ *   - multiSelectField
  *   - pickerField
  */
 export type StringSliceField = {
@@ -40,6 +47,7 @@ export type StringSliceField = {
    * The defaultValues field.
    */
   defaultValues?: Array<string> | null | undefined;
+  multiSelectField?: MultiSelectField | null | undefined;
   pickerField?: PickerField | null | undefined;
   /**
    * The placeholder field.
@@ -53,17 +61,21 @@ export const StringSliceField$inboundSchema: z.ZodType<
   StringSliceField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  chipsField: z.nullable(ChipsField$inboundSchema).optional(),
-  defaultValues: z.nullable(z.array(z.string())).optional(),
-  pickerField: z.nullable(PickerField$inboundSchema).optional(),
-  placeholder: z.string().optional(),
-  rules: z.nullable(RepeatedRules$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chipsField: z.nullable(ChipsField$inboundSchema).optional(),
+    defaultValues: z.nullable(z.array(z.string())).optional(),
+    multiSelectField: z.nullable(MultiSelectField$inboundSchema).optional(),
+    pickerField: z.nullable(PickerField$inboundSchema).optional(),
+    placeholder: z.string().optional(),
+    rules: z.nullable(RepeatedRules$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type StringSliceField$Outbound = {
   chipsField?: ChipsField$Outbound | null | undefined;
   defaultValues?: Array<string> | null | undefined;
+  multiSelectField?: MultiSelectField$Outbound | null | undefined;
   pickerField?: PickerField$Outbound | null | undefined;
   placeholder?: string | undefined;
   rules?: RepeatedRules$Outbound | null | undefined;
@@ -74,13 +86,16 @@ export const StringSliceField$outboundSchema: z.ZodType<
   StringSliceField$Outbound,
   z.ZodTypeDef,
   StringSliceField
-> = z.object({
-  chipsField: z.nullable(ChipsField$outboundSchema).optional(),
-  defaultValues: z.nullable(z.array(z.string())).optional(),
-  pickerField: z.nullable(PickerField$outboundSchema).optional(),
-  placeholder: z.string().optional(),
-  rules: z.nullable(RepeatedRules$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chipsField: z.nullable(ChipsField$outboundSchema).optional(),
+    defaultValues: z.nullable(z.array(z.string())).optional(),
+    multiSelectField: z.nullable(MultiSelectField$outboundSchema).optional(),
+    pickerField: z.nullable(PickerField$outboundSchema).optional(),
+    placeholder: z.string().optional(),
+    rules: z.nullable(RepeatedRules$outboundSchema).optional(),
+  })
+);
 
 export function stringSliceFieldToJSON(
   stringSliceField: StringSliceField,

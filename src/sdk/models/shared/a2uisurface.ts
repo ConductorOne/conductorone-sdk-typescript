@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -108,41 +108,43 @@ export const A2UISurfaceRole$inboundSchema: z.ZodType<
   A2UISurfaceRole,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(A2UISurfaceRole);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(A2UISurfaceRole));
 
 /** @internal */
 export const State$inboundSchema: z.ZodType<State, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(State);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(State));
 
 /** @internal */
 export const A2UISurface$inboundSchema: z.ZodType<
   A2UISurface,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  catalogId: z.string().optional(),
-  components: z.nullable(z.array(A2UIComponent$inboundSchema)).optional(),
-  conversationId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  dataModelJson: z.string().optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  hasReportProgram: z.boolean().optional(),
-  reportEditTarget: z.nullable(A2UIReportEditTarget$inboundSchema).optional(),
-  role: A2UISurfaceRole$inboundSchema.optional(),
-  savedReportId: z.string().optional(),
-  schemaVersion: z.string().transform(v => parseInt(v, 10)).optional(),
-  sendDataModel: z.boolean().optional(),
-  state: State$inboundSchema.optional(),
-  surfaceId: z.string().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogId: z.string().optional(),
+    components: z.nullable(z.array(A2UIComponent$inboundSchema)).optional(),
+    conversationId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    dataModelJson: z.string().optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    hasReportProgram: z.boolean().optional(),
+    reportEditTarget: z.nullable(A2UIReportEditTarget$inboundSchema).optional(),
+    role: A2UISurfaceRole$inboundSchema.optional(),
+    savedReportId: z.string().optional(),
+    schemaVersion: z.string().transform(v => parseInt(v, 10)).optional(),
+    sendDataModel: z.boolean().optional(),
+    state: State$inboundSchema.optional(),
+    surfaceId: z.string().optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function a2UISurfaceFromJSON(
   jsonString: string,

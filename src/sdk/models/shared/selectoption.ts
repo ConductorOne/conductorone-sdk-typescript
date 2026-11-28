@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const SelectOption$inboundSchema: z.ZodType<
   SelectOption,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  value: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    value: z.string().optional(),
+  })
+);
 /** @internal */
 export type SelectOption$Outbound = {
   description?: string | undefined;
@@ -47,11 +49,13 @@ export const SelectOption$outboundSchema: z.ZodType<
   SelectOption$Outbound,
   z.ZodTypeDef,
   SelectOption
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  value: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    value: z.string().optional(),
+  })
+);
 
 export function selectOptionToJSON(selectOption: SelectOption): string {
   return JSON.stringify(SelectOption$outboundSchema.parse(selectOption));

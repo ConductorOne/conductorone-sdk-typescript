@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ConnectorServiceRotateCredentialRequest is a request for rotating connector credentials. It uses URL values for input.
@@ -29,10 +30,12 @@ export const ConnectorServiceRotateCredentialRequest$outboundSchema: z.ZodType<
   ConnectorServiceRotateCredentialRequest$Outbound,
   z.ZodTypeDef,
   ConnectorServiceRotateCredentialRequest
-> = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+  })
+);
 
 export function connectorServiceRotateCredentialRequestToJSON(
   connectorServiceRotateCredentialRequest:

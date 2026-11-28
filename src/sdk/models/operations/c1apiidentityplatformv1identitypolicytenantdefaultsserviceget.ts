@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -37,21 +37,24 @@ export const C1ApiIdentityPlatformV1IdentityPolicyTenantDefaultsServiceGetRespon
     C1ApiIdentityPlatformV1IdentityPolicyTenantDefaultsServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    IdentityPolicyTenantDefaultsServiceGetResponse: shared
-      .IdentityPolicyTenantDefaultsServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "IdentityPolicyTenantDefaultsServiceGetResponse":
-        "identityPolicyTenantDefaultsServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      IdentityPolicyTenantDefaultsServiceGetResponse: shared
+        .IdentityPolicyTenantDefaultsServiceGetResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "IdentityPolicyTenantDefaultsServiceGetResponse":
+          "identityPolicyTenantDefaultsServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiIdentityPlatformV1IdentityPolicyTenantDefaultsServiceGetResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -21,6 +21,7 @@ export type EdgeEgressRuleList = {
    * The rules field.
    */
   rules?: Array<EdgeEgressRule> | null | undefined;
+  unmatchedRule?: EdgeEgressRule | null | undefined;
 };
 
 /** @internal */
@@ -28,12 +29,16 @@ export const EdgeEgressRuleList$inboundSchema: z.ZodType<
   EdgeEgressRuleList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rules: z.nullable(z.array(EdgeEgressRule$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rules: z.nullable(z.array(EdgeEgressRule$inboundSchema)).optional(),
+    unmatchedRule: z.nullable(EdgeEgressRule$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type EdgeEgressRuleList$Outbound = {
   rules?: Array<EdgeEgressRule$Outbound> | null | undefined;
+  unmatchedRule?: EdgeEgressRule$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -41,9 +46,12 @@ export const EdgeEgressRuleList$outboundSchema: z.ZodType<
   EdgeEgressRuleList$Outbound,
   z.ZodTypeDef,
   EdgeEgressRuleList
-> = z.object({
-  rules: z.nullable(z.array(EdgeEgressRule$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rules: z.nullable(z.array(EdgeEgressRule$outboundSchema)).optional(),
+    unmatchedRule: z.nullable(EdgeEgressRule$outboundSchema).optional(),
+  })
+);
 
 export function edgeEgressRuleListToJSON(
   edgeEgressRuleList: EdgeEgressRuleList,

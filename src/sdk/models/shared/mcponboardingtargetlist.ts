@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   McpOnboardingTarget,
   McpOnboardingTarget$Outbound,
@@ -32,9 +33,11 @@ export const McpOnboardingTargetList$outboundSchema: z.ZodType<
   McpOnboardingTargetList$Outbound,
   z.ZodTypeDef,
   McpOnboardingTargetList
-> = z.object({
-  targets: z.nullable(z.array(McpOnboardingTarget$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    targets: z.nullable(z.array(McpOnboardingTarget$outboundSchema)).optional(),
+  })
+);
 
 export function mcpOnboardingTargetListToJSON(
   mcpOnboardingTargetList: McpOnboardingTargetList,

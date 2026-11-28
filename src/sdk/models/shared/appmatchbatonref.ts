@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,11 +33,13 @@ export const AppMatchBatonRef$inboundSchema: z.ZodType<
   AppMatchBatonRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string(),
-  connectorId: z.string(),
-  externalId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    connectorId: z.string(),
+    externalId: z.string(),
+  })
+);
 /** @internal */
 export type AppMatchBatonRef$Outbound = {
   appId: string;
@@ -50,11 +52,13 @@ export const AppMatchBatonRef$outboundSchema: z.ZodType<
   AppMatchBatonRef$Outbound,
   z.ZodTypeDef,
   AppMatchBatonRef
-> = z.object({
-  appId: z.string(),
-  connectorId: z.string(),
-  externalId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    connectorId: z.string(),
+    externalId: z.string(),
+  })
+);
 
 export function appMatchBatonRefToJSON(
   appMatchBatonRef: AppMatchBatonRef,

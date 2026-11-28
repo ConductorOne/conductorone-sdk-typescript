@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -50,11 +50,13 @@ export const AccessScope$inboundSchema: z.ZodType<
   AccessScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  entitlement: z.nullable(AppEntitlementScopeRef$inboundSchema).optional(),
-  groups: z.nullable(AccessScopeGroups$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.nullable(z.string()).optional(),
+    entitlement: z.nullable(AppEntitlementScopeRef$inboundSchema).optional(),
+    groups: z.nullable(AccessScopeGroups$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type AccessScope$Outbound = {
   appId?: string | null | undefined;
@@ -67,11 +69,13 @@ export const AccessScope$outboundSchema: z.ZodType<
   AccessScope$Outbound,
   z.ZodTypeDef,
   AccessScope
-> = z.object({
-  appId: z.nullable(z.string()).optional(),
-  entitlement: z.nullable(AppEntitlementScopeRef$outboundSchema).optional(),
-  groups: z.nullable(AccessScopeGroups$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.nullable(z.string()).optional(),
+    entitlement: z.nullable(AppEntitlementScopeRef$outboundSchema).optional(),
+    groups: z.nullable(AccessScopeGroups$outboundSchema).optional(),
+  })
+);
 
 export function accessScopeToJSON(accessScope: AccessScope): string {
   return JSON.stringify(AccessScope$outboundSchema.parse(accessScope));

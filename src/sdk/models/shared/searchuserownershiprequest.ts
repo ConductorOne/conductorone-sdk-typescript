@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -45,7 +46,7 @@ export const OwnershipTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   OwnershipTypes
-> = openEnums.outboundSchema(OwnershipTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(OwnershipTypes));
 
 /** @internal */
 export type SearchUserOwnershipRequest$Outbound = {
@@ -60,12 +61,15 @@ export const SearchUserOwnershipRequest$outboundSchema: z.ZodType<
   SearchUserOwnershipRequest$Outbound,
   z.ZodTypeDef,
   SearchUserOwnershipRequest
-> = z.object({
-  ownershipTypes: z.nullable(z.array(OwnershipTypes$outboundSchema)).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ownershipTypes: z.nullable(z.array(OwnershipTypes$outboundSchema))
+      .optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function searchUserOwnershipRequestToJSON(
   searchUserOwnershipRequest: SearchUserOwnershipRequest,

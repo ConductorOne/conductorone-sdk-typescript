@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,16 +46,18 @@ export const C1ApiFundsV1AppCapServiceDeleteRequest$outboundSchema: z.ZodType<
   C1ApiFundsV1AppCapServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   C1ApiFundsV1AppCapServiceDeleteRequest
-> = z.object({
-  appId: z.string(),
-  appCapServiceDeleteRequest: shared.AppCapServiceDeleteRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    appCapServiceDeleteRequest: "AppCapServiceDeleteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    appCapServiceDeleteRequest: shared.AppCapServiceDeleteRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      appCapServiceDeleteRequest: "AppCapServiceDeleteRequest",
+    });
+  })
+);
 
 export function c1ApiFundsV1AppCapServiceDeleteRequestToJSON(
   c1ApiFundsV1AppCapServiceDeleteRequest:
@@ -73,20 +75,22 @@ export const C1ApiFundsV1AppCapServiceDeleteResponse$inboundSchema: z.ZodType<
   C1ApiFundsV1AppCapServiceDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  AppCapServiceDeleteResponse: shared.AppCapServiceDeleteResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "AppCapServiceDeleteResponse": "appCapServiceDeleteResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    AppCapServiceDeleteResponse: shared
+      .AppCapServiceDeleteResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "AppCapServiceDeleteResponse": "appCapServiceDeleteResponse",
+    });
+  })
+);
 
 export function c1ApiFundsV1AppCapServiceDeleteResponseFromJSON(
   jsonString: string,

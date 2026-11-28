@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -65,7 +66,9 @@ export const ExecutionStates$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ExecutionStates
-> = openEnums.outboundSchema(ExecutionStates);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ExecutionStates)
+);
 
 /** @internal */
 export type SearchAllAutomationExecutionsRequest$Outbound = {
@@ -83,17 +86,19 @@ export const SearchAllAutomationExecutionsRequest$outboundSchema: z.ZodType<
   SearchAllAutomationExecutionsRequest$Outbound,
   z.ZodTypeDef,
   SearchAllAutomationExecutionsRequest
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  automationTemplateIds: z.nullable(z.array(z.string())).optional(),
-  executionStates: z.nullable(z.array(ExecutionStates$outboundSchema))
-    .optional(),
-  expandMask: z.nullable(AutomationExecutionExpandMask$outboundSchema)
-    .optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  subjectUserIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    automationTemplateIds: z.nullable(z.array(z.string())).optional(),
+    executionStates: z.nullable(z.array(ExecutionStates$outboundSchema))
+      .optional(),
+    expandMask: z.nullable(AutomationExecutionExpandMask$outboundSchema)
+      .optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    subjectUserIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function searchAllAutomationExecutionsRequestToJSON(
   searchAllAutomationExecutionsRequest: SearchAllAutomationExecutionsRequest,

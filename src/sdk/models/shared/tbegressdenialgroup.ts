@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -95,34 +95,38 @@ export const TBEgressDenialGroupOutcome$inboundSchema: z.ZodType<
   TBEgressDenialGroupOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TBEgressDenialGroupOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TBEgressDenialGroupOutcome)
+);
 
 /** @internal */
 export const TBEgressDenialGroup$inboundSchema: z.ZodType<
   TBEgressDenialGroup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.string().transform(v => parseInt(v, 10)).optional(),
-  destHost: z.string().optional(),
-  egressEnforcementMode: z.string().optional(),
-  egressPolicyVerdict: z.string().optional(),
-  firstSeen: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  lastSeen: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  outcome: TBEgressDenialGroupOutcome$inboundSchema.optional(),
-  principalUserId: z.string().optional(),
-  reasonClass: z.string().optional(),
-  sampleEventId: z.string().optional(),
-  sampleEventTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  sourcePrincipal: z.string().optional(),
-  sourcePrincipalKind: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.string().transform(v => parseInt(v, 10)).optional(),
+    destHost: z.string().optional(),
+    egressEnforcementMode: z.string().optional(),
+    egressPolicyVerdict: z.string().optional(),
+    firstSeen: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    lastSeen: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    outcome: TBEgressDenialGroupOutcome$inboundSchema.optional(),
+    principalUserId: z.string().optional(),
+    reasonClass: z.string().optional(),
+    sampleEventId: z.string().optional(),
+    sampleEventTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    sourcePrincipal: z.string().optional(),
+    sourcePrincipalKind: z.string().optional(),
+  })
+);
 
 export function tbEgressDenialGroupFromJSON(
   jsonString: string,

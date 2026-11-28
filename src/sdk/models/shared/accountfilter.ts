@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -38,22 +38,24 @@ export const AccountType$inboundSchema: z.ZodType<
   AccountType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AccountType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AccountType));
 /** @internal */
 export const AccountType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccountType
-> = openEnums.outboundSchema(AccountType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AccountType));
 
 /** @internal */
 export const AccountFilter$inboundSchema: z.ZodType<
   AccountFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountType: AccountType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountType: AccountType$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type AccountFilter$Outbound = {
   accountType?: string | undefined;
@@ -64,9 +66,11 @@ export const AccountFilter$outboundSchema: z.ZodType<
   AccountFilter$Outbound,
   z.ZodTypeDef,
   AccountFilter
-> = z.object({
-  accountType: AccountType$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountType: AccountType$outboundSchema.optional(),
+  })
+);
 
 export function accountFilterToJSON(accountFilter: AccountFilter): string {
   return JSON.stringify(AccountFilter$outboundSchema.parse(accountFilter));

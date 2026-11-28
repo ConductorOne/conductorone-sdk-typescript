@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,11 @@ export const FundsSpendLimitAmount$inboundSchema: z.ZodType<
   FundsSpendLimitAmount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  money: z.nullable(FundsMoney$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    money: z.nullable(FundsMoney$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FundsSpendLimitAmount$Outbound = {
   money?: FundsMoney$Outbound | null | undefined;
@@ -38,9 +40,11 @@ export const FundsSpendLimitAmount$outboundSchema: z.ZodType<
   FundsSpendLimitAmount$Outbound,
   z.ZodTypeDef,
   FundsSpendLimitAmount
-> = z.object({
-  money: z.nullable(FundsMoney$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    money: z.nullable(FundsMoney$outboundSchema).optional(),
+  })
+);
 
 export function fundsSpendLimitAmountToJSON(
   fundsSpendLimitAmount: FundsSpendLimitAmount,

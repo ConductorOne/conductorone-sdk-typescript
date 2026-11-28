@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -48,14 +48,16 @@ export const CreateAccessReview$inboundSchema: z.ZodType<
   CreateAccessReview,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReviewTemplateCel: z.string().optional(),
-  accessReviewTemplateId: z.string().optional(),
-  campaignName: z.string().optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewTemplateCel: z.string().optional(),
+    accessReviewTemplateId: z.string().optional(),
+    campaignName: z.string().optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdsCel: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type CreateAccessReview$Outbound = {
   accessReviewTemplateCel?: string | undefined;
@@ -71,14 +73,16 @@ export const CreateAccessReview$outboundSchema: z.ZodType<
   CreateAccessReview$Outbound,
   z.ZodTypeDef,
   CreateAccessReview
-> = z.object({
-  accessReviewTemplateCel: z.string().optional(),
-  accessReviewTemplateId: z.string().optional(),
-  campaignName: z.string().optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewTemplateCel: z.string().optional(),
+    accessReviewTemplateId: z.string().optional(),
+    campaignName: z.string().optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdsCel: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+  })
+);
 
 export function createAccessReviewToJSON(
   createAccessReview: CreateAccessReview,

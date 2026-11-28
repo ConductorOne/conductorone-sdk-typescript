@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,19 +51,21 @@ export const C1ApiAppV1AppUserServiceListAppUserCredentialsRequest$outboundSchem
     C1ApiAppV1AppUserServiceListAppUserCredentialsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppUserServiceListAppUserCredentialsRequest
-  > = z.object({
-    appId: z.string(),
-    appUserId: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appUserId: "app_user_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appUserId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appUserId: "app_user_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppUserServiceListAppUserCredentialsRequestToJSON(
   c1ApiAppV1AppUserServiceListAppUserCredentialsRequest:
@@ -82,21 +84,23 @@ export const C1ApiAppV1AppUserServiceListAppUserCredentialsResponse$inboundSchem
     C1ApiAppV1AppUserServiceListAppUserCredentialsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AppUserServiceListCredentialsResponse: shared
-      .AppUserServiceListCredentialsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AppUserServiceListCredentialsResponse":
-        "appUserServiceListCredentialsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AppUserServiceListCredentialsResponse: shared
+        .AppUserServiceListCredentialsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AppUserServiceListCredentialsResponse":
+          "appUserServiceListCredentialsResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppUserServiceListAppUserCredentialsResponseFromJSON(
   jsonString: string,

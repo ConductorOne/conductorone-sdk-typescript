@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -87,26 +87,28 @@ export const UserStatusEnum$inboundSchema: z.ZodType<
   UserStatusEnum,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(UserStatusEnum);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(UserStatusEnum));
 /** @internal */
 export const UserStatusEnum$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UserStatusEnum
-> = openEnums.outboundSchema(UserStatusEnum);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(UserStatusEnum));
 
 /** @internal */
 export const UpdateUser$inboundSchema: z.ZodType<
   UpdateUser,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
-  userStatusCel: z.nullable(z.string()).optional(),
-  userStatusEnum: z.nullable(UserStatusEnum$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.nullable(z.string()).optional(),
+    userRef: z.nullable(UserRef$inboundSchema).optional(),
+    userStatusCel: z.nullable(z.string()).optional(),
+    userStatusEnum: z.nullable(UserStatusEnum$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateUser$Outbound = {
   useSubjectUser?: boolean | undefined;
@@ -121,13 +123,15 @@ export const UpdateUser$outboundSchema: z.ZodType<
   UpdateUser$Outbound,
   z.ZodTypeDef,
   UpdateUser
-> = z.object({
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.nullable(z.string()).optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-  userStatusCel: z.nullable(z.string()).optional(),
-  userStatusEnum: z.nullable(UserStatusEnum$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.nullable(z.string()).optional(),
+    userRef: z.nullable(UserRef$outboundSchema).optional(),
+    userStatusCel: z.nullable(z.string()).optional(),
+    userStatusEnum: z.nullable(UserStatusEnum$outboundSchema).optional(),
+  })
+);
 
 export function updateUserToJSON(updateUser: UpdateUser): string {
   return JSON.stringify(UpdateUser$outboundSchema.parse(updateUser));

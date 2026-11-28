@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,11 +46,13 @@ export const GoLinkTargetInput$inboundSchema: z.ZodType<
   GoLinkTargetInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: z.nullable(GoLinkActionTarget$inboundSchema).optional(),
-  chooser: z.nullable(GoLinkChooserTargetInput$inboundSchema).optional(),
-  redirect: z.nullable(GoLinkRedirectTarget$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(GoLinkActionTarget$inboundSchema).optional(),
+    chooser: z.nullable(GoLinkChooserTargetInput$inboundSchema).optional(),
+    redirect: z.nullable(GoLinkRedirectTarget$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type GoLinkTargetInput$Outbound = {
   action?: GoLinkActionTarget$Outbound | null | undefined;
@@ -63,11 +65,13 @@ export const GoLinkTargetInput$outboundSchema: z.ZodType<
   GoLinkTargetInput$Outbound,
   z.ZodTypeDef,
   GoLinkTargetInput
-> = z.object({
-  action: z.nullable(GoLinkActionTarget$outboundSchema).optional(),
-  chooser: z.nullable(GoLinkChooserTargetInput$outboundSchema).optional(),
-  redirect: z.nullable(GoLinkRedirectTarget$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(GoLinkActionTarget$outboundSchema).optional(),
+    chooser: z.nullable(GoLinkChooserTargetInput$outboundSchema).optional(),
+    redirect: z.nullable(GoLinkRedirectTarget$outboundSchema).optional(),
+  })
+);
 
 export function goLinkTargetInputToJSON(
   goLinkTargetInput: GoLinkTargetInput,

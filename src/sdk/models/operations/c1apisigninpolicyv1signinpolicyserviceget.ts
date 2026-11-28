@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,9 +45,11 @@ export const C1ApiSignInPolicyV1SignInPolicyServiceGetRequest$outboundSchema:
     C1ApiSignInPolicyV1SignInPolicyServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSignInPolicyV1SignInPolicyServiceGetRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiSignInPolicyV1SignInPolicyServiceGetRequestToJSON(
   c1ApiSignInPolicyV1SignInPolicyServiceGetRequest:
@@ -66,20 +68,22 @@ export const C1ApiSignInPolicyV1SignInPolicyServiceGetResponse$inboundSchema:
     C1ApiSignInPolicyV1SignInPolicyServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SignInPolicyServiceGetResponse: shared
-      .SignInPolicyServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SignInPolicyServiceGetResponse": "signInPolicyServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SignInPolicyServiceGetResponse: shared
+        .SignInPolicyServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SignInPolicyServiceGetResponse": "signInPolicyServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiSignInPolicyV1SignInPolicyServiceGetResponseFromJSON(
   jsonString: string,

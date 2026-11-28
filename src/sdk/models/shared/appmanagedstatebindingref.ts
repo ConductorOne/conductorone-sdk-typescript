@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AppManagedStateBindingRef identifies an application discovered by a connector.
@@ -34,11 +35,13 @@ export const AppManagedStateBindingRef$outboundSchema: z.ZodType<
   AppManagedStateBindingRef$Outbound,
   z.ZodTypeDef,
   AppManagedStateBindingRef
-> = z.object({
-  appId: z.string().optional(),
-  resourceId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    resourceId: z.string().optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 
 export function appManagedStateBindingRefToJSON(
   appManagedStateBindingRef: AppManagedStateBindingRef,

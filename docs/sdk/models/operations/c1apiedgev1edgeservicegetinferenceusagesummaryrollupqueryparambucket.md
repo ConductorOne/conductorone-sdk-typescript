@@ -9,7 +9,7 @@ import { C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupQueryParamBucket } 
 
 let value:
   C1ApiEdgeV1EdgeServiceGetInferenceUsageSummaryRollupQueryParamBucket =
-    "TB_TIME_BUCKET_DAY";
+    "TB_TIME_BUCKET_FIFTEEN_MINUTES";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -17,5 +17,5 @@ let value:
 ## Values
 
 ```typescript
-"TB_TIME_BUCKET_UNSPECIFIED" | "TB_TIME_BUCKET_HOUR" | "TB_TIME_BUCKET_DAY" | Unrecognized<string>
+"TB_TIME_BUCKET_UNSPECIFIED" | "TB_TIME_BUCKET_HOUR" | "TB_TIME_BUCKET_DAY" | "TB_TIME_BUCKET_FIVE_MINUTES" | "TB_TIME_BUCKET_FIFTEEN_MINUTES" | Unrecognized<string>
 ```

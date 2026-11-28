@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -53,34 +53,40 @@ export const RequestSchemaJustificationVisibility$inboundSchema: z.ZodType<
   RequestSchemaJustificationVisibility,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(RequestSchemaJustificationVisibility);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(RequestSchemaJustificationVisibility)
+);
 /** @internal */
 export const RequestSchemaJustificationVisibility$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   RequestSchemaJustificationVisibility
-> = openEnums.outboundSchema(RequestSchemaJustificationVisibility);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(RequestSchemaJustificationVisibility)
+);
 
 /** @internal */
 export const RequestSchema$inboundSchema: z.ZodType<
   RequestSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
-  id: z.string().optional(),
-  justificationVisibility: RequestSchemaJustificationVisibility$inboundSchema
-    .optional(),
-  modifiedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
+    id: z.string().optional(),
+    justificationVisibility: RequestSchemaJustificationVisibility$inboundSchema
+      .optional(),
+    modifiedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type RequestSchema$Outbound = {
   createdAt?: string | null | undefined;
@@ -96,15 +102,17 @@ export const RequestSchema$outboundSchema: z.ZodType<
   RequestSchema$Outbound,
   z.ZodTypeDef,
   RequestSchema
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
-  id: z.string().optional(),
-  justificationVisibility: RequestSchemaJustificationVisibility$outboundSchema
-    .optional(),
-  modifiedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+    id: z.string().optional(),
+    justificationVisibility: RequestSchemaJustificationVisibility$outboundSchema
+      .optional(),
+    modifiedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function requestSchemaToJSON(requestSchema: RequestSchema): string {
   return JSON.stringify(RequestSchema$outboundSchema.parse(requestSchema));

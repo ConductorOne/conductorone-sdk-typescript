@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,6 +18,8 @@ export const QueryParamBucket = {
   TbTimeBucketUnspecified: "TB_TIME_BUCKET_UNSPECIFIED",
   TbTimeBucketHour: "TB_TIME_BUCKET_HOUR",
   TbTimeBucketDay: "TB_TIME_BUCKET_DAY",
+  TbTimeBucketFiveMinutes: "TB_TIME_BUCKET_FIVE_MINUTES",
+  TbTimeBucketFifteenMinutes: "TB_TIME_BUCKET_FIFTEEN_MINUTES",
 } as const;
 /**
  * The bucket field.
@@ -92,14 +94,18 @@ export const QueryParamBucket$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   QueryParamBucket
-> = openEnums.outboundSchema(QueryParamBucket);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(QueryParamBucket)
+);
 
 /** @internal */
 export const QueryParamDimension$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   QueryParamDimension
-> = openEnums.outboundSchema(QueryParamDimension);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(QueryParamDimension)
+);
 
 /** @internal */
 export type C1ApiEdgeV1EdgeServiceListEgressTrafficEventsRequest$Outbound = {
@@ -119,22 +125,24 @@ export const C1ApiEdgeV1EdgeServiceListEgressTrafficEventsRequest$outboundSchema
     C1ApiEdgeV1EdgeServiceListEgressTrafficEventsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListEgressTrafficEventsRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    bucket: QueryParamBucket$outboundSchema.optional(),
-    dimension: QueryParamDimension$outboundSchema.optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      bucket: QueryParamBucket$outboundSchema.optional(),
+      dimension: QueryParamDimension$outboundSchema.optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressTrafficEventsRequestToJSON(
   c1ApiEdgeV1EdgeServiceListEgressTrafficEventsRequest:
@@ -153,21 +161,23 @@ export const C1ApiEdgeV1EdgeServiceListEgressTrafficEventsResponse$inboundSchema
     C1ApiEdgeV1EdgeServiceListEgressTrafficEventsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListEgressTrafficEventsResponse: shared
-      .EdgeServiceListEgressTrafficEventsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListEgressTrafficEventsResponse":
-        "edgeServiceListEgressTrafficEventsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListEgressTrafficEventsResponse: shared
+        .EdgeServiceListEgressTrafficEventsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListEgressTrafficEventsResponse":
+          "edgeServiceListEgressTrafficEventsResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressTrafficEventsResponseFromJSON(
   jsonString: string,

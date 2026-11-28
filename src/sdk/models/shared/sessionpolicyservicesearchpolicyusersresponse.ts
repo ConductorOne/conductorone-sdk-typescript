@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { PolicyUser, PolicyUser$inboundSchema } from "./policyuser.js";
@@ -31,10 +31,12 @@ export const SessionPolicyServiceSearchPolicyUsersResponse$inboundSchema:
     SessionPolicyServiceSearchPolicyUsersResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    nextPageToken: z.string().optional(),
-    users: z.nullable(z.array(PolicyUser$inboundSchema)).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      nextPageToken: z.string().optional(),
+      users: z.nullable(z.array(PolicyUser$inboundSchema)).optional(),
+    })
+  );
 
 export function sessionPolicyServiceSearchPolicyUsersResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const GoLinkRedirectTarget$inboundSchema: z.ZodType<
   GoLinkRedirectTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  urlTemplate: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    urlTemplate: z.string().optional(),
+  })
+);
 /** @internal */
 export type GoLinkRedirectTarget$Outbound = {
   urlTemplate?: string | undefined;
@@ -38,9 +40,11 @@ export const GoLinkRedirectTarget$outboundSchema: z.ZodType<
   GoLinkRedirectTarget$Outbound,
   z.ZodTypeDef,
   GoLinkRedirectTarget
-> = z.object({
-  urlTemplate: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    urlTemplate: z.string().optional(),
+  })
+);
 
 export function goLinkRedirectTargetToJSON(
   goLinkRedirectTarget: GoLinkRedirectTarget,

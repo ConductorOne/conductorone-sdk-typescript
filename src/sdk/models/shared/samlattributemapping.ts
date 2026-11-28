@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -57,25 +57,27 @@ export const NameFormat$inboundSchema: z.ZodType<
   NameFormat,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(NameFormat);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(NameFormat));
 /** @internal */
 export const NameFormat$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   NameFormat
-> = openEnums.outboundSchema(NameFormat);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(NameFormat));
 
 /** @internal */
 export const SAMLAttributeMapping$inboundSchema: z.ZodType<
   SAMLAttributeMapping,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  friendlyName: z.string().optional(),
-  name: z.string(),
-  nameFormat: NameFormat$inboundSchema.optional(),
-  userAttributeMappingId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    friendlyName: z.string().optional(),
+    name: z.string(),
+    nameFormat: NameFormat$inboundSchema.optional(),
+    userAttributeMappingId: z.string(),
+  })
+);
 /** @internal */
 export type SAMLAttributeMapping$Outbound = {
   friendlyName?: string | undefined;
@@ -89,12 +91,14 @@ export const SAMLAttributeMapping$outboundSchema: z.ZodType<
   SAMLAttributeMapping$Outbound,
   z.ZodTypeDef,
   SAMLAttributeMapping
-> = z.object({
-  friendlyName: z.string().optional(),
-  name: z.string(),
-  nameFormat: NameFormat$outboundSchema.optional(),
-  userAttributeMappingId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    friendlyName: z.string().optional(),
+    name: z.string(),
+    nameFormat: NameFormat$outboundSchema.optional(),
+    userAttributeMappingId: z.string(),
+  })
+);
 
 export function samlAttributeMappingToJSON(
   samlAttributeMapping: SAMLAttributeMapping,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,19 +56,21 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceTestTokenRequest$
     C1ApiWorkloadFederationV1WorkloadFederationServiceTestTokenRequest$Outbound,
     z.ZodTypeDef,
     C1ApiWorkloadFederationV1WorkloadFederationServiceTestTokenRequest
-  > = z.object({
-    servicePrincipalId: z.string(),
-    clientId: z.string(),
-    workloadFederationServiceTestTokenRequest: shared
-      .WorkloadFederationServiceTestTokenRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      servicePrincipalId: "service_principal_id",
-      clientId: "client_id",
-      workloadFederationServiceTestTokenRequest:
-        "WorkloadFederationServiceTestTokenRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      servicePrincipalId: z.string(),
+      clientId: z.string(),
+      workloadFederationServiceTestTokenRequest: shared
+        .WorkloadFederationServiceTestTokenRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        servicePrincipalId: "service_principal_id",
+        clientId: "client_id",
+        workloadFederationServiceTestTokenRequest:
+          "WorkloadFederationServiceTestTokenRequest",
+      });
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceTestTokenRequestToJSON(
   c1ApiWorkloadFederationV1WorkloadFederationServiceTestTokenRequest:
@@ -88,21 +90,23 @@ export const C1ApiWorkloadFederationV1WorkloadFederationServiceTestTokenResponse
     C1ApiWorkloadFederationV1WorkloadFederationServiceTestTokenResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    WorkloadFederationServiceTestTokenResponse: shared
-      .WorkloadFederationServiceTestTokenResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "WorkloadFederationServiceTestTokenResponse":
-        "workloadFederationServiceTestTokenResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      WorkloadFederationServiceTestTokenResponse: shared
+        .WorkloadFederationServiceTestTokenResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "WorkloadFederationServiceTestTokenResponse":
+          "workloadFederationServiceTestTokenResponse",
+      });
+    })
+  );
 
 export function c1ApiWorkloadFederationV1WorkloadFederationServiceTestTokenResponseFromJSON(
   jsonString: string,

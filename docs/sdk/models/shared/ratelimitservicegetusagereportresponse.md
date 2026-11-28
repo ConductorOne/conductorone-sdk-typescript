@@ -1,0 +1,22 @@
+# RateLimitServiceGetUsageReportResponse
+
+The RateLimitServiceGetUsageReportResponse message.
+
+## Example Usage
+
+```typescript
+import { RateLimitServiceGetUsageReportResponse } from "conductorone-sdk-typescript/sdk/models/shared";
+
+let value: RateLimitServiceGetUsageReportResponse = {};
+```
+
+## Fields
+
+| Field                                                                                                                          | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `entries`                                                                                                                      | [shared.RateLimitConsumer](../../../sdk/models/shared/ratelimitconsumer.md)[]                                                  | :heavy_minus_sign:                                                                                                             | The top entries in sort_by order, at most max_entries of them. Ranking happens over every matching consumer before truncation. |
+| `totalConsumers`                                                                                                               | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | The number of consumers that match the filters, including those beyond max_entries.                                            |
+| `totalRequests`                                                                                                                | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Served requests summed over every matching consumer, including those beyond max_entries.                                       |
+| `totalThrottled`                                                                                                               | *number*                                                                                                                       | :heavy_minus_sign:                                                                                                             | Throttled requests summed over every matching consumer, including those beyond max_entries.                                    |
+| `windowEnd`                                                                                                                    | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                  | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |
+| `windowStart`                                                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                  | :heavy_minus_sign:                                                                                                             | N/A                                                                                                                            |

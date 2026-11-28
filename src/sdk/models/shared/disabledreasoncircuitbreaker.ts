@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -49,24 +49,26 @@ export type DisabledReasonCircuitBreaker = {
 
 /** @internal */
 export const Period$inboundSchema: z.ZodType<Period, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Period);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Period));
 /** @internal */
 export const Period$outboundSchema: z.ZodType<string, z.ZodTypeDef, Period> =
-  openEnums.outboundSchema(Period);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Period));
 
 /** @internal */
 export const DisabledReasonCircuitBreaker$inboundSchema: z.ZodType<
   DisabledReasonCircuitBreaker,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  observedCount: z.number().int().optional(),
-  period: Period$inboundSchema.optional(),
-  threshold: z.number().int().optional(),
-  trippedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    observedCount: z.number().int().optional(),
+    period: Period$inboundSchema.optional(),
+    threshold: z.number().int().optional(),
+    trippedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type DisabledReasonCircuitBreaker$Outbound = {
   observedCount?: number | undefined;
@@ -80,12 +82,14 @@ export const DisabledReasonCircuitBreaker$outboundSchema: z.ZodType<
   DisabledReasonCircuitBreaker$Outbound,
   z.ZodTypeDef,
   DisabledReasonCircuitBreaker
-> = z.object({
-  observedCount: z.number().int().optional(),
-  period: Period$outboundSchema.optional(),
-  threshold: z.number().int().optional(),
-  trippedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    observedCount: z.number().int().optional(),
+    period: Period$outboundSchema.optional(),
+    threshold: z.number().int().optional(),
+    trippedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function disabledReasonCircuitBreakerToJSON(
   disabledReasonCircuitBreaker: DisabledReasonCircuitBreaker,

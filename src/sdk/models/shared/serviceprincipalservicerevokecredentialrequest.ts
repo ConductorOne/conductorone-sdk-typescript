@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ServicePrincipalServiceRevokeCredentialRequest message.
@@ -18,7 +19,7 @@ export const ServicePrincipalServiceRevokeCredentialRequest$outboundSchema:
     ServicePrincipalServiceRevokeCredentialRequest$Outbound,
     z.ZodTypeDef,
     ServicePrincipalServiceRevokeCredentialRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function servicePrincipalServiceRevokeCredentialRequestToJSON(
   servicePrincipalServiceRevokeCredentialRequest:

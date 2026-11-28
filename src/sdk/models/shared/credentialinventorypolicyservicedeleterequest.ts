@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The CredentialInventoryPolicyServiceDeleteRequest message.
@@ -18,7 +19,7 @@ export const CredentialInventoryPolicyServiceDeleteRequest$outboundSchema:
     CredentialInventoryPolicyServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     CredentialInventoryPolicyServiceDeleteRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function credentialInventoryPolicyServiceDeleteRequestToJSON(
   credentialInventoryPolicyServiceDeleteRequest:

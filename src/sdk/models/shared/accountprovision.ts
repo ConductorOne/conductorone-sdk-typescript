@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,13 +47,15 @@ export const AccountProvision$inboundSchema: z.ZodType<
   AccountProvision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  config: z.nullable(z.record(z.any())).optional(),
-  connectorId: z.string().optional(),
-  doNotSave: z.nullable(DoNotSave$inboundSchema).optional(),
-  saveToVault: z.nullable(SaveToVault$inboundSchema).optional(),
-  schemaId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    config: z.nullable(z.record(z.any())).optional(),
+    connectorId: z.string().optional(),
+    doNotSave: z.nullable(DoNotSave$inboundSchema).optional(),
+    saveToVault: z.nullable(SaveToVault$inboundSchema).optional(),
+    schemaId: z.string().optional(),
+  })
+);
 /** @internal */
 export type AccountProvision$Outbound = {
   config?: { [k: string]: any } | null | undefined;
@@ -68,13 +70,15 @@ export const AccountProvision$outboundSchema: z.ZodType<
   AccountProvision$Outbound,
   z.ZodTypeDef,
   AccountProvision
-> = z.object({
-  config: z.nullable(z.record(z.any())).optional(),
-  connectorId: z.string().optional(),
-  doNotSave: z.nullable(DoNotSave$outboundSchema).optional(),
-  saveToVault: z.nullable(SaveToVault$outboundSchema).optional(),
-  schemaId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    config: z.nullable(z.record(z.any())).optional(),
+    connectorId: z.string().optional(),
+    doNotSave: z.nullable(DoNotSave$outboundSchema).optional(),
+    saveToVault: z.nullable(SaveToVault$outboundSchema).optional(),
+    schemaId: z.string().optional(),
+  })
+);
 
 export function accountProvisionToJSON(
   accountProvision: AccountProvision,

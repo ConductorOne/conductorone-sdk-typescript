@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiFunctionsV1FunctionsServiceCreateTagRequest$outboundSchema:
     C1ApiFunctionsV1FunctionsServiceCreateTagRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsServiceCreateTagRequest
-  > = z.object({
-    functionId: z.string(),
-    functionsServiceCreateTagRequest: shared
-      .FunctionsServiceCreateTagRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      functionId: "function_id",
-      functionsServiceCreateTagRequest: "FunctionsServiceCreateTagRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      functionId: z.string(),
+      functionsServiceCreateTagRequest: shared
+        .FunctionsServiceCreateTagRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        functionId: "function_id",
+        functionsServiceCreateTagRequest: "FunctionsServiceCreateTagRequest",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceCreateTagRequestToJSON(
   c1ApiFunctionsV1FunctionsServiceCreateTagRequest:
@@ -79,20 +81,23 @@ export const C1ApiFunctionsV1FunctionsServiceCreateTagResponse$inboundSchema:
     C1ApiFunctionsV1FunctionsServiceCreateTagResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FunctionsServiceCreateTagResponse: shared
-      .FunctionsServiceCreateTagResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FunctionsServiceCreateTagResponse": "functionsServiceCreateTagResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FunctionsServiceCreateTagResponse: shared
+        .FunctionsServiceCreateTagResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FunctionsServiceCreateTagResponse":
+          "functionsServiceCreateTagResponse",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsServiceCreateTagResponseFromJSON(
   jsonString: string,

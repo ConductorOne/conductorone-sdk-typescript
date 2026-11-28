@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const AppEntitlementReference$inboundSchema: z.ZodType<
   AppEntitlementReference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+  })
+);
 /** @internal */
 export type AppEntitlementReference$Outbound = {
   appEntitlementId?: string | undefined;
@@ -41,10 +43,12 @@ export const AppEntitlementReference$outboundSchema: z.ZodType<
   AppEntitlementReference$Outbound,
   z.ZodTypeDef,
   AppEntitlementReference
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+  })
+);
 
 export function appEntitlementReferenceToJSON(
   appEntitlementReference: AppEntitlementReference,

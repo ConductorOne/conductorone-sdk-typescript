@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -63,46 +63,52 @@ export const ErrorKind$inboundSchema: z.ZodType<
   ErrorKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ErrorKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ErrorKind));
 /** @internal */
 export const ErrorKind$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ErrorKind
-> = openEnums.outboundSchema(ErrorKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ErrorKind));
 
 /** @internal */
 export const ConnectorStatusStatus$inboundSchema: z.ZodType<
   ConnectorStatusStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ConnectorStatusStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ConnectorStatusStatus)
+);
 /** @internal */
 export const ConnectorStatusStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ConnectorStatusStatus
-> = openEnums.outboundSchema(ConnectorStatusStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ConnectorStatusStatus)
+);
 
 /** @internal */
 export const ConnectorStatus$inboundSchema: z.ZodType<
   ConnectorStatus,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  completedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  errorKind: ErrorKind$inboundSchema.optional(),
-  lastError: z.string().optional(),
-  startedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  status: ConnectorStatusStatus$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    errorKind: ErrorKind$inboundSchema.optional(),
+    lastError: z.string().optional(),
+    startedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    status: ConnectorStatusStatus$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ConnectorStatus$Outbound = {
   completedAt?: string | null | undefined;
@@ -118,14 +124,17 @@ export const ConnectorStatus$outboundSchema: z.ZodType<
   ConnectorStatus$Outbound,
   z.ZodTypeDef,
   ConnectorStatus
-> = z.object({
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  errorKind: ErrorKind$outboundSchema.optional(),
-  lastError: z.string().optional(),
-  startedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  status: ConnectorStatusStatus$outboundSchema.optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    completedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    errorKind: ErrorKind$outboundSchema.optional(),
+    lastError: z.string().optional(),
+    startedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    status: ConnectorStatusStatus$outboundSchema.optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function connectorStatusToJSON(
   connectorStatus: ConnectorStatus,

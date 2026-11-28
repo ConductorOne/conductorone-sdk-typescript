@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,19 +53,21 @@ export const C1ApiAiGovernanceV1MCPToolServiceDeleteRequest$outboundSchema:
     C1ApiAiGovernanceV1MCPToolServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPToolServiceDeleteRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    id: z.string(),
-    mcpToolServiceDeleteRequest: shared
-      .MCPToolServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      mcpToolServiceDeleteRequest: "MCPToolServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      id: z.string(),
+      mcpToolServiceDeleteRequest: shared
+        .MCPToolServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        mcpToolServiceDeleteRequest: "MCPToolServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPToolServiceDeleteRequestToJSON(
   c1ApiAiGovernanceV1MCPToolServiceDeleteRequest:
@@ -84,20 +86,22 @@ export const C1ApiAiGovernanceV1MCPToolServiceDeleteResponse$inboundSchema:
     C1ApiAiGovernanceV1MCPToolServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPToolServiceDeleteResponse: shared
-      .MCPToolServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPToolServiceDeleteResponse": "mcpToolServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPToolServiceDeleteResponse: shared
+        .MCPToolServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPToolServiceDeleteResponse": "mcpToolServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPToolServiceDeleteResponseFromJSON(
   jsonString: string,

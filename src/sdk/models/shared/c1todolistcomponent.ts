@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { C1TodoItem, C1TodoItem$inboundSchema } from "./c1todoitem.js";
@@ -25,10 +25,12 @@ export const C1TodoListComponent$inboundSchema: z.ZodType<
   C1TodoListComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  items: z.nullable(z.array(C1TodoItem$inboundSchema)).optional(),
-  title: z.nullable(DynamicString$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.nullable(z.array(C1TodoItem$inboundSchema)).optional(),
+    title: z.nullable(DynamicString$inboundSchema).optional(),
+  })
+);
 
 export function c1TodoListComponentFromJSON(
   jsonString: string,

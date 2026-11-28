@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   XAAResourceServer,
   XAAResourceServer$Outbound,
@@ -28,10 +29,12 @@ export const XAAResourceServerServiceUpdateRequest$outboundSchema: z.ZodType<
   XAAResourceServerServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   XAAResourceServerServiceUpdateRequest
-> = z.object({
-  resourceServer: z.nullable(XAAResourceServer$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resourceServer: z.nullable(XAAResourceServer$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function xaaResourceServerServiceUpdateRequestToJSON(
   xaaResourceServerServiceUpdateRequest: XAAResourceServerServiceUpdateRequest,

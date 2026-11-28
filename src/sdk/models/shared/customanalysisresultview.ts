@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -94,39 +94,43 @@ export const CustomAnalysisResultViewStatus$inboundSchema: z.ZodType<
   CustomAnalysisResultViewStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CustomAnalysisResultViewStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CustomAnalysisResultViewStatus)
+);
 
 /** @internal */
 export const TerminalReason$inboundSchema: z.ZodType<
   TerminalReason,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TerminalReason);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TerminalReason));
 
 /** @internal */
 export const CustomAnalysisResultView$inboundSchema: z.ZodType<
   CustomAnalysisResultView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessScope: z.nullable(AccessScope$inboundSchema).optional(),
-  cohortSize: z.number().int().optional(),
-  completedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdByUserId: z.string().optional(),
-  errorMessage: z.string().optional(),
-  id: z.string().optional(),
-  profileFilters: z.nullable(z.array(ProfileFilter$inboundSchema)).optional(),
-  resourceScope: z.nullable(ResourceScope$inboundSchema).optional(),
-  status: CustomAnalysisResultViewStatus$inboundSchema.optional(),
-  suggestionsGenerated: z.number().int().optional(),
-  supersededByResultId: z.string().optional(),
-  terminalReason: TerminalReason$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessScope: z.nullable(AccessScope$inboundSchema).optional(),
+    cohortSize: z.number().int().optional(),
+    completedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdByUserId: z.string().optional(),
+    errorMessage: z.string().optional(),
+    id: z.string().optional(),
+    profileFilters: z.nullable(z.array(ProfileFilter$inboundSchema)).optional(),
+    resourceScope: z.nullable(ResourceScope$inboundSchema).optional(),
+    status: CustomAnalysisResultViewStatus$inboundSchema.optional(),
+    suggestionsGenerated: z.number().int().optional(),
+    supersededByResultId: z.string().optional(),
+    terminalReason: TerminalReason$inboundSchema.optional(),
+  })
+);
 
 export function customAnalysisResultViewFromJSON(
   jsonString: string,

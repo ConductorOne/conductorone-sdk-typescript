@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SSOApplicationServiceDeleteRequest deletes an SSO application.
@@ -17,7 +18,7 @@ export const SSOApplicationServiceDeleteRequest$outboundSchema: z.ZodType<
   SSOApplicationServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   SSOApplicationServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function ssoApplicationServiceDeleteRequestToJSON(
   ssoApplicationServiceDeleteRequest: SSOApplicationServiceDeleteRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,18 +36,20 @@ export const ReassignedByErrorAction$inboundSchema: z.ZodType<
   ReassignedByErrorAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  errorCode: z.string().optional(),
-  errorUserId: z.string().optional(),
-  erroredAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  newPolicyStepId: z.string().optional(),
-  reassignedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    errorCode: z.string().optional(),
+    errorUserId: z.string().optional(),
+    erroredAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    newPolicyStepId: z.string().optional(),
+    reassignedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ReassignedByErrorAction$Outbound = {
   description?: string | undefined;
@@ -63,14 +65,17 @@ export const ReassignedByErrorAction$outboundSchema: z.ZodType<
   ReassignedByErrorAction$Outbound,
   z.ZodTypeDef,
   ReassignedByErrorAction
-> = z.object({
-  description: z.string().optional(),
-  errorCode: z.string().optional(),
-  errorUserId: z.string().optional(),
-  erroredAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  newPolicyStepId: z.string().optional(),
-  reassignedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    errorCode: z.string().optional(),
+    errorUserId: z.string().optional(),
+    erroredAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    newPolicyStepId: z.string().optional(),
+    reassignedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function reassignedByErrorActionToJSON(
   reassignedByErrorAction: ReassignedByErrorAction,

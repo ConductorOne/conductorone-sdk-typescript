@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -101,7 +102,9 @@ export const CreateAppRequestIdentityMatching$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CreateAppRequestIdentityMatching
-> = openEnums.outboundSchema(CreateAppRequestIdentityMatching);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CreateAppRequestIdentityMatching)
+);
 
 /** @internal */
 export type CreateAppRequest$Outbound = {
@@ -128,22 +131,26 @@ export const CreateAppRequest$outboundSchema: z.ZodType<
   CreateAppRequest$Outbound,
   z.ZodTypeDef,
   CreateAppRequest
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  appEntitlementOwnerRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  certifyPolicyId: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  grantPolicyId: z.string().optional(),
-  identityMatching: CreateAppRequestIdentityMatching$outboundSchema.optional(),
-  instructions: z.string().optional(),
-  matchBatonRef: z.nullable(AppMatchBatonRef$outboundSchema).optional(),
-  monthlyCostUsd: z.number().int().optional(),
-  owners: z.nullable(z.array(z.string())).optional(),
-  revokePolicyId: z.string().optional(),
-  strictAccessEntitlementProvisioning: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    appEntitlementOwnerRefs: z.nullable(
+      z.array(AppEntitlementRef$outboundSchema),
+    ).optional(),
+    certifyPolicyId: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    grantPolicyId: z.string().optional(),
+    identityMatching: CreateAppRequestIdentityMatching$outboundSchema
+      .optional(),
+    instructions: z.string().optional(),
+    matchBatonRef: z.nullable(AppMatchBatonRef$outboundSchema).optional(),
+    monthlyCostUsd: z.number().int().optional(),
+    owners: z.nullable(z.array(z.string())).optional(),
+    revokePolicyId: z.string().optional(),
+    strictAccessEntitlementProvisioning: z.boolean().optional(),
+  })
+);
 
 export function createAppRequestToJSON(
   createAppRequest: CreateAppRequest,

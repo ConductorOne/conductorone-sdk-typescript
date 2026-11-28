@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ServicePrincipalCredentialInput,
   ServicePrincipalCredentialInput$Outbound,
@@ -29,11 +30,13 @@ export const ServicePrincipalServiceUpdateCredentialRequest$outboundSchema:
     ServicePrincipalServiceUpdateCredentialRequest$Outbound,
     z.ZodTypeDef,
     ServicePrincipalServiceUpdateCredentialRequest
-  > = z.object({
-    credential: z.nullable(ServicePrincipalCredentialInput$outboundSchema)
-      .optional(),
-    updateMask: z.nullable(z.string()).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      credential: z.nullable(ServicePrincipalCredentialInput$outboundSchema)
+        .optional(),
+      updateMask: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function servicePrincipalServiceUpdateCredentialRequestToJSON(
   servicePrincipalServiceUpdateCredentialRequest:

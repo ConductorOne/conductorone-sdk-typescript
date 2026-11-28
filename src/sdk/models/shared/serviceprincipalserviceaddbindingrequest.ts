@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ServicePrincipalBindingSubject,
   ServicePrincipalBindingSubject$Outbound,
@@ -31,10 +32,13 @@ export const ServicePrincipalServiceAddBindingRequest$outboundSchema: z.ZodType<
   ServicePrincipalServiceAddBindingRequest$Outbound,
   z.ZodTypeDef,
   ServicePrincipalServiceAddBindingRequest
-> = z.object({
-  servicePrincipalId: z.string().optional(),
-  subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    servicePrincipalId: z.string().optional(),
+    subject: z.nullable(ServicePrincipalBindingSubject$outboundSchema)
+      .optional(),
+  })
+);
 
 export function servicePrincipalServiceAddBindingRequestToJSON(
   servicePrincipalServiceAddBindingRequest:

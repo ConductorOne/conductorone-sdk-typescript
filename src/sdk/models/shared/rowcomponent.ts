@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ChildList, ChildList$inboundSchema } from "./childlist.js";
@@ -30,12 +30,14 @@ export const RowComponent$inboundSchema: z.ZodType<
   RowComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  alignment: z.string().optional(),
-  children: z.nullable(ChildList$inboundSchema).optional(),
-  distribution: z.string().optional(),
-  gap: z.nullable(DynamicNumber$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alignment: z.string().optional(),
+    children: z.nullable(ChildList$inboundSchema).optional(),
+    distribution: z.string().optional(),
+    gap: z.nullable(DynamicNumber$inboundSchema).optional(),
+  })
+);
 
 export function rowComponentFromJSON(
   jsonString: string,

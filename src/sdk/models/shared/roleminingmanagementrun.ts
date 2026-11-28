@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -86,39 +86,43 @@ export const RoleMiningManagementRunStatus$inboundSchema: z.ZodType<
   RoleMiningManagementRunStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(RoleMiningManagementRunStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(RoleMiningManagementRunStatus)
+);
 
 /** @internal */
 export const TriggerType$inboundSchema: z.ZodType<
   TriggerType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TriggerType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(TriggerType));
 
 /** @internal */
 export const RoleMiningManagementRun$inboundSchema: z.ZodType<
   RoleMiningManagementRun,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cohortsAnalyzed: z.number().int().optional(),
-  completedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  errorMessage: z.string().optional(),
-  id: z.string().optional(),
-  status: RoleMiningManagementRunStatus$inboundSchema.optional(),
-  suggestionsGenerated: z.number().int().optional(),
-  totalUsers: z.number().int().optional(),
-  triggerDetail: z.string().optional(),
-  triggerType: TriggerType$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cohortsAnalyzed: z.number().int().optional(),
+    completedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    errorMessage: z.string().optional(),
+    id: z.string().optional(),
+    status: RoleMiningManagementRunStatus$inboundSchema.optional(),
+    suggestionsGenerated: z.number().int().optional(),
+    totalUsers: z.number().int().optional(),
+    triggerDetail: z.string().optional(),
+    triggerType: TriggerType$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function roleMiningManagementRunFromJSON(
   jsonString: string,

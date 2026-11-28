@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -47,24 +47,30 @@ export const FunctionNetworkConfigMode$inboundSchema: z.ZodType<
   FunctionNetworkConfigMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FunctionNetworkConfigMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(FunctionNetworkConfigMode)
+);
 /** @internal */
 export const FunctionNetworkConfigMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FunctionNetworkConfigMode
-> = openEnums.outboundSchema(FunctionNetworkConfigMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FunctionNetworkConfigMode)
+);
 
 /** @internal */
 export const FunctionNetworkConfig$inboundSchema: z.ZodType<
   FunctionNetworkConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  edgeId: z.string().optional(),
-  mode: FunctionNetworkConfigMode$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    edgeId: z.string().optional(),
+    mode: FunctionNetworkConfigMode$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type FunctionNetworkConfig$Outbound = {
   appId?: string | undefined;
@@ -77,11 +83,13 @@ export const FunctionNetworkConfig$outboundSchema: z.ZodType<
   FunctionNetworkConfig$Outbound,
   z.ZodTypeDef,
   FunctionNetworkConfig
-> = z.object({
-  appId: z.string().optional(),
-  edgeId: z.string().optional(),
-  mode: FunctionNetworkConfigMode$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    edgeId: z.string().optional(),
+    mode: FunctionNetworkConfigMode$outboundSchema.optional(),
+  })
+);
 
 export function functionNetworkConfigToJSON(
   functionNetworkConfig: FunctionNetworkConfig,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,16 +50,18 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutoma
     C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomationRequest
-  > = z.object({
-    requestCatalogId: z.string(),
-    setBundleAutomationRequest: shared.SetBundleAutomationRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requestCatalogId: "request_catalog_id",
-      setBundleAutomationRequest: "SetBundleAutomationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      requestCatalogId: z.string(),
+      setBundleAutomationRequest: shared
+        .SetBundleAutomationRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        requestCatalogId: "request_catalog_id",
+        setBundleAutomationRequest: "SetBundleAutomationRequest",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomationRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomationRequest:
@@ -79,19 +81,21 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutoma
     C1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    BundleAutomation: shared.BundleAutomation$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "BundleAutomation": "bundleAutomation",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      BundleAutomation: shared.BundleAutomation$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "BundleAutomation": "bundleAutomation",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServiceSetBundleAutomationResponseFromJSON(
   jsonString: string,
