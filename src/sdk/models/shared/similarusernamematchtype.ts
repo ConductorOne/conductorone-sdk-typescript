@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const SimilarUsernameMatchType$inboundSchema: z.ZodType<
   SimilarUsernameMatchType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  proposedIdentityUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    proposedIdentityUserId: z.string().optional(),
+  })
+);
 /** @internal */
 export type SimilarUsernameMatchType$Outbound = {
   proposedIdentityUserId?: string | undefined;
@@ -35,9 +37,11 @@ export const SimilarUsernameMatchType$outboundSchema: z.ZodType<
   SimilarUsernameMatchType$Outbound,
   z.ZodTypeDef,
   SimilarUsernameMatchType
-> = z.object({
-  proposedIdentityUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    proposedIdentityUserId: z.string().optional(),
+  })
+);
 
 export function similarUsernameMatchTypeToJSON(
   similarUsernameMatchType: SimilarUsernameMatchType,

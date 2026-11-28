@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,18 +56,21 @@ export const C1ApiServicePrincipalV1ServicePrincipalServiceUpdateCredentialReque
     C1ApiServicePrincipalV1ServicePrincipalServiceUpdateCredentialRequest$Outbound,
     z.ZodTypeDef,
     C1ApiServicePrincipalV1ServicePrincipalServiceUpdateCredentialRequest
-  > = z.object({
-    servicePrincipalId: z.string(),
-    id: z.string(),
-    servicePrincipalServiceUpdateCredentialRequest: shared
-      .ServicePrincipalServiceUpdateCredentialRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      servicePrincipalId: "service_principal_id",
-      servicePrincipalServiceUpdateCredentialRequest:
-        "ServicePrincipalServiceUpdateCredentialRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      servicePrincipalId: z.string(),
+      id: z.string(),
+      servicePrincipalServiceUpdateCredentialRequest: shared
+        .ServicePrincipalServiceUpdateCredentialRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        servicePrincipalId: "service_principal_id",
+        servicePrincipalServiceUpdateCredentialRequest:
+          "ServicePrincipalServiceUpdateCredentialRequest",
+      });
+    })
+  );
 
 export function c1ApiServicePrincipalV1ServicePrincipalServiceUpdateCredentialRequestToJSON(
   c1ApiServicePrincipalV1ServicePrincipalServiceUpdateCredentialRequest:
@@ -87,21 +90,24 @@ export const C1ApiServicePrincipalV1ServicePrincipalServiceUpdateCredentialRespo
     C1ApiServicePrincipalV1ServicePrincipalServiceUpdateCredentialResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ServicePrincipalServiceUpdateCredentialResponse: shared
-      .ServicePrincipalServiceUpdateCredentialResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ServicePrincipalServiceUpdateCredentialResponse":
-        "servicePrincipalServiceUpdateCredentialResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ServicePrincipalServiceUpdateCredentialResponse: shared
+        .ServicePrincipalServiceUpdateCredentialResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ServicePrincipalServiceUpdateCredentialResponse":
+          "servicePrincipalServiceUpdateCredentialResponse",
+      });
+    })
+  );
 
 export function c1ApiServicePrincipalV1ServicePrincipalServiceUpdateCredentialResponseFromJSON(
   jsonString: string,

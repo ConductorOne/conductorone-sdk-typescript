@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -41,17 +41,21 @@ export const AssignmentSource$inboundSchema: z.ZodType<
   AssignmentSource,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AssignmentSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AssignmentSource)
+);
 
 /** @internal */
 export const Assignment$inboundSchema: z.ZodType<
   Assignment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  source: AssignmentSource$inboundSchema.optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: AssignmentSource$inboundSchema.optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function assignmentFromJSON(
   jsonString: string,

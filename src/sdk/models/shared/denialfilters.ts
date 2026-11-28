@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -102,21 +103,27 @@ export const DenialFiltersAuthorityKind$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DenialFiltersAuthorityKind
-> = openEnums.outboundSchema(DenialFiltersAuthorityKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DenialFiltersAuthorityKind)
+);
 
 /** @internal */
 export const DenialFiltersScopeKind$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DenialFiltersScopeKind
-> = openEnums.outboundSchema(DenialFiltersScopeKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DenialFiltersScopeKind)
+);
 
 /** @internal */
 export const DenialFiltersState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DenialFiltersState
-> = openEnums.outboundSchema(DenialFiltersState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DenialFiltersState)
+);
 
 /** @internal */
 export type DenialFilters$Outbound = {
@@ -136,17 +143,19 @@ export const DenialFilters$outboundSchema: z.ZodType<
   DenialFilters$Outbound,
   z.ZodTypeDef,
   DenialFilters
-> = z.object({
-  authorityId: z.string().optional(),
-  authorityKind: DenialFiltersAuthorityKind$outboundSchema.optional(),
-  departments: z.nullable(z.array(z.string())).optional(),
-  endTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  scopeAppId: z.string().optional(),
-  scopeKind: DenialFiltersScopeKind$outboundSchema.optional(),
-  scopeUserId: z.string().optional(),
-  startTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  state: DenialFiltersState$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authorityId: z.string().optional(),
+    authorityKind: DenialFiltersAuthorityKind$outboundSchema.optional(),
+    departments: z.nullable(z.array(z.string())).optional(),
+    endTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    scopeAppId: z.string().optional(),
+    scopeKind: DenialFiltersScopeKind$outboundSchema.optional(),
+    scopeUserId: z.string().optional(),
+    startTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    state: DenialFiltersState$outboundSchema.optional(),
+  })
+);
 
 export function denialFiltersToJSON(denialFilters: DenialFilters): string {
   return JSON.stringify(DenialFilters$outboundSchema.parse(denialFilters));

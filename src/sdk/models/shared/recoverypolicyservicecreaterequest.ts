@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -82,8 +83,10 @@ export const RecoveryPolicyServiceCreateRequestAllowedRecoveryTypes$outboundSche
     string,
     z.ZodTypeDef,
     RecoveryPolicyServiceCreateRequestAllowedRecoveryTypes
-  > = openEnums.outboundSchema(
-    RecoveryPolicyServiceCreateRequestAllowedRecoveryTypes,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      RecoveryPolicyServiceCreateRequestAllowedRecoveryTypes,
+    )
   );
 
 /** @internal */
@@ -92,8 +95,10 @@ export const RecoveryPolicyServiceCreateRequestMinRecoveryAuthLevel$outboundSche
     string,
     z.ZodTypeDef,
     RecoveryPolicyServiceCreateRequestMinRecoveryAuthLevel
-  > = openEnums.outboundSchema(
-    RecoveryPolicyServiceCreateRequestMinRecoveryAuthLevel,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      RecoveryPolicyServiceCreateRequestMinRecoveryAuthLevel,
+    )
   );
 
 /** @internal */
@@ -110,19 +115,21 @@ export const RecoveryPolicyServiceCreateRequest$outboundSchema: z.ZodType<
   RecoveryPolicyServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   RecoveryPolicyServiceCreateRequest
-> = z.object({
-  allowedRecoveryTypes: z.nullable(
-    z.array(
-      RecoveryPolicyServiceCreateRequestAllowedRecoveryTypes$outboundSchema,
-    ),
-  ).optional(),
-  displayName: z.string(),
-  minRecoveryAuthLevel:
-    RecoveryPolicyServiceCreateRequestMinRecoveryAuthLevel$outboundSchema
-      .optional(),
-  priority: z.number().int().optional(),
-  revokeOnRecovery: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedRecoveryTypes: z.nullable(
+      z.array(
+        RecoveryPolicyServiceCreateRequestAllowedRecoveryTypes$outboundSchema,
+      ),
+    ).optional(),
+    displayName: z.string(),
+    minRecoveryAuthLevel:
+      RecoveryPolicyServiceCreateRequestMinRecoveryAuthLevel$outboundSchema
+        .optional(),
+    priority: z.number().int().optional(),
+    revokeOnRecovery: z.boolean().optional(),
+  })
+);
 
 export function recoveryPolicyServiceCreateRequestToJSON(
   recoveryPolicyServiceCreateRequest: RecoveryPolicyServiceCreateRequest,

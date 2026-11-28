@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SetAppResourceOwnersRequest message.
@@ -24,9 +25,11 @@ export const SetAppResourceOwnersRequest$outboundSchema: z.ZodType<
   SetAppResourceOwnersRequest$Outbound,
   z.ZodTypeDef,
   SetAppResourceOwnersRequest
-> = z.object({
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function setAppResourceOwnersRequestToJSON(
   setAppResourceOwnersRequest: SetAppResourceOwnersRequest,

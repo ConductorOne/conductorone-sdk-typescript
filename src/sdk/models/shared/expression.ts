@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,11 +32,13 @@ export const Expression$inboundSchema: z.ZodType<
   Expression,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expressionCel: z.string().optional(),
-  isSecret: z.boolean().optional(),
-  key: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expressionCel: z.string().optional(),
+    isSecret: z.boolean().optional(),
+    key: z.string().optional(),
+  })
+);
 /** @internal */
 export type Expression$Outbound = {
   expressionCel?: string | undefined;
@@ -49,11 +51,13 @@ export const Expression$outboundSchema: z.ZodType<
   Expression$Outbound,
   z.ZodTypeDef,
   Expression
-> = z.object({
-  expressionCel: z.string().optional(),
-  isSecret: z.boolean().optional(),
-  key: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expressionCel: z.string().optional(),
+    isSecret: z.boolean().optional(),
+    key: z.string().optional(),
+  })
+);
 
 export function expressionToJSON(expression: Expression): string {
   return JSON.stringify(Expression$outboundSchema.parse(expression));

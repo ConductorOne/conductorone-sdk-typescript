@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,19 +53,21 @@ export const C1ApiFundsV1SubjectAppLimitServiceUnsuspendRequest$outboundSchema:
     C1ApiFundsV1SubjectAppLimitServiceUnsuspendRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1SubjectAppLimitServiceUnsuspendRequest
-  > = z.object({
-    userId: z.string(),
-    appId: z.string(),
-    subjectAppLimitServiceUnsuspendRequest: shared
-      .SubjectAppLimitServiceUnsuspendRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      appId: "app_id",
-      subjectAppLimitServiceUnsuspendRequest:
-        "SubjectAppLimitServiceUnsuspendRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      appId: z.string(),
+      subjectAppLimitServiceUnsuspendRequest: shared
+        .SubjectAppLimitServiceUnsuspendRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        appId: "app_id",
+        subjectAppLimitServiceUnsuspendRequest:
+          "SubjectAppLimitServiceUnsuspendRequest",
+      });
+    })
+  );
 
 export function c1ApiFundsV1SubjectAppLimitServiceUnsuspendRequestToJSON(
   c1ApiFundsV1SubjectAppLimitServiceUnsuspendRequest:
@@ -84,21 +86,23 @@ export const C1ApiFundsV1SubjectAppLimitServiceUnsuspendResponse$inboundSchema:
     C1ApiFundsV1SubjectAppLimitServiceUnsuspendResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SubjectAppLimitServiceUnsuspendResponse: shared
-      .SubjectAppLimitServiceUnsuspendResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SubjectAppLimitServiceUnsuspendResponse":
-        "subjectAppLimitServiceUnsuspendResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SubjectAppLimitServiceUnsuspendResponse: shared
+        .SubjectAppLimitServiceUnsuspendResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SubjectAppLimitServiceUnsuspendResponse":
+          "subjectAppLimitServiceUnsuspendResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1SubjectAppLimitServiceUnsuspendResponseFromJSON(
   jsonString: string,

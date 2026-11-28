@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -42,16 +42,20 @@ export const TaskAuditCertifyOutcomeOutcome$inboundSchema: z.ZodType<
   TaskAuditCertifyOutcomeOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskAuditCertifyOutcomeOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskAuditCertifyOutcomeOutcome)
+);
 
 /** @internal */
 export const TaskAuditCertifyOutcome$inboundSchema: z.ZodType<
   TaskAuditCertifyOutcome,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  outcome: TaskAuditCertifyOutcomeOutcome$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    outcome: TaskAuditCertifyOutcomeOutcome$inboundSchema.optional(),
+  })
+);
 
 export function taskAuditCertifyOutcomeFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   EvaluateEntitlementSelectionRequest1,
   EvaluateEntitlementSelectionRequest1$Outbound,
@@ -32,11 +33,13 @@ export const CountEntitlementSelectionFilterAttributeValuesRequest$outboundSchem
     CountEntitlementSelectionFilterAttributeValuesRequest$Outbound,
     z.ZodTypeDef,
     CountEntitlementSelectionFilterAttributeValuesRequest
-  > = z.object({
-    selection: z.nullable(EvaluateEntitlementSelectionRequest1$outboundSchema)
-      .optional(),
-    values: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      selection: z.nullable(EvaluateEntitlementSelectionRequest1$outboundSchema)
+        .optional(),
+      values: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function countEntitlementSelectionFilterAttributeValuesRequestToJSON(
   countEntitlementSelectionFilterAttributeValuesRequest:

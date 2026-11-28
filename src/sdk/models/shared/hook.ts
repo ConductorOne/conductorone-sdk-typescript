@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -151,32 +151,34 @@ export type HookInput = {
 
 /** @internal */
 export const Event$inboundSchema: z.ZodType<Event, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Event);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Event));
 /** @internal */
 export const Event$outboundSchema: z.ZodType<string, z.ZodTypeDef, Event> =
-  openEnums.outboundSchema(Event);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Event));
 
 /** @internal */
-export const Hook$inboundSchema: z.ZodType<Hook, z.ZodTypeDef, unknown> = z
-  .object({
-    builtinPattern: z.nullable(BuiltInPattern$inboundSchema).optional(),
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    enabled: z.boolean().optional(),
-    event: Event$inboundSchema.optional(),
-    filter: z.nullable(HookFilter$inboundSchema).optional(),
-    function: z.nullable(HookFunctionRef$inboundSchema).optional(),
-    id: z.string().optional(),
-    jsonPatch: z.nullable(JSONPatchConfig$inboundSchema).optional(),
-    managedByGuardrails: z.boolean().optional(),
-    priority: z.number().int().optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
+export const Hook$inboundSchema: z.ZodType<Hook, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      builtinPattern: z.nullable(BuiltInPattern$inboundSchema).optional(),
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      enabled: z.boolean().optional(),
+      event: Event$inboundSchema.optional(),
+      filter: z.nullable(HookFilter$inboundSchema).optional(),
+      function: z.nullable(HookFunctionRef$inboundSchema).optional(),
+      id: z.string().optional(),
+      jsonPatch: z.nullable(JSONPatchConfig$inboundSchema).optional(),
+      managedByGuardrails: z.boolean().optional(),
+      priority: z.number().int().optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    })
+  );
 
 export function hookFromJSON(
   jsonString: string,
@@ -208,19 +210,21 @@ export const HookInput$outboundSchema: z.ZodType<
   HookInput$Outbound,
   z.ZodTypeDef,
   HookInput
-> = z.object({
-  builtinPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  event: Event$outboundSchema.optional(),
-  filter: z.nullable(HookFilter$outboundSchema).optional(),
-  function: z.nullable(HookFunctionRef$outboundSchema).optional(),
-  id: z.string().optional(),
-  jsonPatch: z.nullable(JSONPatchConfig$outboundSchema).optional(),
-  managedByGuardrails: z.boolean().optional(),
-  priority: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    builtinPattern: z.nullable(BuiltInPattern$outboundSchema).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    event: Event$outboundSchema.optional(),
+    filter: z.nullable(HookFilter$outboundSchema).optional(),
+    function: z.nullable(HookFunctionRef$outboundSchema).optional(),
+    id: z.string().optional(),
+    jsonPatch: z.nullable(JSONPatchConfig$outboundSchema).optional(),
+    managedByGuardrails: z.boolean().optional(),
+    priority: z.number().int().optional(),
+  })
+);
 
 export function hookInputToJSON(hookInput: HookInput): string {
   return JSON.stringify(HookInput$outboundSchema.parse(hookInput));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   XAAClientAudienceMappingRef,
   XAAClientAudienceMappingRef$Outbound,
@@ -58,15 +59,17 @@ export const XAAClientAudienceMappingServiceSearchRequest$outboundSchema:
     XAAClientAudienceMappingServiceSearchRequest$Outbound,
     z.ZodTypeDef,
     XAAClientAudienceMappingServiceSearchRequest
-  > = z.object({
-    disabled: z.nullable(z.boolean()).optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    refs: z.nullable(z.array(XAAClientAudienceMappingRef$outboundSchema))
-      .optional(),
-    xaaResourceServerIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      disabled: z.nullable(z.boolean()).optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+      refs: z.nullable(z.array(XAAClientAudienceMappingRef$outboundSchema))
+        .optional(),
+      xaaResourceServerIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function xaaClientAudienceMappingServiceSearchRequestToJSON(
   xaaClientAudienceMappingServiceSearchRequest:

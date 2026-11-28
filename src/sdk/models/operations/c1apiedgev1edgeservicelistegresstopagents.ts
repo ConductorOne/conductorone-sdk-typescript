@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -18,6 +18,8 @@ export const Bucket = {
   TbTimeBucketUnspecified: "TB_TIME_BUCKET_UNSPECIFIED",
   TbTimeBucketHour: "TB_TIME_BUCKET_HOUR",
   TbTimeBucketDay: "TB_TIME_BUCKET_DAY",
+  TbTimeBucketFiveMinutes: "TB_TIME_BUCKET_FIVE_MINUTES",
+  TbTimeBucketFifteenMinutes: "TB_TIME_BUCKET_FIFTEEN_MINUTES",
 } as const;
 /**
  * The bucket field.
@@ -89,14 +91,14 @@ export type C1ApiEdgeV1EdgeServiceListEgressTopAgentsResponse = {
 
 /** @internal */
 export const Bucket$outboundSchema: z.ZodType<string, z.ZodTypeDef, Bucket> =
-  openEnums.outboundSchema(Bucket);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Bucket));
 
 /** @internal */
 export const Dimension$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Dimension
-> = openEnums.outboundSchema(Dimension);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Dimension));
 
 /** @internal */
 export type C1ApiEdgeV1EdgeServiceListEgressTopAgentsRequest$Outbound = {
@@ -116,22 +118,24 @@ export const C1ApiEdgeV1EdgeServiceListEgressTopAgentsRequest$outboundSchema:
     C1ApiEdgeV1EdgeServiceListEgressTopAgentsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListEgressTopAgentsRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    bucket: Bucket$outboundSchema.optional(),
-    dimension: Dimension$outboundSchema.optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    since: z.number().int().transform(v => `${v}`).optional(),
-    until: z.number().int().transform(v => `${v}`).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      bucket: Bucket$outboundSchema.optional(),
+      dimension: Dimension$outboundSchema.optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      since: z.number().int().transform(v => `${v}`).optional(),
+      until: z.number().int().transform(v => `${v}`).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressTopAgentsRequestToJSON(
   c1ApiEdgeV1EdgeServiceListEgressTopAgentsRequest:
@@ -150,21 +154,23 @@ export const C1ApiEdgeV1EdgeServiceListEgressTopAgentsResponse$inboundSchema:
     C1ApiEdgeV1EdgeServiceListEgressTopAgentsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListEgressTopAgentsResponse: shared
-      .EdgeServiceListEgressTopAgentsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListEgressTopAgentsResponse":
-        "edgeServiceListEgressTopAgentsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListEgressTopAgentsResponse: shared
+        .EdgeServiceListEgressTopAgentsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListEgressTopAgentsResponse":
+          "edgeServiceListEgressTopAgentsResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListEgressTopAgentsResponseFromJSON(
   jsonString: string,

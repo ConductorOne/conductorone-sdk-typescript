@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessReviewExcludedEntitlementInput,
   AccessReviewExcludedEntitlementInput$Outbound,
@@ -47,12 +48,14 @@ export const AccessReviewSetCampaignScopeAndExcludedEntitlementsRequest$outbound
     AccessReviewSetCampaignScopeAndExcludedEntitlementsRequest$Outbound,
     z.ZodTypeDef,
     AccessReviewSetCampaignScopeAndExcludedEntitlementsRequest
-  > = z.object({
-    excludedEntitlements: z.nullable(
-      z.array(AccessReviewExcludedEntitlementInput$outboundSchema),
-    ).optional(),
-    scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      excludedEntitlements: z.nullable(
+        z.array(AccessReviewExcludedEntitlementInput$outboundSchema),
+      ).optional(),
+      scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
+    })
+  );
 
 export function accessReviewSetCampaignScopeAndExcludedEntitlementsRequestToJSON(
   accessReviewSetCampaignScopeAndExcludedEntitlementsRequest:

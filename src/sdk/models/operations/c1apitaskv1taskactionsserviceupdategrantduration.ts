@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,17 +49,19 @@ export const C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$outboundSch
     C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceUpdateGrantDurationRequest: shared
-      .TaskActionsServiceUpdateGrantDurationRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceUpdateGrantDurationRequest:
-        "TaskActionsServiceUpdateGrantDurationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceUpdateGrantDurationRequest: shared
+        .TaskActionsServiceUpdateGrantDurationRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceUpdateGrantDurationRequest:
+          "TaskActionsServiceUpdateGrantDurationRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequestToJSON(
   c1ApiTaskV1TaskActionsServiceUpdateGrantDurationRequest:
@@ -77,20 +79,22 @@ export const C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse$inboundSch
     C1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskServiceActionResponse: shared.TaskServiceActionResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskServiceActionResponse": "taskServiceActionResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskServiceActionResponse: shared.TaskServiceActionResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskServiceActionResponse": "taskServiceActionResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceUpdateGrantDurationResponseFromJSON(
   jsonString: string,

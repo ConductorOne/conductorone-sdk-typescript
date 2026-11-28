@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskTypeActionInput,
   TaskTypeActionInput$Outbound,
@@ -71,14 +72,16 @@ export const TaskTypeInput$outboundSchema: z.ZodType<
   TaskTypeInput$Outbound,
   z.ZodTypeDef,
   TaskTypeInput
-> = z.object({
-  action: z.nullable(TaskTypeActionInput$outboundSchema).optional(),
-  certify: z.nullable(TaskTypeCertifyInput$outboundSchema).optional(),
-  finding: z.nullable(TaskTypeFindingInput$outboundSchema).optional(),
-  grant: z.nullable(TaskTypeGrantInput$outboundSchema).optional(),
-  offboarding: z.nullable(TaskTypeOffboardingInput$outboundSchema).optional(),
-  revoke: z.nullable(TaskTypeRevokeInput$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(TaskTypeActionInput$outboundSchema).optional(),
+    certify: z.nullable(TaskTypeCertifyInput$outboundSchema).optional(),
+    finding: z.nullable(TaskTypeFindingInput$outboundSchema).optional(),
+    grant: z.nullable(TaskTypeGrantInput$outboundSchema).optional(),
+    offboarding: z.nullable(TaskTypeOffboardingInput$outboundSchema).optional(),
+    revoke: z.nullable(TaskTypeRevokeInput$outboundSchema).optional(),
+  })
+);
 
 export function taskTypeInputToJSON(taskTypeInput: TaskTypeInput): string {
   return JSON.stringify(TaskTypeInput$outboundSchema.parse(taskTypeInput));

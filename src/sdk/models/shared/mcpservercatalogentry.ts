@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -229,63 +229,72 @@ export const MCPServerCatalogEntryChannel$inboundSchema: z.ZodType<
   MCPServerCatalogEntryChannel,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MCPServerCatalogEntryChannel);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MCPServerCatalogEntryChannel)
+);
 
 /** @internal */
 export const DefaultAuthMethod$inboundSchema: z.ZodType<
   DefaultAuthMethod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DefaultAuthMethod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DefaultAuthMethod)
+);
 
 /** @internal */
 export const Maturity$inboundSchema: z.ZodType<
   Maturity,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Maturity);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Maturity));
 
 /** @internal */
 export const Scope$inboundSchema: z.ZodType<Scope, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Scope);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Scope));
 
 /** @internal */
 export const SupportedOauth2Modes$inboundSchema: z.ZodType<
   SupportedOauth2Modes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SupportedOauth2Modes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SupportedOauth2Modes)
+);
 
 /** @internal */
 export const MCPServerCatalogEntry$inboundSchema: z.ZodType<
   MCPServerCatalogEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  authModes: z.nullable(z.array(MCPServerCatalogAuthMode$inboundSchema))
-    .optional(),
-  authValidationUrl: z.string().optional(),
-  baseUrl: z.string().optional(),
-  channel: MCPServerCatalogEntryChannel$inboundSchema.optional(),
-  configSchema: z.nullable(MCPServerCatalogConfigSchema$inboundSchema)
-    .optional(),
-  connectType: z.string().optional(),
-  defaultAuthMethod: DefaultAuthMethod$inboundSchema.optional(),
-  defaultAuthorizeUrl: z.string().optional(),
-  defaultScopes: z.nullable(z.array(z.string())).optional(),
-  defaultTokenUrl: z.string().optional(),
-  defaultToolPrefix: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  iconUrl: z.string().optional(),
-  id: z.string().optional(),
-  maturity: Maturity$inboundSchema.optional(),
-  scope: Scope$inboundSchema.optional(),
-  serviceName: z.string().optional(),
-  stable: z.boolean().optional(),
-  supportedOauth2Modes: z.nullable(z.array(SupportedOauth2Modes$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authModes: z.nullable(z.array(MCPServerCatalogAuthMode$inboundSchema))
+      .optional(),
+    authValidationUrl: z.string().optional(),
+    baseUrl: z.string().optional(),
+    channel: MCPServerCatalogEntryChannel$inboundSchema.optional(),
+    configSchema: z.nullable(MCPServerCatalogConfigSchema$inboundSchema)
+      .optional(),
+    connectType: z.string().optional(),
+    defaultAuthMethod: DefaultAuthMethod$inboundSchema.optional(),
+    defaultAuthorizeUrl: z.string().optional(),
+    defaultScopes: z.nullable(z.array(z.string())).optional(),
+    defaultTokenUrl: z.string().optional(),
+    defaultToolPrefix: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    iconUrl: z.string().optional(),
+    id: z.string().optional(),
+    maturity: Maturity$inboundSchema.optional(),
+    scope: Scope$inboundSchema.optional(),
+    serviceName: z.string().optional(),
+    stable: z.boolean().optional(),
+    supportedOauth2Modes: z.nullable(
+      z.array(SupportedOauth2Modes$inboundSchema),
+    ).optional(),
+  })
+);
 
 export function mcpServerCatalogEntryFromJSON(
   jsonString: string,

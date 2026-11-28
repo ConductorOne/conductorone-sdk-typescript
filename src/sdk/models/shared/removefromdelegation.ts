@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -48,13 +48,15 @@ export const RemoveFromDelegation$inboundSchema: z.ZodType<
   RemoveFromDelegation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  replacementUserIdCel: z.nullable(z.string()).optional(),
-  replacementUserRef: z.nullable(UserRef$inboundSchema).optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.string().optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    replacementUserIdCel: z.nullable(z.string()).optional(),
+    replacementUserRef: z.nullable(UserRef$inboundSchema).optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.string().optional(),
+    userRef: z.nullable(UserRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type RemoveFromDelegation$Outbound = {
   replacementUserIdCel?: string | null | undefined;
@@ -69,13 +71,15 @@ export const RemoveFromDelegation$outboundSchema: z.ZodType<
   RemoveFromDelegation$Outbound,
   z.ZodTypeDef,
   RemoveFromDelegation
-> = z.object({
-  replacementUserIdCel: z.nullable(z.string()).optional(),
-  replacementUserRef: z.nullable(UserRef$outboundSchema).optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.string().optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    replacementUserIdCel: z.nullable(z.string()).optional(),
+    replacementUserRef: z.nullable(UserRef$outboundSchema).optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.string().optional(),
+    userRef: z.nullable(UserRef$outboundSchema).optional(),
+  })
+);
 
 export function removeFromDelegationToJSON(
   removeFromDelegation: RemoveFromDelegation,

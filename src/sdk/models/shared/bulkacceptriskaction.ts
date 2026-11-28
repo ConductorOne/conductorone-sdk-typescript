@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The BulkAcceptRiskAction message.
@@ -26,10 +27,12 @@ export const BulkAcceptRiskAction$outboundSchema: z.ZodType<
   BulkAcceptRiskAction$Outbound,
   z.ZodTypeDef,
   BulkAcceptRiskAction
-> = z.object({
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  justification: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    justification: z.string().optional(),
+  })
+);
 
 export function bulkAcceptRiskActionToJSON(
   bulkAcceptRiskAction: BulkAcceptRiskAction,

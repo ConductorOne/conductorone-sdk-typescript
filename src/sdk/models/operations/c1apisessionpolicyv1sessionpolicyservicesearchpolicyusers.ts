@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,16 +56,18 @@ export const C1ApiSessionPolicyV1SessionPolicyServiceSearchPolicyUsersRequest$ou
     C1ApiSessionPolicyV1SessionPolicyServiceSearchPolicyUsersRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSessionPolicyV1SessionPolicyServiceSearchPolicyUsersRequest
-  > = z.object({
-    id: z.string(),
-    sessionPolicyServiceSearchPolicyUsersRequest: shared
-      .SessionPolicyServiceSearchPolicyUsersRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      sessionPolicyServiceSearchPolicyUsersRequest:
-        "SessionPolicyServiceSearchPolicyUsersRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      sessionPolicyServiceSearchPolicyUsersRequest: shared
+        .SessionPolicyServiceSearchPolicyUsersRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        sessionPolicyServiceSearchPolicyUsersRequest:
+          "SessionPolicyServiceSearchPolicyUsersRequest",
+      });
+    })
+  );
 
 export function c1ApiSessionPolicyV1SessionPolicyServiceSearchPolicyUsersRequestToJSON(
   c1ApiSessionPolicyV1SessionPolicyServiceSearchPolicyUsersRequest:
@@ -83,21 +85,23 @@ export const C1ApiSessionPolicyV1SessionPolicyServiceSearchPolicyUsersResponse$i
     C1ApiSessionPolicyV1SessionPolicyServiceSearchPolicyUsersResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SessionPolicyServiceSearchPolicyUsersResponse: shared
-      .SessionPolicyServiceSearchPolicyUsersResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SessionPolicyServiceSearchPolicyUsersResponse":
-        "sessionPolicyServiceSearchPolicyUsersResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SessionPolicyServiceSearchPolicyUsersResponse: shared
+        .SessionPolicyServiceSearchPolicyUsersResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SessionPolicyServiceSearchPolicyUsersResponse":
+          "sessionPolicyServiceSearchPolicyUsersResponse",
+      });
+    })
+  );
 
 export function c1ApiSessionPolicyV1SessionPolicyServiceSearchPolicyUsersResponseFromJSON(
   jsonString: string,

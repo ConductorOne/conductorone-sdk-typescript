@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const ResponseProvisionStepErrored$inboundSchema: z.ZodType<
   ResponseProvisionStepErrored,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  comment: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    comment: z.string().optional(),
+  })
+);
 /** @internal */
 export type ResponseProvisionStepErrored$Outbound = {
   comment?: string | undefined;
@@ -35,9 +37,11 @@ export const ResponseProvisionStepErrored$outboundSchema: z.ZodType<
   ResponseProvisionStepErrored$Outbound,
   z.ZodTypeDef,
   ResponseProvisionStepErrored
-> = z.object({
-  comment: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    comment: z.string().optional(),
+  })
+);
 
 export function responseProvisionStepErroredToJSON(
   responseProvisionStepErrored: ResponseProvisionStepErrored,

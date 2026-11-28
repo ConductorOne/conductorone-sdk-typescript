@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,9 +45,11 @@ export const C1ApiSessionPolicyV1SessionPolicyServiceGetRequest$outboundSchema:
     C1ApiSessionPolicyV1SessionPolicyServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSessionPolicyV1SessionPolicyServiceGetRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiSessionPolicyV1SessionPolicyServiceGetRequestToJSON(
   c1ApiSessionPolicyV1SessionPolicyServiceGetRequest:
@@ -66,20 +68,22 @@ export const C1ApiSessionPolicyV1SessionPolicyServiceGetResponse$inboundSchema:
     C1ApiSessionPolicyV1SessionPolicyServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SessionPolicyServiceGetResponse: shared
-      .SessionPolicyServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SessionPolicyServiceGetResponse": "sessionPolicyServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SessionPolicyServiceGetResponse: shared
+        .SessionPolicyServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SessionPolicyServiceGetResponse": "sessionPolicyServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiSessionPolicyV1SessionPolicyServiceGetResponseFromJSON(
   jsonString: string,

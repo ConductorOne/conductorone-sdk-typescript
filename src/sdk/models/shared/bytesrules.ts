@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -124,22 +124,24 @@ export const BytesRules$inboundSchema: z.ZodType<
   BytesRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  const: z.string().optional(),
-  contains: z.string().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  ip: z.nullable(z.boolean()).optional(),
-  ipv4: z.nullable(z.boolean()).optional(),
-  ipv6: z.nullable(z.boolean()).optional(),
-  len: z.string().optional(),
-  maxLen: z.string().optional(),
-  minLen: z.string().optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-  pattern: z.string().optional(),
-  prefix: z.string().optional(),
-  suffix: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.string().optional(),
+    contains: z.string().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    ip: z.nullable(z.boolean()).optional(),
+    ipv4: z.nullable(z.boolean()).optional(),
+    ipv6: z.nullable(z.boolean()).optional(),
+    len: z.string().optional(),
+    maxLen: z.string().optional(),
+    minLen: z.string().optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+    pattern: z.string().optional(),
+    prefix: z.string().optional(),
+    suffix: z.string().optional(),
+  })
+);
 /** @internal */
 export type BytesRules$Outbound = {
   const?: string | undefined;
@@ -163,22 +165,24 @@ export const BytesRules$outboundSchema: z.ZodType<
   BytesRules$Outbound,
   z.ZodTypeDef,
   BytesRules
-> = z.object({
-  const: z.string().optional(),
-  contains: z.string().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.string())).optional(),
-  ip: z.nullable(z.boolean()).optional(),
-  ipv4: z.nullable(z.boolean()).optional(),
-  ipv6: z.nullable(z.boolean()).optional(),
-  len: z.string().optional(),
-  maxLen: z.string().optional(),
-  minLen: z.string().optional(),
-  notIn: z.nullable(z.array(z.string())).optional(),
-  pattern: z.string().optional(),
-  prefix: z.string().optional(),
-  suffix: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.string().optional(),
+    contains: z.string().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.string())).optional(),
+    ip: z.nullable(z.boolean()).optional(),
+    ipv4: z.nullable(z.boolean()).optional(),
+    ipv6: z.nullable(z.boolean()).optional(),
+    len: z.string().optional(),
+    maxLen: z.string().optional(),
+    minLen: z.string().optional(),
+    notIn: z.nullable(z.array(z.string())).optional(),
+    pattern: z.string().optional(),
+    prefix: z.string().optional(),
+    suffix: z.string().optional(),
+  })
+);
 
 export function bytesRulesToJSON(bytesRules: BytesRules): string {
   return JSON.stringify(BytesRules$outboundSchema.parse(bytesRules));

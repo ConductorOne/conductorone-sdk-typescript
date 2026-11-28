@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -58,21 +58,23 @@ export const MatchType$inboundSchema: z.ZodType<
   MatchType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MatchType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(MatchType));
 
 /** @internal */
 export const AccessProfileMatch$inboundSchema: z.ZodType<
   AccessProfileMatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  catalogDisplayName: z.string().optional(),
-  catalogId: z.string().optional(),
-  matchType: MatchType$inboundSchema.optional(),
-  missingEntitlements: z.nullable(z.array(CohortEntitlement$inboundSchema))
-    .optional(),
-  overlapRatio: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    catalogDisplayName: z.string().optional(),
+    catalogId: z.string().optional(),
+    matchType: MatchType$inboundSchema.optional(),
+    missingEntitlements: z.nullable(z.array(CohortEntitlement$inboundSchema))
+      .optional(),
+    overlapRatio: z.number().optional(),
+  })
+);
 
 export function accessProfileMatchFromJSON(
   jsonString: string,

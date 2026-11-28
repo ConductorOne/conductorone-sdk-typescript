@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,14 +54,16 @@ export const MapRules$inboundSchema: z.ZodType<
   MapRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ignoreEmpty: z.boolean().optional(),
-  keys: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
-  maxPairs: z.string().optional(),
-  minPairs: z.string().optional(),
-  noSparse: z.boolean().optional(),
-  values: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ignoreEmpty: z.boolean().optional(),
+    keys: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
+    maxPairs: z.string().optional(),
+    minPairs: z.string().optional(),
+    noSparse: z.boolean().optional(),
+    values: z.nullable(z.lazy(() => FieldRules$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type MapRules$Outbound = {
   ignoreEmpty?: boolean | undefined;
@@ -77,14 +79,16 @@ export const MapRules$outboundSchema: z.ZodType<
   MapRules$Outbound,
   z.ZodTypeDef,
   MapRules
-> = z.object({
-  ignoreEmpty: z.boolean().optional(),
-  keys: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
-  maxPairs: z.string().optional(),
-  minPairs: z.string().optional(),
-  noSparse: z.boolean().optional(),
-  values: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ignoreEmpty: z.boolean().optional(),
+    keys: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
+    maxPairs: z.string().optional(),
+    minPairs: z.string().optional(),
+    noSparse: z.boolean().optional(),
+    values: z.nullable(z.lazy(() => FieldRules$outboundSchema)).optional(),
+  })
+);
 
 export function mapRulesToJSON(mapRules: MapRules): string {
   return JSON.stringify(MapRules$outboundSchema.parse(mapRules));

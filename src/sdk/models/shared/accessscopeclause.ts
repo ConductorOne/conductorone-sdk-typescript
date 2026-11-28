@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,12 @@ export const AccessScopeClause$inboundSchema: z.ZodType<
   AccessScopeClause,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entitlements: z.nullable(z.array(AppEntitlementScopeRef$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlements: z.nullable(z.array(AppEntitlementScopeRef$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type AccessScopeClause$Outbound = {
   entitlements?: Array<AppEntitlementScopeRef$Outbound> | null | undefined;
@@ -42,10 +44,12 @@ export const AccessScopeClause$outboundSchema: z.ZodType<
   AccessScopeClause$Outbound,
   z.ZodTypeDef,
   AccessScopeClause
-> = z.object({
-  entitlements: z.nullable(z.array(AppEntitlementScopeRef$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entitlements: z.nullable(z.array(AppEntitlementScopeRef$outboundSchema))
+      .optional(),
+  })
+);
 
 export function accessScopeClauseToJSON(
   accessScopeClause: AccessScopeClause,

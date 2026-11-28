@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const EmailOTPConstraints$inboundSchema: z.ZodType<
   EmailOTPConstraints,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  codeLength: z.number().int().optional(),
-  maxAttempts: z.number().int().optional(),
-  ttlSeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    codeLength: z.number().int().optional(),
+    maxAttempts: z.number().int().optional(),
+    ttlSeconds: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type EmailOTPConstraints$Outbound = {
   codeLength?: number | undefined;
@@ -47,11 +49,13 @@ export const EmailOTPConstraints$outboundSchema: z.ZodType<
   EmailOTPConstraints$Outbound,
   z.ZodTypeDef,
   EmailOTPConstraints
-> = z.object({
-  codeLength: z.number().int().optional(),
-  maxAttempts: z.number().int().optional(),
-  ttlSeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    codeLength: z.number().int().optional(),
+    maxAttempts: z.number().int().optional(),
+    ttlSeconds: z.number().int().optional(),
+  })
+);
 
 export function emailOTPConstraintsToJSON(
   emailOTPConstraints: EmailOTPConstraints,

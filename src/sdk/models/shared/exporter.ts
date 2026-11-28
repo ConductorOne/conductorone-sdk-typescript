@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -63,29 +63,31 @@ export const ExporterState$inboundSchema: z.ZodType<
   ExporterState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ExporterState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ExporterState));
 
 /** @internal */
 export const Exporter$inboundSchema: z.ZodType<
   Exporter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  datasource: z.nullable(ExportToDatasource$inboundSchema).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  exportId: z.string().optional(),
-  state: ExporterState$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  watermarkEventId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    datasource: z.nullable(ExportToDatasource$inboundSchema).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    exportId: z.string().optional(),
+    state: ExporterState$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    watermarkEventId: z.string().optional(),
+  })
+);
 
 export function exporterFromJSON(
   jsonString: string,

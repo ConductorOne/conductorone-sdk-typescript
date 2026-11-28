@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -47,22 +47,27 @@ export const BundleAutomationCircuitBreakerState$inboundSchema: z.ZodType<
   BundleAutomationCircuitBreakerState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(BundleAutomationCircuitBreakerState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(BundleAutomationCircuitBreakerState)
+);
 
 /** @internal */
 export const BundleAutomationCircuitBreaker$inboundSchema: z.ZodType<
   BundleAutomationCircuitBreaker,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  removedMembersThresholdPercentage: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  state: BundleAutomationCircuitBreakerState$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    removedMembersThresholdPercentage: z.string().transform(v =>
+      parseInt(v, 10)
+    ).optional(),
+    state: BundleAutomationCircuitBreakerState$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    userRef: z.nullable(UserRef$inboundSchema).optional(),
+  })
+);
 
 export function bundleAutomationCircuitBreakerFromJSON(
   jsonString: string,

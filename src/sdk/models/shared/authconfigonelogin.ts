@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const AuthConfigOneLogin$inboundSchema: z.ZodType<
   AuthConfigOneLogin,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  domain: z.string().optional(),
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    domain: z.string().optional(),
+    oidcClientId: z.string().optional(),
+    oidcClientSecret: z.string().optional(),
+  })
+);
 /** @internal */
 export type AuthConfigOneLogin$Outbound = {
   domain?: string | undefined;
@@ -47,11 +49,13 @@ export const AuthConfigOneLogin$outboundSchema: z.ZodType<
   AuthConfigOneLogin$Outbound,
   z.ZodTypeDef,
   AuthConfigOneLogin
-> = z.object({
-  domain: z.string().optional(),
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    domain: z.string().optional(),
+    oidcClientId: z.string().optional(),
+    oidcClientSecret: z.string().optional(),
+  })
+);
 
 export function authConfigOneLoginToJSON(
   authConfigOneLogin: AuthConfigOneLogin,

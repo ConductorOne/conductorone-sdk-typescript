@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,11 +40,13 @@ export const RequestCatalogTypeChangeImpactRef$inboundSchema: z.ZodType<
   RequestCatalogTypeChangeImpactRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlement: z.nullable(AppEntitlementRef$inboundSchema).optional(),
-  bundleAutomation: z.nullable(BundleAutomationRef$inboundSchema).optional(),
-  requestCatalog: z.nullable(RequestCatalogRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlement: z.nullable(AppEntitlementRef$inboundSchema).optional(),
+    bundleAutomation: z.nullable(BundleAutomationRef$inboundSchema).optional(),
+    requestCatalog: z.nullable(RequestCatalogRef$inboundSchema).optional(),
+  })
+);
 
 export function requestCatalogTypeChangeImpactRefFromJSON(
   jsonString: string,

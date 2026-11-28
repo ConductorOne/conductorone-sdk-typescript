@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiAiGovernanceV1ToolGatesServiceListRequest$outboundSchema:
     C1ApiAiGovernanceV1ToolGatesServiceListRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1ToolGatesServiceListRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ToolGatesServiceListRequestToJSON(
   c1ApiAiGovernanceV1ToolGatesServiceListRequest:
@@ -74,20 +76,22 @@ export const C1ApiAiGovernanceV1ToolGatesServiceListResponse$inboundSchema:
     C1ApiAiGovernanceV1ToolGatesServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ToolGatesServiceListResponse: shared
-      .ToolGatesServiceListResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ToolGatesServiceListResponse": "toolGatesServiceListResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ToolGatesServiceListResponse: shared
+        .ToolGatesServiceListResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ToolGatesServiceListResponse": "toolGatesServiceListResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ToolGatesServiceListResponseFromJSON(
   jsonString: string,

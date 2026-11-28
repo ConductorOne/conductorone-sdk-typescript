@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -73,18 +73,20 @@ export const SInt64Rules$inboundSchema: z.ZodType<
   SInt64Rules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  const: z.string().transform(v => parseInt(v, 10)).optional(),
-  gt: z.string().transform(v => parseInt(v, 10)).optional(),
-  gte: z.string().transform(v => parseInt(v, 10)).optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.string().transform(v => parseInt(v, 10))))
-    .optional(),
-  lt: z.string().transform(v => parseInt(v, 10)).optional(),
-  lte: z.string().transform(v => parseInt(v, 10)).optional(),
-  notIn: z.nullable(z.array(z.string().transform(v => parseInt(v, 10))))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.string().transform(v => parseInt(v, 10)).optional(),
+    gt: z.string().transform(v => parseInt(v, 10)).optional(),
+    gte: z.string().transform(v => parseInt(v, 10)).optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.string().transform(v => parseInt(v, 10))))
+      .optional(),
+    lt: z.string().transform(v => parseInt(v, 10)).optional(),
+    lte: z.string().transform(v => parseInt(v, 10)).optional(),
+    notIn: z.nullable(z.array(z.string().transform(v => parseInt(v, 10))))
+      .optional(),
+  })
+);
 /** @internal */
 export type SInt64Rules$Outbound = {
   const?: string | undefined;
@@ -102,17 +104,19 @@ export const SInt64Rules$outboundSchema: z.ZodType<
   SInt64Rules$Outbound,
   z.ZodTypeDef,
   SInt64Rules
-> = z.object({
-  const: z.number().int().transform(v => `${v}`).optional(),
-  gt: z.number().int().transform(v => `${v}`).optional(),
-  gte: z.number().int().transform(v => `${v}`).optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.number().int().transform(v => `${v}`))).optional(),
-  lt: z.number().int().transform(v => `${v}`).optional(),
-  lte: z.number().int().transform(v => `${v}`).optional(),
-  notIn: z.nullable(z.array(z.number().int().transform(v => `${v}`)))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.number().int().transform(v => `${v}`).optional(),
+    gt: z.number().int().transform(v => `${v}`).optional(),
+    gte: z.number().int().transform(v => `${v}`).optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.number().int().transform(v => `${v}`))).optional(),
+    lt: z.number().int().transform(v => `${v}`).optional(),
+    lte: z.number().int().transform(v => `${v}`).optional(),
+    notIn: z.nullable(z.array(z.number().int().transform(v => `${v}`)))
+      .optional(),
+  })
+);
 
 export function sInt64RulesToJSON(sInt64Rules: SInt64Rules): string {
   return JSON.stringify(SInt64Rules$outboundSchema.parse(sInt64Rules));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiCrossAppAccessV1XAAScopeServiceCreateRequest$outboundSchema:
     C1ApiCrossAppAccessV1XAAScopeServiceCreateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAScopeServiceCreateRequest
-  > = z.object({
-    appId: z.string(),
-    xaaScopeServiceCreateRequest: shared
-      .XAAScopeServiceCreateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      xaaScopeServiceCreateRequest: "XAAScopeServiceCreateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      xaaScopeServiceCreateRequest: shared
+        .XAAScopeServiceCreateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        xaaScopeServiceCreateRequest: "XAAScopeServiceCreateRequest",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAScopeServiceCreateRequestToJSON(
   c1ApiCrossAppAccessV1XAAScopeServiceCreateRequest:
@@ -79,20 +81,22 @@ export const C1ApiCrossAppAccessV1XAAScopeServiceCreateResponse$inboundSchema:
     C1ApiCrossAppAccessV1XAAScopeServiceCreateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAScopeServiceCreateResponse: shared
-      .XAAScopeServiceCreateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAScopeServiceCreateResponse": "xaaScopeServiceCreateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAScopeServiceCreateResponse: shared
+        .XAAScopeServiceCreateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAScopeServiceCreateResponse": "xaaScopeServiceCreateResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAScopeServiceCreateResponseFromJSON(
   jsonString: string,

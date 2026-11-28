@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The GoLinkServiceResolveRequest message.
@@ -24,9 +25,11 @@ export const GoLinkServiceResolveRequest$outboundSchema: z.ZodType<
   GoLinkServiceResolveRequest$Outbound,
   z.ZodTypeDef,
   GoLinkServiceResolveRequest
-> = z.object({
-  path: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string().optional(),
+  })
+);
 
 export function goLinkServiceResolveRequestToJSON(
   goLinkServiceResolveRequest: GoLinkServiceResolveRequest,

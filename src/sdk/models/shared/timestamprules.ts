@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,27 +45,29 @@ export const TimestampRules$inboundSchema: z.ZodType<
   TimestampRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  const: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  gt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  gtNow: z.boolean().optional(),
-  gte: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  lt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  ltNow: z.boolean().optional(),
-  lte: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  required: z.boolean().optional(),
-  within: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    gt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    gtNow: z.boolean().optional(),
+    gte: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    lt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    ltNow: z.boolean().optional(),
+    lte: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    required: z.boolean().optional(),
+    within: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type TimestampRules$Outbound = {
   const?: string | null | undefined;
@@ -84,17 +86,19 @@ export const TimestampRules$outboundSchema: z.ZodType<
   TimestampRules$Outbound,
   z.ZodTypeDef,
   TimestampRules
-> = z.object({
-  const: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  gt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  gtNow: z.boolean().optional(),
-  gte: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  lt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  ltNow: z.boolean().optional(),
-  lte: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  required: z.boolean().optional(),
-  within: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    gt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    gtNow: z.boolean().optional(),
+    gte: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    lt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    ltNow: z.boolean().optional(),
+    lte: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    required: z.boolean().optional(),
+    within: z.nullable(z.string()).optional(),
+  })
+);
 
 export function timestampRulesToJSON(timestampRules: TimestampRules): string {
   return JSON.stringify(TimestampRules$outboundSchema.parse(timestampRules));

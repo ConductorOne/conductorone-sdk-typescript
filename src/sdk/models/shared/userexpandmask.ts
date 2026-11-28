@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The user expand mask is used to indicate which related objects should be expanded in the response.
@@ -27,9 +28,11 @@ export const UserExpandMask$outboundSchema: z.ZodType<
   UserExpandMask$Outbound,
   z.ZodTypeDef,
   UserExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function userExpandMaskToJSON(userExpandMask: UserExpandMask): string {
   return JSON.stringify(UserExpandMask$outboundSchema.parse(userExpandMask));

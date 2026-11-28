@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -93,7 +94,9 @@ export const SSOApplicationServiceCreateRequestSubjectType$outboundSchema:
     string,
     z.ZodTypeDef,
     SSOApplicationServiceCreateRequestSubjectType
-  > = openEnums.outboundSchema(SSOApplicationServiceCreateRequestSubjectType);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(SSOApplicationServiceCreateRequestSubjectType)
+  );
 
 /** @internal */
 export type SSOApplicationServiceCreateRequest$Outbound = {
@@ -113,20 +116,22 @@ export const SSOApplicationServiceCreateRequest$outboundSchema: z.ZodType<
   SSOApplicationServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   SSOApplicationServiceCreateRequest
-> = z.object({
-  assertionLifetime: z.nullable(z.string()).optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  initialClient: z.nullable(SSOApplicationOIDCClientConfig$outboundSchema)
-    .optional(),
-  oidc: z.nullable(SSOApplicationOIDCConfig$outboundSchema).optional(),
-  saml: z.nullable(SSOApplicationSAMLConfig$outboundSchema).optional(),
-  sectorId: z.string().optional(),
-  subjectCompatibility: z.nullable(SSOSubjectCompatibility$outboundSchema)
-    .optional(),
-  subjectType: SSOApplicationServiceCreateRequestSubjectType$outboundSchema
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assertionLifetime: z.nullable(z.string()).optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    initialClient: z.nullable(SSOApplicationOIDCClientConfig$outboundSchema)
+      .optional(),
+    oidc: z.nullable(SSOApplicationOIDCConfig$outboundSchema).optional(),
+    saml: z.nullable(SSOApplicationSAMLConfig$outboundSchema).optional(),
+    sectorId: z.string().optional(),
+    subjectCompatibility: z.nullable(SSOSubjectCompatibility$outboundSchema)
+      .optional(),
+    subjectType: SSOApplicationServiceCreateRequestSubjectType$outboundSchema
+      .optional(),
+  })
+);
 
 export function ssoApplicationServiceCreateRequestToJSON(
   ssoApplicationServiceCreateRequest: SSOApplicationServiceCreateRequest,

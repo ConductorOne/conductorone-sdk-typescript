@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,20 +41,22 @@ export const SecretTrait$inboundSchema: z.ZodType<
   SecretTrait,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdByAppUserId: z.string().optional(),
-  credentialDetail: z.string().optional(),
-  identityAppUserId: z.string().optional(),
-  lastUsedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  secretCreatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  secretExpiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdByAppUserId: z.string().optional(),
+    credentialDetail: z.string().optional(),
+    identityAppUserId: z.string().optional(),
+    lastUsedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    secretCreatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    secretExpiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type SecretTrait$Outbound = {
   createdByAppUserId?: string | undefined;
@@ -70,16 +72,18 @@ export const SecretTrait$outboundSchema: z.ZodType<
   SecretTrait$Outbound,
   z.ZodTypeDef,
   SecretTrait
-> = z.object({
-  createdByAppUserId: z.string().optional(),
-  credentialDetail: z.string().optional(),
-  identityAppUserId: z.string().optional(),
-  lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  secretCreatedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  secretExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdByAppUserId: z.string().optional(),
+    credentialDetail: z.string().optional(),
+    identityAppUserId: z.string().optional(),
+    lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    secretCreatedAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    secretExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function secretTraitToJSON(secretTrait: SecretTrait): string {
   return JSON.stringify(SecretTrait$outboundSchema.parse(secretTrait));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,15 +46,17 @@ export const C1ApiGolinkV1GoLinkServiceUpdateRequest$outboundSchema: z.ZodType<
   C1ApiGolinkV1GoLinkServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   C1ApiGolinkV1GoLinkServiceUpdateRequest
-> = z.object({
-  id: z.string(),
-  goLinkServiceUpdateRequest: shared.GoLinkServiceUpdateRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    goLinkServiceUpdateRequest: "GoLinkServiceUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    goLinkServiceUpdateRequest: shared.GoLinkServiceUpdateRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      goLinkServiceUpdateRequest: "GoLinkServiceUpdateRequest",
+    });
+  })
+);
 
 export function c1ApiGolinkV1GoLinkServiceUpdateRequestToJSON(
   c1ApiGolinkV1GoLinkServiceUpdateRequest:
@@ -72,20 +74,22 @@ export const C1ApiGolinkV1GoLinkServiceUpdateResponse$inboundSchema: z.ZodType<
   C1ApiGolinkV1GoLinkServiceUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  GoLinkServiceUpdateResponse: shared.GoLinkServiceUpdateResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "GoLinkServiceUpdateResponse": "goLinkServiceUpdateResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    GoLinkServiceUpdateResponse: shared
+      .GoLinkServiceUpdateResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "GoLinkServiceUpdateResponse": "goLinkServiceUpdateResponse",
+    });
+  })
+);
 
 export function c1ApiGolinkV1GoLinkServiceUpdateResponseFromJSON(
   jsonString: string,

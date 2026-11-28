@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -42,14 +42,16 @@ export const EncryptedData$inboundSchema: z.ZodType<
   EncryptedData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  encryptedBytes: z.string().optional(),
-  keyId: z.string().optional(),
-  name: z.string().optional(),
-  provider: z.string().optional(),
-  schema: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    encryptedBytes: z.string().optional(),
+    keyId: z.string().optional(),
+    name: z.string().optional(),
+    provider: z.string().optional(),
+    schema: z.string().optional(),
+  })
+);
 
 export function encryptedDataFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   GoLinkInput,
   GoLinkInput$Outbound,
@@ -28,10 +29,12 @@ export const GoLinkServiceUpdateRequest$outboundSchema: z.ZodType<
   GoLinkServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   GoLinkServiceUpdateRequest
-> = z.object({
-  golink: z.nullable(GoLinkInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    golink: z.nullable(GoLinkInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function goLinkServiceUpdateRequestToJSON(
   goLinkServiceUpdateRequest: GoLinkServiceUpdateRequest,

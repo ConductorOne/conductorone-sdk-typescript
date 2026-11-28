@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   Classifier,
   Classifier$Outbound,
@@ -26,9 +27,11 @@ export const CreateClassifierRequest$outboundSchema: z.ZodType<
   CreateClassifierRequest$Outbound,
   z.ZodTypeDef,
   CreateClassifierRequest
-> = z.object({
-  classifier: z.nullable(Classifier$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    classifier: z.nullable(Classifier$outboundSchema),
+  })
+);
 
 export function createClassifierRequestToJSON(
   createClassifierRequest: CreateClassifierRequest,

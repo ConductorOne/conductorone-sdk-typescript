@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SignInPolicyServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const SignInPolicyServiceDeleteRequest$outboundSchema: z.ZodType<
   SignInPolicyServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   SignInPolicyServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function signInPolicyServiceDeleteRequestToJSON(
   signInPolicyServiceDeleteRequest: SignInPolicyServiceDeleteRequest,

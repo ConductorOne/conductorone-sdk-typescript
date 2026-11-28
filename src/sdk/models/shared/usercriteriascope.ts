@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -58,28 +58,31 @@ export const UserStatus$inboundSchema: z.ZodType<
   UserStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(UserStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(UserStatus));
 /** @internal */
 export const UserStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UserStatus
-> = openEnums.outboundSchema(UserStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(UserStatus));
 
 /** @internal */
 export const UserCriteriaScope$inboundSchema: z.ZodType<
   UserCriteriaScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  groupAppEntitlementsRef: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-    .optional(),
-  managerUserIds: z.nullable(z.array(z.string())).optional(),
-  multiUserProfileAttributes: z.record(
-    IncludedUserAttributeValues$inboundSchema,
-  ).optional(),
-  userStatus: z.nullable(z.array(UserStatus$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groupAppEntitlementsRef: z.nullable(
+      z.array(AppEntitlementRef$inboundSchema),
+    ).optional(),
+    managerUserIds: z.nullable(z.array(z.string())).optional(),
+    multiUserProfileAttributes: z.record(
+      IncludedUserAttributeValues$inboundSchema,
+    ).optional(),
+    userStatus: z.nullable(z.array(UserStatus$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type UserCriteriaScope$Outbound = {
   groupAppEntitlementsRef?:
@@ -98,15 +101,18 @@ export const UserCriteriaScope$outboundSchema: z.ZodType<
   UserCriteriaScope$Outbound,
   z.ZodTypeDef,
   UserCriteriaScope
-> = z.object({
-  groupAppEntitlementsRef: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  managerUserIds: z.nullable(z.array(z.string())).optional(),
-  multiUserProfileAttributes: z.record(
-    IncludedUserAttributeValues$outboundSchema,
-  ).optional(),
-  userStatus: z.nullable(z.array(UserStatus$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groupAppEntitlementsRef: z.nullable(
+      z.array(AppEntitlementRef$outboundSchema),
+    ).optional(),
+    managerUserIds: z.nullable(z.array(z.string())).optional(),
+    multiUserProfileAttributes: z.record(
+      IncludedUserAttributeValues$outboundSchema,
+    ).optional(),
+    userStatus: z.nullable(z.array(UserStatus$outboundSchema)).optional(),
+  })
+);
 
 export function userCriteriaScopeToJSON(
   userCriteriaScope: UserCriteriaScope,

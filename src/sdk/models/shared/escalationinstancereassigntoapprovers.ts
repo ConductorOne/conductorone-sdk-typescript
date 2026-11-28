@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const EscalationInstanceReassignToApprovers$inboundSchema: z.ZodType<
   EscalationInstanceReassignToApprovers,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approverIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approverIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type EscalationInstanceReassignToApprovers$Outbound = {
   approverIds?: Array<string> | null | undefined;
@@ -35,9 +37,11 @@ export const EscalationInstanceReassignToApprovers$outboundSchema: z.ZodType<
   EscalationInstanceReassignToApprovers$Outbound,
   z.ZodTypeDef,
   EscalationInstanceReassignToApprovers
-> = z.object({
-  approverIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approverIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function escalationInstanceReassignToApproversToJSON(
   escalationInstanceReassignToApprovers: EscalationInstanceReassignToApprovers,

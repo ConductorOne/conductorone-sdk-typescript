@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The GoLinkRef message.
@@ -24,9 +25,11 @@ export const GoLinkRef$outboundSchema: z.ZodType<
   GoLinkRef$Outbound,
   z.ZodTypeDef,
   GoLinkRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function goLinkRefToJSON(goLinkRef: GoLinkRef): string {
   return JSON.stringify(GoLinkRef$outboundSchema.parse(goLinkRef));

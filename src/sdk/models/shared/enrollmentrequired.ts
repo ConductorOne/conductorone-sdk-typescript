@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -42,24 +42,30 @@ export const EnrollmentRequiredCredentialTypes$inboundSchema: z.ZodType<
   EnrollmentRequiredCredentialTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EnrollmentRequiredCredentialTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EnrollmentRequiredCredentialTypes)
+);
 /** @internal */
 export const EnrollmentRequiredCredentialTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EnrollmentRequiredCredentialTypes
-> = openEnums.outboundSchema(EnrollmentRequiredCredentialTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EnrollmentRequiredCredentialTypes)
+);
 
 /** @internal */
 export const EnrollmentRequired$inboundSchema: z.ZodType<
   EnrollmentRequired,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  credentialTypes: z.nullable(
-    z.array(EnrollmentRequiredCredentialTypes$inboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credentialTypes: z.nullable(
+      z.array(EnrollmentRequiredCredentialTypes$inboundSchema),
+    ).optional(),
+  })
+);
 /** @internal */
 export type EnrollmentRequired$Outbound = {
   credentialTypes?: Array<string> | null | undefined;
@@ -70,11 +76,13 @@ export const EnrollmentRequired$outboundSchema: z.ZodType<
   EnrollmentRequired$Outbound,
   z.ZodTypeDef,
   EnrollmentRequired
-> = z.object({
-  credentialTypes: z.nullable(
-    z.array(EnrollmentRequiredCredentialTypes$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credentialTypes: z.nullable(
+      z.array(EnrollmentRequiredCredentialTypes$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function enrollmentRequiredToJSON(
   enrollmentRequired: EnrollmentRequired,

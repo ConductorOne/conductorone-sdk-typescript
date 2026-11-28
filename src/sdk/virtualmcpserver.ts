@@ -6,6 +6,8 @@ import { virtualMCPServerCreate } from "../funcs/virtualMCPServerCreate.js";
 import { virtualMCPServerDelete } from "../funcs/virtualMCPServerDelete.js";
 import { virtualMCPServerGet } from "../funcs/virtualMCPServerGet.js";
 import { virtualMCPServerList } from "../funcs/virtualMCPServerList.js";
+import { virtualMCPServerSearch } from "../funcs/virtualMCPServerSearch.js";
+import { virtualMCPServerSummary } from "../funcs/virtualMCPServerSummary.js";
 import { virtualMCPServerUpdate } from "../funcs/virtualMCPServerUpdate.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
@@ -13,6 +15,46 @@ import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class VirtualMCPServer extends ClientSDK {
+  /**
+   * Search
+   *
+   * @remarks
+   * Search the tenant's Virtual MCP Servers by text, state, source, and
+   *  connection requirements. Results are ordered by display name and ID and
+   *  may briefly lag recent writes.
+   */
+  async search(
+    request?: shared.VirtualMCPServerServiceSearchRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAiGovernanceV1VirtualMCPServerServiceSearchResponse
+  > {
+    return unwrapAsync(virtualMCPServerSearch(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Summary
+   *
+   * @remarks
+   * Summary returns tenant-wide Virtual MCP Server counts, the number of users
+   *  with access, and the distinct mapped sources in use. Values may briefly lag
+   *  recent writes.
+   */
+  async summary(
+    options?: RequestOptions,
+  ): Promise<
+    operations.C1ApiAiGovernanceV1VirtualMCPServerServiceSummaryResponse
+  > {
+    return unwrapAsync(virtualMCPServerSummary(
+      this,
+      options,
+    ));
+  }
+
   /**
    * List
    *

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SearchEmailAuditEventsRequest message.
@@ -29,10 +30,12 @@ export const SearchEmailAuditEventsRequest$outboundSchema: z.ZodType<
   SearchEmailAuditEventsRequest$Outbound,
   z.ZodTypeDef,
   SearchEmailAuditEventsRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  })
+);
 
 export function searchEmailAuditEventsRequestToJSON(
   searchEmailAuditEventsRequest: SearchEmailAuditEventsRequest,

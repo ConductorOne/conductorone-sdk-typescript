@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiA2uiV1A2UIServiceListSurfacesRequest$outboundSchema:
     C1ApiA2uiV1A2UIServiceListSurfacesRequest$Outbound,
     z.ZodTypeDef,
     C1ApiA2uiV1A2UIServiceListSurfacesRequest
-  > = z.object({
-    conversationId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      conversationId: "conversation_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      conversationId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        conversationId: "conversation_id",
+      });
+    })
+  );
 
 export function c1ApiA2uiV1A2UIServiceListSurfacesRequestToJSON(
   c1ApiA2uiV1A2UIServiceListSurfacesRequest:
@@ -67,20 +69,22 @@ export function c1ApiA2uiV1A2UIServiceListSurfacesRequestToJSON(
 /** @internal */
 export const C1ApiA2uiV1A2UIServiceListSurfacesResponse$inboundSchema:
   z.ZodType<C1ApiA2uiV1A2UIServiceListSurfacesResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      A2UIServiceListSurfacesResponse: shared
-        .A2UIServiceListSurfacesResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "A2UIServiceListSurfacesResponse": "a2UIServiceListSurfacesResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        A2UIServiceListSurfacesResponse: shared
+          .A2UIServiceListSurfacesResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "A2UIServiceListSurfacesResponse": "a2UIServiceListSurfacesResponse",
+        });
+      })
+    );
 
 export function c1ApiA2uiV1A2UIServiceListSurfacesResponseFromJSON(
   jsonString: string,

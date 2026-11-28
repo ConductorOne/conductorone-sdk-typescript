@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -59,24 +59,26 @@ export const C1ApiAppV2AppResourceOwnersV2DeleteUserOwnerRequest$outboundSchema:
     C1ApiAppV2AppResourceOwnersV2DeleteUserOwnerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2AppResourceOwnersV2DeleteUserOwnerRequest
-  > = z.object({
-    appId: z.string(),
-    resourceTypeId: z.string(),
-    resourceId: z.string(),
-    roleSlug: z.string(),
-    userRefId: z.string(),
-    deleteAppResourceUserOwnerRequest: shared
-      .DeleteAppResourceUserOwnerRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      resourceTypeId: "resource_type_id",
-      resourceId: "resource_id",
-      roleSlug: "role_slug",
-      userRefId: "user_ref_id",
-      deleteAppResourceUserOwnerRequest: "DeleteAppResourceUserOwnerRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      resourceTypeId: z.string(),
+      resourceId: z.string(),
+      roleSlug: z.string(),
+      userRefId: z.string(),
+      deleteAppResourceUserOwnerRequest: shared
+        .DeleteAppResourceUserOwnerRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        resourceTypeId: "resource_type_id",
+        resourceId: "resource_id",
+        roleSlug: "role_slug",
+        userRefId: "user_ref_id",
+        deleteAppResourceUserOwnerRequest: "DeleteAppResourceUserOwnerRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppResourceOwnersV2DeleteUserOwnerRequestToJSON(
   c1ApiAppV2AppResourceOwnersV2DeleteUserOwnerRequest:
@@ -95,21 +97,23 @@ export const C1ApiAppV2AppResourceOwnersV2DeleteUserOwnerResponse$inboundSchema:
     C1ApiAppV2AppResourceOwnersV2DeleteUserOwnerResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteAppResourceUserOwnerResponse: shared
-      .DeleteAppResourceUserOwnerResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteAppResourceUserOwnerResponse":
-        "deleteAppResourceUserOwnerResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteAppResourceUserOwnerResponse: shared
+        .DeleteAppResourceUserOwnerResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteAppResourceUserOwnerResponse":
+          "deleteAppResourceUserOwnerResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppResourceOwnersV2DeleteUserOwnerResponseFromJSON(
   jsonString: string,

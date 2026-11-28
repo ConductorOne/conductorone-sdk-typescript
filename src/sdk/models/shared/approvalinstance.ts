@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -107,34 +107,40 @@ export const ApprovalInstanceState$inboundSchema: z.ZodType<
   ApprovalInstanceState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ApprovalInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ApprovalInstanceState)
+);
 /** @internal */
 export const ApprovalInstanceState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ApprovalInstanceState
-> = openEnums.outboundSchema(ApprovalInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ApprovalInstanceState)
+);
 
 /** @internal */
 export const ApprovalInstance$inboundSchema: z.ZodType<
   ApprovalInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approval: z.nullable(Approval$inboundSchema).optional(),
-  approved: z.nullable(ApprovedAction$inboundSchema).optional(),
-  assignedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  denied: z.nullable(DeniedAction$inboundSchema).optional(),
-  escalationInstance: z.nullable(EscalationInstance$inboundSchema).optional(),
-  reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
-  reassignedByError: z.nullable(ReassignedByErrorAction$inboundSchema)
-    .optional(),
-  restarted: z.nullable(RestartAction$inboundSchema).optional(),
-  skipped: z.nullable(SkippedAction$inboundSchema).optional(),
-  state: ApprovalInstanceState$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approval: z.nullable(Approval$inboundSchema).optional(),
+    approved: z.nullable(ApprovedAction$inboundSchema).optional(),
+    assignedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    denied: z.nullable(DeniedAction$inboundSchema).optional(),
+    escalationInstance: z.nullable(EscalationInstance$inboundSchema).optional(),
+    reassigned: z.nullable(ReassignedAction$inboundSchema).optional(),
+    reassignedByError: z.nullable(ReassignedByErrorAction$inboundSchema)
+      .optional(),
+    restarted: z.nullable(RestartAction$inboundSchema).optional(),
+    skipped: z.nullable(SkippedAction$inboundSchema).optional(),
+    state: ApprovalInstanceState$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ApprovalInstance$Outbound = {
   approval?: Approval$Outbound | null | undefined;
@@ -154,19 +160,22 @@ export const ApprovalInstance$outboundSchema: z.ZodType<
   ApprovalInstance$Outbound,
   z.ZodTypeDef,
   ApprovalInstance
-> = z.object({
-  approval: z.nullable(Approval$outboundSchema).optional(),
-  approved: z.nullable(ApprovedAction$outboundSchema).optional(),
-  assignedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  denied: z.nullable(DeniedAction$outboundSchema).optional(),
-  escalationInstance: z.nullable(EscalationInstance$outboundSchema).optional(),
-  reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
-  reassignedByError: z.nullable(ReassignedByErrorAction$outboundSchema)
-    .optional(),
-  restarted: z.nullable(RestartAction$outboundSchema).optional(),
-  skipped: z.nullable(SkippedAction$outboundSchema).optional(),
-  state: ApprovalInstanceState$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approval: z.nullable(Approval$outboundSchema).optional(),
+    approved: z.nullable(ApprovedAction$outboundSchema).optional(),
+    assignedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    denied: z.nullable(DeniedAction$outboundSchema).optional(),
+    escalationInstance: z.nullable(EscalationInstance$outboundSchema)
+      .optional(),
+    reassigned: z.nullable(ReassignedAction$outboundSchema).optional(),
+    reassignedByError: z.nullable(ReassignedByErrorAction$outboundSchema)
+      .optional(),
+    restarted: z.nullable(RestartAction$outboundSchema).optional(),
+    skipped: z.nullable(SkippedAction$outboundSchema).optional(),
+    state: ApprovalInstanceState$outboundSchema.optional(),
+  })
+);
 
 export function approvalInstanceToJSON(
   approvalInstance: ApprovalInstance,

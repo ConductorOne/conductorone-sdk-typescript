@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,17 +51,19 @@ export const C1ApiFundsV1FundAssignmentServiceGrantExtensionRequest$outboundSche
     C1ApiFundsV1FundAssignmentServiceGrantExtensionRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1FundAssignmentServiceGrantExtensionRequest
-  > = z.object({
-    userId: z.string(),
-    fundAssignmentServiceGrantExtensionRequest: shared
-      .FundAssignmentServiceGrantExtensionRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      fundAssignmentServiceGrantExtensionRequest:
-        "FundAssignmentServiceGrantExtensionRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      fundAssignmentServiceGrantExtensionRequest: shared
+        .FundAssignmentServiceGrantExtensionRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        fundAssignmentServiceGrantExtensionRequest:
+          "FundAssignmentServiceGrantExtensionRequest",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundAssignmentServiceGrantExtensionRequestToJSON(
   c1ApiFundsV1FundAssignmentServiceGrantExtensionRequest:
@@ -80,21 +82,23 @@ export const C1ApiFundsV1FundAssignmentServiceGrantExtensionResponse$inboundSche
     C1ApiFundsV1FundAssignmentServiceGrantExtensionResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FundAssignmentServiceGrantExtensionResponse: shared
-      .FundAssignmentServiceGrantExtensionResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FundAssignmentServiceGrantExtensionResponse":
-        "fundAssignmentServiceGrantExtensionResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FundAssignmentServiceGrantExtensionResponse: shared
+        .FundAssignmentServiceGrantExtensionResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FundAssignmentServiceGrantExtensionResponse":
+          "fundAssignmentServiceGrantExtensionResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundAssignmentServiceGrantExtensionResponseFromJSON(
   jsonString: string,

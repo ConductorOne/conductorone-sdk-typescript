@@ -29,10 +29,14 @@ export class Functions extends ClientSDK {
    * List retrieves all functions with pagination
    */
   async listFunctions(
+    request?:
+      | operations.C1ApiFunctionsV1FunctionsServiceListFunctionsRequest
+      | undefined,
     options?: RequestOptions,
   ): Promise<operations.C1ApiFunctionsV1FunctionsServiceListFunctionsResponse> {
     return unwrapAsync(functionsListFunctions(
       this,
+      request,
       options,
     ));
   }

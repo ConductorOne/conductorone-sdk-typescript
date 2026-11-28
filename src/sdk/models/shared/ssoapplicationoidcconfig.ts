@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -53,23 +53,30 @@ export const IdTokenSignedResponseAlg$inboundSchema: z.ZodType<
   IdTokenSignedResponseAlg,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(IdTokenSignedResponseAlg);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(IdTokenSignedResponseAlg)
+);
 /** @internal */
 export const IdTokenSignedResponseAlg$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   IdTokenSignedResponseAlg
-> = openEnums.outboundSchema(IdTokenSignedResponseAlg);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(IdTokenSignedResponseAlg)
+);
 
 /** @internal */
 export const SSOApplicationOIDCConfig$inboundSchema: z.ZodType<
   SSOApplicationOIDCConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  claimMappings: z.nullable(z.array(OIDCClaimMapping$inboundSchema)).optional(),
-  idTokenSignedResponseAlg: IdTokenSignedResponseAlg$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    claimMappings: z.nullable(z.array(OIDCClaimMapping$inboundSchema))
+      .optional(),
+    idTokenSignedResponseAlg: IdTokenSignedResponseAlg$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type SSOApplicationOIDCConfig$Outbound = {
   claimMappings?: Array<OIDCClaimMapping$Outbound> | null | undefined;
@@ -81,11 +88,14 @@ export const SSOApplicationOIDCConfig$outboundSchema: z.ZodType<
   SSOApplicationOIDCConfig$Outbound,
   z.ZodTypeDef,
   SSOApplicationOIDCConfig
-> = z.object({
-  claimMappings: z.nullable(z.array(OIDCClaimMapping$outboundSchema))
-    .optional(),
-  idTokenSignedResponseAlg: IdTokenSignedResponseAlg$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    claimMappings: z.nullable(z.array(OIDCClaimMapping$outboundSchema))
+      .optional(),
+    idTokenSignedResponseAlg: IdTokenSignedResponseAlg$outboundSchema
+      .optional(),
+  })
+);
 
 export function ssoApplicationOIDCConfigToJSON(
   ssoApplicationOIDCConfig: SSOApplicationOIDCConfig,

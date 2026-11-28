@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -57,17 +57,19 @@ export const TBUsageAttributionModelRow$inboundSchema: z.ZodType<
   TBUsageAttributionModelRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cacheReadTokens: z.string().optional(),
-  cacheWriteTokens: z.string().optional(),
-  costNanoUsd: z.string().transform(v => parseInt(v, 10)).optional(),
-  inputTokens: z.string().optional(),
-  missingUsageCallCount: z.string().optional(),
-  modelName: z.string().optional(),
-  outputTokens: z.string().optional(),
-  requestCount: z.string().optional(),
-  unpricedRequestCount: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cacheReadTokens: z.string().optional(),
+    cacheWriteTokens: z.string().optional(),
+    costNanoUsd: z.string().transform(v => parseInt(v, 10)).optional(),
+    inputTokens: z.string().optional(),
+    missingUsageCallCount: z.string().optional(),
+    modelName: z.string().optional(),
+    outputTokens: z.string().optional(),
+    requestCount: z.string().optional(),
+    unpricedRequestCount: z.string().optional(),
+  })
+);
 
 export function tbUsageAttributionModelRowFromJSON(
   jsonString: string,

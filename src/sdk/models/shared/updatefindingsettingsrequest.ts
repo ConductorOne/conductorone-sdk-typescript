@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   FindingSettingsEntry,
   FindingSettingsEntry$Outbound,
@@ -34,9 +35,12 @@ export const UpdateFindingSettingsRequest$outboundSchema: z.ZodType<
   UpdateFindingSettingsRequest$Outbound,
   z.ZodTypeDef,
   UpdateFindingSettingsRequest
-> = z.object({
-  settings: z.nullable(z.array(FindingSettingsEntry$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    settings: z.nullable(z.array(FindingSettingsEntry$outboundSchema))
+      .optional(),
+  })
+);
 
 export function updateFindingSettingsRequestToJSON(
   updateFindingSettingsRequest: UpdateFindingSettingsRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -114,63 +114,69 @@ export const XAAScopeClassification$inboundSchema: z.ZodType<
   XAAScopeClassification,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(XAAScopeClassification);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(XAAScopeClassification)
+);
 /** @internal */
 export const XAAScopeClassification$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   XAAScopeClassification
-> = openEnums.outboundSchema(XAAScopeClassification);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(XAAScopeClassification)
+);
 
 /** @internal */
 export const Source$inboundSchema: z.ZodType<Source, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Source);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Source));
 /** @internal */
 export const Source$outboundSchema: z.ZodType<string, z.ZodTypeDef, Source> =
-  openEnums.outboundSchema(Source);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Source));
 
 /** @internal */
 export const XAAScopeState$inboundSchema: z.ZodType<
   XAAScopeState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(XAAScopeState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(XAAScopeState));
 /** @internal */
 export const XAAScopeState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   XAAScopeState
-> = openEnums.outboundSchema(XAAScopeState);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(XAAScopeState));
 
 /** @internal */
 export const XAAScope$inboundSchema: z.ZodType<
   XAAScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  classification: XAAScopeClassification$inboundSchema.optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  lastDiscoveredAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  scopeValue: z.string().optional(),
-  source: Source$inboundSchema.optional(),
-  state: XAAScopeState$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  xaaResourceServerId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    classification: XAAScopeClassification$inboundSchema.optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    lastDiscoveredAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    scopeValue: z.string().optional(),
+    source: Source$inboundSchema.optional(),
+    state: XAAScopeState$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    xaaResourceServerId: z.string().optional(),
+  })
+);
 /** @internal */
 export type XAAScope$Outbound = {
   appEntitlementId?: string | undefined;
@@ -194,23 +200,25 @@ export const XAAScope$outboundSchema: z.ZodType<
   XAAScope$Outbound,
   z.ZodTypeDef,
   XAAScope
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  classification: XAAScopeClassification$outboundSchema.optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  lastDiscoveredAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  scopeValue: z.string().optional(),
-  source: Source$outboundSchema.optional(),
-  state: XAAScopeState$outboundSchema.optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  xaaResourceServerId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    classification: XAAScopeClassification$outboundSchema.optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    lastDiscoveredAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    scopeValue: z.string().optional(),
+    source: Source$outboundSchema.optional(),
+    state: XAAScopeState$outboundSchema.optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    xaaResourceServerId: z.string().optional(),
+  })
+);
 
 export function xaaScopeToJSON(xaaScope: XAAScope): string {
   return JSON.stringify(XAAScope$outboundSchema.parse(xaaScope));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,9 +23,11 @@ export const LocalUserInvitationServiceGetResponse$inboundSchema: z.ZodType<
   LocalUserInvitationServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  invitation: z.nullable(LocalUserInvitation$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    invitation: z.nullable(LocalUserInvitation$inboundSchema).optional(),
+  })
+);
 
 export function localUserInvitationServiceGetResponseFromJSON(
   jsonString: string,

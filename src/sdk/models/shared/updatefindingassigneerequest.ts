@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The UpdateFindingAssigneeRequest message.
@@ -24,9 +25,11 @@ export const UpdateFindingAssigneeRequest$outboundSchema: z.ZodType<
   UpdateFindingAssigneeRequest$Outbound,
   z.ZodTypeDef,
   UpdateFindingAssigneeRequest
-> = z.object({
-  assigneeIdentityUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assigneeIdentityUserId: z.string().optional(),
+  })
+);
 
 export function updateFindingAssigneeRequestToJSON(
   updateFindingAssigneeRequest: UpdateFindingAssigneeRequest,

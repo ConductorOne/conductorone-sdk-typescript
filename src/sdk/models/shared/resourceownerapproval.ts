@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -48,15 +48,17 @@ export const ResourceOwnerApproval$inboundSchema: z.ZodType<
   ResourceOwnerApproval,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowSelfApproval: z.boolean().optional(),
-  fallback: z.boolean().optional(),
-  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
-    .optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
-  requireDistinctApprovers: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSelfApproval: z.boolean().optional(),
+    fallback: z.boolean().optional(),
+    fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
+      .optional(),
+    fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+    isGroupFallbackEnabled: z.boolean().optional(),
+    requireDistinctApprovers: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type ResourceOwnerApproval$Outbound = {
   allowSelfApproval?: boolean | undefined;
@@ -72,15 +74,18 @@ export const ResourceOwnerApproval$outboundSchema: z.ZodType<
   ResourceOwnerApproval$Outbound,
   z.ZodTypeDef,
   ResourceOwnerApproval
-> = z.object({
-  allowSelfApproval: z.boolean().optional(),
-  fallback: z.boolean().optional(),
-  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
-    .optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
-  requireDistinctApprovers: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowSelfApproval: z.boolean().optional(),
+    fallback: z.boolean().optional(),
+    fallbackGroupIds: z.nullable(
+      z.array(AppEntitlementReference$outboundSchema),
+    ).optional(),
+    fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+    isGroupFallbackEnabled: z.boolean().optional(),
+    requireDistinctApprovers: z.boolean().optional(),
+  })
+);
 
 export function resourceOwnerApprovalToJSON(
   resourceOwnerApproval: ResourceOwnerApproval,

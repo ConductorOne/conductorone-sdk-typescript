@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -100,10 +100,10 @@ export type EdgeServicePreviewEgressHostDecisionResponse = {
   replacedEffect?: ReplacedEffect | undefined;
   resultingRules?: EdgeEgressRuleList | null | undefined;
   /**
-   * The Edge never configured egress rules, so saving resulting_rules switches
+   * Saving starts a configured policy with an unmatched deny on an Edge that
    *
    * @remarks
-   *  it to denying every host no rule allows.
+   *  never configured rules. False when the proposed unmatched rule is ALLOW.
    */
   startsDefaultDeny?: boolean | undefined;
   /**
@@ -124,7 +124,7 @@ export const ReplacedEffect$inboundSchema: z.ZodType<
   ReplacedEffect,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ReplacedEffect);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ReplacedEffect));
 
 /** @internal */
 export const EdgeServicePreviewEgressHostDecisionResponseStatus$inboundSchema:
@@ -132,8 +132,8 @@ export const EdgeServicePreviewEgressHostDecisionResponseStatus$inboundSchema:
     EdgeServicePreviewEgressHostDecisionResponseStatus,
     z.ZodTypeDef,
     unknown
-  > = openEnums.inboundSchema(
-    EdgeServicePreviewEgressHostDecisionResponseStatus,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.inboundSchema(EdgeServicePreviewEgressHostDecisionResponseStatus)
   );
 
 /** @internal */
@@ -142,21 +142,23 @@ export const EdgeServicePreviewEgressHostDecisionResponse$inboundSchema:
     EdgeServicePreviewEgressHostDecisionResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    after: z.nullable(EdgeEgressHostVerdict$inboundSchema).optional(),
-    before: z.nullable(EdgeEgressHostVerdict$inboundSchema).optional(),
-    canonicalHost: z.string().optional(),
-    check: z.nullable(EdgeEgressRuleListCheck$inboundSchema).optional(),
-    newRuleIndex: z.number().int().optional(),
-    overridesRuleIndex: z.number().int().optional(),
-    replacedEffect: ReplacedEffect$inboundSchema.optional(),
-    resultingRules: z.nullable(EdgeEgressRuleList$inboundSchema).optional(),
-    startsDefaultDeny: z.boolean().optional(),
-    status: EdgeServicePreviewEgressHostDecisionResponseStatus$inboundSchema
-      .optional(),
-    warnings: z.nullable(z.array(EdgeEgressRuleWarning$inboundSchema))
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      after: z.nullable(EdgeEgressHostVerdict$inboundSchema).optional(),
+      before: z.nullable(EdgeEgressHostVerdict$inboundSchema).optional(),
+      canonicalHost: z.string().optional(),
+      check: z.nullable(EdgeEgressRuleListCheck$inboundSchema).optional(),
+      newRuleIndex: z.number().int().optional(),
+      overridesRuleIndex: z.number().int().optional(),
+      replacedEffect: ReplacedEffect$inboundSchema.optional(),
+      resultingRules: z.nullable(EdgeEgressRuleList$inboundSchema).optional(),
+      startsDefaultDeny: z.boolean().optional(),
+      status: EdgeServicePreviewEgressHostDecisionResponseStatus$inboundSchema
+        .optional(),
+      warnings: z.nullable(z.array(EdgeEgressRuleWarning$inboundSchema))
+        .optional(),
+    })
+  );
 
 export function edgeServicePreviewEgressHostDecisionResponseFromJSON(
   jsonString: string,

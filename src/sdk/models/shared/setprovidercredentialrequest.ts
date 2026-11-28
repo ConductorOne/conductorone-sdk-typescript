@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -47,7 +48,9 @@ export const SetProviderCredentialRequestHeaderStyle$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SetProviderCredentialRequestHeaderStyle
-> = openEnums.outboundSchema(SetProviderCredentialRequestHeaderStyle);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SetProviderCredentialRequestHeaderStyle)
+);
 
 /** @internal */
 export type SetProviderCredentialRequest$Outbound = {
@@ -61,12 +64,14 @@ export const SetProviderCredentialRequest$outboundSchema: z.ZodType<
   SetProviderCredentialRequest$Outbound,
   z.ZodTypeDef,
   SetProviderCredentialRequest
-> = z.object({
-  apiKey: z.string().optional(),
-  displayName: z.string().optional(),
-  headerStyle: SetProviderCredentialRequestHeaderStyle$outboundSchema
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKey: z.string().optional(),
+    displayName: z.string().optional(),
+    headerStyle: SetProviderCredentialRequestHeaderStyle$outboundSchema
+      .optional(),
+  })
+);
 
 export function setProviderCredentialRequestToJSON(
   setProviderCredentialRequest: SetProviderCredentialRequest,

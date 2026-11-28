@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * CredentialInventoryPolicyRef is a lightweight reference to a policy by ID.
@@ -24,9 +25,11 @@ export const CredentialInventoryPolicyRef$outboundSchema: z.ZodType<
   CredentialInventoryPolicyRef$Outbound,
   z.ZodTypeDef,
   CredentialInventoryPolicyRef
-> = z.object({
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string().optional(),
+  })
+);
 
 export function credentialInventoryPolicyRefToJSON(
   credentialInventoryPolicyRef: CredentialInventoryPolicyRef,

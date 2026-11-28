@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const ActionTargetBatonResourceActionInstance$inboundSchema: z.ZodType<
   ActionTargetBatonResourceActionInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batonActionInvocationId: z.string().optional(),
-  partialResult: z.boolean().optional(),
-  unaddedMemberCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batonActionInvocationId: z.string().optional(),
+    partialResult: z.boolean().optional(),
+    unaddedMemberCount: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type ActionTargetBatonResourceActionInstance$Outbound = {
   batonActionInvocationId?: string | undefined;
@@ -47,11 +49,13 @@ export const ActionTargetBatonResourceActionInstance$outboundSchema: z.ZodType<
   ActionTargetBatonResourceActionInstance$Outbound,
   z.ZodTypeDef,
   ActionTargetBatonResourceActionInstance
-> = z.object({
-  batonActionInvocationId: z.string().optional(),
-  partialResult: z.boolean().optional(),
-  unaddedMemberCount: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batonActionInvocationId: z.string().optional(),
+    partialResult: z.boolean().optional(),
+    unaddedMemberCount: z.number().int().optional(),
+  })
+);
 
 export function actionTargetBatonResourceActionInstanceToJSON(
   actionTargetBatonResourceActionInstance:

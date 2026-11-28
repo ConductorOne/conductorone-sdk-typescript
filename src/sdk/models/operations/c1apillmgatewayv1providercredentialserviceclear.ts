@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiLlmGatewayV1ProviderCredentialServiceClearRequest$outboundSche
     C1ApiLlmGatewayV1ProviderCredentialServiceClearRequest$Outbound,
     z.ZodTypeDef,
     C1ApiLlmGatewayV1ProviderCredentialServiceClearRequest
-  > = z.object({
-    slotId: z.string(),
-    clearProviderCredentialRequest: shared
-      .ClearProviderCredentialRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      slotId: "slot_id",
-      clearProviderCredentialRequest: "ClearProviderCredentialRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      slotId: z.string(),
+      clearProviderCredentialRequest: shared
+        .ClearProviderCredentialRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        slotId: "slot_id",
+        clearProviderCredentialRequest: "ClearProviderCredentialRequest",
+      });
+    })
+  );
 
 export function c1ApiLlmGatewayV1ProviderCredentialServiceClearRequestToJSON(
   c1ApiLlmGatewayV1ProviderCredentialServiceClearRequest:
@@ -79,20 +81,22 @@ export const C1ApiLlmGatewayV1ProviderCredentialServiceClearResponse$inboundSche
     C1ApiLlmGatewayV1ProviderCredentialServiceClearResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ClearProviderCredentialResponse: shared
-      .ClearProviderCredentialResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ClearProviderCredentialResponse": "clearProviderCredentialResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ClearProviderCredentialResponse: shared
+        .ClearProviderCredentialResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ClearProviderCredentialResponse": "clearProviderCredentialResponse",
+      });
+    })
+  );
 
 export function c1ApiLlmGatewayV1ProviderCredentialServiceClearResponseFromJSON(
   jsonString: string,

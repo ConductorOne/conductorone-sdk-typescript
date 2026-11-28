@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -181,69 +181,71 @@ export const ApplicableType$inboundSchema: z.ZodType<
   ApplicableType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ApplicableType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ApplicableType));
 
 /** @internal */
 export const DefaultOutcome$inboundSchema: z.ZodType<
   DefaultOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DefaultOutcome);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DefaultOutcome));
 
 /** @internal */
 export const Distribution$inboundSchema: z.ZodType<
   Distribution,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Distribution);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Distribution));
 
 /** @internal */
 export const ManagedBy$inboundSchema: z.ZodType<
   ManagedBy,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ManagedBy);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ManagedBy));
 
 /** @internal */
 export const PresetTier$inboundSchema: z.ZodType<
   PresetTier,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PresetTier);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(PresetTier));
 
 /** @internal */
 export const ClassifierTemplate$inboundSchema: z.ZodType<
   ClassifierTemplate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  applicableType: ApplicableType$inboundSchema.optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  defaultDenyReason: z.string().optional(),
-  defaultOutcome: DefaultOutcome$inboundSchema.optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  distribution: Distribution$inboundSchema.optional(),
-  frameworkTags: z.nullable(z.array(z.string())).optional(),
-  hooks: z.nullable(z.array(HookSpec$inboundSchema)).optional(),
-  id: z.string().optional(),
-  isLatest: z.boolean().optional(),
-  managedBy: ManagedBy$inboundSchema.optional(),
-  presetTier: PresetTier$inboundSchema.optional(),
-  requiredParams: z.nullable(z.array(TemplateParam$inboundSchema)).optional(),
-  rules: z.nullable(z.array(AgentClassifierRule$inboundSchema)).optional(),
-  templateVersion: z.string().optional(),
-  tenantId: z.string().optional(),
-  toolGates: z.nullable(z.array(ToolGateSpec$inboundSchema)).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    applicableType: ApplicableType$inboundSchema.optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    defaultDenyReason: z.string().optional(),
+    defaultOutcome: DefaultOutcome$inboundSchema.optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    distribution: Distribution$inboundSchema.optional(),
+    frameworkTags: z.nullable(z.array(z.string())).optional(),
+    hooks: z.nullable(z.array(HookSpec$inboundSchema)).optional(),
+    id: z.string().optional(),
+    isLatest: z.boolean().optional(),
+    managedBy: ManagedBy$inboundSchema.optional(),
+    presetTier: PresetTier$inboundSchema.optional(),
+    requiredParams: z.nullable(z.array(TemplateParam$inboundSchema)).optional(),
+    rules: z.nullable(z.array(AgentClassifierRule$inboundSchema)).optional(),
+    templateVersion: z.string().optional(),
+    tenantId: z.string().optional(),
+    toolGates: z.nullable(z.array(ToolGateSpec$inboundSchema)).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function classifierTemplateFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeletePolicyRequest message contains the ID of the policy to delete. It uses URL value for input.
@@ -17,7 +18,7 @@ export const DeletePolicyRequest$outboundSchema: z.ZodType<
   DeletePolicyRequest$Outbound,
   z.ZodTypeDef,
   DeletePolicyRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deletePolicyRequestToJSON(
   deletePolicyRequest: DeletePolicyRequest,

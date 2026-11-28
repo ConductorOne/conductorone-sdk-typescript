@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppUsageControls,
   AppUsageControls$Outbound,
@@ -28,10 +29,12 @@ export const UpdateAppUsageControlsRequest$outboundSchema: z.ZodType<
   UpdateAppUsageControlsRequest$Outbound,
   z.ZodTypeDef,
   UpdateAppUsageControlsRequest
-> = z.object({
-  appUsageControls: z.nullable(AppUsageControls$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUsageControls: z.nullable(AppUsageControls$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateAppUsageControlsRequestToJSON(
   updateAppUsageControlsRequest: UpdateAppUsageControlsRequest,

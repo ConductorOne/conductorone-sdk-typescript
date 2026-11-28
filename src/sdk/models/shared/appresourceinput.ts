@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AgentTrait,
   AgentTrait$Outbound,
@@ -115,22 +116,24 @@ export const AppResourceInput$outboundSchema: z.ZodType<
   AppResourceInput$Outbound,
   z.ZodTypeDef,
   AppResourceInput
-> = z.object({
-  accessConfigId: z.string().optional(),
-  agentTrait: z.nullable(AgentTrait$outboundSchema).optional(),
-  annotations: z.record(z.string()).optional(),
-  appId: z.string().optional(),
-  appResourceTypeId: z.string().optional(),
-  customDescription: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  grantCount: z.number().int().transform(v => `${v}`).optional(),
-  id: z.string().optional(),
-  matchBatonId: z.string().optional(),
-  parentAppResourceId: z.string().optional(),
-  parentAppResourceTypeId: z.string().optional(),
-  secretTrait: z.nullable(SecretTrait$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessConfigId: z.string().optional(),
+    agentTrait: z.nullable(AgentTrait$outboundSchema).optional(),
+    annotations: z.record(z.string()).optional(),
+    appId: z.string().optional(),
+    appResourceTypeId: z.string().optional(),
+    customDescription: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    grantCount: z.number().int().transform(v => `${v}`).optional(),
+    id: z.string().optional(),
+    matchBatonId: z.string().optional(),
+    parentAppResourceId: z.string().optional(),
+    parentAppResourceTypeId: z.string().optional(),
+    secretTrait: z.nullable(SecretTrait$outboundSchema).optional(),
+  })
+);
 
 export function appResourceInputToJSON(
   appResourceInput: AppResourceInput,

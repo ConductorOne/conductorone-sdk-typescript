@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   VaultInput,
   VaultInput$Outbound,
@@ -28,10 +29,12 @@ export const VaultServiceUpdateRequest$outboundSchema: z.ZodType<
   VaultServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   VaultServiceUpdateRequest
-> = z.object({
-  updateMask: z.nullable(z.string()).optional(),
-  vault: z.nullable(VaultInput$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    updateMask: z.nullable(z.string()).optional(),
+    vault: z.nullable(VaultInput$outboundSchema).optional(),
+  })
+);
 
 export function vaultServiceUpdateRequestToJSON(
   vaultServiceUpdateRequest: VaultServiceUpdateRequest,

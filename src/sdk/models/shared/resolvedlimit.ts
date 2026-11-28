@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,10 +34,12 @@ export const ResolvedLimit$inboundSchema: z.ZodType<
   ResolvedLimit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  amount: z.nullable(ResolvedAmount$inboundSchema).optional(),
-  unlimited: z.nullable(ResolvedUnlimited$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.nullable(ResolvedAmount$inboundSchema).optional(),
+    unlimited: z.nullable(ResolvedUnlimited$inboundSchema).optional(),
+  })
+);
 
 export function resolvedLimitFromJSON(
   jsonString: string,

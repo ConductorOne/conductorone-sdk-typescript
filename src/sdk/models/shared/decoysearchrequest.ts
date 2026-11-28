@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -70,14 +71,14 @@ export type DecoySearchRequest = {
 
 /** @internal */
 export const Kinds$outboundSchema: z.ZodType<string, z.ZodTypeDef, Kinds> =
-  openEnums.outboundSchema(Kinds);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Kinds));
 
 /** @internal */
 export const Statuses$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Statuses
-> = openEnums.outboundSchema(Statuses);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Statuses));
 
 /** @internal */
 export type DecoySearchRequest$Outbound = {
@@ -95,15 +96,17 @@ export const DecoySearchRequest$outboundSchema: z.ZodType<
   DecoySearchRequest$Outbound,
   z.ZodTypeDef,
   DecoySearchRequest
-> = z.object({
-  annotationKeys: z.nullable(z.array(z.string())).optional(),
-  hasBeenUsed: z.boolean().optional(),
-  kinds: z.nullable(z.array(Kinds$outboundSchema)).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  statuses: z.nullable(z.array(Statuses$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotationKeys: z.nullable(z.array(z.string())).optional(),
+    hasBeenUsed: z.boolean().optional(),
+    kinds: z.nullable(z.array(Kinds$outboundSchema)).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    statuses: z.nullable(z.array(Statuses$outboundSchema)).optional(),
+  })
+);
 
 export function decoySearchRequestToJSON(
   decoySearchRequest: DecoySearchRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -140,61 +140,75 @@ export const AgentClassifierRuleAction$inboundSchema: z.ZodType<
   AgentClassifierRuleAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AgentClassifierRuleAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AgentClassifierRuleAction)
+);
 /** @internal */
 export const AgentClassifierRuleAction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AgentClassifierRuleAction
-> = openEnums.outboundSchema(AgentClassifierRuleAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AgentClassifierRuleAction)
+);
 
 /** @internal */
 export const AgentClassifierRuleMode$inboundSchema: z.ZodType<
   AgentClassifierRuleMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AgentClassifierRuleMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AgentClassifierRuleMode)
+);
 /** @internal */
 export const AgentClassifierRuleMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AgentClassifierRuleMode
-> = openEnums.outboundSchema(AgentClassifierRuleMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AgentClassifierRuleMode)
+);
 
 /** @internal */
 export const AgentClassifierRuleOutcome$inboundSchema: z.ZodType<
   AgentClassifierRuleOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AgentClassifierRuleOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AgentClassifierRuleOutcome)
+);
 /** @internal */
 export const AgentClassifierRuleOutcome$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AgentClassifierRuleOutcome
-> = openEnums.outboundSchema(AgentClassifierRuleOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AgentClassifierRuleOutcome)
+);
 
 /** @internal */
 export const AgentClassifierRule$inboundSchema: z.ZodType<
   AgentClassifierRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: AgentClassifierRuleAction$inboundSchema.optional(),
-  celCondition: z.string().optional(),
-  denyReason: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  id: z.string().optional(),
-  mode: AgentClassifierRuleMode$inboundSchema.optional(),
-  outcome: AgentClassifierRuleOutcome$inboundSchema.optional(),
-  postHookIds: z.nullable(z.array(z.string())).optional(),
-  preHookIds: z.nullable(z.array(z.string())).optional(),
-  preOutputHookIds: z.nullable(z.array(z.string())).optional(),
-  sourceTemplateId: z.string().optional(),
-  systemManaged: z.boolean().optional(),
-  toolGateIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: AgentClassifierRuleAction$inboundSchema.optional(),
+    celCondition: z.string().optional(),
+    denyReason: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    id: z.string().optional(),
+    mode: AgentClassifierRuleMode$inboundSchema.optional(),
+    outcome: AgentClassifierRuleOutcome$inboundSchema.optional(),
+    postHookIds: z.nullable(z.array(z.string())).optional(),
+    preHookIds: z.nullable(z.array(z.string())).optional(),
+    preOutputHookIds: z.nullable(z.array(z.string())).optional(),
+    sourceTemplateId: z.string().optional(),
+    systemManaged: z.boolean().optional(),
+    toolGateIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type AgentClassifierRule$Outbound = {
   action?: string | undefined;
@@ -218,22 +232,24 @@ export const AgentClassifierRule$outboundSchema: z.ZodType<
   AgentClassifierRule$Outbound,
   z.ZodTypeDef,
   AgentClassifierRule
-> = z.object({
-  action: AgentClassifierRuleAction$outboundSchema.optional(),
-  celCondition: z.string().optional(),
-  denyReason: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  id: z.string().optional(),
-  mode: AgentClassifierRuleMode$outboundSchema.optional(),
-  outcome: AgentClassifierRuleOutcome$outboundSchema.optional(),
-  postHookIds: z.nullable(z.array(z.string())).optional(),
-  preHookIds: z.nullable(z.array(z.string())).optional(),
-  preOutputHookIds: z.nullable(z.array(z.string())).optional(),
-  sourceTemplateId: z.string().optional(),
-  systemManaged: z.boolean().optional(),
-  toolGateIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: AgentClassifierRuleAction$outboundSchema.optional(),
+    celCondition: z.string().optional(),
+    denyReason: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    id: z.string().optional(),
+    mode: AgentClassifierRuleMode$outboundSchema.optional(),
+    outcome: AgentClassifierRuleOutcome$outboundSchema.optional(),
+    postHookIds: z.nullable(z.array(z.string())).optional(),
+    preHookIds: z.nullable(z.array(z.string())).optional(),
+    preOutputHookIds: z.nullable(z.array(z.string())).optional(),
+    sourceTemplateId: z.string().optional(),
+    systemManaged: z.boolean().optional(),
+    toolGateIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function agentClassifierRuleToJSON(
   agentClassifierRule: AgentClassifierRule,

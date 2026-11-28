@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SSFReceiverStreamServiceDeleteRequest identifies the SSF receiver stream to delete.
@@ -17,7 +18,7 @@ export const SSFReceiverStreamServiceDeleteRequest$outboundSchema: z.ZodType<
   SSFReceiverStreamServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   SSFReceiverStreamServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function ssfReceiverStreamServiceDeleteRequestToJSON(
   ssfReceiverStreamServiceDeleteRequest: SSFReceiverStreamServiceDeleteRequest,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -42,17 +43,19 @@ export const UpdateAppEntitlementResponseExpanded$inboundSchema: z.ZodType<
   UpdateAppEntitlementResponseExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 
 export function updateAppEntitlementResponseExpandedFromJSON(
   jsonString: string,
@@ -70,12 +73,14 @@ export const UpdateAppEntitlementResponse$inboundSchema: z.ZodType<
   UpdateAppEntitlementResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementView: z.nullable(AppEntitlementView$inboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => UpdateAppEntitlementResponseExpanded$inboundSchema)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementView: z.nullable(AppEntitlementView$inboundSchema).optional(),
+    expanded: z.nullable(
+      z.array(z.lazy(() => UpdateAppEntitlementResponseExpanded$inboundSchema)),
+    ).optional(),
+  })
+);
 
 export function updateAppEntitlementResponseFromJSON(
   jsonString: string,

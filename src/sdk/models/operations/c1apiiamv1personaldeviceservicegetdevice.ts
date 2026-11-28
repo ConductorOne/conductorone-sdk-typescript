@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiIamV1PersonalDeviceServiceGetDeviceRequest$outboundSchema:
     C1ApiIamV1PersonalDeviceServiceGetDeviceRequest$Outbound,
     z.ZodTypeDef,
     C1ApiIamV1PersonalDeviceServiceGetDeviceRequest
-  > = z.object({
-    deviceId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      deviceId: "device_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      deviceId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        deviceId: "device_id",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalDeviceServiceGetDeviceRequestToJSON(
   c1ApiIamV1PersonalDeviceServiceGetDeviceRequest:
@@ -70,21 +72,23 @@ export const C1ApiIamV1PersonalDeviceServiceGetDeviceResponse$inboundSchema:
     C1ApiIamV1PersonalDeviceServiceGetDeviceResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PersonalDeviceServiceGetDeviceResponse: shared
-      .PersonalDeviceServiceGetDeviceResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PersonalDeviceServiceGetDeviceResponse":
-        "personalDeviceServiceGetDeviceResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PersonalDeviceServiceGetDeviceResponse: shared
+        .PersonalDeviceServiceGetDeviceResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PersonalDeviceServiceGetDeviceResponse":
+          "personalDeviceServiceGetDeviceResponse",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalDeviceServiceGetDeviceResponseFromJSON(
   jsonString: string,

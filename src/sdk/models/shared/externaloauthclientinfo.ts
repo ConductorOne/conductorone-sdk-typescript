@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -119,44 +119,48 @@ export const ExternalOAuthClientInfoAuthMethod$inboundSchema: z.ZodType<
   ExternalOAuthClientInfoAuthMethod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ExternalOAuthClientInfoAuthMethod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ExternalOAuthClientInfoAuthMethod)
+);
 
 /** @internal */
 export const ClientIdType$inboundSchema: z.ZodType<
   ClientIdType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ClientIdType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ClientIdType));
 
 /** @internal */
 export const WellKnownClient$inboundSchema: z.ZodType<
   WellKnownClient,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(WellKnownClient);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(WellKnownClient));
 
 /** @internal */
 export const ExternalOAuthClientInfo$inboundSchema: z.ZodType<
   ExternalOAuthClientInfo,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  authMethod: ExternalOAuthClientInfoAuthMethod$inboundSchema.optional(),
-  clientId: z.string().optional(),
-  clientIdType: ClientIdType$inboundSchema.optional(),
-  clientIdUrl: z.string().optional(),
-  clientName: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  redirectUris: z.nullable(z.array(z.string())).optional(),
-  softwareId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  verifiedDomain: z.string().optional(),
-  wellKnownClient: WellKnownClient$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authMethod: ExternalOAuthClientInfoAuthMethod$inboundSchema.optional(),
+    clientId: z.string().optional(),
+    clientIdType: ClientIdType$inboundSchema.optional(),
+    clientIdUrl: z.string().optional(),
+    clientName: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    redirectUris: z.nullable(z.array(z.string())).optional(),
+    softwareId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    verifiedDomain: z.string().optional(),
+    wellKnownClient: WellKnownClient$inboundSchema.optional(),
+  })
+);
 
 export function externalOAuthClientInfoFromJSON(
   jsonString: string,

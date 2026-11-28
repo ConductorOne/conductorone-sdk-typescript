@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAAccessProfileRef is a lightweight reference to an access profile, used for
@@ -32,10 +33,12 @@ export const XAAAccessProfileRef$outboundSchema: z.ZodType<
   XAAAccessProfileRef$Outbound,
   z.ZodTypeDef,
   XAAAccessProfileRef
-> = z.object({
-  appId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function xaaAccessProfileRefToJSON(
   xaaAccessProfileRef: XAAAccessProfileRef,

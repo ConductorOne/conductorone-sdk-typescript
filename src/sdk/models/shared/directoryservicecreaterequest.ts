@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   DirectoryAccountFilterAll,
   DirectoryAccountFilterAll$Outbound,
@@ -23,6 +24,11 @@ import {
   DirectoryMergeConfig$Outbound,
   DirectoryMergeConfig$outboundSchema,
 } from "./directorymergeconfig.js";
+import {
+  DirectoryMergeRuleList,
+  DirectoryMergeRuleList$Outbound,
+  DirectoryMergeRuleList$outboundSchema,
+} from "./directorymergerulelist.js";
 
 /**
  * Uplevel an app into a full directory.
@@ -42,6 +48,7 @@ export type DirectoryServiceCreateRequest = {
   celExpression?: DirectoryAccountFilterCel | null | undefined;
   expandMask?: DirectoryExpandMask | null | undefined;
   mergeConfig?: DirectoryMergeConfig | null | undefined;
+  mergeRules?: DirectoryMergeRuleList | null | undefined;
 };
 
 /** @internal */
@@ -51,6 +58,7 @@ export type DirectoryServiceCreateRequest$Outbound = {
   celExpression?: DirectoryAccountFilterCel$Outbound | null | undefined;
   expandMask?: DirectoryExpandMask$Outbound | null | undefined;
   mergeConfig?: DirectoryMergeConfig$Outbound | null | undefined;
+  mergeRules?: DirectoryMergeRuleList$Outbound | null | undefined;
 };
 
 /** @internal */
@@ -58,14 +66,17 @@ export const DirectoryServiceCreateRequest$outboundSchema: z.ZodType<
   DirectoryServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   DirectoryServiceCreateRequest
-> = z.object({
-  all: z.nullable(DirectoryAccountFilterAll$outboundSchema).optional(),
-  appId: z.string().optional(),
-  celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
-    .optional(),
-  expandMask: z.nullable(DirectoryExpandMask$outboundSchema).optional(),
-  mergeConfig: z.nullable(DirectoryMergeConfig$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    all: z.nullable(DirectoryAccountFilterAll$outboundSchema).optional(),
+    appId: z.string().optional(),
+    celExpression: z.nullable(DirectoryAccountFilterCel$outboundSchema)
+      .optional(),
+    expandMask: z.nullable(DirectoryExpandMask$outboundSchema).optional(),
+    mergeConfig: z.nullable(DirectoryMergeConfig$outboundSchema).optional(),
+    mergeRules: z.nullable(DirectoryMergeRuleList$outboundSchema).optional(),
+  })
+);
 
 export function directoryServiceCreateRequestToJSON(
   directoryServiceCreateRequest: DirectoryServiceCreateRequest,

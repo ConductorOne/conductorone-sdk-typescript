@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const GrantEntitlementInclusionListCel$inboundSchema: z.ZodType<
   GrantEntitlementInclusionListCel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementRefsCel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementRefsCel: z.string().optional(),
+  })
+);
 /** @internal */
 export type GrantEntitlementInclusionListCel$Outbound = {
   appEntitlementRefsCel?: string | undefined;
@@ -35,9 +37,11 @@ export const GrantEntitlementInclusionListCel$outboundSchema: z.ZodType<
   GrantEntitlementInclusionListCel$Outbound,
   z.ZodTypeDef,
   GrantEntitlementInclusionListCel
-> = z.object({
-  appEntitlementRefsCel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementRefsCel: z.string().optional(),
+  })
+);
 
 export function grantEntitlementInclusionListCelToJSON(
   grantEntitlementInclusionListCel: GrantEntitlementInclusionListCel,

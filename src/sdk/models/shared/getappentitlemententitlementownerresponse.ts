@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,11 +26,13 @@ export const GetAppEntitlementEntitlementOwnerResponse$inboundSchema: z.ZodType<
   GetAppEntitlementEntitlementOwnerResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementOwnerEntitlement: z.nullable(
-    AppEntitlementOwnerEntitlement$inboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementOwnerEntitlement: z.nullable(
+      AppEntitlementOwnerEntitlement$inboundSchema,
+    ).optional(),
+  })
+);
 
 export function getAppEntitlementEntitlementOwnerResponseFromJSON(
   jsonString: string,

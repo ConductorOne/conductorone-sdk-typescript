@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -61,18 +61,20 @@ export const SSOApplicationOIDCClientAuthentication$inboundSchema: z.ZodType<
   SSOApplicationOIDCClientAuthentication,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  clientSecretBasic: z.nullable(
-    SSOApplicationOIDCClientAuthClientSecretBasic$inboundSchema,
-  ).optional(),
-  clientSecretPost: z.nullable(
-    SSOApplicationOIDCClientAuthClientSecretPost$inboundSchema,
-  ).optional(),
-  none: z.nullable(SSOApplicationOIDCClientAuthNone$inboundSchema).optional(),
-  privateKeyJwt: z.nullable(
-    SSOApplicationOIDCClientAuthPrivateKeyJWT$inboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientSecretBasic: z.nullable(
+      SSOApplicationOIDCClientAuthClientSecretBasic$inboundSchema,
+    ).optional(),
+    clientSecretPost: z.nullable(
+      SSOApplicationOIDCClientAuthClientSecretPost$inboundSchema,
+    ).optional(),
+    none: z.nullable(SSOApplicationOIDCClientAuthNone$inboundSchema).optional(),
+    privateKeyJwt: z.nullable(
+      SSOApplicationOIDCClientAuthPrivateKeyJWT$inboundSchema,
+    ).optional(),
+  })
+);
 /** @internal */
 export type SSOApplicationOIDCClientAuthentication$Outbound = {
   clientSecretBasic?:
@@ -95,18 +97,21 @@ export const SSOApplicationOIDCClientAuthentication$outboundSchema: z.ZodType<
   SSOApplicationOIDCClientAuthentication$Outbound,
   z.ZodTypeDef,
   SSOApplicationOIDCClientAuthentication
-> = z.object({
-  clientSecretBasic: z.nullable(
-    SSOApplicationOIDCClientAuthClientSecretBasic$outboundSchema,
-  ).optional(),
-  clientSecretPost: z.nullable(
-    SSOApplicationOIDCClientAuthClientSecretPost$outboundSchema,
-  ).optional(),
-  none: z.nullable(SSOApplicationOIDCClientAuthNone$outboundSchema).optional(),
-  privateKeyJwt: z.nullable(
-    SSOApplicationOIDCClientAuthPrivateKeyJWT$outboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientSecretBasic: z.nullable(
+      SSOApplicationOIDCClientAuthClientSecretBasic$outboundSchema,
+    ).optional(),
+    clientSecretPost: z.nullable(
+      SSOApplicationOIDCClientAuthClientSecretPost$outboundSchema,
+    ).optional(),
+    none: z.nullable(SSOApplicationOIDCClientAuthNone$outboundSchema)
+      .optional(),
+    privateKeyJwt: z.nullable(
+      SSOApplicationOIDCClientAuthPrivateKeyJWT$outboundSchema,
+    ).optional(),
+  })
+);
 
 export function ssoApplicationOIDCClientAuthenticationToJSON(
   ssoApplicationOIDCClientAuthentication:

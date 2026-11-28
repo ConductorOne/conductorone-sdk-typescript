@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,14 +38,16 @@ export const AccessReviewTemplateSetupEntitlementView$inboundSchema: z.ZodType<
   AccessReviewTemplateSetupEntitlementView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReviewTemplateEntitlement: z.nullable(
-    AccessReviewTemplateSetupEntitlement$inboundSchema,
-  ).optional(),
-  appPath: z.string().optional(),
-  entitlementPath: z.string().optional(),
-  policyPath: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewTemplateEntitlement: z.nullable(
+      AccessReviewTemplateSetupEntitlement$inboundSchema,
+    ).optional(),
+    appPath: z.string().optional(),
+    entitlementPath: z.string().optional(),
+    policyPath: z.string().optional(),
+  })
+);
 
 export function accessReviewTemplateSetupEntitlementViewFromJSON(
   jsonString: string,

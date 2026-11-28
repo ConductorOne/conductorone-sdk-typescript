@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -153,62 +153,66 @@ export const Availability$inboundSchema: z.ZodType<
   Availability,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Availability);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Availability));
 
 /** @internal */
 export const GetOverviewResponseState$inboundSchema: z.ZodType<
   GetOverviewResponseState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GetOverviewResponseState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(GetOverviewResponseState)
+);
 
 /** @internal */
 export const GetOverviewResponse$inboundSchema: z.ZodType<
   GetOverviewResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountInitialized: z.boolean().optional(),
-  availability: Availability$inboundSchema.optional(),
-  availableEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  availableStart: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  committedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  consumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  coverage: z.nullable(AttributionCoverage$inboundSchema).optional(),
-  currencyCode: z.string().optional(),
-  denialEvents: z.string().transform(v => parseInt(v, 10)).optional(),
-  distinctAppCount: z.number().int().optional(),
-  forecast: z.nullable(RunRateForecast$inboundSchema).optional(),
-  hasPriorWindow: z.boolean().optional(),
-  hasRemainingNano: z.boolean().optional(),
-  limitNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  periodEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  periodStart: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  priorWindowConsumedNano: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  rateBasis: z.nullable(z.array(RateBasisCount$inboundSchema)).optional(),
-  remainingNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  reportingEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  reportingStart: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  reportingWindowConsumedNano: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  reservedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  state: GetOverviewResponseState$inboundSchema.optional(),
-  tokens: z.nullable(TokenEconomics$inboundSchema).optional(),
-  trajectory: z.nullable(z.array(TrajectoryPoint$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountInitialized: z.boolean().optional(),
+    availability: Availability$inboundSchema.optional(),
+    availableEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    availableStart: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    committedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    consumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    coverage: z.nullable(AttributionCoverage$inboundSchema).optional(),
+    currencyCode: z.string().optional(),
+    denialEvents: z.string().transform(v => parseInt(v, 10)).optional(),
+    distinctAppCount: z.number().int().optional(),
+    forecast: z.nullable(RunRateForecast$inboundSchema).optional(),
+    hasPriorWindow: z.boolean().optional(),
+    hasRemainingNano: z.boolean().optional(),
+    limitNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    periodEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    periodStart: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    priorWindowConsumedNano: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    rateBasis: z.nullable(z.array(RateBasisCount$inboundSchema)).optional(),
+    remainingNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    reportingEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    reportingStart: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    reportingWindowConsumedNano: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    reservedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    state: GetOverviewResponseState$inboundSchema.optional(),
+    tokens: z.nullable(TokenEconomics$inboundSchema).optional(),
+    trajectory: z.nullable(z.array(TrajectoryPoint$inboundSchema)).optional(),
+  })
+);
 
 export function getOverviewResponseFromJSON(
   jsonString: string,

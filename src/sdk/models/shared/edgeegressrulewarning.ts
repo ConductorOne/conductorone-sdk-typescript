@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -60,20 +60,24 @@ export const EdgeEgressRuleWarningKind$inboundSchema: z.ZodType<
   EdgeEgressRuleWarningKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeEgressRuleWarningKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeEgressRuleWarningKind)
+);
 
 /** @internal */
 export const EdgeEgressRuleWarning$inboundSchema: z.ZodType<
   EdgeEgressRuleWarning,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  authzenServerId: z.string().optional(),
-  kind: EdgeEgressRuleWarningKind$inboundSchema.optional(),
-  message: z.string().optional(),
-  ruleIndex: z.number().int().optional(),
-  servicePrincipalIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authzenServerId: z.string().optional(),
+    kind: EdgeEgressRuleWarningKind$inboundSchema.optional(),
+    message: z.string().optional(),
+    ruleIndex: z.number().int().optional(),
+    servicePrincipalIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function edgeEgressRuleWarningFromJSON(
   jsonString: string,

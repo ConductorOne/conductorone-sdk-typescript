@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { UsableEdge, UsableEdge$inboundSchema } from "./usableedge.js";
@@ -30,10 +30,12 @@ export const EdgeServiceListUsableEdgesResponse$inboundSchema: z.ZodType<
   EdgeServiceListUsableEdgesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  edges: z.nullable(z.array(UsableEdge$inboundSchema)).optional(),
-  nextPageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    edges: z.nullable(z.array(UsableEdge$inboundSchema)).optional(),
+    nextPageToken: z.string().optional(),
+  })
+);
 
 export function edgeServiceListUsableEdgesResponseFromJSON(
   jsonString: string,

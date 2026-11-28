@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -43,7 +44,9 @@ export type FundAssignmentServiceSetLimitRequest = {
 /** @internal */
 export const FundAssignmentServiceSetLimitRequestPeriod$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, FundAssignmentServiceSetLimitRequestPeriod> =
-    openEnums.outboundSchema(FundAssignmentServiceSetLimitRequestPeriod);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(FundAssignmentServiceSetLimitRequestPeriod)
+    );
 
 /** @internal */
 export type FundAssignmentServiceSetLimitRequest$Outbound = {
@@ -56,10 +59,13 @@ export const FundAssignmentServiceSetLimitRequest$outboundSchema: z.ZodType<
   FundAssignmentServiceSetLimitRequest$Outbound,
   z.ZodTypeDef,
   FundAssignmentServiceSetLimitRequest
-> = z.object({
-  limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
-  period: FundAssignmentServiceSetLimitRequestPeriod$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
+    period: FundAssignmentServiceSetLimitRequestPeriod$outboundSchema
+      .optional(),
+  })
+);
 
 export function fundAssignmentServiceSetLimitRequestToJSON(
   fundAssignmentServiceSetLimitRequest: FundAssignmentServiceSetLimitRequest,

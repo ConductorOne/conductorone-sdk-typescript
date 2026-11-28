@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { TaskRef, TaskRef$inboundSchema } from "./taskref.js";
@@ -20,9 +20,11 @@ export const TaskServiceCreateSpendRemedyResponse$inboundSchema: z.ZodType<
   TaskServiceCreateSpendRemedyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  task: z.nullable(TaskRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    task: z.nullable(TaskRef$inboundSchema).optional(),
+  })
+);
 
 export function taskServiceCreateSpendRemedyResponseFromJSON(
   jsonString: string,

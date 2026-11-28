@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { DynamicBool, DynamicBool$inboundSchema } from "./dynamicbool.js";
@@ -22,10 +22,12 @@ export const CheckBoxComponent$inboundSchema: z.ZodType<
   CheckBoxComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  label: z.nullable(DynamicString$inboundSchema).optional(),
-  value: z.nullable(DynamicBool$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    label: z.nullable(DynamicString$inboundSchema).optional(),
+    value: z.nullable(DynamicBool$inboundSchema).optional(),
+  })
+);
 
 export function checkBoxComponentFromJSON(
   jsonString: string,

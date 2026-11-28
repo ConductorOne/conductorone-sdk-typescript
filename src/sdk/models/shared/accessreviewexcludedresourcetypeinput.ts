@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Identifies a resource type to exclude from a user-first campaign's scope.
@@ -29,10 +30,12 @@ export const AccessReviewExcludedResourceTypeInput$outboundSchema: z.ZodType<
   AccessReviewExcludedResourceTypeInput$Outbound,
   z.ZodTypeDef,
   AccessReviewExcludedResourceTypeInput
-> = z.object({
-  appId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 
 export function accessReviewExcludedResourceTypeInputToJSON(
   accessReviewExcludedResourceTypeInput: AccessReviewExcludedResourceTypeInput,

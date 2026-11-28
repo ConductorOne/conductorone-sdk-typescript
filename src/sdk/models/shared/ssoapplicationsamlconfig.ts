@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -145,46 +145,52 @@ export const EncryptionAlgorithm$inboundSchema: z.ZodType<
   EncryptionAlgorithm,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EncryptionAlgorithm);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EncryptionAlgorithm)
+);
 /** @internal */
 export const EncryptionAlgorithm$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EncryptionAlgorithm
-> = openEnums.outboundSchema(EncryptionAlgorithm);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EncryptionAlgorithm)
+);
 
 /** @internal */
 export const NameIdFormat$inboundSchema: z.ZodType<
   NameIdFormat,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(NameIdFormat);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(NameIdFormat));
 /** @internal */
 export const NameIdFormat$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   NameIdFormat
-> = openEnums.outboundSchema(NameIdFormat);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(NameIdFormat));
 
 /** @internal */
 export const SSOApplicationSAMLConfig$inboundSchema: z.ZodType<
   SSOApplicationSAMLConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  acsUrls: z.nullable(z.array(z.string())),
-  attributeMappings: z.nullable(z.array(SAMLAttributeMapping$inboundSchema))
-    .optional(),
-  encryptAssertions: z.boolean().optional(),
-  encryptionAlgorithm: EncryptionAlgorithm$inboundSchema.optional(),
-  nameIdFormat: NameIdFormat$inboundSchema.optional(),
-  requireSignedAuthnRequests: z.boolean().optional(),
-  signAssertions: z.boolean().optional(),
-  signResponses: z.boolean().optional(),
-  spEncryptionCertificate: z.string().optional(),
-  spEntityId: z.string(),
-  spSigningCertificates: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acsUrls: z.nullable(z.array(z.string())),
+    attributeMappings: z.nullable(z.array(SAMLAttributeMapping$inboundSchema))
+      .optional(),
+    encryptAssertions: z.boolean().optional(),
+    encryptionAlgorithm: EncryptionAlgorithm$inboundSchema.optional(),
+    nameIdFormat: NameIdFormat$inboundSchema.optional(),
+    requireSignedAuthnRequests: z.boolean().optional(),
+    signAssertions: z.boolean().optional(),
+    signResponses: z.boolean().optional(),
+    spEncryptionCertificate: z.string().optional(),
+    spEntityId: z.string(),
+    spSigningCertificates: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type SSOApplicationSAMLConfig$Outbound = {
   acsUrls: Array<string> | null;
@@ -205,20 +211,22 @@ export const SSOApplicationSAMLConfig$outboundSchema: z.ZodType<
   SSOApplicationSAMLConfig$Outbound,
   z.ZodTypeDef,
   SSOApplicationSAMLConfig
-> = z.object({
-  acsUrls: z.nullable(z.array(z.string())),
-  attributeMappings: z.nullable(z.array(SAMLAttributeMapping$outboundSchema))
-    .optional(),
-  encryptAssertions: z.boolean().optional(),
-  encryptionAlgorithm: EncryptionAlgorithm$outboundSchema.optional(),
-  nameIdFormat: NameIdFormat$outboundSchema.optional(),
-  requireSignedAuthnRequests: z.boolean().optional(),
-  signAssertions: z.boolean().optional(),
-  signResponses: z.boolean().optional(),
-  spEncryptionCertificate: z.string().optional(),
-  spEntityId: z.string(),
-  spSigningCertificates: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acsUrls: z.nullable(z.array(z.string())),
+    attributeMappings: z.nullable(z.array(SAMLAttributeMapping$outboundSchema))
+      .optional(),
+    encryptAssertions: z.boolean().optional(),
+    encryptionAlgorithm: EncryptionAlgorithm$outboundSchema.optional(),
+    nameIdFormat: NameIdFormat$outboundSchema.optional(),
+    requireSignedAuthnRequests: z.boolean().optional(),
+    signAssertions: z.boolean().optional(),
+    signResponses: z.boolean().optional(),
+    spEncryptionCertificate: z.string().optional(),
+    spEntityId: z.string(),
+    spSigningCertificates: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function ssoApplicationSAMLConfigToJSON(
   ssoApplicationSAMLConfig: SSOApplicationSAMLConfig,

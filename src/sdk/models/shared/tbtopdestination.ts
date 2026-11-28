@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -60,18 +60,20 @@ export const TBTopDestination$inboundSchema: z.ZodType<
   TBTopDestination,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowedCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  callCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  deniedCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  destHost: z.string().optional(),
-  distinctAgentCount: z.string().transform(v => parseInt(v, 10)).optional(),
-  requestBytes: z.string().transform(v => parseInt(v, 10)).optional(),
-  responseBytes: z.string().transform(v => parseInt(v, 10)).optional(),
-  trend: z.nullable(z.array(z.string().transform(v => parseInt(v, 10))))
-    .optional(),
-  unspecifiedCount: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    callCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    deniedCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    destHost: z.string().optional(),
+    distinctAgentCount: z.string().transform(v => parseInt(v, 10)).optional(),
+    requestBytes: z.string().transform(v => parseInt(v, 10)).optional(),
+    responseBytes: z.string().transform(v => parseInt(v, 10)).optional(),
+    trend: z.nullable(z.array(z.string().transform(v => parseInt(v, 10))))
+      .optional(),
+    unspecifiedCount: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function tbTopDestinationFromJSON(
   jsonString: string,

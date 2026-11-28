@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,16 +50,18 @@ export const C1ApiFundsV1FundRuleServiceDeleteRequest$outboundSchema: z.ZodType<
   C1ApiFundsV1FundRuleServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   C1ApiFundsV1FundRuleServiceDeleteRequest
-> = z.object({
-  ruleId: z.string(),
-  fundRuleServiceDeleteRequest: shared
-    .FundRuleServiceDeleteRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ruleId: "rule_id",
-    fundRuleServiceDeleteRequest: "FundRuleServiceDeleteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ruleId: z.string(),
+    fundRuleServiceDeleteRequest: shared
+      .FundRuleServiceDeleteRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ruleId: "rule_id",
+      fundRuleServiceDeleteRequest: "FundRuleServiceDeleteRequest",
+    });
+  })
+);
 
 export function c1ApiFundsV1FundRuleServiceDeleteRequestToJSON(
   c1ApiFundsV1FundRuleServiceDeleteRequest:
@@ -77,20 +79,22 @@ export const C1ApiFundsV1FundRuleServiceDeleteResponse$inboundSchema: z.ZodType<
   C1ApiFundsV1FundRuleServiceDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  FundRuleServiceDeleteResponse: shared
-    .FundRuleServiceDeleteResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "FundRuleServiceDeleteResponse": "fundRuleServiceDeleteResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    FundRuleServiceDeleteResponse: shared
+      .FundRuleServiceDeleteResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "FundRuleServiceDeleteResponse": "fundRuleServiceDeleteResponse",
+    });
+  })
+);
 
 export function c1ApiFundsV1FundRuleServiceDeleteResponseFromJSON(
   jsonString: string,

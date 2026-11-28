@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Identifies an entitlement to add or remove from a template's setup.
@@ -30,10 +31,12 @@ export const AccessReviewTemplateSetupEntitlementInput$outboundSchema:
     AccessReviewTemplateSetupEntitlementInput$Outbound,
     z.ZodTypeDef,
     AccessReviewTemplateSetupEntitlementInput
-  > = z.object({
-    appEntitlementId: z.string().optional(),
-    appId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appEntitlementId: z.string().optional(),
+      appId: z.string().optional(),
+    })
+  );
 
 export function accessReviewTemplateSetupEntitlementInputToJSON(
   accessReviewTemplateSetupEntitlementInput:

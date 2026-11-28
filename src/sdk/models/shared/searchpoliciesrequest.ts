@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -170,28 +171,30 @@ export const PolicyTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   PolicyTypes
-> = openEnums.outboundSchema(PolicyTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(PolicyTypes));
 
 /** @internal */
 export const ScopeObjectType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ScopeObjectType
-> = openEnums.outboundSchema(ScopeObjectType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ScopeObjectType)
+);
 
 /** @internal */
 export const ScopeSlot$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ScopeSlot
-> = openEnums.outboundSchema(ScopeSlot);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ScopeSlot));
 
 /** @internal */
 export const ScopeView$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ScopeView
-> = openEnums.outboundSchema(ScopeView);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ScopeView));
 
 /** @internal */
 export type SearchPoliciesRequest$Outbound = {
@@ -216,22 +219,24 @@ export const SearchPoliciesRequest$outboundSchema: z.ZodType<
   SearchPoliciesRequest$Outbound,
   z.ZodTypeDef,
   SearchPoliciesRequest
-> = z.object({
-  displayName: z.string().optional(),
-  excludePolicyIds: z.nullable(z.array(z.string())).optional(),
-  includeAccessProfileOwnerPolicy: z.boolean().optional(),
-  includeDeleted: z.boolean().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  policyTypes: z.nullable(z.array(PolicyTypes$outboundSchema)).optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
-  scopeAppEntitlementId: z.string().optional(),
-  scopeAppId: z.string().optional(),
-  scopeObjectType: ScopeObjectType$outboundSchema.optional(),
-  scopeSlot: ScopeSlot$outboundSchema.optional(),
-  scopeView: ScopeView$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    excludePolicyIds: z.nullable(z.array(z.string())).optional(),
+    includeAccessProfileOwnerPolicy: z.boolean().optional(),
+    includeDeleted: z.boolean().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    policyTypes: z.nullable(z.array(PolicyTypes$outboundSchema)).optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(PolicyRef$outboundSchema)).optional(),
+    scopeAppEntitlementId: z.string().optional(),
+    scopeAppId: z.string().optional(),
+    scopeObjectType: ScopeObjectType$outboundSchema.optional(),
+    scopeSlot: ScopeSlot$outboundSchema.optional(),
+    scopeView: ScopeView$outboundSchema.optional(),
+  })
+);
 
 export function searchPoliciesRequestToJSON(
   searchPoliciesRequest: SearchPoliciesRequest,

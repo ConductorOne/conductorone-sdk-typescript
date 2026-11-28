@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -81,40 +81,46 @@ export const AgentFailureAction$inboundSchema: z.ZodType<
   AgentFailureAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AgentFailureAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AgentFailureAction)
+);
 /** @internal */
 export const AgentFailureAction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AgentFailureAction
-> = openEnums.outboundSchema(AgentFailureAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AgentFailureAction)
+);
 
 /** @internal */
 export const AgentMode$inboundSchema: z.ZodType<
   AgentMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AgentMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AgentMode));
 /** @internal */
 export const AgentMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AgentMode
-> = openEnums.outboundSchema(AgentMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AgentMode));
 
 /** @internal */
 export const AgentApproval$inboundSchema: z.ZodType<
   AgentApproval,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agentFailureAction: AgentFailureAction$inboundSchema.optional(),
-  agentMode: AgentMode$inboundSchema.optional(),
-  agentUserId: z.string().optional(),
-  instructions: z.string().optional(),
-  policyIds: z.nullable(z.array(z.string())).optional(),
-  reassignToUserIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentFailureAction: AgentFailureAction$inboundSchema.optional(),
+    agentMode: AgentMode$inboundSchema.optional(),
+    agentUserId: z.string().optional(),
+    instructions: z.string().optional(),
+    policyIds: z.nullable(z.array(z.string())).optional(),
+    reassignToUserIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type AgentApproval$Outbound = {
   agentFailureAction?: string | undefined;
@@ -130,14 +136,16 @@ export const AgentApproval$outboundSchema: z.ZodType<
   AgentApproval$Outbound,
   z.ZodTypeDef,
   AgentApproval
-> = z.object({
-  agentFailureAction: AgentFailureAction$outboundSchema.optional(),
-  agentMode: AgentMode$outboundSchema.optional(),
-  agentUserId: z.string().optional(),
-  instructions: z.string().optional(),
-  policyIds: z.nullable(z.array(z.string())).optional(),
-  reassignToUserIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentFailureAction: AgentFailureAction$outboundSchema.optional(),
+    agentMode: AgentMode$outboundSchema.optional(),
+    agentUserId: z.string().optional(),
+    instructions: z.string().optional(),
+    policyIds: z.nullable(z.array(z.string())).optional(),
+    reassignToUserIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function agentApprovalToJSON(agentApproval: AgentApproval): string {
   return JSON.stringify(AgentApproval$outboundSchema.parse(agentApproval));

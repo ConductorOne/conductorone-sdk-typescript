@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const UserAttributeTypeConfigCelExpression$inboundSchema: z.ZodType<
   UserAttributeTypeConfigCelExpression,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  celExpression: z.string().optional(),
-  userProfileAttributeKey: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    celExpression: z.string().optional(),
+    userProfileAttributeKey: z.string().optional(),
+  })
+);
 /** @internal */
 export type UserAttributeTypeConfigCelExpression$Outbound = {
   celExpression?: string | undefined;
@@ -41,10 +43,12 @@ export const UserAttributeTypeConfigCelExpression$outboundSchema: z.ZodType<
   UserAttributeTypeConfigCelExpression$Outbound,
   z.ZodTypeDef,
   UserAttributeTypeConfigCelExpression
-> = z.object({
-  celExpression: z.string().optional(),
-  userProfileAttributeKey: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    celExpression: z.string().optional(),
+    userProfileAttributeKey: z.string().optional(),
+  })
+);
 
 export function userAttributeTypeConfigCelExpressionToJSON(
   userAttributeTypeConfigCelExpression: UserAttributeTypeConfigCelExpression,

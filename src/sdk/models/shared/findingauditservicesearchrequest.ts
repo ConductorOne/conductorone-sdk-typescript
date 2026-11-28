@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -36,6 +37,8 @@ export const EventTypes = {
     "FINDING_AUDIT_EVENT_TYPE_REPROCESS_COMPLETED",
   FindingAuditEventTypeAssigneeChanged:
     "FINDING_AUDIT_EVENT_TYPE_ASSIGNEE_CHANGED",
+  FindingAuditEventTypeHistoryImported:
+    "FINDING_AUDIT_EVENT_TYPE_HISTORY_IMPORTED",
 } as const;
 export type EventTypes = OpenEnum<typeof EventTypes>;
 
@@ -86,7 +89,7 @@ export const EventTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EventTypes
-> = openEnums.outboundSchema(EventTypes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(EventTypes));
 
 /** @internal */
 export type FindingAuditServiceSearchRequest$Outbound = {
@@ -106,17 +109,19 @@ export const FindingAuditServiceSearchRequest$outboundSchema: z.ZodType<
   FindingAuditServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   FindingAuditServiceSearchRequest
-> = z.object({
-  actorPrincipalId: z.string().optional(),
-  actorSubject: z.string().optional(),
-  appId: z.string().optional(),
-  eventTypes: z.nullable(z.array(EventTypes$outboundSchema)).optional(),
-  findingId: z.string().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  since: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  until: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actorPrincipalId: z.string().optional(),
+    actorSubject: z.string().optional(),
+    appId: z.string().optional(),
+    eventTypes: z.nullable(z.array(EventTypes$outboundSchema)).optional(),
+    findingId: z.string().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    since: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    until: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function findingAuditServiceSearchRequestToJSON(
   findingAuditServiceSearchRequest: FindingAuditServiceSearchRequest,

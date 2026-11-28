@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceUpdateRequest$outboundSchem
     C1ApiRequestSchemaV1RequestSchemaServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestSchemaV1RequestSchemaServiceUpdateRequest
-  > = z.object({
-    requestSchemaId: z.string(),
-    requestSchemaServiceUpdateRequest: shared
-      .RequestSchemaServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requestSchemaId: "request_schema_id",
-      requestSchemaServiceUpdateRequest: "RequestSchemaServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      requestSchemaId: z.string(),
+      requestSchemaServiceUpdateRequest: shared
+        .RequestSchemaServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        requestSchemaId: "request_schema_id",
+        requestSchemaServiceUpdateRequest: "RequestSchemaServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiRequestSchemaV1RequestSchemaServiceUpdateRequestToJSON(
   c1ApiRequestSchemaV1RequestSchemaServiceUpdateRequest:
@@ -79,21 +81,23 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceUpdateResponse$inboundSchem
     C1ApiRequestSchemaV1RequestSchemaServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RequestSchemaServiceUpdateResponse: shared
-      .RequestSchemaServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RequestSchemaServiceUpdateResponse":
-        "requestSchemaServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RequestSchemaServiceUpdateResponse: shared
+        .RequestSchemaServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RequestSchemaServiceUpdateResponse":
+          "requestSchemaServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestSchemaV1RequestSchemaServiceUpdateResponseFromJSON(
   jsonString: string,

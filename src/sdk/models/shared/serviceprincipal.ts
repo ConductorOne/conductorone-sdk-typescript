@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { User, User$inboundSchema } from "./user.js";
@@ -35,19 +35,21 @@ export const ServicePrincipal$inboundSchema: z.ZodType<
   ServicePrincipal,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
-    .optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  user: z.nullable(User$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    objectPermissions: z.nullable(UserActorObjectPermissions$inboundSchema)
+      .optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    user: z.nullable(User$inboundSchema).optional(),
+  })
+);
 
 export function servicePrincipalFromJSON(
   jsonString: string,

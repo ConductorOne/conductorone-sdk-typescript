@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -105,31 +105,37 @@ export const PolicyStepInstanceState$inboundSchema: z.ZodType<
   PolicyStepInstanceState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PolicyStepInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(PolicyStepInstanceState)
+);
 /** @internal */
 export const PolicyStepInstanceState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   PolicyStepInstanceState
-> = openEnums.outboundSchema(PolicyStepInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(PolicyStepInstanceState)
+);
 
 /** @internal */
 export const PolicyStepInstance$inboundSchema: z.ZodType<
   PolicyStepInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accept: z.nullable(AcceptInstance$inboundSchema).optional(),
-  action: z.nullable(ActionInstance$inboundSchema).optional(),
-  approval: z.nullable(ApprovalInstance$inboundSchema).optional(),
-  form: z.nullable(FormInstance$inboundSchema).optional(),
-  id: z.string().optional(),
-  policyGenerationId: z.string().optional(),
-  provision: z.nullable(ProvisionInstance$inboundSchema).optional(),
-  reject: z.nullable(RejectInstance$inboundSchema).optional(),
-  state: PolicyStepInstanceState$inboundSchema.optional(),
-  wait: z.nullable(WaitInstance$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accept: z.nullable(AcceptInstance$inboundSchema).optional(),
+    action: z.nullable(ActionInstance$inboundSchema).optional(),
+    approval: z.nullable(ApprovalInstance$inboundSchema).optional(),
+    form: z.nullable(FormInstance$inboundSchema).optional(),
+    id: z.string().optional(),
+    policyGenerationId: z.string().optional(),
+    provision: z.nullable(ProvisionInstance$inboundSchema).optional(),
+    reject: z.nullable(RejectInstance$inboundSchema).optional(),
+    state: PolicyStepInstanceState$inboundSchema.optional(),
+    wait: z.nullable(WaitInstance$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PolicyStepInstance$Outbound = {
   accept?: AcceptInstance$Outbound | null | undefined;
@@ -149,18 +155,20 @@ export const PolicyStepInstance$outboundSchema: z.ZodType<
   PolicyStepInstance$Outbound,
   z.ZodTypeDef,
   PolicyStepInstance
-> = z.object({
-  accept: z.nullable(AcceptInstance$outboundSchema).optional(),
-  action: z.nullable(ActionInstance$outboundSchema).optional(),
-  approval: z.nullable(ApprovalInstance$outboundSchema).optional(),
-  form: z.nullable(FormInstance$outboundSchema).optional(),
-  id: z.string().optional(),
-  policyGenerationId: z.string().optional(),
-  provision: z.nullable(ProvisionInstance$outboundSchema).optional(),
-  reject: z.nullable(RejectInstance$outboundSchema).optional(),
-  state: PolicyStepInstanceState$outboundSchema.optional(),
-  wait: z.nullable(WaitInstance$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accept: z.nullable(AcceptInstance$outboundSchema).optional(),
+    action: z.nullable(ActionInstance$outboundSchema).optional(),
+    approval: z.nullable(ApprovalInstance$outboundSchema).optional(),
+    form: z.nullable(FormInstance$outboundSchema).optional(),
+    id: z.string().optional(),
+    policyGenerationId: z.string().optional(),
+    provision: z.nullable(ProvisionInstance$outboundSchema).optional(),
+    reject: z.nullable(RejectInstance$outboundSchema).optional(),
+    state: PolicyStepInstanceState$outboundSchema.optional(),
+    wait: z.nullable(WaitInstance$outboundSchema).optional(),
+  })
+);
 
 export function policyStepInstanceToJSON(
   policyStepInstance: PolicyStepInstance,

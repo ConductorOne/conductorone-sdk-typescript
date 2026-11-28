@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -21,10 +21,12 @@ export type Form = {
 };
 
 /** @internal */
-export const Form$inboundSchema: z.ZodType<Form, z.ZodTypeDef, unknown> = z
-  .object({
-    form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
-  });
+export const Form$inboundSchema: z.ZodType<Form, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      form: z.nullable(RequestSchemaForm$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Form$Outbound = {
   form?: RequestSchemaForm$Outbound | null | undefined;
@@ -32,9 +34,11 @@ export type Form$Outbound = {
 
 /** @internal */
 export const Form$outboundSchema: z.ZodType<Form$Outbound, z.ZodTypeDef, Form> =
-  z.object({
-    form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      form: z.nullable(RequestSchemaForm$outboundSchema).optional(),
+    })
+  );
 
 export function formToJSON(form: Form): string {
   return JSON.stringify(Form$outboundSchema.parse(form));

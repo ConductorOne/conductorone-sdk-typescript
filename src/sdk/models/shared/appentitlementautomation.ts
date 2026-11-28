@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -77,30 +77,34 @@ export const AppEntitlementAutomation$inboundSchema: z.ZodType<
   AppEntitlementAutomation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  basic: z.nullable(AppEntitlementAutomationRuleBasic$inboundSchema).optional(),
-  cel: z.nullable(AppEntitlementAutomationRuleCEL$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  entitlements: z.nullable(
-    AppEntitlementAutomationRuleEntitlement$inboundSchema,
-  ).optional(),
-  lastRunStatus: z.nullable(AppEntitlementAutomationLastRunStatus$inboundSchema)
-    .optional(),
-  managedByRequestCatalogId: z.string().optional(),
-  none: z.nullable(AppEntitlementAutomationRuleNone$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    basic: z.nullable(AppEntitlementAutomationRuleBasic$inboundSchema)
+      .optional(),
+    cel: z.nullable(AppEntitlementAutomationRuleCEL$inboundSchema).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    entitlements: z.nullable(
+      AppEntitlementAutomationRuleEntitlement$inboundSchema,
+    ).optional(),
+    lastRunStatus: z.nullable(
+      AppEntitlementAutomationLastRunStatus$inboundSchema,
+    ).optional(),
+    managedByRequestCatalogId: z.string().optional(),
+    none: z.nullable(AppEntitlementAutomationRuleNone$inboundSchema).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function appEntitlementAutomationFromJSON(
   jsonString: string,

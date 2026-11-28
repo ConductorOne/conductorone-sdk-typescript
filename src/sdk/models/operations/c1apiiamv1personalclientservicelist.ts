@@ -4,10 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type C1ApiIamV1PersonalClientServiceListRequest = {
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+};
 
 export type C1ApiIamV1PersonalClientServiceListResponse = {
   /**
@@ -31,25 +36,63 @@ export type C1ApiIamV1PersonalClientServiceListResponse = {
 };
 
 /** @internal */
+export type C1ApiIamV1PersonalClientServiceListRequest$Outbound = {
+  page_size?: number | undefined;
+  page_token?: string | undefined;
+};
+
+/** @internal */
+export const C1ApiIamV1PersonalClientServiceListRequest$outboundSchema:
+  z.ZodType<
+    C1ApiIamV1PersonalClientServiceListRequest$Outbound,
+    z.ZodTypeDef,
+    C1ApiIamV1PersonalClientServiceListRequest
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
+
+export function c1ApiIamV1PersonalClientServiceListRequestToJSON(
+  c1ApiIamV1PersonalClientServiceListRequest:
+    C1ApiIamV1PersonalClientServiceListRequest,
+): string {
+  return JSON.stringify(
+    C1ApiIamV1PersonalClientServiceListRequest$outboundSchema.parse(
+      c1ApiIamV1PersonalClientServiceListRequest,
+    ),
+  );
+}
+
+/** @internal */
 export const C1ApiIamV1PersonalClientServiceListResponse$inboundSchema:
   z.ZodType<
     C1ApiIamV1PersonalClientServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    PersonalClientServiceListResponse: shared
-      .PersonalClientServiceListResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "PersonalClientServiceListResponse": "personalClientServiceListResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      PersonalClientServiceListResponse: shared
+        .PersonalClientServiceListResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "PersonalClientServiceListResponse":
+          "personalClientServiceListResponse",
+      });
+    })
+  );
 
 export function c1ApiIamV1PersonalClientServiceListResponseFromJSON(
   jsonString: string,

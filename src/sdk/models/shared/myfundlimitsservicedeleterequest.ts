@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The MyFundLimitsServiceDeleteRequest message.
@@ -17,7 +18,7 @@ export const MyFundLimitsServiceDeleteRequest$outboundSchema: z.ZodType<
   MyFundLimitsServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   MyFundLimitsServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function myFundLimitsServiceDeleteRequestToJSON(
   myFundLimitsServiceDeleteRequest: MyFundLimitsServiceDeleteRequest,

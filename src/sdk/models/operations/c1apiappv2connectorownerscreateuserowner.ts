@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -57,22 +57,24 @@ export const C1ApiAppV2ConnectorOwnersCreateUserOwnerRequest$outboundSchema:
     C1ApiAppV2ConnectorOwnersCreateUserOwnerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2ConnectorOwnersCreateUserOwnerRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    roleSlug: z.string(),
-    userRefId: z.string(),
-    createConnectorUserOwnerRequest: shared
-      .CreateConnectorUserOwnerRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      roleSlug: "role_slug",
-      userRefId: "user_ref_id",
-      createConnectorUserOwnerRequest: "CreateConnectorUserOwnerRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      roleSlug: z.string(),
+      userRefId: z.string(),
+      createConnectorUserOwnerRequest: shared
+        .CreateConnectorUserOwnerRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        roleSlug: "role_slug",
+        userRefId: "user_ref_id",
+        createConnectorUserOwnerRequest: "CreateConnectorUserOwnerRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV2ConnectorOwnersCreateUserOwnerRequestToJSON(
   c1ApiAppV2ConnectorOwnersCreateUserOwnerRequest:
@@ -91,20 +93,22 @@ export const C1ApiAppV2ConnectorOwnersCreateUserOwnerResponse$inboundSchema:
     C1ApiAppV2ConnectorOwnersCreateUserOwnerResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    CreateConnectorUserOwnerResponse: shared
-      .CreateConnectorUserOwnerResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "CreateConnectorUserOwnerResponse": "createConnectorUserOwnerResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      CreateConnectorUserOwnerResponse: shared
+        .CreateConnectorUserOwnerResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "CreateConnectorUserOwnerResponse": "createConnectorUserOwnerResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV2ConnectorOwnersCreateUserOwnerResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,12 +46,14 @@ export const PolicyInstance$inboundSchema: z.ZodType<
   PolicyInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  current: z.nullable(PolicyStepInstance$inboundSchema).optional(),
-  history: z.nullable(z.array(PolicyStepInstance$inboundSchema)).optional(),
-  next: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
-  policy: z.nullable(Policy$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    current: z.nullable(PolicyStepInstance$inboundSchema).optional(),
+    history: z.nullable(z.array(PolicyStepInstance$inboundSchema)).optional(),
+    next: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
+    policy: z.nullable(Policy$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PolicyInstance$Outbound = {
   current?: PolicyStepInstance$Outbound | null | undefined;
@@ -65,12 +67,14 @@ export const PolicyInstance$outboundSchema: z.ZodType<
   PolicyInstance$Outbound,
   z.ZodTypeDef,
   PolicyInstance
-> = z.object({
-  current: z.nullable(PolicyStepInstance$outboundSchema).optional(),
-  history: z.nullable(z.array(PolicyStepInstance$outboundSchema)).optional(),
-  next: z.nullable(z.array(PolicyStep$outboundSchema)).optional(),
-  policy: z.nullable(Policy$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    current: z.nullable(PolicyStepInstance$outboundSchema).optional(),
+    history: z.nullable(z.array(PolicyStepInstance$outboundSchema)).optional(),
+    next: z.nullable(z.array(PolicyStep$outboundSchema)).optional(),
+    policy: z.nullable(Policy$outboundSchema).optional(),
+  })
+);
 
 export function policyInstanceToJSON(policyInstance: PolicyInstance): string {
   return JSON.stringify(PolicyInstance$outboundSchema.parse(policyInstance));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   RecoveryPolicyRef,
   RecoveryPolicyRef$Outbound,
@@ -44,12 +45,14 @@ export const RecoveryPolicyServiceSearchRequest$outboundSchema: z.ZodType<
   RecoveryPolicyServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   RecoveryPolicyServiceSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(RecoveryPolicyRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(RecoveryPolicyRef$outboundSchema)).optional(),
+  })
+);
 
 export function recoveryPolicyServiceSearchRequestToJSON(
   recoveryPolicyServiceSearchRequest: RecoveryPolicyServiceSearchRequest,

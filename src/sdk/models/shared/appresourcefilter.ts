@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const AppResourceFilter$inboundSchema: z.ZodType<
   AppResourceFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 /** @internal */
 export type AppResourceFilter$Outbound = {
   appId?: string | undefined;
@@ -41,10 +43,12 @@ export const AppResourceFilter$outboundSchema: z.ZodType<
   AppResourceFilter$Outbound,
   z.ZodTypeDef,
   AppResourceFilter
-> = z.object({
-  appId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 
 export function appResourceFilterToJSON(
   appResourceFilter: AppResourceFilter,

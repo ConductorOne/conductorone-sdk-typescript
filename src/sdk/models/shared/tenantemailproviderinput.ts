@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AWSSESProviderConfig,
   AWSSESProviderConfig$Outbound,
@@ -85,18 +86,20 @@ export const TenantEmailProviderInput$outboundSchema: z.ZodType<
   TenantEmailProviderInput$Outbound,
   z.ZodTypeDef,
   TenantEmailProviderInput
-> = z.object({
-  awsSes: z.nullable(AWSSESProviderConfig$outboundSchema).optional(),
-  c1Builtin: z.nullable(C1BuiltInProviderConfig$outboundSchema).optional(),
-  fromAddress: z.string().optional(),
-  fromName: z.string().optional(),
-  googleWorkspace: z.nullable(GoogleWorkspaceProviderConfig$outboundSchema)
-    .optional(),
-  microsoftGraph: z.nullable(MicrosoftGraphProviderConfig$outboundSchema)
-    .optional(),
-  replyToAddress: z.string().optional(),
-  sendgrid: z.nullable(SendGridProviderConfig$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    awsSes: z.nullable(AWSSESProviderConfig$outboundSchema).optional(),
+    c1Builtin: z.nullable(C1BuiltInProviderConfig$outboundSchema).optional(),
+    fromAddress: z.string().optional(),
+    fromName: z.string().optional(),
+    googleWorkspace: z.nullable(GoogleWorkspaceProviderConfig$outboundSchema)
+      .optional(),
+    microsoftGraph: z.nullable(MicrosoftGraphProviderConfig$outboundSchema)
+      .optional(),
+    replyToAddress: z.string().optional(),
+    sendgrid: z.nullable(SendGridProviderConfig$outboundSchema).optional(),
+  })
+);
 
 export function tenantEmailProviderInputToJSON(
   tenantEmailProviderInput: TenantEmailProviderInput,

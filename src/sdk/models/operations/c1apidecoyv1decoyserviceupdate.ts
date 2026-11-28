@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,15 +46,17 @@ export const C1ApiDecoyV1DecoyServiceUpdateRequest$outboundSchema: z.ZodType<
   C1ApiDecoyV1DecoyServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   C1ApiDecoyV1DecoyServiceUpdateRequest
-> = z.object({
-  id: z.string(),
-  decoyServiceUpdateRequest: shared.DecoyServiceUpdateRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    decoyServiceUpdateRequest: "DecoyServiceUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    decoyServiceUpdateRequest: shared.DecoyServiceUpdateRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      decoyServiceUpdateRequest: "DecoyServiceUpdateRequest",
+    });
+  })
+);
 
 export function c1ApiDecoyV1DecoyServiceUpdateRequestToJSON(
   c1ApiDecoyV1DecoyServiceUpdateRequest: C1ApiDecoyV1DecoyServiceUpdateRequest,
@@ -71,20 +73,22 @@ export const C1ApiDecoyV1DecoyServiceUpdateResponse$inboundSchema: z.ZodType<
   C1ApiDecoyV1DecoyServiceUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  DecoyServiceUpdateResponse: shared.DecoyServiceUpdateResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "DecoyServiceUpdateResponse": "decoyServiceUpdateResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    DecoyServiceUpdateResponse: shared.DecoyServiceUpdateResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "DecoyServiceUpdateResponse": "decoyServiceUpdateResponse",
+    });
+  })
+);
 
 export function c1ApiDecoyV1DecoyServiceUpdateResponseFromJSON(
   jsonString: string,

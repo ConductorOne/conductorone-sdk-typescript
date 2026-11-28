@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -124,23 +124,25 @@ export const FormField$inboundSchema: z.ZodType<
   FormField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  adminConfig: z.nullable(AdminProviderConfig$inboundSchema).optional(),
-  boolField: z.nullable(BoolField$inboundSchema).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  fileField: z.nullable(FileField$inboundSchema).optional(),
-  int64Field: z.nullable(Int64Field$inboundSchema).optional(),
-  name: z.string().optional(),
-  oauth2Field: z.nullable(Oauth2Field$inboundSchema).optional(),
-  readOnly: z.boolean().optional(),
-  required: z.boolean().optional(),
-  sharedConfig: z.nullable(SharedProviderConfig$inboundSchema).optional(),
-  stringField: z.nullable(FormStringField$inboundSchema).optional(),
-  stringMapField: z.nullable(FormStringMapField$inboundSchema).optional(),
-  stringSliceField: z.nullable(StringSliceField$inboundSchema).optional(),
-  userConfig: z.nullable(UserProviderConfig$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    adminConfig: z.nullable(AdminProviderConfig$inboundSchema).optional(),
+    boolField: z.nullable(BoolField$inboundSchema).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    fileField: z.nullable(FileField$inboundSchema).optional(),
+    int64Field: z.nullable(Int64Field$inboundSchema).optional(),
+    name: z.string().optional(),
+    oauth2Field: z.nullable(Oauth2Field$inboundSchema).optional(),
+    readOnly: z.boolean().optional(),
+    required: z.boolean().optional(),
+    sharedConfig: z.nullable(SharedProviderConfig$inboundSchema).optional(),
+    stringField: z.nullable(FormStringField$inboundSchema).optional(),
+    stringMapField: z.nullable(FormStringMapField$inboundSchema).optional(),
+    stringSliceField: z.nullable(StringSliceField$inboundSchema).optional(),
+    userConfig: z.nullable(UserProviderConfig$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FormField$Outbound = {
   adminConfig?: AdminProviderConfig$Outbound | null | undefined;
@@ -165,23 +167,25 @@ export const FormField$outboundSchema: z.ZodType<
   FormField$Outbound,
   z.ZodTypeDef,
   FormField
-> = z.object({
-  adminConfig: z.nullable(AdminProviderConfig$outboundSchema).optional(),
-  boolField: z.nullable(BoolField$outboundSchema).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  fileField: z.nullable(FileField$outboundSchema).optional(),
-  int64Field: z.nullable(Int64Field$outboundSchema).optional(),
-  name: z.string().optional(),
-  oauth2Field: z.nullable(Oauth2Field$outboundSchema).optional(),
-  readOnly: z.boolean().optional(),
-  required: z.boolean().optional(),
-  sharedConfig: z.nullable(SharedProviderConfig$outboundSchema).optional(),
-  stringField: z.nullable(FormStringField$outboundSchema).optional(),
-  stringMapField: z.nullable(FormStringMapField$outboundSchema).optional(),
-  stringSliceField: z.nullable(StringSliceField$outboundSchema).optional(),
-  userConfig: z.nullable(UserProviderConfig$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    adminConfig: z.nullable(AdminProviderConfig$outboundSchema).optional(),
+    boolField: z.nullable(BoolField$outboundSchema).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    fileField: z.nullable(FileField$outboundSchema).optional(),
+    int64Field: z.nullable(Int64Field$outboundSchema).optional(),
+    name: z.string().optional(),
+    oauth2Field: z.nullable(Oauth2Field$outboundSchema).optional(),
+    readOnly: z.boolean().optional(),
+    required: z.boolean().optional(),
+    sharedConfig: z.nullable(SharedProviderConfig$outboundSchema).optional(),
+    stringField: z.nullable(FormStringField$outboundSchema).optional(),
+    stringMapField: z.nullable(FormStringMapField$outboundSchema).optional(),
+    stringSliceField: z.nullable(StringSliceField$outboundSchema).optional(),
+    userConfig: z.nullable(UserProviderConfig$outboundSchema).optional(),
+  })
+);
 
 export function formFieldToJSON(formField: FormField): string {
   return JSON.stringify(FormField$outboundSchema.parse(formField));

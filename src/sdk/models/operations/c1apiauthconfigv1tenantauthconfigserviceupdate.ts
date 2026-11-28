@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiAuthConfigV1TenantAuthConfigServiceUpdateRequest$outboundSchem
     C1ApiAuthConfigV1TenantAuthConfigServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAuthConfigV1TenantAuthConfigServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    tenantAuthConfigServiceUpdateRequest: shared
-      .TenantAuthConfigServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      tenantAuthConfigServiceUpdateRequest:
-        "TenantAuthConfigServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      tenantAuthConfigServiceUpdateRequest: shared
+        .TenantAuthConfigServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        tenantAuthConfigServiceUpdateRequest:
+          "TenantAuthConfigServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiAuthConfigV1TenantAuthConfigServiceUpdateRequestToJSON(
   c1ApiAuthConfigV1TenantAuthConfigServiceUpdateRequest:
@@ -79,21 +81,23 @@ export const C1ApiAuthConfigV1TenantAuthConfigServiceUpdateResponse$inboundSchem
     C1ApiAuthConfigV1TenantAuthConfigServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TenantAuthConfigServiceUpdateResponse: shared
-      .TenantAuthConfigServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TenantAuthConfigServiceUpdateResponse":
-        "tenantAuthConfigServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TenantAuthConfigServiceUpdateResponse: shared
+        .TenantAuthConfigServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TenantAuthConfigServiceUpdateResponse":
+          "tenantAuthConfigServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiAuthConfigV1TenantAuthConfigServiceUpdateResponseFromJSON(
   jsonString: string,

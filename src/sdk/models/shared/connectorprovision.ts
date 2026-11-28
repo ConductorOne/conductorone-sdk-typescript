@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,11 +46,13 @@ export const ConnectorProvision$inboundSchema: z.ZodType<
   ConnectorProvision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  account: z.nullable(AccountProvision$inboundSchema).optional(),
-  defaultBehavior: z.nullable(DefaultBehavior$inboundSchema).optional(),
-  deleteAccount: z.nullable(DeleteAccount$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    account: z.nullable(AccountProvision$inboundSchema).optional(),
+    defaultBehavior: z.nullable(DefaultBehavior$inboundSchema).optional(),
+    deleteAccount: z.nullable(DeleteAccount$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ConnectorProvision$Outbound = {
   account?: AccountProvision$Outbound | null | undefined;
@@ -63,11 +65,13 @@ export const ConnectorProvision$outboundSchema: z.ZodType<
   ConnectorProvision$Outbound,
   z.ZodTypeDef,
   ConnectorProvision
-> = z.object({
-  account: z.nullable(AccountProvision$outboundSchema).optional(),
-  defaultBehavior: z.nullable(DefaultBehavior$outboundSchema).optional(),
-  deleteAccount: z.nullable(DeleteAccount$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    account: z.nullable(AccountProvision$outboundSchema).optional(),
+    defaultBehavior: z.nullable(DefaultBehavior$outboundSchema).optional(),
+    deleteAccount: z.nullable(DeleteAccount$outboundSchema).optional(),
+  })
+);
 
 export function connectorProvisionToJSON(
   connectorProvision: ConnectorProvision,

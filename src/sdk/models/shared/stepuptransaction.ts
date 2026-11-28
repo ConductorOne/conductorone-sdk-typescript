@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -68,32 +68,36 @@ export const StepUpTransactionState$inboundSchema: z.ZodType<
   StepUpTransactionState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(StepUpTransactionState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(StepUpTransactionState)
+);
 
 /** @internal */
 export const StepUpTransaction$inboundSchema: z.ZodType<
   StepUpTransaction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approveTask: z.nullable(TargetTask$inboundSchema).optional(),
-  claims: z.nullable(z.record(z.any())).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  errorMessage: z.string().optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string().optional(),
-  providerId: z.string().optional(),
-  state: StepUpTransactionState$inboundSchema.optional(),
-  test: z.nullable(TargetTest$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approveTask: z.nullable(TargetTask$inboundSchema).optional(),
+    claims: z.nullable(z.record(z.any())).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    errorMessage: z.string().optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string().optional(),
+    providerId: z.string().optional(),
+    state: StepUpTransactionState$inboundSchema.optional(),
+    test: z.nullable(TargetTest$inboundSchema).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    userId: z.string().optional(),
+  })
+);
 
 export function stepUpTransactionFromJSON(
   jsonString: string,

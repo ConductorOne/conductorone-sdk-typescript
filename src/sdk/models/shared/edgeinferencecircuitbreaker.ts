@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const EdgeInferenceCircuitBreaker$inboundSchema: z.ZodType<
   EdgeInferenceCircuitBreaker,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cooldownMs: z.number().int().optional(),
-  failureThreshold: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cooldownMs: z.number().int().optional(),
+    failureThreshold: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type EdgeInferenceCircuitBreaker$Outbound = {
   cooldownMs?: number | undefined;
@@ -41,10 +43,12 @@ export const EdgeInferenceCircuitBreaker$outboundSchema: z.ZodType<
   EdgeInferenceCircuitBreaker$Outbound,
   z.ZodTypeDef,
   EdgeInferenceCircuitBreaker
-> = z.object({
-  cooldownMs: z.number().int().optional(),
-  failureThreshold: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cooldownMs: z.number().int().optional(),
+    failureThreshold: z.number().int().optional(),
+  })
+);
 
 export function edgeInferenceCircuitBreakerToJSON(
   edgeInferenceCircuitBreaker: EdgeInferenceCircuitBreaker,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,10 +31,12 @@ export const ReviewerAttributeConfig$inboundSchema: z.ZodType<
   ReviewerAttributeConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bindings: z.nullable(z.array(ReviewerAttributeBinding$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bindings: z.nullable(z.array(ReviewerAttributeBinding$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type ReviewerAttributeConfig$Outbound = {
   bindings?: Array<ReviewerAttributeBinding$Outbound> | null | undefined;
@@ -45,10 +47,12 @@ export const ReviewerAttributeConfig$outboundSchema: z.ZodType<
   ReviewerAttributeConfig$Outbound,
   z.ZodTypeDef,
   ReviewerAttributeConfig
-> = z.object({
-  bindings: z.nullable(z.array(ReviewerAttributeBinding$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bindings: z.nullable(z.array(ReviewerAttributeBinding$outboundSchema))
+      .optional(),
+  })
+);
 
 export function reviewerAttributeConfigToJSON(
   reviewerAttributeConfig: ReviewerAttributeConfig,

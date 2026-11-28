@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -156,31 +156,33 @@ export const Approval$inboundSchema: z.ZodType<
   Approval,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessProfileOwners: z.nullable(AccessProfileOwnerApproval$inboundSchema)
-    .optional(),
-  agent: z.nullable(AgentApproval$inboundSchema).optional(),
-  allowDelegation: z.boolean().optional(),
-  allowReassignment: z.boolean().optional(),
-  allowedReassignees: z.nullable(z.array(z.string())).optional(),
-  appOwners: z.nullable(AppOwnerApproval$inboundSchema).optional(),
-  assigned: z.boolean().optional(),
-  entitlementOwners: z.nullable(EntitlementOwnerApproval$inboundSchema)
-    .optional(),
-  escalation: z.nullable(Escalation$inboundSchema).optional(),
-  escalationEnabled: z.boolean().optional(),
-  expression: z.nullable(ExpressionApproval$inboundSchema).optional(),
-  group: z.nullable(AppGroupApproval$inboundSchema).optional(),
-  manager: z.nullable(ManagerApproval$inboundSchema).optional(),
-  requireApprovalReason: z.boolean().optional(),
-  requireDenialReason: z.boolean().optional(),
-  requireReassignmentReason: z.boolean().optional(),
-  requiresStepUpProviderId: z.string().optional(),
-  resourceOwners: z.nullable(ResourceOwnerApproval$inboundSchema).optional(),
-  self: z.nullable(SelfApproval$inboundSchema).optional(),
-  users: z.nullable(UserApproval$inboundSchema).optional(),
-  webhook: z.nullable(WebhookApproval$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileOwners: z.nullable(AccessProfileOwnerApproval$inboundSchema)
+      .optional(),
+    agent: z.nullable(AgentApproval$inboundSchema).optional(),
+    allowDelegation: z.boolean().optional(),
+    allowReassignment: z.boolean().optional(),
+    allowedReassignees: z.nullable(z.array(z.string())).optional(),
+    appOwners: z.nullable(AppOwnerApproval$inboundSchema).optional(),
+    assigned: z.boolean().optional(),
+    entitlementOwners: z.nullable(EntitlementOwnerApproval$inboundSchema)
+      .optional(),
+    escalation: z.nullable(Escalation$inboundSchema).optional(),
+    escalationEnabled: z.boolean().optional(),
+    expression: z.nullable(ExpressionApproval$inboundSchema).optional(),
+    group: z.nullable(AppGroupApproval$inboundSchema).optional(),
+    manager: z.nullable(ManagerApproval$inboundSchema).optional(),
+    requireApprovalReason: z.boolean().optional(),
+    requireDenialReason: z.boolean().optional(),
+    requireReassignmentReason: z.boolean().optional(),
+    requiresStepUpProviderId: z.string().optional(),
+    resourceOwners: z.nullable(ResourceOwnerApproval$inboundSchema).optional(),
+    self: z.nullable(SelfApproval$inboundSchema).optional(),
+    users: z.nullable(UserApproval$inboundSchema).optional(),
+    webhook: z.nullable(WebhookApproval$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type Approval$Outbound = {
   accessProfileOwners?: AccessProfileOwnerApproval$Outbound | null | undefined;
@@ -211,31 +213,33 @@ export const Approval$outboundSchema: z.ZodType<
   Approval$Outbound,
   z.ZodTypeDef,
   Approval
-> = z.object({
-  accessProfileOwners: z.nullable(AccessProfileOwnerApproval$outboundSchema)
-    .optional(),
-  agent: z.nullable(AgentApproval$outboundSchema).optional(),
-  allowDelegation: z.boolean().optional(),
-  allowReassignment: z.boolean().optional(),
-  allowedReassignees: z.nullable(z.array(z.string())).optional(),
-  appOwners: z.nullable(AppOwnerApproval$outboundSchema).optional(),
-  assigned: z.boolean().optional(),
-  entitlementOwners: z.nullable(EntitlementOwnerApproval$outboundSchema)
-    .optional(),
-  escalation: z.nullable(Escalation$outboundSchema).optional(),
-  escalationEnabled: z.boolean().optional(),
-  expression: z.nullable(ExpressionApproval$outboundSchema).optional(),
-  group: z.nullable(AppGroupApproval$outboundSchema).optional(),
-  manager: z.nullable(ManagerApproval$outboundSchema).optional(),
-  requireApprovalReason: z.boolean().optional(),
-  requireDenialReason: z.boolean().optional(),
-  requireReassignmentReason: z.boolean().optional(),
-  requiresStepUpProviderId: z.string().optional(),
-  resourceOwners: z.nullable(ResourceOwnerApproval$outboundSchema).optional(),
-  self: z.nullable(SelfApproval$outboundSchema).optional(),
-  users: z.nullable(UserApproval$outboundSchema).optional(),
-  webhook: z.nullable(WebhookApproval$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileOwners: z.nullable(AccessProfileOwnerApproval$outboundSchema)
+      .optional(),
+    agent: z.nullable(AgentApproval$outboundSchema).optional(),
+    allowDelegation: z.boolean().optional(),
+    allowReassignment: z.boolean().optional(),
+    allowedReassignees: z.nullable(z.array(z.string())).optional(),
+    appOwners: z.nullable(AppOwnerApproval$outboundSchema).optional(),
+    assigned: z.boolean().optional(),
+    entitlementOwners: z.nullable(EntitlementOwnerApproval$outboundSchema)
+      .optional(),
+    escalation: z.nullable(Escalation$outboundSchema).optional(),
+    escalationEnabled: z.boolean().optional(),
+    expression: z.nullable(ExpressionApproval$outboundSchema).optional(),
+    group: z.nullable(AppGroupApproval$outboundSchema).optional(),
+    manager: z.nullable(ManagerApproval$outboundSchema).optional(),
+    requireApprovalReason: z.boolean().optional(),
+    requireDenialReason: z.boolean().optional(),
+    requireReassignmentReason: z.boolean().optional(),
+    requiresStepUpProviderId: z.string().optional(),
+    resourceOwners: z.nullable(ResourceOwnerApproval$outboundSchema).optional(),
+    self: z.nullable(SelfApproval$outboundSchema).optional(),
+    users: z.nullable(UserApproval$outboundSchema).optional(),
+    webhook: z.nullable(WebhookApproval$outboundSchema).optional(),
+  })
+);
 
 export function approvalToJSON(approval: Approval): string {
   return JSON.stringify(Approval$outboundSchema.parse(approval));

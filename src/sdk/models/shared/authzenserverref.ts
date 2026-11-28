@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AuthzenServerRef message.
@@ -29,10 +30,12 @@ export const AuthzenServerRef$outboundSchema: z.ZodType<
   AuthzenServerRef$Outbound,
   z.ZodTypeDef,
   AuthzenServerRef
-> = z.object({
-  appId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function authzenServerRefToJSON(
   authzenServerRef: AuthzenServerRef,

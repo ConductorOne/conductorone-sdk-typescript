@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -48,14 +48,16 @@ export const AccessProfileComponentReviewSubject$inboundSchema: z.ZodType<
   AccessProfileComponentReviewSubject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  composition: z.nullable(AccessProfileCompositionReviewItem$inboundSchema)
-    .optional(),
-  membershipCriteria: z.nullable(
-    AccessProfileMembershipCriteriaReviewItem$inboundSchema,
-  ).optional(),
-  profile: z.nullable(AccessProfileRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    composition: z.nullable(AccessProfileCompositionReviewItem$inboundSchema)
+      .optional(),
+    membershipCriteria: z.nullable(
+      AccessProfileMembershipCriteriaReviewItem$inboundSchema,
+    ).optional(),
+    profile: z.nullable(AccessProfileRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type AccessProfileComponentReviewSubject$Outbound = {
   composition?: AccessProfileCompositionReviewItem$Outbound | null | undefined;
@@ -71,14 +73,16 @@ export const AccessProfileComponentReviewSubject$outboundSchema: z.ZodType<
   AccessProfileComponentReviewSubject$Outbound,
   z.ZodTypeDef,
   AccessProfileComponentReviewSubject
-> = z.object({
-  composition: z.nullable(AccessProfileCompositionReviewItem$outboundSchema)
-    .optional(),
-  membershipCriteria: z.nullable(
-    AccessProfileMembershipCriteriaReviewItem$outboundSchema,
-  ).optional(),
-  profile: z.nullable(AccessProfileRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    composition: z.nullable(AccessProfileCompositionReviewItem$outboundSchema)
+      .optional(),
+    membershipCriteria: z.nullable(
+      AccessProfileMembershipCriteriaReviewItem$outboundSchema,
+    ).optional(),
+    profile: z.nullable(AccessProfileRef$outboundSchema).optional(),
+  })
+);
 
 export function accessProfileComponentReviewSubjectToJSON(
   accessProfileComponentReviewSubject: AccessProfileComponentReviewSubject,

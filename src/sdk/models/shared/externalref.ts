@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -44,24 +44,30 @@ export const ExternalRefSource$inboundSchema: z.ZodType<
   ExternalRefSource,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ExternalRefSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ExternalRefSource)
+);
 /** @internal */
 export const ExternalRefSource$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ExternalRefSource
-> = openEnums.outboundSchema(ExternalRefSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ExternalRefSource)
+);
 
 /** @internal */
 export const ExternalRef$inboundSchema: z.ZodType<
   ExternalRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  externalRefSource: ExternalRefSource$inboundSchema.optional(),
-  name: z.string().optional(),
-  url: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    externalRefSource: ExternalRefSource$inboundSchema.optional(),
+    name: z.string().optional(),
+    url: z.string().optional(),
+  })
+);
 /** @internal */
 export type ExternalRef$Outbound = {
   externalRefSource?: string | undefined;
@@ -74,11 +80,13 @@ export const ExternalRef$outboundSchema: z.ZodType<
   ExternalRef$Outbound,
   z.ZodTypeDef,
   ExternalRef
-> = z.object({
-  externalRefSource: ExternalRefSource$outboundSchema.optional(),
-  name: z.string().optional(),
-  url: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    externalRefSource: ExternalRefSource$outboundSchema.optional(),
+    name: z.string().optional(),
+    url: z.string().optional(),
+  })
+);
 
 export function externalRefToJSON(externalRef: ExternalRef): string {
   return JSON.stringify(ExternalRef$outboundSchema.parse(externalRef));

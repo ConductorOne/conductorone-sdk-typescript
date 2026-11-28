@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -37,22 +37,28 @@ export const ChallengeRequiredTypes$inboundSchema: z.ZodType<
   ChallengeRequiredTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ChallengeRequiredTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ChallengeRequiredTypes)
+);
 /** @internal */
 export const ChallengeRequiredTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ChallengeRequiredTypes
-> = openEnums.outboundSchema(ChallengeRequiredTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ChallengeRequiredTypes)
+);
 
 /** @internal */
 export const ChallengeRequired$inboundSchema: z.ZodType<
   ChallengeRequired,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  types: z.nullable(z.array(ChallengeRequiredTypes$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    types: z.nullable(z.array(ChallengeRequiredTypes$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type ChallengeRequired$Outbound = {
   types?: Array<string> | null | undefined;
@@ -63,9 +69,12 @@ export const ChallengeRequired$outboundSchema: z.ZodType<
   ChallengeRequired$Outbound,
   z.ZodTypeDef,
   ChallengeRequired
-> = z.object({
-  types: z.nullable(z.array(ChallengeRequiredTypes$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    types: z.nullable(z.array(ChallengeRequiredTypes$outboundSchema))
+      .optional(),
+  })
+);
 
 export function challengeRequiredToJSON(
   challengeRequired: ChallengeRequired,

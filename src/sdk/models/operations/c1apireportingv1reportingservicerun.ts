@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiReportingV1ReportingServiceRunRequest$outboundSchema:
     C1ApiReportingV1ReportingServiceRunRequest$Outbound,
     z.ZodTypeDef,
     C1ApiReportingV1ReportingServiceRunRequest
-  > = z.object({
-    id: z.string(),
-    reportingServiceRunRequest: shared.ReportingServiceRunRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      reportingServiceRunRequest: "ReportingServiceRunRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      reportingServiceRunRequest: shared
+        .ReportingServiceRunRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        reportingServiceRunRequest: "ReportingServiceRunRequest",
+      });
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceRunRequestToJSON(
   c1ApiReportingV1ReportingServiceRunRequest:
@@ -74,20 +76,22 @@ export const C1ApiReportingV1ReportingServiceRunResponse$inboundSchema:
     C1ApiReportingV1ReportingServiceRunResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ReportingServiceRunResponse: shared
-      .ReportingServiceRunResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ReportingServiceRunResponse": "reportingServiceRunResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ReportingServiceRunResponse: shared
+        .ReportingServiceRunResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ReportingServiceRunResponse": "reportingServiceRunResponse",
+      });
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceRunResponseFromJSON(
   jsonString: string,

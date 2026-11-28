@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -120,42 +120,48 @@ export const SigningAlgorithm$inboundSchema: z.ZodType<
   SigningAlgorithm,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SigningAlgorithm);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SigningAlgorithm)
+);
 /** @internal */
 export const SigningAlgorithm$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SigningAlgorithm
-> = openEnums.outboundSchema(SigningAlgorithm);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SigningAlgorithm)
+);
 
 /** @internal */
 export const XAAResourceServer$inboundSchema: z.ZodType<
   XAAResourceServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  maxGrantLifetime: z.nullable(z.string()).optional(),
-  modifyClaimsHook: z.nullable(XAAModifyClaimsHook$inboundSchema).optional(),
-  normalizedAudience: z.string().optional(),
-  requireProofOfPossession: z.boolean().optional(),
-  resourceUris: z.nullable(z.array(z.string())).optional(),
-  sectorId: z.string().optional(),
-  signingAlgorithm: SigningAlgorithm$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    maxGrantLifetime: z.nullable(z.string()).optional(),
+    modifyClaimsHook: z.nullable(XAAModifyClaimsHook$inboundSchema).optional(),
+    normalizedAudience: z.string().optional(),
+    requireProofOfPossession: z.boolean().optional(),
+    resourceUris: z.nullable(z.array(z.string())).optional(),
+    sectorId: z.string().optional(),
+    signingAlgorithm: SigningAlgorithm$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type XAAResourceServer$Outbound = {
   appId?: string | undefined;
@@ -180,23 +186,25 @@ export const XAAResourceServer$outboundSchema: z.ZodType<
   XAAResourceServer$Outbound,
   z.ZodTypeDef,
   XAAResourceServer
-> = z.object({
-  appId: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  disabled: z.boolean().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  maxGrantLifetime: z.nullable(z.string()).optional(),
-  modifyClaimsHook: z.nullable(XAAModifyClaimsHook$outboundSchema).optional(),
-  normalizedAudience: z.string().optional(),
-  requireProofOfPossession: z.boolean().optional(),
-  resourceUris: z.nullable(z.array(z.string())).optional(),
-  sectorId: z.string().optional(),
-  signingAlgorithm: SigningAlgorithm$outboundSchema.optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    disabled: z.boolean().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    maxGrantLifetime: z.nullable(z.string()).optional(),
+    modifyClaimsHook: z.nullable(XAAModifyClaimsHook$outboundSchema).optional(),
+    normalizedAudience: z.string().optional(),
+    requireProofOfPossession: z.boolean().optional(),
+    resourceUris: z.nullable(z.array(z.string())).optional(),
+    sectorId: z.string().optional(),
+    signingAlgorithm: SigningAlgorithm$outboundSchema.optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function xaaResourceServerToJSON(
   xaaResourceServer: XAAResourceServer,

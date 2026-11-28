@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -159,8 +160,10 @@ export const SSFReceiverStreamServiceCreateRequestAccountDisabledAction$outbound
     string,
     z.ZodTypeDef,
     SSFReceiverStreamServiceCreateRequestAccountDisabledAction
-  > = openEnums.outboundSchema(
-    SSFReceiverStreamServiceCreateRequestAccountDisabledAction,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      SSFReceiverStreamServiceCreateRequestAccountDisabledAction,
+    )
   );
 
 /** @internal */
@@ -169,8 +172,10 @@ export const SSFReceiverStreamServiceCreateRequestCredentialChangeAction$outboun
     string,
     z.ZodTypeDef,
     SSFReceiverStreamServiceCreateRequestCredentialChangeAction
-  > = openEnums.outboundSchema(
-    SSFReceiverStreamServiceCreateRequestCredentialChangeAction,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      SSFReceiverStreamServiceCreateRequestCredentialChangeAction,
+    )
   );
 
 /** @internal */
@@ -179,8 +184,10 @@ export const SSFReceiverStreamServiceCreateRequestCredentialCompromiseAction$out
     string,
     z.ZodTypeDef,
     SSFReceiverStreamServiceCreateRequestCredentialCompromiseAction
-  > = openEnums.outboundSchema(
-    SSFReceiverStreamServiceCreateRequestCredentialCompromiseAction,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      SSFReceiverStreamServiceCreateRequestCredentialCompromiseAction,
+    )
   );
 
 /** @internal */
@@ -189,8 +196,10 @@ export const SSFReceiverStreamServiceCreateRequestDeliveryMethod$outboundSchema:
     string,
     z.ZodTypeDef,
     SSFReceiverStreamServiceCreateRequestDeliveryMethod
-  > = openEnums.outboundSchema(
-    SSFReceiverStreamServiceCreateRequestDeliveryMethod,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      SSFReceiverStreamServiceCreateRequestDeliveryMethod,
+    )
   );
 
 /** @internal */
@@ -199,8 +208,10 @@ export const SSFReceiverStreamServiceCreateRequestSessionRevokedAction$outboundS
     string,
     z.ZodTypeDef,
     SSFReceiverStreamServiceCreateRequestSessionRevokedAction
-  > = openEnums.outboundSchema(
-    SSFReceiverStreamServiceCreateRequestSessionRevokedAction,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      SSFReceiverStreamServiceCreateRequestSessionRevokedAction,
+    )
   );
 
 /** @internal */
@@ -225,31 +236,33 @@ export const SSFReceiverStreamServiceCreateRequest$outboundSchema: z.ZodType<
   SSFReceiverStreamServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   SSFReceiverStreamServiceCreateRequest
-> = z.object({
-  accountDisabledAction:
-    SSFReceiverStreamServiceCreateRequestAccountDisabledAction$outboundSchema
-      .optional(),
-  credentialChangeAction:
-    SSFReceiverStreamServiceCreateRequestCredentialChangeAction$outboundSchema
-      .optional(),
-  credentialCompromiseAction:
-    SSFReceiverStreamServiceCreateRequestCredentialCompromiseAction$outboundSchema
-      .optional(),
-  deliveryMethod:
-    SSFReceiverStreamServiceCreateRequestDeliveryMethod$outboundSchema
-      .optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  enabled: z.boolean().optional(),
-  expectedAudience: z.string().optional(),
-  issuerUrl: z.string(),
-  jwksUrl: z.string().optional(),
-  pollEndpointUrl: z.string().optional(),
-  pollInterval: z.nullable(z.string()).optional(),
-  sessionRevokedAction:
-    SSFReceiverStreamServiceCreateRequestSessionRevokedAction$outboundSchema
-      .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountDisabledAction:
+      SSFReceiverStreamServiceCreateRequestAccountDisabledAction$outboundSchema
+        .optional(),
+    credentialChangeAction:
+      SSFReceiverStreamServiceCreateRequestCredentialChangeAction$outboundSchema
+        .optional(),
+    credentialCompromiseAction:
+      SSFReceiverStreamServiceCreateRequestCredentialCompromiseAction$outboundSchema
+        .optional(),
+    deliveryMethod:
+      SSFReceiverStreamServiceCreateRequestDeliveryMethod$outboundSchema
+        .optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    enabled: z.boolean().optional(),
+    expectedAudience: z.string().optional(),
+    issuerUrl: z.string(),
+    jwksUrl: z.string().optional(),
+    pollEndpointUrl: z.string().optional(),
+    pollInterval: z.nullable(z.string()).optional(),
+    sessionRevokedAction:
+      SSFReceiverStreamServiceCreateRequestSessionRevokedAction$outboundSchema
+        .optional(),
+  })
+);
 
 export function ssfReceiverStreamServiceCreateRequestToJSON(
   ssfReceiverStreamServiceCreateRequest: SSFReceiverStreamServiceCreateRequest,

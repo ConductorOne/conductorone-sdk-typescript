@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const AuthConfigPingOne$inboundSchema: z.ZodType<
   AuthConfigPingOne,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  environmentId: z.string().optional(),
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environmentId: z.string().optional(),
+    oidcClientId: z.string().optional(),
+    oidcClientSecret: z.string().optional(),
+  })
+);
 /** @internal */
 export type AuthConfigPingOne$Outbound = {
   environmentId?: string | undefined;
@@ -47,11 +49,13 @@ export const AuthConfigPingOne$outboundSchema: z.ZodType<
   AuthConfigPingOne$Outbound,
   z.ZodTypeDef,
   AuthConfigPingOne
-> = z.object({
-  environmentId: z.string().optional(),
-  oidcClientId: z.string().optional(),
-  oidcClientSecret: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environmentId: z.string().optional(),
+    oidcClientId: z.string().optional(),
+    oidcClientSecret: z.string().optional(),
+  })
+);
 
 export function authConfigPingOneToJSON(
   authConfigPingOne: AuthConfigPingOne,

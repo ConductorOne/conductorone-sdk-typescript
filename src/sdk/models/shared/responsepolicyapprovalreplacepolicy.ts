@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,10 +32,12 @@ export const ResponsePolicyApprovalReplacePolicy$inboundSchema: z.ZodType<
   ResponsePolicyApprovalReplacePolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  comment: z.string().optional(),
-  policySteps: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    comment: z.string().optional(),
+    policySteps: z.nullable(z.array(PolicyStep$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type ResponsePolicyApprovalReplacePolicy$Outbound = {
   comment?: string | undefined;
@@ -47,10 +49,12 @@ export const ResponsePolicyApprovalReplacePolicy$outboundSchema: z.ZodType<
   ResponsePolicyApprovalReplacePolicy$Outbound,
   z.ZodTypeDef,
   ResponsePolicyApprovalReplacePolicy
-> = z.object({
-  comment: z.string().optional(),
-  policySteps: z.nullable(z.array(PolicyStep$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    comment: z.string().optional(),
+    policySteps: z.nullable(z.array(PolicyStep$outboundSchema)).optional(),
+  })
+);
 
 export function responsePolicyApprovalReplacePolicyToJSON(
   responsePolicyApprovalReplacePolicy: ResponsePolicyApprovalReplacePolicy,

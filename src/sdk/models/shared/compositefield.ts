@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -47,17 +47,21 @@ export const CompositeFieldTfType$inboundSchema: z.ZodType<
   CompositeFieldTfType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(CompositeFieldTfType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(CompositeFieldTfType)
+);
 
 /** @internal */
 export const CompositeField$inboundSchema: z.ZodType<
   CompositeField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  c1Field: z.string().optional(),
-  tfType: CompositeFieldTfType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    c1Field: z.string().optional(),
+    tfType: CompositeFieldTfType$inboundSchema.optional(),
+  })
+);
 
 export function compositeFieldFromJSON(
   jsonString: string,

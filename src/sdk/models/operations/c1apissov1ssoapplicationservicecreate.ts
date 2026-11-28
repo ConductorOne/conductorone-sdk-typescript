@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,19 @@ export const C1ApiSsov1SSOApplicationServiceCreateRequest$outboundSchema:
     C1ApiSsov1SSOApplicationServiceCreateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSsov1SSOApplicationServiceCreateRequest
-  > = z.object({
-    appId: z.string(),
-    ssoApplicationServiceCreateRequest: shared
-      .SSOApplicationServiceCreateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      ssoApplicationServiceCreateRequest: "SSOApplicationServiceCreateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      ssoApplicationServiceCreateRequest: shared
+        .SSOApplicationServiceCreateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        ssoApplicationServiceCreateRequest:
+          "SSOApplicationServiceCreateRequest",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceCreateRequestToJSON(
   c1ApiSsov1SSOApplicationServiceCreateRequest:
@@ -79,21 +82,23 @@ export const C1ApiSsov1SSOApplicationServiceCreateResponse$inboundSchema:
     C1ApiSsov1SSOApplicationServiceCreateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SSOApplicationServiceCreateResponse: shared
-      .SSOApplicationServiceCreateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SSOApplicationServiceCreateResponse":
-        "ssoApplicationServiceCreateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SSOApplicationServiceCreateResponse: shared
+        .SSOApplicationServiceCreateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SSOApplicationServiceCreateResponse":
+          "ssoApplicationServiceCreateResponse",
+      });
+    })
+  );
 
 export function c1ApiSSOV1SSOApplicationServiceCreateResponseFromJSON(
   jsonString: string,

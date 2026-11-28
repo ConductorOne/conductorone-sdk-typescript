@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,15 +35,17 @@ export const FunctionCommit$inboundSchema: z.ZodType<
   FunctionCommit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  author: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  functionId: z.string().optional(),
-  id: z.string().optional(),
-  message: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    author: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    functionId: z.string().optional(),
+    id: z.string().optional(),
+    message: z.string().optional(),
+  })
+);
 
 export function functionCommitFromJSON(
   jsonString: string,

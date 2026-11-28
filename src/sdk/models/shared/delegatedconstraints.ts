@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,12 +37,14 @@ export const DelegatedConstraints$inboundSchema: z.ZodType<
   DelegatedConstraints,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  googleEnabled: z.boolean().optional(),
-  googleHostedDomains: z.nullable(z.array(z.string())).optional(),
-  microsoftEnabled: z.boolean().optional(),
-  microsoftTenantIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    googleEnabled: z.boolean().optional(),
+    googleHostedDomains: z.nullable(z.array(z.string())).optional(),
+    microsoftEnabled: z.boolean().optional(),
+    microsoftTenantIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type DelegatedConstraints$Outbound = {
   googleEnabled?: boolean | undefined;
@@ -56,12 +58,14 @@ export const DelegatedConstraints$outboundSchema: z.ZodType<
   DelegatedConstraints$Outbound,
   z.ZodTypeDef,
   DelegatedConstraints
-> = z.object({
-  googleEnabled: z.boolean().optional(),
-  googleHostedDomains: z.nullable(z.array(z.string())).optional(),
-  microsoftEnabled: z.boolean().optional(),
-  microsoftTenantIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    googleEnabled: z.boolean().optional(),
+    googleHostedDomains: z.nullable(z.array(z.string())).optional(),
+    microsoftEnabled: z.boolean().optional(),
+    microsoftTenantIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function delegatedConstraintsToJSON(
   delegatedConstraints: DelegatedConstraints,

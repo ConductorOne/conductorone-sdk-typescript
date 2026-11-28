@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,11 +46,13 @@ export const FundsSpendLimit$inboundSchema: z.ZodType<
   FundsSpendLimit,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  amount: z.nullable(FundsSpendLimitAmount$inboundSchema).optional(),
-  blocked: z.nullable(FundsSpendLimitBlocked$inboundSchema).optional(),
-  unlimited: z.nullable(FundsSpendLimitUnlimited$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.nullable(FundsSpendLimitAmount$inboundSchema).optional(),
+    blocked: z.nullable(FundsSpendLimitBlocked$inboundSchema).optional(),
+    unlimited: z.nullable(FundsSpendLimitUnlimited$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FundsSpendLimit$Outbound = {
   amount?: FundsSpendLimitAmount$Outbound | null | undefined;
@@ -63,11 +65,13 @@ export const FundsSpendLimit$outboundSchema: z.ZodType<
   FundsSpendLimit$Outbound,
   z.ZodTypeDef,
   FundsSpendLimit
-> = z.object({
-  amount: z.nullable(FundsSpendLimitAmount$outboundSchema).optional(),
-  blocked: z.nullable(FundsSpendLimitBlocked$outboundSchema).optional(),
-  unlimited: z.nullable(FundsSpendLimitUnlimited$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    amount: z.nullable(FundsSpendLimitAmount$outboundSchema).optional(),
+    blocked: z.nullable(FundsSpendLimitBlocked$outboundSchema).optional(),
+    unlimited: z.nullable(FundsSpendLimitUnlimited$outboundSchema).optional(),
+  })
+);
 
 export function fundsSpendLimitToJSON(
   fundsSpendLimit: FundsSpendLimit,

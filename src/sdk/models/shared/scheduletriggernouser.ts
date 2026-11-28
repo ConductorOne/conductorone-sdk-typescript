@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,14 +34,16 @@ export const ScheduleTriggerNoUser$inboundSchema: z.ZodType<
   ScheduleTriggerNoUser,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  advanced: z.boolean().optional(),
-  cronSpec: z.string().optional(),
-  start: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    advanced: z.boolean().optional(),
+    cronSpec: z.string().optional(),
+    start: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    timezone: z.string().optional(),
+  })
+);
 /** @internal */
 export type ScheduleTriggerNoUser$Outbound = {
   advanced?: boolean | undefined;
@@ -55,12 +57,14 @@ export const ScheduleTriggerNoUser$outboundSchema: z.ZodType<
   ScheduleTriggerNoUser$Outbound,
   z.ZodTypeDef,
   ScheduleTriggerNoUser
-> = z.object({
-  advanced: z.boolean().optional(),
-  cronSpec: z.string().optional(),
-  start: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    advanced: z.boolean().optional(),
+    cronSpec: z.string().optional(),
+    start: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    timezone: z.string().optional(),
+  })
+);
 
 export function scheduleTriggerNoUserToJSON(
   scheduleTriggerNoUser: ScheduleTriggerNoUser,

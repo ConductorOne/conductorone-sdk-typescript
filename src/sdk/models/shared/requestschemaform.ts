@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -60,15 +60,17 @@ export const RequestSchemaForm$inboundSchema: z.ZodType<
   RequestSchemaForm,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  fieldGroups: z.nullable(z.array(FormFieldGroup$inboundSchema)).optional(),
-  fieldRelationships: z.nullable(z.array(FieldRelationship$inboundSchema))
-    .optional(),
-  fields: z.nullable(z.array(FormField$inboundSchema)).optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    fieldGroups: z.nullable(z.array(FormFieldGroup$inboundSchema)).optional(),
+    fieldRelationships: z.nullable(z.array(FieldRelationship$inboundSchema))
+      .optional(),
+    fields: z.nullable(z.array(FormField$inboundSchema)).optional(),
+    id: z.string().optional(),
+  })
+);
 /** @internal */
 export type RequestSchemaForm$Outbound = {
   description?: string | undefined;
@@ -84,15 +86,17 @@ export const RequestSchemaForm$outboundSchema: z.ZodType<
   RequestSchemaForm$Outbound,
   z.ZodTypeDef,
   RequestSchemaForm
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  fieldGroups: z.nullable(z.array(FormFieldGroup$outboundSchema)).optional(),
-  fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
-    .optional(),
-  fields: z.nullable(z.array(FormField$outboundSchema)).optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    fieldGroups: z.nullable(z.array(FormFieldGroup$outboundSchema)).optional(),
+    fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
+      .optional(),
+    fields: z.nullable(z.array(FormField$outboundSchema)).optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function requestSchemaFormToJSON(
   requestSchemaForm: RequestSchemaForm,

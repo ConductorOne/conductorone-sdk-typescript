@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -42,14 +42,16 @@ export const FunctionTestResultAssertion$inboundSchema: z.ZodType<
   FunctionTestResultAssertion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actual: z.string().optional(),
-  at: z.string().optional(),
-  description: z.string().optional(),
-  expected: z.string().optional(),
-  operator: z.string().optional(),
-  pass: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actual: z.string().optional(),
+    at: z.string().optional(),
+    description: z.string().optional(),
+    expected: z.string().optional(),
+    operator: z.string().optional(),
+    pass: z.boolean().optional(),
+  })
+);
 
 export function functionTestResultAssertionFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -77,23 +77,25 @@ export const AttributionGroup$inboundSchema: z.ZodType<
   AttributionGroup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  billableTokens: z.string().transform(v => parseInt(v, 10)).optional(),
-  blendedCostPerMillionTokensNano: z.string().transform(v => parseInt(v, 10))
-    .optional(),
-  cacheReadTokens: z.string().transform(v => parseInt(v, 10)).optional(),
-  cacheReadValueNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  cacheWriteCostNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  cacheWriteTokens: z.string().transform(v => parseInt(v, 10)).optional(),
-  displayName: z.string().optional(),
-  inputTokens: z.string().transform(v => parseInt(v, 10)).optional(),
-  key: z.string().optional(),
-  missing: z.boolean().optional(),
-  outputTokens: z.string().transform(v => parseInt(v, 10)).optional(),
-  reasoningTokens: z.string().transform(v => parseInt(v, 10)).optional(),
-  settledCalls: z.string().transform(v => parseInt(v, 10)).optional(),
-  settledNano: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    billableTokens: z.string().transform(v => parseInt(v, 10)).optional(),
+    blendedCostPerMillionTokensNano: z.string().transform(v => parseInt(v, 10))
+      .optional(),
+    cacheReadTokens: z.string().transform(v => parseInt(v, 10)).optional(),
+    cacheReadValueNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    cacheWriteCostNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    cacheWriteTokens: z.string().transform(v => parseInt(v, 10)).optional(),
+    displayName: z.string().optional(),
+    inputTokens: z.string().transform(v => parseInt(v, 10)).optional(),
+    key: z.string().optional(),
+    missing: z.boolean().optional(),
+    outputTokens: z.string().transform(v => parseInt(v, 10)).optional(),
+    reasoningTokens: z.string().transform(v => parseInt(v, 10)).optional(),
+    settledCalls: z.string().transform(v => parseInt(v, 10)).optional(),
+    settledNano: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function attributionGroupFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SSOApplicationRef message.
@@ -29,10 +30,12 @@ export const SSOApplicationRef$outboundSchema: z.ZodType<
   SSOApplicationRef$Outbound,
   z.ZodTypeDef,
   SSOApplicationRef
-> = z.object({
-  appId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function ssoApplicationRefToJSON(
   ssoApplicationRef: SSOApplicationRef,

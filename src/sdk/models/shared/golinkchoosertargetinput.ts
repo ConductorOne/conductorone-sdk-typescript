@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,9 +28,11 @@ export const GoLinkChooserTargetInput$inboundSchema: z.ZodType<
   GoLinkChooserTargetInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  options: z.nullable(z.array(GoLinkChooserOption$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    options: z.nullable(z.array(GoLinkChooserOption$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type GoLinkChooserTargetInput$Outbound = {
   options?: Array<GoLinkChooserOption$Outbound> | null | undefined;
@@ -41,9 +43,11 @@ export const GoLinkChooserTargetInput$outboundSchema: z.ZodType<
   GoLinkChooserTargetInput$Outbound,
   z.ZodTypeDef,
   GoLinkChooserTargetInput
-> = z.object({
-  options: z.nullable(z.array(GoLinkChooserOption$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    options: z.nullable(z.array(GoLinkChooserOption$outboundSchema)).optional(),
+  })
+);
 
 export function goLinkChooserTargetInputToJSON(
   goLinkChooserTargetInput: GoLinkChooserTargetInput,

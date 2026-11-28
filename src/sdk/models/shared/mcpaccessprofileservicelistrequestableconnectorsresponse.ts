@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,10 +30,12 @@ export const MCPAccessProfileServiceListRequestableConnectorsResponse$inboundSch
     MCPAccessProfileServiceListRequestableConnectorsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    connectors: z.nullable(z.array(RequestableConnector$inboundSchema))
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      connectors: z.nullable(z.array(RequestableConnector$inboundSchema))
+        .optional(),
+    })
+  );
 
 export function mcpAccessProfileServiceListRequestableConnectorsResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ListClassifierTemplatesRequest message.
@@ -34,11 +35,13 @@ export const ListClassifierTemplatesRequest$outboundSchema: z.ZodType<
   ListClassifierTemplatesRequest$Outbound,
   z.ZodTypeDef,
   ListClassifierTemplatesRequest
-> = z.object({
-  latestOnly: z.boolean().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    latestOnly: z.boolean().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  })
+);
 
 export function listClassifierTemplatesRequestToJSON(
   listClassifierTemplatesRequest: ListClassifierTemplatesRequest,

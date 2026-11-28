@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,13 +41,15 @@ export const AnnouncedTunnelService$inboundSchema: z.ZodType<
   AnnouncedTunnelService,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  port: z.number().int().optional(),
-  servicePath: z.string().optional(),
-  serviceType: z.string().optional(),
-  transportType: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    port: z.number().int().optional(),
+    servicePath: z.string().optional(),
+    serviceType: z.string().optional(),
+    transportType: z.string().optional(),
+  })
+);
 
 export function announcedTunnelServiceFromJSON(
   jsonString: string,

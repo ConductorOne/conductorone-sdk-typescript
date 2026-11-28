@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   TaskExpandMask,
   TaskExpandMask$Outbound,
@@ -46,12 +47,14 @@ export const TaskActionsServiceApproveWithStepUpRequest$outboundSchema:
     TaskActionsServiceApproveWithStepUpRequest$Outbound,
     z.ZodTypeDef,
     TaskActionsServiceApproveWithStepUpRequest
-  > = z.object({
-    comment: z.string().optional(),
-    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-    policyStepId: z.string(),
-    stepUpTransactionId: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      comment: z.string().optional(),
+      expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+      policyStepId: z.string(),
+      stepUpTransactionId: z.string(),
+    })
+  );
 
 export function taskActionsServiceApproveWithStepUpRequestToJSON(
   taskActionsServiceApproveWithStepUpRequest:

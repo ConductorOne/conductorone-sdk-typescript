@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -118,22 +118,25 @@ export const AutomationTrigger$inboundSchema: z.ZodType<
   AutomationTrigger,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessConflict: z.nullable(AccessConflictTrigger$inboundSchema).optional(),
-  appUserCreated: z.nullable(AppUserCreatedTrigger$inboundSchema).optional(),
-  appUserUpdated: z.nullable(AppUserUpdatedTrigger$inboundSchema).optional(),
-  grantDeleted: z.nullable(GrantDeletedTrigger$inboundSchema).optional(),
-  grantFound: z.nullable(GrantFoundTrigger$inboundSchema).optional(),
-  schedule: z.nullable(ScheduleTrigger$inboundSchema).optional(),
-  scheduleAppUser: z.nullable(ScheduleTriggerAppUser$inboundSchema).optional(),
-  scheduleNoUser: z.nullable(ScheduleTriggerNoUser$inboundSchema).optional(),
-  usageBasedRevocation: z.nullable(UsageBasedRevocationTrigger$inboundSchema)
-    .optional(),
-  userCreated: z.nullable(UserCreatedTrigger$inboundSchema).optional(),
-  userProfileChange: z.nullable(UserProfileChangeTrigger$inboundSchema)
-    .optional(),
-  webhook: z.nullable(WebhookAutomationTrigger$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessConflict: z.nullable(AccessConflictTrigger$inboundSchema).optional(),
+    appUserCreated: z.nullable(AppUserCreatedTrigger$inboundSchema).optional(),
+    appUserUpdated: z.nullable(AppUserUpdatedTrigger$inboundSchema).optional(),
+    grantDeleted: z.nullable(GrantDeletedTrigger$inboundSchema).optional(),
+    grantFound: z.nullable(GrantFoundTrigger$inboundSchema).optional(),
+    schedule: z.nullable(ScheduleTrigger$inboundSchema).optional(),
+    scheduleAppUser: z.nullable(ScheduleTriggerAppUser$inboundSchema)
+      .optional(),
+    scheduleNoUser: z.nullable(ScheduleTriggerNoUser$inboundSchema).optional(),
+    usageBasedRevocation: z.nullable(UsageBasedRevocationTrigger$inboundSchema)
+      .optional(),
+    userCreated: z.nullable(UserCreatedTrigger$inboundSchema).optional(),
+    userProfileChange: z.nullable(UserProfileChangeTrigger$inboundSchema)
+      .optional(),
+    webhook: z.nullable(WebhookAutomationTrigger$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type AutomationTrigger$Outbound = {
   accessConflict?: AccessConflictTrigger$Outbound | null | undefined;
@@ -158,22 +161,25 @@ export const AutomationTrigger$outboundSchema: z.ZodType<
   AutomationTrigger$Outbound,
   z.ZodTypeDef,
   AutomationTrigger
-> = z.object({
-  accessConflict: z.nullable(AccessConflictTrigger$outboundSchema).optional(),
-  appUserCreated: z.nullable(AppUserCreatedTrigger$outboundSchema).optional(),
-  appUserUpdated: z.nullable(AppUserUpdatedTrigger$outboundSchema).optional(),
-  grantDeleted: z.nullable(GrantDeletedTrigger$outboundSchema).optional(),
-  grantFound: z.nullable(GrantFoundTrigger$outboundSchema).optional(),
-  schedule: z.nullable(ScheduleTrigger$outboundSchema).optional(),
-  scheduleAppUser: z.nullable(ScheduleTriggerAppUser$outboundSchema).optional(),
-  scheduleNoUser: z.nullable(ScheduleTriggerNoUser$outboundSchema).optional(),
-  usageBasedRevocation: z.nullable(UsageBasedRevocationTrigger$outboundSchema)
-    .optional(),
-  userCreated: z.nullable(UserCreatedTrigger$outboundSchema).optional(),
-  userProfileChange: z.nullable(UserProfileChangeTrigger$outboundSchema)
-    .optional(),
-  webhook: z.nullable(WebhookAutomationTrigger$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessConflict: z.nullable(AccessConflictTrigger$outboundSchema).optional(),
+    appUserCreated: z.nullable(AppUserCreatedTrigger$outboundSchema).optional(),
+    appUserUpdated: z.nullable(AppUserUpdatedTrigger$outboundSchema).optional(),
+    grantDeleted: z.nullable(GrantDeletedTrigger$outboundSchema).optional(),
+    grantFound: z.nullable(GrantFoundTrigger$outboundSchema).optional(),
+    schedule: z.nullable(ScheduleTrigger$outboundSchema).optional(),
+    scheduleAppUser: z.nullable(ScheduleTriggerAppUser$outboundSchema)
+      .optional(),
+    scheduleNoUser: z.nullable(ScheduleTriggerNoUser$outboundSchema).optional(),
+    usageBasedRevocation: z.nullable(UsageBasedRevocationTrigger$outboundSchema)
+      .optional(),
+    userCreated: z.nullable(UserCreatedTrigger$outboundSchema).optional(),
+    userProfileChange: z.nullable(UserProfileChangeTrigger$outboundSchema)
+      .optional(),
+    webhook: z.nullable(WebhookAutomationTrigger$outboundSchema).optional(),
+  })
+);
 
 export function automationTriggerToJSON(
   automationTrigger: AutomationTrigger,

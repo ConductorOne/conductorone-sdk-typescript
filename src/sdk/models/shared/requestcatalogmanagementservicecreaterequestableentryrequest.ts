@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Create a single requestable entry
@@ -29,9 +30,11 @@ export const RequestCatalogManagementServiceCreateRequestableEntryRequest$outbou
     RequestCatalogManagementServiceCreateRequestableEntryRequest$Outbound,
     z.ZodTypeDef,
     RequestCatalogManagementServiceCreateRequestableEntryRequest
-  > = z.object({
-    createRequests: z.boolean().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      createRequests: z.boolean().optional(),
+    })
+  );
 
 export function requestCatalogManagementServiceCreateRequestableEntryRequestToJSON(
   requestCatalogManagementServiceCreateRequestableEntryRequest:

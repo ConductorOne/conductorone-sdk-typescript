@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiSystemlogV1ExportServiceListEventsRequest$outboundSchema:
     C1ApiSystemlogV1ExportServiceListEventsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiSystemlogV1ExportServiceListEventsRequest
-  > = z.object({
-    exportId: z.string(),
-    exportServiceListEventsRequest: shared
-      .ExportServiceListEventsRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      exportId: "export_id",
-      exportServiceListEventsRequest: "ExportServiceListEventsRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      exportId: z.string(),
+      exportServiceListEventsRequest: shared
+        .ExportServiceListEventsRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        exportId: "export_id",
+        exportServiceListEventsRequest: "ExportServiceListEventsRequest",
+      });
+    })
+  );
 
 export function c1ApiSystemlogV1ExportServiceListEventsRequestToJSON(
   c1ApiSystemlogV1ExportServiceListEventsRequest:
@@ -79,20 +81,22 @@ export const C1ApiSystemlogV1ExportServiceListEventsResponse$inboundSchema:
     C1ApiSystemlogV1ExportServiceListEventsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ExportServiceListEventsResponse: shared
-      .ExportServiceListEventsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ExportServiceListEventsResponse": "exportServiceListEventsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ExportServiceListEventsResponse: shared
+        .ExportServiceListEventsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ExportServiceListEventsResponse": "exportServiceListEventsResponse",
+      });
+    })
+  );
 
 export function c1ApiSystemlogV1ExportServiceListEventsResponseFromJSON(
   jsonString: string,

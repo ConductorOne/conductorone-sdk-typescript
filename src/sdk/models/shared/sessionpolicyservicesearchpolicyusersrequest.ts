@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -66,8 +67,8 @@ export const SessionPolicyServiceSearchPolicyUsersRequestSource$outboundSchema:
     string,
     z.ZodTypeDef,
     SessionPolicyServiceSearchPolicyUsersRequestSource
-  > = openEnums.outboundSchema(
-    SessionPolicyServiceSearchPolicyUsersRequestSource,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(SessionPolicyServiceSearchPolicyUsersRequestSource)
   );
 
 /** @internal */
@@ -84,13 +85,15 @@ export const SessionPolicyServiceSearchPolicyUsersRequest$outboundSchema:
     SessionPolicyServiceSearchPolicyUsersRequest$Outbound,
     z.ZodTypeDef,
     SessionPolicyServiceSearchPolicyUsersRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    source: SessionPolicyServiceSearchPolicyUsersRequestSource$outboundSchema
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+      source: SessionPolicyServiceSearchPolicyUsersRequestSource$outboundSchema
+        .optional(),
+    })
+  );
 
 export function sessionPolicyServiceSearchPolicyUsersRequestToJSON(
   sessionPolicyServiceSearchPolicyUsersRequest:

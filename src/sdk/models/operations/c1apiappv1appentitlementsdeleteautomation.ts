@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,18 +47,20 @@ export const C1ApiAppV1AppEntitlementsDeleteAutomationRequest$outboundSchema:
     C1ApiAppV1AppEntitlementsDeleteAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementsDeleteAutomationRequest
-  > = z.object({
-    appId: z.string(),
-    appEntitlementId: z.string(),
-    deleteAutomationRequest: shared.DeleteAutomationRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appEntitlementId: "app_entitlement_id",
-      deleteAutomationRequest: "DeleteAutomationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appEntitlementId: z.string(),
+      deleteAutomationRequest: shared.DeleteAutomationRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appEntitlementId: "app_entitlement_id",
+        deleteAutomationRequest: "DeleteAutomationRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsDeleteAutomationRequestToJSON(
   c1ApiAppV1AppEntitlementsDeleteAutomationRequest:
@@ -77,20 +79,22 @@ export const C1ApiAppV1AppEntitlementsDeleteAutomationResponse$inboundSchema:
     C1ApiAppV1AppEntitlementsDeleteAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteAutomationResponse: shared.DeleteAutomationResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteAutomationResponse": "deleteAutomationResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteAutomationResponse: shared.DeleteAutomationResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteAutomationResponse": "deleteAutomationResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementsDeleteAutomationResponseFromJSON(
   jsonString: string,

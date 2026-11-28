@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,14 +50,16 @@ export const C1ApiAppV1AppResourceTypeServiceGetRequest$outboundSchema:
     C1ApiAppV1AppResourceTypeServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppResourceTypeServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppResourceTypeServiceGetRequestToJSON(
   c1ApiAppV1AppResourceTypeServiceGetRequest:
@@ -76,20 +78,23 @@ export const C1ApiAppV1AppResourceTypeServiceGetResponse$inboundSchema:
     C1ApiAppV1AppResourceTypeServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AppResourceTypeServiceGetResponse: shared
-      .AppResourceTypeServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AppResourceTypeServiceGetResponse": "appResourceTypeServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AppResourceTypeServiceGetResponse: shared
+        .AppResourceTypeServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AppResourceTypeServiceGetResponse":
+          "appResourceTypeServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppResourceTypeServiceGetResponseFromJSON(
   jsonString: string,

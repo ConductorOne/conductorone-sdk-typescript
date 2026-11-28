@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,17 +48,19 @@ export const C1ApiEdgeV1EdgeServiceUpdateRequest$outboundSchema: z.ZodType<
   C1ApiEdgeV1EdgeServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   C1ApiEdgeV1EdgeServiceUpdateRequest
-> = z.object({
-  appId: z.string(),
-  id: z.string(),
-  edgeServiceUpdateRequest: shared.EdgeServiceUpdateRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    edgeServiceUpdateRequest: "EdgeServiceUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    id: z.string(),
+    edgeServiceUpdateRequest: shared.EdgeServiceUpdateRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      edgeServiceUpdateRequest: "EdgeServiceUpdateRequest",
+    });
+  })
+);
 
 export function c1ApiEdgeV1EdgeServiceUpdateRequestToJSON(
   c1ApiEdgeV1EdgeServiceUpdateRequest: C1ApiEdgeV1EdgeServiceUpdateRequest,
@@ -75,20 +77,22 @@ export const C1ApiEdgeV1EdgeServiceUpdateResponse$inboundSchema: z.ZodType<
   C1ApiEdgeV1EdgeServiceUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  EdgeServiceUpdateResponse: shared.EdgeServiceUpdateResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "EdgeServiceUpdateResponse": "edgeServiceUpdateResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    EdgeServiceUpdateResponse: shared.EdgeServiceUpdateResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "EdgeServiceUpdateResponse": "edgeServiceUpdateResponse",
+    });
+  })
+);
 
 export function c1ApiEdgeV1EdgeServiceUpdateResponseFromJSON(
   jsonString: string,

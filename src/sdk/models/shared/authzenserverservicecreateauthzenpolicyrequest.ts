@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AuthzenCelPolicy,
   AuthzenCelPolicy$Outbound,
@@ -43,11 +44,13 @@ export const AuthzenServerServiceCreateAuthzenPolicyRequest$outboundSchema:
     AuthzenServerServiceCreateAuthzenPolicyRequest$Outbound,
     z.ZodTypeDef,
     AuthzenServerServiceCreateAuthzenPolicyRequest
-  > = z.object({
-    cel: z.nullable(AuthzenCelPolicy$outboundSchema).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      cel: z.nullable(AuthzenCelPolicy$outboundSchema).optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+    })
+  );
 
 export function authzenServerServiceCreateAuthzenPolicyRequestToJSON(
   authzenServerServiceCreateAuthzenPolicyRequest:

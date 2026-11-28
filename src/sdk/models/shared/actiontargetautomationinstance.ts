@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const ActionTargetAutomationInstance$inboundSchema: z.ZodType<
   ActionTargetAutomationInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  automationExecutionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automationExecutionId: z.string().optional(),
+  })
+);
 /** @internal */
 export type ActionTargetAutomationInstance$Outbound = {
   automationExecutionId?: string | undefined;
@@ -35,9 +37,11 @@ export const ActionTargetAutomationInstance$outboundSchema: z.ZodType<
   ActionTargetAutomationInstance$Outbound,
   z.ZodTypeDef,
   ActionTargetAutomationInstance
-> = z.object({
-  automationExecutionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automationExecutionId: z.string().optional(),
+  })
+);
 
 export function actionTargetAutomationInstanceToJSON(
   actionTargetAutomationInstance: ActionTargetAutomationInstance,

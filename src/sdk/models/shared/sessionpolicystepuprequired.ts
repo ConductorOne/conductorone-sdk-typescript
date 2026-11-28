@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -63,35 +63,41 @@ export type SessionPolicyStepUpRequired = {
 
 /** @internal */
 export const Level$inboundSchema: z.ZodType<Level, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Level);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Level));
 /** @internal */
 export const Level$outboundSchema: z.ZodType<string, z.ZodTypeDef, Level> =
-  openEnums.outboundSchema(Level);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Level));
 
 /** @internal */
 export const SessionPolicyStepUpRequiredTypes$inboundSchema: z.ZodType<
   SessionPolicyStepUpRequiredTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SessionPolicyStepUpRequiredTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SessionPolicyStepUpRequiredTypes)
+);
 /** @internal */
 export const SessionPolicyStepUpRequiredTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SessionPolicyStepUpRequiredTypes
-> = openEnums.outboundSchema(SessionPolicyStepUpRequiredTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SessionPolicyStepUpRequiredTypes)
+);
 
 /** @internal */
 export const SessionPolicyStepUpRequired$inboundSchema: z.ZodType<
   SessionPolicyStepUpRequired,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  level: Level$inboundSchema.optional(),
-  maxAgeSeconds: z.number().int().optional(),
-  types: z.nullable(z.array(SessionPolicyStepUpRequiredTypes$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    level: Level$inboundSchema.optional(),
+    maxAgeSeconds: z.number().int().optional(),
+    types: z.nullable(z.array(SessionPolicyStepUpRequiredTypes$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type SessionPolicyStepUpRequired$Outbound = {
   level?: string | undefined;
@@ -104,12 +110,14 @@ export const SessionPolicyStepUpRequired$outboundSchema: z.ZodType<
   SessionPolicyStepUpRequired$Outbound,
   z.ZodTypeDef,
   SessionPolicyStepUpRequired
-> = z.object({
-  level: Level$outboundSchema.optional(),
-  maxAgeSeconds: z.number().int().optional(),
-  types: z.nullable(z.array(SessionPolicyStepUpRequiredTypes$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    level: Level$outboundSchema.optional(),
+    maxAgeSeconds: z.number().int().optional(),
+    types: z.nullable(z.array(SessionPolicyStepUpRequiredTypes$outboundSchema))
+      .optional(),
+  })
+);
 
 export function sessionPolicyStepUpRequiredToJSON(
   sessionPolicyStepUpRequired: SessionPolicyStepUpRequired,

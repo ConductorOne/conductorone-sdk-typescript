@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,16 +54,19 @@ export const C1ApiCredentialInventoryV1CredentialInventoryPolicyServiceUpdateReq
     C1ApiCredentialInventoryV1CredentialInventoryPolicyServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCredentialInventoryV1CredentialInventoryPolicyServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    credentialInventoryPolicyServiceUpdateRequest: shared
-      .CredentialInventoryPolicyServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      credentialInventoryPolicyServiceUpdateRequest:
-        "CredentialInventoryPolicyServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      credentialInventoryPolicyServiceUpdateRequest: shared
+        .CredentialInventoryPolicyServiceUpdateRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        credentialInventoryPolicyServiceUpdateRequest:
+          "CredentialInventoryPolicyServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiCredentialInventoryV1CredentialInventoryPolicyServiceUpdateRequestToJSON(
   c1ApiCredentialInventoryV1CredentialInventoryPolicyServiceUpdateRequest:
@@ -83,21 +86,24 @@ export const C1ApiCredentialInventoryV1CredentialInventoryPolicyServiceUpdateRes
     C1ApiCredentialInventoryV1CredentialInventoryPolicyServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    CredentialInventoryPolicyServiceUpdateResponse: shared
-      .CredentialInventoryPolicyServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "CredentialInventoryPolicyServiceUpdateResponse":
-        "credentialInventoryPolicyServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      CredentialInventoryPolicyServiceUpdateResponse: shared
+        .CredentialInventoryPolicyServiceUpdateResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "CredentialInventoryPolicyServiceUpdateResponse":
+          "credentialInventoryPolicyServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiCredentialInventoryV1CredentialInventoryPolicyServiceUpdateResponseFromJSON(
   jsonString: string,

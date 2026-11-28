@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AuthzenTestAction,
   AuthzenTestAction$Outbound,
@@ -45,12 +46,14 @@ export const AuthzenTestRequest$outboundSchema: z.ZodType<
   AuthzenTestRequest$Outbound,
   z.ZodTypeDef,
   AuthzenTestRequest
-> = z.object({
-  action: z.nullable(AuthzenTestAction$outboundSchema).optional(),
-  context: z.nullable(z.record(z.any())).optional(),
-  resource: z.nullable(AuthzenTestResource$outboundSchema).optional(),
-  subject: z.nullable(AuthzenTestSubject$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(AuthzenTestAction$outboundSchema).optional(),
+    context: z.nullable(z.record(z.any())).optional(),
+    resource: z.nullable(AuthzenTestResource$outboundSchema).optional(),
+    subject: z.nullable(AuthzenTestSubject$outboundSchema).optional(),
+  })
+);
 
 export function authzenTestRequestToJSON(
   authzenTestRequest: AuthzenTestRequest,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -196,17 +197,19 @@ export type ConnectorInput = {
 
 /** @internal */
 export const Config$inboundSchema: z.ZodType<Config, z.ZodTypeDef, unknown> =
-  collectExtraKeys$(
-    z.object({
-      "@type": z.string().optional(),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
-  ).transform((v) => {
-    return remap$(v, {
-      "@type": "atType",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        "@type": z.string().optional(),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    ).transform((v) => {
+      return remap$(v, {
+        "@type": "atType",
+      });
+    })
+  );
 /** @internal */
 export type Config$Outbound = {
   "@type"?: string | undefined;
@@ -218,18 +221,20 @@ export const Config$outboundSchema: z.ZodType<
   Config$Outbound,
   z.ZodTypeDef,
   Config
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    atType: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        atType: "@type",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function configToJSON(config: Config): string {
   return JSON.stringify(Config$outboundSchema.parse(config));
@@ -249,44 +254,47 @@ export const Connector$inboundSchema: z.ZodType<
   Connector,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  canResumeSync: z.boolean().optional(),
-  catalogId: z.string().optional(),
-  config: z.nullable(z.lazy(() => Config$inboundSchema)).optional(),
-  configUpdatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  connectorApiVersion: z.number().int().optional(),
-  connectorSyncCronSchedule: z.nullable(ConnectorSyncCronSchedule$inboundSchema)
-    .optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  disableCheckBadSync: z.boolean().optional(),
-  displayName: z.string().optional(),
-  downloadUrl: z.string().optional(),
-  id: z.string().optional(),
-  oauthAuthorizedAs: z.nullable(OAuth2AuthorizedAs$inboundSchema).optional(),
-  parallelSyncWorkerCount: z.nullable(z.number().int()).optional(),
-  profileAllowList: z.nullable(z.array(z.string())).optional(),
-  profileIgnoreList: z.nullable(z.array(z.string())).optional(),
-  status: z.nullable(ConnectorStatus$inboundSchema).optional(),
-  syncConfig: z.nullable(SyncConfig$inboundSchema).optional(),
-  syncDisabledAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  syncDisabledCategory: z.string().optional(),
-  syncDisabledReason: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    canResumeSync: z.boolean().optional(),
+    catalogId: z.string().optional(),
+    config: z.nullable(z.lazy(() => Config$inboundSchema)).optional(),
+    configUpdatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    connectorApiVersion: z.number().int().optional(),
+    connectorSyncCronSchedule: z.nullable(
+      ConnectorSyncCronSchedule$inboundSchema,
+    ).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    disableCheckBadSync: z.boolean().optional(),
+    displayName: z.string().optional(),
+    downloadUrl: z.string().optional(),
+    id: z.string().optional(),
+    oauthAuthorizedAs: z.nullable(OAuth2AuthorizedAs$inboundSchema).optional(),
+    parallelSyncWorkerCount: z.nullable(z.number().int()).optional(),
+    profileAllowList: z.nullable(z.array(z.string())).optional(),
+    profileIgnoreList: z.nullable(z.array(z.string())).optional(),
+    status: z.nullable(ConnectorStatus$inboundSchema).optional(),
+    syncConfig: z.nullable(SyncConfig$inboundSchema).optional(),
+    syncDisabledAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    syncDisabledCategory: z.string().optional(),
+    syncDisabledReason: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function connectorFromJSON(
   jsonString: string,
@@ -328,29 +336,31 @@ export const ConnectorInput$outboundSchema: z.ZodType<
   ConnectorInput$Outbound,
   z.ZodTypeDef,
   ConnectorInput
-> = z.object({
-  appId: z.string().optional(),
-  canResumeSync: z.boolean().optional(),
-  catalogId: z.string().optional(),
-  config: z.nullable(z.lazy(() => Config$outboundSchema)).optional(),
-  connectorSyncCronSchedule: z.nullable(
-    ConnectorSyncCronSchedule$outboundSchema,
-  ).optional(),
-  description: z.string().optional(),
-  disableCheckBadSync: z.boolean().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  oauthAuthorizedAs: z.nullable(OAuth2AuthorizedAsInput$outboundSchema)
-    .optional(),
-  parallelSyncWorkerCount: z.nullable(z.number().int()).optional(),
-  profileAllowList: z.nullable(z.array(z.string())).optional(),
-  profileIgnoreList: z.nullable(z.array(z.string())).optional(),
-  status: z.nullable(ConnectorStatus$outboundSchema).optional(),
-  syncConfig: z.nullable(SyncConfig$outboundSchema).optional(),
-  syncDisabledCategory: z.string().optional(),
-  syncDisabledReason: z.string().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    canResumeSync: z.boolean().optional(),
+    catalogId: z.string().optional(),
+    config: z.nullable(z.lazy(() => Config$outboundSchema)).optional(),
+    connectorSyncCronSchedule: z.nullable(
+      ConnectorSyncCronSchedule$outboundSchema,
+    ).optional(),
+    description: z.string().optional(),
+    disableCheckBadSync: z.boolean().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    oauthAuthorizedAs: z.nullable(OAuth2AuthorizedAsInput$outboundSchema)
+      .optional(),
+    parallelSyncWorkerCount: z.nullable(z.number().int()).optional(),
+    profileAllowList: z.nullable(z.array(z.string())).optional(),
+    profileIgnoreList: z.nullable(z.array(z.string())).optional(),
+    status: z.nullable(ConnectorStatus$outboundSchema).optional(),
+    syncConfig: z.nullable(SyncConfig$outboundSchema).optional(),
+    syncDisabledCategory: z.string().optional(),
+    syncDisabledReason: z.string().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function connectorInputToJSON(connectorInput: ConnectorInput): string {
   return JSON.stringify(ConnectorInput$outboundSchema.parse(connectorInput));

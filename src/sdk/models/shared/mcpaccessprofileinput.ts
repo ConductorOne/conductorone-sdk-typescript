@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPAccessProfile represents an admin-curated grouping of MCP tools.
@@ -60,18 +61,20 @@ export const MCPAccessProfileInput$outboundSchema: z.ZodType<
   MCPAccessProfileInput$Outbound,
   z.ZodTypeDef,
   MCPAccessProfileInput
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  toolCount: z.number().int().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    toolCount: z.number().int().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function mcpAccessProfileInputToJSON(
   mcpAccessProfileInput: MCPAccessProfileInput,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAClientAudienceMappingServiceDeleteRequest deletes a mapping (soft delete).
@@ -25,9 +26,11 @@ export const XAAClientAudienceMappingServiceDeleteRequest$outboundSchema:
     XAAClientAudienceMappingServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     XAAClientAudienceMappingServiceDeleteRequest
-  > = z.object({
-    clientKey: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      clientKey: z.string().optional(),
+    })
+  );
 
 export function xaaClientAudienceMappingServiceDeleteRequestToJSON(
   xaaClientAudienceMappingServiceDeleteRequest:

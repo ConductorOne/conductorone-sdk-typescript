@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAAccessProfileServiceDeleteRequest deletes an access profile (soft delete).
@@ -17,7 +18,7 @@ export const XAAAccessProfileServiceDeleteRequest$outboundSchema: z.ZodType<
   XAAAccessProfileServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   XAAAccessProfileServiceDeleteRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function xaaAccessProfileServiceDeleteRequestToJSON(
   xaaAccessProfileServiceDeleteRequest: XAAAccessProfileServiceDeleteRequest,

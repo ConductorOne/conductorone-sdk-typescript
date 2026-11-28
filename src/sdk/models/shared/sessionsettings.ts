@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -73,34 +73,40 @@ export const ClientIdMetadataDocumentPolicy$inboundSchema: z.ZodType<
   ClientIdMetadataDocumentPolicy,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ClientIdMetadataDocumentPolicy);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ClientIdMetadataDocumentPolicy)
+);
 /** @internal */
 export const ClientIdMetadataDocumentPolicy$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ClientIdMetadataDocumentPolicy
-> = openEnums.outboundSchema(ClientIdMetadataDocumentPolicy);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ClientIdMetadataDocumentPolicy)
+);
 
 /** @internal */
 export const SessionSettings$inboundSchema: z.ZodType<
   SessionSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  clientIdApprovalRequestPolicyId: z.string().optional(),
-  clientIdMetadataDocumentPolicy: ClientIdMetadataDocumentPolicy$inboundSchema
-    .optional(),
-  connectorSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-  enableIdleTimeout: z.boolean().optional(),
-  externalClientSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-  externalClientsEnabled: z.boolean().optional(),
-  idleTimeout: z.nullable(z.string()).optional(),
-  maxSessionLength: z.nullable(z.string()).optional(),
-  pccAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-  pccUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-  ssoAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-  ssoUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientIdApprovalRequestPolicyId: z.string().optional(),
+    clientIdMetadataDocumentPolicy: ClientIdMetadataDocumentPolicy$inboundSchema
+      .optional(),
+    connectorSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+    enableIdleTimeout: z.boolean().optional(),
+    externalClientSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+    externalClientsEnabled: z.boolean().optional(),
+    idleTimeout: z.nullable(z.string()).optional(),
+    maxSessionLength: z.nullable(z.string()).optional(),
+    pccAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+    pccUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+    ssoAdminSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+    ssoUserSource: z.nullable(CIDRRestriction$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SessionSettings$Outbound = {
   clientIdApprovalRequestPolicyId?: string | undefined;
@@ -122,21 +128,23 @@ export const SessionSettings$outboundSchema: z.ZodType<
   SessionSettings$Outbound,
   z.ZodTypeDef,
   SessionSettings
-> = z.object({
-  clientIdApprovalRequestPolicyId: z.string().optional(),
-  clientIdMetadataDocumentPolicy: ClientIdMetadataDocumentPolicy$outboundSchema
-    .optional(),
-  connectorSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-  enableIdleTimeout: z.boolean().optional(),
-  externalClientSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-  externalClientsEnabled: z.boolean().optional(),
-  idleTimeout: z.nullable(z.string()).optional(),
-  maxSessionLength: z.nullable(z.string()).optional(),
-  pccAdminSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-  pccUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-  ssoAdminSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-  ssoUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientIdApprovalRequestPolicyId: z.string().optional(),
+    clientIdMetadataDocumentPolicy:
+      ClientIdMetadataDocumentPolicy$outboundSchema.optional(),
+    connectorSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+    enableIdleTimeout: z.boolean().optional(),
+    externalClientSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+    externalClientsEnabled: z.boolean().optional(),
+    idleTimeout: z.nullable(z.string()).optional(),
+    maxSessionLength: z.nullable(z.string()).optional(),
+    pccAdminSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+    pccUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+    ssoAdminSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+    ssoUserSource: z.nullable(CIDRRestriction$outboundSchema).optional(),
+  })
+);
 
 export function sessionSettingsToJSON(
   sessionSettings: SessionSettings,

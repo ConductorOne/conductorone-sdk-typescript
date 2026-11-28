@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -153,68 +153,70 @@ export type ReportRun = {
 
 /** @internal */
 export const Phase$inboundSchema: z.ZodType<Phase, z.ZodTypeDef, unknown> =
-  openEnums.inboundSchema(Phase);
+  /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Phase));
 
 /** @internal */
 export const ReportRunStatus$inboundSchema: z.ZodType<
   ReportRunStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ReportRunStatus);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(ReportRunStatus));
 
 /** @internal */
 export const ReportRun$inboundSchema: z.ZodType<
   ReportRun,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  artifactUrl: z.string().optional(),
-  conversationId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  editInstruction: z.string().optional(),
-  error: z.string().optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  finalizingAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  finishedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string().optional(),
-  invocationId: z.string().optional(),
-  lineage: z.nullable(z.record(z.any())).optional(),
-  parameterSchema: z.nullable(z.record(z.any())).optional(),
-  parameterValues: z.nullable(z.record(z.any())).optional(),
-  phase: Phase$inboundSchema.optional(),
-  preparingAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  program: z.nullable(ProgramRef$inboundSchema).optional(),
-  reportId: z.string().optional(),
-  requestedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  runByUserId: z.string().optional(),
-  runningAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  sources: z.nullable(z.array(ReportSource$inboundSchema)).optional(),
-  status: ReportRunStatus$inboundSchema.optional(),
-  surfaceId: z.string().optional(),
-  surfaceSnapshot: z.nullable(A2UISurface$inboundSchema).optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  vfsId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    artifactUrl: z.string().optional(),
+    conversationId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    editInstruction: z.string().optional(),
+    error: z.string().optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    finalizingAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    finishedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string().optional(),
+    invocationId: z.string().optional(),
+    lineage: z.nullable(z.record(z.any())).optional(),
+    parameterSchema: z.nullable(z.record(z.any())).optional(),
+    parameterValues: z.nullable(z.record(z.any())).optional(),
+    phase: Phase$inboundSchema.optional(),
+    preparingAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    program: z.nullable(ProgramRef$inboundSchema).optional(),
+    reportId: z.string().optional(),
+    requestedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    runByUserId: z.string().optional(),
+    runningAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    sources: z.nullable(z.array(ReportSource$inboundSchema)).optional(),
+    status: ReportRunStatus$inboundSchema.optional(),
+    surfaceId: z.string().optional(),
+    surfaceSnapshot: z.nullable(A2UISurface$inboundSchema).optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    vfsId: z.string().optional(),
+  })
+);
 
 export function reportRunFromJSON(
   jsonString: string,

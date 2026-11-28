@@ -176,7 +176,7 @@ run();
 
 Promote an unmanaged application into a managed application.
  Returns AlreadyExists when the application is already managed. The new application inherits source owners when user_ids is omitted.
- Concurrent promotion requests are not supported.
+ Concurrent promotion requests for the same application are not supported; racing requests for the same application may fail instead of returning AlreadyExists.
 
 ### Example Usage
 

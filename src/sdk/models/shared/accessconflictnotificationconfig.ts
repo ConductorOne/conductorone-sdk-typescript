@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,10 +32,12 @@ export const AccessConflictNotificationConfig$inboundSchema: z.ZodType<
   AccessConflictNotificationConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  emailNotifications: z.nullable(EmailNotifications$inboundSchema).optional(),
-  slackNotifications: z.nullable(SlackNotifications$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    emailNotifications: z.nullable(EmailNotifications$inboundSchema).optional(),
+    slackNotifications: z.nullable(SlackNotifications$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type AccessConflictNotificationConfig$Outbound = {
   emailNotifications?: EmailNotifications$Outbound | null | undefined;
@@ -47,10 +49,14 @@ export const AccessConflictNotificationConfig$outboundSchema: z.ZodType<
   AccessConflictNotificationConfig$Outbound,
   z.ZodTypeDef,
   AccessConflictNotificationConfig
-> = z.object({
-  emailNotifications: z.nullable(EmailNotifications$outboundSchema).optional(),
-  slackNotifications: z.nullable(SlackNotifications$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    emailNotifications: z.nullable(EmailNotifications$outboundSchema)
+      .optional(),
+    slackNotifications: z.nullable(SlackNotifications$outboundSchema)
+      .optional(),
+  })
+);
 
 export function accessConflictNotificationConfigToJSON(
   accessConflictNotificationConfig: AccessConflictNotificationConfig,

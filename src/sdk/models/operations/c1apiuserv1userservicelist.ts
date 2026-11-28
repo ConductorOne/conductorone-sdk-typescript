@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,15 +44,17 @@ export const C1ApiUserV1UserServiceListRequest$outboundSchema: z.ZodType<
   C1ApiUserV1UserServiceListRequest$Outbound,
   z.ZodTypeDef,
   C1ApiUserV1UserServiceListRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageSize: "page_size",
-    pageToken: "page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageSize: "page_size",
+      pageToken: "page_token",
+    });
+  })
+);
 
 export function c1ApiUserV1UserServiceListRequestToJSON(
   c1ApiUserV1UserServiceListRequest: C1ApiUserV1UserServiceListRequest,
@@ -69,20 +71,22 @@ export const C1ApiUserV1UserServiceListResponse$inboundSchema: z.ZodType<
   C1ApiUserV1UserServiceListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  UserServiceListResponse: shared.UserServiceListResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "UserServiceListResponse": "userServiceListResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    UserServiceListResponse: shared.UserServiceListResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "UserServiceListResponse": "userServiceListResponse",
+    });
+  })
+);
 
 export function c1ApiUserV1UserServiceListResponseFromJSON(
   jsonString: string,

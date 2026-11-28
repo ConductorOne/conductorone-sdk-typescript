@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -43,9 +43,11 @@ export const C1ApiReportingV1ReportingServiceGetRequest$outboundSchema:
     C1ApiReportingV1ReportingServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiReportingV1ReportingServiceGetRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceGetRequestToJSON(
   c1ApiReportingV1ReportingServiceGetRequest:
@@ -64,20 +66,22 @@ export const C1ApiReportingV1ReportingServiceGetResponse$inboundSchema:
     C1ApiReportingV1ReportingServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ReportingServiceGetResponse: shared
-      .ReportingServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ReportingServiceGetResponse": "reportingServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ReportingServiceGetResponse: shared
+        .ReportingServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ReportingServiceGetResponse": "reportingServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceGetResponseFromJSON(
   jsonString: string,

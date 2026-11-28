@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -48,23 +48,27 @@ export const SelectFieldType$inboundSchema: z.ZodType<
   SelectFieldType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SelectFieldType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(SelectFieldType));
 /** @internal */
 export const SelectFieldType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SelectFieldType
-> = openEnums.outboundSchema(SelectFieldType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SelectFieldType)
+);
 
 /** @internal */
 export const SelectField$inboundSchema: z.ZodType<
   SelectField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  options: z.nullable(z.array(SelectOption$inboundSchema)).optional(),
-  type: SelectFieldType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    options: z.nullable(z.array(SelectOption$inboundSchema)).optional(),
+    type: SelectFieldType$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type SelectField$Outbound = {
   options?: Array<SelectOption$Outbound> | null | undefined;
@@ -76,10 +80,12 @@ export const SelectField$outboundSchema: z.ZodType<
   SelectField$Outbound,
   z.ZodTypeDef,
   SelectField
-> = z.object({
-  options: z.nullable(z.array(SelectOption$outboundSchema)).optional(),
-  type: SelectFieldType$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    options: z.nullable(z.array(SelectOption$outboundSchema)).optional(),
+    type: SelectFieldType$outboundSchema.optional(),
+  })
+);
 
 export function selectFieldToJSON(selectField: SelectField): string {
   return JSON.stringify(SelectField$outboundSchema.parse(selectField));

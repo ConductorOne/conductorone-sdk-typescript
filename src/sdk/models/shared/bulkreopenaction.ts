@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The BulkReopenAction message.
@@ -17,7 +18,7 @@ export const BulkReopenAction$outboundSchema: z.ZodType<
   BulkReopenAction$Outbound,
   z.ZodTypeDef,
   BulkReopenAction
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function bulkReopenActionToJSON(
   bulkReopenAction: BulkReopenAction,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -65,7 +65,7 @@ export type C1ApiEdgeV1EdgeServiceListUsableEdgesResponse = {
 
 /** @internal */
 export const Kind$outboundSchema: z.ZodType<string, z.ZodTypeDef, Kind> =
-  openEnums.outboundSchema(Kind);
+  /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Kind));
 
 /** @internal */
 export type C1ApiEdgeV1EdgeServiceListUsableEdgesRequest$Outbound = {
@@ -80,16 +80,18 @@ export const C1ApiEdgeV1EdgeServiceListUsableEdgesRequest$outboundSchema:
     C1ApiEdgeV1EdgeServiceListUsableEdgesRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServiceListUsableEdgesRequest
-  > = z.object({
-    kind: Kind$outboundSchema.optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      kind: Kind$outboundSchema.optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListUsableEdgesRequestToJSON(
   c1ApiEdgeV1EdgeServiceListUsableEdgesRequest:
@@ -108,21 +110,23 @@ export const C1ApiEdgeV1EdgeServiceListUsableEdgesResponse$inboundSchema:
     C1ApiEdgeV1EdgeServiceListUsableEdgesResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServiceListUsableEdgesResponse: shared
-      .EdgeServiceListUsableEdgesResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServiceListUsableEdgesResponse":
-        "edgeServiceListUsableEdgesResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServiceListUsableEdgesResponse: shared
+        .EdgeServiceListUsableEdgesResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServiceListUsableEdgesResponse":
+          "edgeServiceListUsableEdgesResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServiceListUsableEdgesResponseFromJSON(
   jsonString: string,

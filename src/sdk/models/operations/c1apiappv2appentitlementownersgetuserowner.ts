@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,19 +51,21 @@ export const C1ApiAppV2AppEntitlementOwnersGetUserOwnerRequest$outboundSchema:
     C1ApiAppV2AppEntitlementOwnersGetUserOwnerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2AppEntitlementOwnersGetUserOwnerRequest
-  > = z.object({
-    appId: z.string(),
-    entitlementId: z.string(),
-    roleSlug: z.string(),
-    userRefId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      entitlementId: "entitlement_id",
-      roleSlug: "role_slug",
-      userRefId: "user_ref_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      entitlementId: z.string(),
+      roleSlug: z.string(),
+      userRefId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        entitlementId: "entitlement_id",
+        roleSlug: "role_slug",
+        userRefId: "user_ref_id",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppEntitlementOwnersGetUserOwnerRequestToJSON(
   c1ApiAppV2AppEntitlementOwnersGetUserOwnerRequest:
@@ -82,21 +84,23 @@ export const C1ApiAppV2AppEntitlementOwnersGetUserOwnerResponse$inboundSchema:
     C1ApiAppV2AppEntitlementOwnersGetUserOwnerResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetAppEntitlementUserOwnerResponse: shared
-      .GetAppEntitlementUserOwnerResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetAppEntitlementUserOwnerResponse":
-        "getAppEntitlementUserOwnerResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetAppEntitlementUserOwnerResponse: shared
+        .GetAppEntitlementUserOwnerResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetAppEntitlementUserOwnerResponse":
+          "getAppEntitlementUserOwnerResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppEntitlementOwnersGetUserOwnerResponseFromJSON(
   jsonString: string,

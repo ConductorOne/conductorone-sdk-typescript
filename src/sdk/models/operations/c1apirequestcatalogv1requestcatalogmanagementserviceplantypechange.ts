@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,18 +54,20 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeR
     C1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeRequest
-  > = z.object({
-    requestCatalogId: z.string(),
-    requestCatalogManagementServicePlanTypeChangeRequest: shared
-      .RequestCatalogManagementServicePlanTypeChangeRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      requestCatalogId: "request_catalog_id",
-      requestCatalogManagementServicePlanTypeChangeRequest:
-        "RequestCatalogManagementServicePlanTypeChangeRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      requestCatalogId: z.string(),
+      requestCatalogManagementServicePlanTypeChangeRequest: shared
+        .RequestCatalogManagementServicePlanTypeChangeRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        requestCatalogId: "request_catalog_id",
+        requestCatalogManagementServicePlanTypeChangeRequest:
+          "RequestCatalogManagementServicePlanTypeChangeRequest",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeRequestToJSON(
   c1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeRequest:
@@ -85,22 +87,24 @@ export const C1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeR
     C1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RequestCatalogManagementServicePlanTypeChangeResponse: shared
-      .RequestCatalogManagementServicePlanTypeChangeResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RequestCatalogManagementServicePlanTypeChangeResponse":
-        "requestCatalogManagementServicePlanTypeChangeResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RequestCatalogManagementServicePlanTypeChangeResponse: shared
+        .RequestCatalogManagementServicePlanTypeChangeResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RequestCatalogManagementServicePlanTypeChangeResponse":
+          "requestCatalogManagementServicePlanTypeChangeResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestcatalogV1RequestCatalogManagementServicePlanTypeChangeResponseFromJSON(
   jsonString: string,

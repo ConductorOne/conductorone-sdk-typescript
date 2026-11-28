@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,9 +23,11 @@ export const FundAssignmentServiceSuspendResponse$inboundSchema: z.ZodType<
   FundAssignmentServiceSuspendResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assignment: z.nullable(FundAssignment$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignment: z.nullable(FundAssignment$inboundSchema).optional(),
+  })
+);
 
 export function fundAssignmentServiceSuspendResponseFromJSON(
   jsonString: string,

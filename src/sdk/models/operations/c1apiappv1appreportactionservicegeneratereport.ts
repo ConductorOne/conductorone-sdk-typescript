@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,17 +51,19 @@ export const C1ApiAppV1AppReportActionServiceGenerateReportRequest$outboundSchem
     C1ApiAppV1AppReportActionServiceGenerateReportRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppReportActionServiceGenerateReportRequest
-  > = z.object({
-    appId: z.string(),
-    appActionsServiceGenerateReportRequest: shared
-      .AppActionsServiceGenerateReportRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appActionsServiceGenerateReportRequest:
-        "AppActionsServiceGenerateReportRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appActionsServiceGenerateReportRequest: shared
+        .AppActionsServiceGenerateReportRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appActionsServiceGenerateReportRequest:
+          "AppActionsServiceGenerateReportRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppReportActionServiceGenerateReportRequestToJSON(
   c1ApiAppV1AppReportActionServiceGenerateReportRequest:
@@ -80,21 +82,23 @@ export const C1ApiAppV1AppReportActionServiceGenerateReportResponse$inboundSchem
     C1ApiAppV1AppReportActionServiceGenerateReportResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AppActionsServiceGenerateReportResponse: shared
-      .AppActionsServiceGenerateReportResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AppActionsServiceGenerateReportResponse":
-        "appActionsServiceGenerateReportResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AppActionsServiceGenerateReportResponse: shared
+        .AppActionsServiceGenerateReportResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AppActionsServiceGenerateReportResponse":
+          "appActionsServiceGenerateReportResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppReportActionServiceGenerateReportResponseFromJSON(
   jsonString: string,

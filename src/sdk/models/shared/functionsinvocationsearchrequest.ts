@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * FunctionsInvocationSearchRequest is the request for searching function invocations.
@@ -32,10 +33,12 @@ export const FunctionsInvocationSearchRequest$outboundSchema: z.ZodType<
   FunctionsInvocationSearchRequest$Outbound,
   z.ZodTypeDef,
   FunctionsInvocationSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  })
+);
 
 export function functionsInvocationSearchRequestToJSON(
   functionsInvocationSearchRequest: FunctionsInvocationSearchRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAScopeRef is a lightweight reference to a scope, used for websocket
@@ -32,10 +33,12 @@ export const XAAScopeRef$outboundSchema: z.ZodType<
   XAAScopeRef$Outbound,
   z.ZodTypeDef,
   XAAScopeRef
-> = z.object({
-  appId: z.string().optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function xaaScopeRefToJSON(xaaScopeRef: XAAScopeRef): string {
   return JSON.stringify(XAAScopeRef$outboundSchema.parse(xaaScopeRef));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeleteAppEntitlementRequest message.
@@ -17,7 +18,7 @@ export const DeleteAppEntitlementRequest$outboundSchema: z.ZodType<
   DeleteAppEntitlementRequest$Outbound,
   z.ZodTypeDef,
   DeleteAppEntitlementRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteAppEntitlementRequestToJSON(
   deleteAppEntitlementRequest: DeleteAppEntitlementRequest,

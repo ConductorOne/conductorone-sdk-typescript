@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,16 +54,18 @@ export const C1ApiFindingV1FindingRoutingRuleServiceUpdateFindingRoutingRuleRequ
     C1ApiFindingV1FindingRoutingRuleServiceUpdateFindingRoutingRuleRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFindingV1FindingRoutingRuleServiceUpdateFindingRoutingRuleRequest
-  > = z.object({
-    routingRuleId: z.string(),
-    updateFindingRoutingRuleRequest: shared
-      .UpdateFindingRoutingRuleRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      routingRuleId: "routing_rule_id",
-      updateFindingRoutingRuleRequest: "UpdateFindingRoutingRuleRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      routingRuleId: z.string(),
+      updateFindingRoutingRuleRequest: shared
+        .UpdateFindingRoutingRuleRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        routingRuleId: "routing_rule_id",
+        updateFindingRoutingRuleRequest: "UpdateFindingRoutingRuleRequest",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingRoutingRuleServiceUpdateFindingRoutingRuleRequestToJSON(
   c1ApiFindingV1FindingRoutingRuleServiceUpdateFindingRoutingRuleRequest:
@@ -83,20 +85,22 @@ export const C1ApiFindingV1FindingRoutingRuleServiceUpdateFindingRoutingRuleResp
     C1ApiFindingV1FindingRoutingRuleServiceUpdateFindingRoutingRuleResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    UpdateFindingRoutingRuleResponse: shared
-      .UpdateFindingRoutingRuleResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "UpdateFindingRoutingRuleResponse": "updateFindingRoutingRuleResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      UpdateFindingRoutingRuleResponse: shared
+        .UpdateFindingRoutingRuleResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "UpdateFindingRoutingRuleResponse": "updateFindingRoutingRuleResponse",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingRoutingRuleServiceUpdateFindingRoutingRuleResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -57,23 +57,27 @@ export const AppPopulationReportState$inboundSchema: z.ZodType<
   AppPopulationReportState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AppPopulationReportState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(AppPopulationReportState)
+);
 
 /** @internal */
 export const AppPopulationReport$inboundSchema: z.ZodType<
   AppPopulationReport,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  downloadUrl: z.string().optional(),
-  hashes: z.record(z.string()).optional(),
-  id: z.string().optional(),
-  state: AppPopulationReportState$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    downloadUrl: z.string().optional(),
+    hashes: z.record(z.string()).optional(),
+    id: z.string().optional(),
+    state: AppPopulationReportState$inboundSchema.optional(),
+  })
+);
 
 export function appPopulationReportFromJSON(
   jsonString: string,

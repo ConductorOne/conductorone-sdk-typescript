@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -53,6 +54,23 @@ export const TaskSearchRequestAccountTypes = {
 export type TaskSearchRequestAccountTypes = OpenEnum<
   typeof TaskSearchRequestAccountTypes
 >;
+
+export const AttentionCauses = {
+  TaskAttentionCauseUnspecified: "TASK_ATTENTION_CAUSE_UNSPECIFIED",
+  TaskAttentionCauseFailed: "TASK_ATTENTION_CAUSE_FAILED",
+  TaskAttentionCauseNoAssignee: "TASK_ATTENTION_CAUSE_NO_ASSIGNEE",
+  TaskAttentionCauseWaitingOnIntegration:
+    "TASK_ATTENTION_CAUSE_WAITING_ON_INTEGRATION",
+  TaskAttentionCauseWaitingForAccount:
+    "TASK_ATTENTION_CAUSE_WAITING_FOR_ACCOUNT",
+  TaskAttentionCauseWaitingOnLock: "TASK_ATTENTION_CAUSE_WAITING_ON_LOCK",
+  TaskAttentionCauseMultipleAppAccounts:
+    "TASK_ATTENTION_CAUSE_MULTIPLE_APP_ACCOUNTS",
+  TaskAttentionCauseSubjectDeleted: "TASK_ATTENTION_CAUSE_SUBJECT_DELETED",
+  TaskAttentionCauseWaitingOnExternalTicket:
+    "TASK_ATTENTION_CAUSE_WAITING_ON_EXTERNAL_TICKET",
+} as const;
+export type AttentionCauses = OpenEnum<typeof AttentionCauses>;
 
 export const CertifyOutcomes = {
   CertifyOutcomeUnspecified: "CERTIFY_OUTCOME_UNSPECIFIED",
@@ -229,6 +247,10 @@ export type TaskSearchRequest = {
    */
   assigneesInIds?: Array<string> | null | undefined;
   /**
+   * Only stuck tasks with any of these causes. Empty applies no filter. Requires a super admin.
+   */
+  attentionCauses?: Array<AttentionCauses> | null | undefined;
+  /**
    * Search tasks by certify outcome
    */
   certifyOutcomes?: Array<CertifyOutcomes> | null | undefined;
@@ -272,6 +294,10 @@ export type TaskSearchRequest = {
    * Search tasks where the user would see this task in the My Work section
    */
   myWorkUserIds?: Array<string> | null | undefined;
+  /**
+   * When true, only open tasks that are stuck. False applies no filter. Requires a super admin.
+   */
+  needsAttention?: boolean | undefined;
   olderThanDuration?: string | null | undefined;
   /**
    * Search tasks that were created by any of the users in this array.
@@ -350,84 +376,109 @@ export const AccessProfileReviewKinds$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccessProfileReviewKinds
-> = openEnums.outboundSchema(AccessProfileReviewKinds);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccessProfileReviewKinds)
+);
 
 /** @internal */
 export const AccountStatuses$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AccountStatuses
-> = openEnums.outboundSchema(AccountStatuses);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AccountStatuses)
+);
 
 /** @internal */
 export const TaskSearchRequestAccountTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskSearchRequestAccountTypes
-> = openEnums.outboundSchema(TaskSearchRequestAccountTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TaskSearchRequestAccountTypes)
+);
+
+/** @internal */
+export const AttentionCauses$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  AttentionCauses
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AttentionCauses)
+);
 
 /** @internal */
 export const CertifyOutcomes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CertifyOutcomes
-> = openEnums.outboundSchema(CertifyOutcomes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CertifyOutcomes)
+);
 
 /** @internal */
 export const CurrentStep$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CurrentStep
-> = openEnums.outboundSchema(CurrentStep);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(CurrentStep));
 
 /** @internal */
 export const EmergencyStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EmergencyStatus
-> = openEnums.outboundSchema(EmergencyStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EmergencyStatus)
+);
 
 /** @internal */
 export const GrantOutcomes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   GrantOutcomes
-> = openEnums.outboundSchema(GrantOutcomes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(GrantOutcomes));
 
 /** @internal */
 export const PendingActionFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   PendingActionFilter
-> = openEnums.outboundSchema(PendingActionFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(PendingActionFilter)
+);
 
 /** @internal */
 export const RevokeOutcomes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   RevokeOutcomes
-> = openEnums.outboundSchema(RevokeOutcomes);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(RevokeOutcomes));
 
 /** @internal */
 export const TaskSearchRequestSortBy$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskSearchRequestSortBy
-> = openEnums.outboundSchema(TaskSearchRequestSortBy);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TaskSearchRequestSortBy)
+);
 
 /** @internal */
 export const StepApprovalTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   StepApprovalTypes
-> = openEnums.outboundSchema(StepApprovalTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(StepApprovalTypes)
+);
 
 /** @internal */
 export const TaskStates$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskStates
-> = openEnums.outboundSchema(TaskStates);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(TaskStates));
 
 /** @internal */
 export type TaskSearchRequest$Outbound = {
@@ -445,6 +496,7 @@ export type TaskSearchRequest$Outbound = {
   applicationIds?: Array<string> | null | undefined;
   assignedOrStepApproverUserId?: string | undefined;
   assigneesInIds?: Array<string> | null | undefined;
+  attentionCauses?: Array<string> | null | undefined;
   certifyOutcomes?: Array<string> | null | undefined;
   createdAfter?: string | null | undefined;
   createdBefore?: string | null | undefined;
@@ -459,6 +511,7 @@ export type TaskSearchRequest$Outbound = {
   includeActedAfter?: string | null | undefined;
   includeDeleted?: boolean | undefined;
   myWorkUserIds?: Array<string> | null | undefined;
+  needsAttention?: boolean | undefined;
   olderThanDuration?: string | null | undefined;
   openerIds?: Array<string> | null | undefined;
   openerOrSubjectUserId?: string | undefined;
@@ -486,66 +539,74 @@ export const TaskSearchRequest$outboundSchema: z.ZodType<
   TaskSearchRequest$Outbound,
   z.ZodTypeDef,
   TaskSearchRequest
-> = z.object({
-  accessProfileIds: z.nullable(z.array(z.string())).optional(),
-  accessProfileReviewKinds: z.nullable(
-    z.array(AccessProfileReviewKinds$outboundSchema),
-  ).optional(),
-  accessReviewIds: z.nullable(z.array(z.string())).optional(),
-  accountOwnerIds: z.nullable(z.array(z.string())).optional(),
-  accountStatuses: z.nullable(z.array(AccountStatuses$outboundSchema))
-    .optional(),
-  accountTypes: z.nullable(
-    z.array(TaskSearchRequestAccountTypes$outboundSchema),
-  ).optional(),
-  actorId: z.string().optional(),
-  appEntitlementIds: z.nullable(z.array(z.string())).optional(),
-  appResourceIds: z.nullable(z.array(z.string())).optional(),
-  appResourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  appUserSubjectIds: z.nullable(z.array(z.string())).optional(),
-  applicationIds: z.nullable(z.array(z.string())).optional(),
-  assignedOrStepApproverUserId: z.string().optional(),
-  assigneesInIds: z.nullable(z.array(z.string())).optional(),
-  certifyOutcomes: z.nullable(z.array(CertifyOutcomes$outboundSchema))
-    .optional(),
-  createdAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  currentStep: CurrentStep$outboundSchema.optional(),
-  emergencyStatus: EmergencyStatus$outboundSchema.optional(),
-  excludeAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
-  excludeAppResourceTypeIds: z.nullable(z.array(z.string())).optional(),
-  excludeApplicationIds: z.nullable(z.array(z.string())).optional(),
-  excludeIds: z.nullable(z.array(z.string())).optional(),
-  expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
-  grantOutcomes: z.nullable(z.array(GrantOutcomes$outboundSchema)).optional(),
-  includeActedAfter: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  includeDeleted: z.boolean().optional(),
-  myWorkUserIds: z.nullable(z.array(z.string())).optional(),
-  olderThanDuration: z.nullable(z.string()).optional(),
-  openerIds: z.nullable(z.array(z.string())).optional(),
-  openerOrSubjectUserId: z.string().optional(),
-  outcomeAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  outcomeBefore: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  pendingActionFilter: PendingActionFilter$outboundSchema.optional(),
-  previouslyActedOnIds: z.nullable(z.array(z.string())).optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(TaskRef$outboundSchema)).optional(),
-  requireApprovalReason: z.boolean().optional(),
-  requireDenialReason: z.boolean().optional(),
-  revokeOutcomes: z.nullable(z.array(RevokeOutcomes$outboundSchema)).optional(),
-  sortBy: TaskSearchRequestSortBy$outboundSchema.optional(),
-  stepApprovalTypes: z.nullable(z.array(StepApprovalTypes$outboundSchema))
-    .optional(),
-  subjectIds: z.nullable(z.array(z.string())).optional(),
-  taskStates: z.nullable(z.array(TaskStates$outboundSchema)).optional(),
-  taskTypes: z.nullable(z.array(TaskTypeInput$outboundSchema)).optional(),
-  userEmploymentStatuses: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileIds: z.nullable(z.array(z.string())).optional(),
+    accessProfileReviewKinds: z.nullable(
+      z.array(AccessProfileReviewKinds$outboundSchema),
+    ).optional(),
+    accessReviewIds: z.nullable(z.array(z.string())).optional(),
+    accountOwnerIds: z.nullable(z.array(z.string())).optional(),
+    accountStatuses: z.nullable(z.array(AccountStatuses$outboundSchema))
+      .optional(),
+    accountTypes: z.nullable(
+      z.array(TaskSearchRequestAccountTypes$outboundSchema),
+    ).optional(),
+    actorId: z.string().optional(),
+    appEntitlementIds: z.nullable(z.array(z.string())).optional(),
+    appResourceIds: z.nullable(z.array(z.string())).optional(),
+    appResourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    appUserSubjectIds: z.nullable(z.array(z.string())).optional(),
+    applicationIds: z.nullable(z.array(z.string())).optional(),
+    assignedOrStepApproverUserId: z.string().optional(),
+    assigneesInIds: z.nullable(z.array(z.string())).optional(),
+    attentionCauses: z.nullable(z.array(AttentionCauses$outboundSchema))
+      .optional(),
+    certifyOutcomes: z.nullable(z.array(CertifyOutcomes$outboundSchema))
+      .optional(),
+    createdAfter: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    currentStep: CurrentStep$outboundSchema.optional(),
+    emergencyStatus: EmergencyStatus$outboundSchema.optional(),
+    excludeAppEntitlementIds: z.nullable(z.array(z.string())).optional(),
+    excludeAppResourceTypeIds: z.nullable(z.array(z.string())).optional(),
+    excludeApplicationIds: z.nullable(z.array(z.string())).optional(),
+    excludeIds: z.nullable(z.array(z.string())).optional(),
+    expandMask: z.nullable(TaskExpandMask$outboundSchema).optional(),
+    grantOutcomes: z.nullable(z.array(GrantOutcomes$outboundSchema)).optional(),
+    includeActedAfter: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    includeDeleted: z.boolean().optional(),
+    myWorkUserIds: z.nullable(z.array(z.string())).optional(),
+    needsAttention: z.boolean().optional(),
+    olderThanDuration: z.nullable(z.string()).optional(),
+    openerIds: z.nullable(z.array(z.string())).optional(),
+    openerOrSubjectUserId: z.string().optional(),
+    outcomeAfter: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    outcomeBefore: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    pendingActionFilter: PendingActionFilter$outboundSchema.optional(),
+    previouslyActedOnIds: z.nullable(z.array(z.string())).optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(TaskRef$outboundSchema)).optional(),
+    requireApprovalReason: z.boolean().optional(),
+    requireDenialReason: z.boolean().optional(),
+    revokeOutcomes: z.nullable(z.array(RevokeOutcomes$outboundSchema))
+      .optional(),
+    sortBy: TaskSearchRequestSortBy$outboundSchema.optional(),
+    stepApprovalTypes: z.nullable(z.array(StepApprovalTypes$outboundSchema))
+      .optional(),
+    subjectIds: z.nullable(z.array(z.string())).optional(),
+    taskStates: z.nullable(z.array(TaskStates$outboundSchema)).optional(),
+    taskTypes: z.nullable(z.array(TaskTypeInput$outboundSchema)).optional(),
+    userEmploymentStatuses: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function taskSearchRequestToJSON(
   taskSearchRequest: TaskSearchRequest,

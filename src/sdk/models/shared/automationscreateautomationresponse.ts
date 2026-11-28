@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Automation, Automation$inboundSchema } from "./automation.js";
@@ -35,11 +35,13 @@ export const AutomationsCreateAutomationResponse$inboundSchema: z.ZodType<
   AutomationsCreateAutomationResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  automation: z.nullable(Automation$inboundSchema).optional(),
-  webhookCapabilityUrl: z.string().optional(),
-  webhookHmacSecret: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automation: z.nullable(Automation$inboundSchema).optional(),
+    webhookCapabilityUrl: z.string().optional(),
+    webhookHmacSecret: z.string().optional(),
+  })
+);
 
 export function automationsCreateAutomationResponseFromJSON(
   jsonString: string,

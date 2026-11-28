@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -44,13 +44,15 @@ export const PayloadFindingDispatch$inboundSchema: z.ZodType<
   PayloadFindingDispatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  dispatchId: z.string().optional(),
-  finding: z.nullable(Finding$inboundSchema).optional(),
-  findingId: z.string().optional(),
-  payloadTemplate: z.string().optional(),
-  ruleId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dispatchId: z.string().optional(),
+    finding: z.nullable(Finding$inboundSchema).optional(),
+    findingId: z.string().optional(),
+    payloadTemplate: z.string().optional(),
+    ruleId: z.string().optional(),
+  })
+);
 /** @internal */
 export type PayloadFindingDispatch$Outbound = {
   dispatchId?: string | undefined;
@@ -65,13 +67,15 @@ export const PayloadFindingDispatch$outboundSchema: z.ZodType<
   PayloadFindingDispatch$Outbound,
   z.ZodTypeDef,
   PayloadFindingDispatch
-> = z.object({
-  dispatchId: z.string().optional(),
-  finding: z.nullable(Finding$outboundSchema).optional(),
-  findingId: z.string().optional(),
-  payloadTemplate: z.string().optional(),
-  ruleId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dispatchId: z.string().optional(),
+    finding: z.nullable(Finding$outboundSchema).optional(),
+    findingId: z.string().optional(),
+    payloadTemplate: z.string().optional(),
+    ruleId: z.string().optional(),
+  })
+);
 
 export function payloadFindingDispatchToJSON(
   payloadFindingDispatch: PayloadFindingDispatch,

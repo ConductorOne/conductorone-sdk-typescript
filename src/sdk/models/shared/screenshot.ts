@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -47,7 +48,7 @@ export const ScreenshotKind$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ScreenshotKind
-> = openEnums.outboundSchema(ScreenshotKind);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(ScreenshotKind));
 
 /** @internal */
 export type Screenshot$Outbound = {
@@ -62,12 +63,14 @@ export const Screenshot$outboundSchema: z.ZodType<
   Screenshot$Outbound,
   z.ZodTypeDef,
   Screenshot
-> = z.object({
-  contentType: z.string().optional(),
-  data: z.string().optional(),
-  kind: ScreenshotKind$outboundSchema.optional(),
-  route: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    contentType: z.string().optional(),
+    data: z.string().optional(),
+    kind: ScreenshotKind$outboundSchema.optional(),
+    route: z.string().optional(),
+  })
+);
 
 export function screenshotToJSON(screenshot: Screenshot): string {
   return JSON.stringify(Screenshot$outboundSchema.parse(screenshot));

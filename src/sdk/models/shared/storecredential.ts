@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -90,44 +90,46 @@ export const AuthType$inboundSchema: z.ZodType<
   AuthType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(AuthType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(AuthType));
 /** @internal */
 export const AuthType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AuthType
-> = openEnums.outboundSchema(AuthType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AuthType));
 
 /** @internal */
 export const VaultType$inboundSchema: z.ZodType<
   VaultType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(VaultType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(VaultType));
 /** @internal */
 export const VaultType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   VaultType
-> = openEnums.outboundSchema(VaultType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(VaultType));
 
 /** @internal */
 export const StoreCredential$inboundSchema: z.ZodType<
   StoreCredential,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appIdCel: z.string().optional(),
-  authType: AuthType$inboundSchema.optional(),
-  credentialCel: z.string().optional(),
-  expiry: z.nullable(z.string()).optional(),
-  labelCel: z.string().optional(),
-  maxViews: z.number().int().optional(),
-  recipientCel: z.string().optional(),
-  recipientEmailCel: z.string().optional(),
-  ttl: z.nullable(z.string()).optional(),
-  vaultType: VaultType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIdCel: z.string().optional(),
+    authType: AuthType$inboundSchema.optional(),
+    credentialCel: z.string().optional(),
+    expiry: z.nullable(z.string()).optional(),
+    labelCel: z.string().optional(),
+    maxViews: z.number().int().optional(),
+    recipientCel: z.string().optional(),
+    recipientEmailCel: z.string().optional(),
+    ttl: z.nullable(z.string()).optional(),
+    vaultType: VaultType$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type StoreCredential$Outbound = {
   appIdCel?: string | undefined;
@@ -147,18 +149,20 @@ export const StoreCredential$outboundSchema: z.ZodType<
   StoreCredential$Outbound,
   z.ZodTypeDef,
   StoreCredential
-> = z.object({
-  appIdCel: z.string().optional(),
-  authType: AuthType$outboundSchema.optional(),
-  credentialCel: z.string().optional(),
-  expiry: z.nullable(z.string()).optional(),
-  labelCel: z.string().optional(),
-  maxViews: z.number().int().optional(),
-  recipientCel: z.string().optional(),
-  recipientEmailCel: z.string().optional(),
-  ttl: z.nullable(z.string()).optional(),
-  vaultType: VaultType$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIdCel: z.string().optional(),
+    authType: AuthType$outboundSchema.optional(),
+    credentialCel: z.string().optional(),
+    expiry: z.nullable(z.string()).optional(),
+    labelCel: z.string().optional(),
+    maxViews: z.number().int().optional(),
+    recipientCel: z.string().optional(),
+    recipientEmailCel: z.string().optional(),
+    ttl: z.nullable(z.string()).optional(),
+    vaultType: VaultType$outboundSchema.optional(),
+  })
+);
 
 export function storeCredentialToJSON(
   storeCredential: StoreCredential,

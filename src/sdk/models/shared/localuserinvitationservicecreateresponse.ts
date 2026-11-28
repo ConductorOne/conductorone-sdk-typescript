@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -16,6 +16,10 @@ import {
  */
 export type LocalUserInvitationServiceCreateResponse = {
   invitation?: LocalUserInvitation | null | undefined;
+  /**
+   * Link the invitee opens to accept. Returned only here; C1 stores just a hash of its secret.
+   */
+  invitationUrl?: string | undefined;
 };
 
 /** @internal */
@@ -23,9 +27,12 @@ export const LocalUserInvitationServiceCreateResponse$inboundSchema: z.ZodType<
   LocalUserInvitationServiceCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  invitation: z.nullable(LocalUserInvitation$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    invitation: z.nullable(LocalUserInvitation$inboundSchema).optional(),
+    invitationUrl: z.string().optional(),
+  })
+);
 
 export function localUserInvitationServiceCreateResponseFromJSON(
   jsonString: string,

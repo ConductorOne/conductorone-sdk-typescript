@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,15 +46,17 @@ export const C1ApiVaultV1VaultServiceDeleteRequest$outboundSchema: z.ZodType<
   C1ApiVaultV1VaultServiceDeleteRequest$Outbound,
   z.ZodTypeDef,
   C1ApiVaultV1VaultServiceDeleteRequest
-> = z.object({
-  id: z.string(),
-  vaultServiceDeleteRequest: shared.VaultServiceDeleteRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vaultServiceDeleteRequest: "VaultServiceDeleteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    vaultServiceDeleteRequest: shared.VaultServiceDeleteRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vaultServiceDeleteRequest: "VaultServiceDeleteRequest",
+    });
+  })
+);
 
 export function c1ApiVaultV1VaultServiceDeleteRequestToJSON(
   c1ApiVaultV1VaultServiceDeleteRequest: C1ApiVaultV1VaultServiceDeleteRequest,
@@ -71,20 +73,22 @@ export const C1ApiVaultV1VaultServiceDeleteResponse$inboundSchema: z.ZodType<
   C1ApiVaultV1VaultServiceDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  VaultServiceDeleteResponse: shared.VaultServiceDeleteResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "VaultServiceDeleteResponse": "vaultServiceDeleteResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    VaultServiceDeleteResponse: shared.VaultServiceDeleteResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "VaultServiceDeleteResponse": "vaultServiceDeleteResponse",
+    });
+  })
+);
 
 export function c1ApiVaultV1VaultServiceDeleteResponseFromJSON(
   jsonString: string,

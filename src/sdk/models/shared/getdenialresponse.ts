@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,11 +30,13 @@ export const GetDenialResponse$inboundSchema: z.ZodType<
   GetDenialResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  episode: z.nullable(DenialEpisode$inboundSchema).optional(),
-  firstDenialMoney: z.nullable(DenialMoneySnapshot$inboundSchema).optional(),
-  historicalTrace: z.nullable(AdmissionTrace$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    episode: z.nullable(DenialEpisode$inboundSchema).optional(),
+    firstDenialMoney: z.nullable(DenialMoneySnapshot$inboundSchema).optional(),
+    historicalTrace: z.nullable(AdmissionTrace$inboundSchema).optional(),
+  })
+);
 
 export function getDenialResponseFromJSON(
   jsonString: string,

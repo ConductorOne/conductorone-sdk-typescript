@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   UserRef,
   UserRef$Outbound,
@@ -26,9 +27,11 @@ export const DeleteAppUserOwnerRequest$outboundSchema: z.ZodType<
   DeleteAppUserOwnerRequest$Outbound,
   z.ZodTypeDef,
   DeleteAppUserOwnerRequest
-> = z.object({
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userRef: z.nullable(UserRef$outboundSchema).optional(),
+  })
+);
 
 export function deleteAppUserOwnerRequestToJSON(
   deleteAppUserOwnerRequest: DeleteAppUserOwnerRequest,

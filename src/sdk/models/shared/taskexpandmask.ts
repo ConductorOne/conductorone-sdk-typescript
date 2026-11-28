@@ -3,13 +3,14 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The task expand mask is an array of strings that specifes the related objects the requester wishes to have returned when making a request where the expand mask is part of the input. Use '*' to view all possible responses.
  */
 export type TaskExpandMask = {
   /**
-   * A list of paths to expand in the response. May be any combination of "*", "access_review_id", "user_id", "created_by_user_id", "app_id", "app_user_id", "app_entitlement_ids", "step_approver_ids", "approver_ids", "identity_user_id", "insight_ids", "app_user_last_usage", "entitlement_scope_bindings", "scope_role_resources", and "resource".
+   * A list of paths to expand in the response. May be any combination of "*", "access_review_id", "user_id", "created_by_user_id", "app_id", "app_user_id", "app_entitlement_ids", "step_approver_ids", "approver_ids", "identity_user_id", "insight_ids", "app_user_last_usage", "entitlement_scope_bindings", "scope_role_resources", "resource", and "credential_issue".
    */
   paths?: Array<string> | null | undefined;
 };
@@ -24,9 +25,11 @@ export const TaskExpandMask$outboundSchema: z.ZodType<
   TaskExpandMask$Outbound,
   z.ZodTypeDef,
   TaskExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function taskExpandMaskToJSON(taskExpandMask: TaskExpandMask): string {
   return JSON.stringify(TaskExpandMask$outboundSchema.parse(taskExpandMask));

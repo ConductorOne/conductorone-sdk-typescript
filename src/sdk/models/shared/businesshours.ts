@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,12 +34,14 @@ export const BusinessHours$inboundSchema: z.ZodType<
   BusinessHours,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  days: z.nullable(z.array(z.number().int())).optional(),
-  end: z.string().optional(),
-  start: z.string().optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    days: z.nullable(z.array(z.number().int())).optional(),
+    end: z.string().optional(),
+    start: z.string().optional(),
+    timezone: z.string().optional(),
+  })
+);
 /** @internal */
 export type BusinessHours$Outbound = {
   days?: Array<number> | null | undefined;
@@ -53,12 +55,14 @@ export const BusinessHours$outboundSchema: z.ZodType<
   BusinessHours$Outbound,
   z.ZodTypeDef,
   BusinessHours
-> = z.object({
-  days: z.nullable(z.array(z.number().int())).optional(),
-  end: z.string().optional(),
-  start: z.string().optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    days: z.nullable(z.array(z.number().int())).optional(),
+    end: z.string().optional(),
+    start: z.string().optional(),
+    timezone: z.string().optional(),
+  })
+);
 
 export function businessHoursToJSON(businessHours: BusinessHours): string {
   return JSON.stringify(BusinessHours$outboundSchema.parse(businessHours));

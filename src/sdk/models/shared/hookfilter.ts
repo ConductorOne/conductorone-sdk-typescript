@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,9 +38,11 @@ export const HookFilter$inboundSchema: z.ZodType<
   HookFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  celExpression: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    celExpression: z.string().optional(),
+  })
+);
 /** @internal */
 export type HookFilter$Outbound = {
   celExpression?: string | undefined;
@@ -51,9 +53,11 @@ export const HookFilter$outboundSchema: z.ZodType<
   HookFilter$Outbound,
   z.ZodTypeDef,
   HookFilter
-> = z.object({
-  celExpression: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    celExpression: z.string().optional(),
+  })
+);
 
 export function hookFilterToJSON(hookFilter: HookFilter): string {
   return JSON.stringify(HookFilter$outboundSchema.parse(hookFilter));

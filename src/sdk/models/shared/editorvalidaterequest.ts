@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The EditorValidateRequest message contains the configuration text to validate.
@@ -24,9 +25,11 @@ export const EditorValidateRequest$outboundSchema: z.ZodType<
   EditorValidateRequest$Outbound,
   z.ZodTypeDef,
   EditorValidateRequest
-> = z.object({
-  text: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string().optional(),
+  })
+);
 
 export function editorValidateRequestToJSON(
   editorValidateRequest: EditorValidateRequest,

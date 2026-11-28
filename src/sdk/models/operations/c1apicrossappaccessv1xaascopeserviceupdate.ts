@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,17 +53,19 @@ export const C1ApiCrossAppAccessV1XAAScopeServiceUpdateRequest$outboundSchema:
     C1ApiCrossAppAccessV1XAAScopeServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAScopeServiceUpdateRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    xaaScopeServiceUpdateRequest: shared
-      .XAAScopeServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      xaaScopeServiceUpdateRequest: "XAAScopeServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      xaaScopeServiceUpdateRequest: shared
+        .XAAScopeServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        xaaScopeServiceUpdateRequest: "XAAScopeServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAScopeServiceUpdateRequestToJSON(
   c1ApiCrossAppAccessV1XAAScopeServiceUpdateRequest:
@@ -82,20 +84,22 @@ export const C1ApiCrossAppAccessV1XAAScopeServiceUpdateResponse$inboundSchema:
     C1ApiCrossAppAccessV1XAAScopeServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAScopeServiceUpdateResponse: shared
-      .XAAScopeServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAScopeServiceUpdateResponse": "xaaScopeServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAScopeServiceUpdateResponse: shared
+        .XAAScopeServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAScopeServiceUpdateResponse": "xaaScopeServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAScopeServiceUpdateResponseFromJSON(
   jsonString: string,

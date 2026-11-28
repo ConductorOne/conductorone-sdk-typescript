@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -43,24 +43,26 @@ export type Vault = {
 };
 
 /** @internal */
-export const Vault$inboundSchema: z.ZodType<Vault, z.ZodTypeDef, unknown> = z
-  .object({
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    credentialExpirationDuration: z.nullable(z.string()).optional(),
-    deletedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    description: z.string().optional(),
-    displayName: z.string().optional(),
-    groupAuthzVault: z.nullable(GroupAuthzVault$inboundSchema).optional(),
-    id: z.string().optional(),
-    magicVault: z.nullable(MagicVault$inboundSchema).optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
+export const Vault$inboundSchema: z.ZodType<Vault, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      credentialExpirationDuration: z.nullable(z.string()).optional(),
+      deletedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      description: z.string().optional(),
+      displayName: z.string().optional(),
+      groupAuthzVault: z.nullable(GroupAuthzVault$inboundSchema).optional(),
+      id: z.string().optional(),
+      magicVault: z.nullable(MagicVault$inboundSchema).optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    })
+  );
 
 export function vaultFromJSON(
   jsonString: string,

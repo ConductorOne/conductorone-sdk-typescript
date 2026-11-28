@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -198,30 +198,32 @@ export const FieldRules$inboundSchema: z.ZodType<
   FieldRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  any: z.nullable(AnyRules$inboundSchema).optional(),
-  bool: z.nullable(BoolRules$inboundSchema).optional(),
-  bytes: z.nullable(BytesRules$inboundSchema).optional(),
-  double: z.nullable(DoubleRules$inboundSchema).optional(),
-  duration: z.nullable(DurationRules$inboundSchema).optional(),
-  enum: z.nullable(EnumRules$inboundSchema).optional(),
-  fixed32: z.nullable(Fixed32Rules$inboundSchema).optional(),
-  fixed64: z.nullable(Fixed64Rules$inboundSchema).optional(),
-  float: z.nullable(FloatRules$inboundSchema).optional(),
-  int32: z.nullable(Int32Rules$inboundSchema).optional(),
-  int64: z.nullable(Int64Rules$inboundSchema).optional(),
-  map: z.nullable(z.lazy(() => MapRules$inboundSchema)).optional(),
-  message: z.nullable(MessageRules$inboundSchema).optional(),
-  repeated: z.nullable(z.lazy(() => RepeatedRules$inboundSchema)).optional(),
-  sfixed32: z.nullable(SFixed32Rules$inboundSchema).optional(),
-  sfixed64: z.nullable(SFixed64Rules$inboundSchema).optional(),
-  sint32: z.nullable(SInt32Rules$inboundSchema).optional(),
-  sint64: z.nullable(SInt64Rules$inboundSchema).optional(),
-  string: z.nullable(StringRules$inboundSchema).optional(),
-  timestamp: z.nullable(TimestampRules$inboundSchema).optional(),
-  uint32: z.nullable(UInt32Rules$inboundSchema).optional(),
-  uint64: z.nullable(UInt64Rules$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    any: z.nullable(AnyRules$inboundSchema).optional(),
+    bool: z.nullable(BoolRules$inboundSchema).optional(),
+    bytes: z.nullable(BytesRules$inboundSchema).optional(),
+    double: z.nullable(DoubleRules$inboundSchema).optional(),
+    duration: z.nullable(DurationRules$inboundSchema).optional(),
+    enum: z.nullable(EnumRules$inboundSchema).optional(),
+    fixed32: z.nullable(Fixed32Rules$inboundSchema).optional(),
+    fixed64: z.nullable(Fixed64Rules$inboundSchema).optional(),
+    float: z.nullable(FloatRules$inboundSchema).optional(),
+    int32: z.nullable(Int32Rules$inboundSchema).optional(),
+    int64: z.nullable(Int64Rules$inboundSchema).optional(),
+    map: z.nullable(z.lazy(() => MapRules$inboundSchema)).optional(),
+    message: z.nullable(MessageRules$inboundSchema).optional(),
+    repeated: z.nullable(z.lazy(() => RepeatedRules$inboundSchema)).optional(),
+    sfixed32: z.nullable(SFixed32Rules$inboundSchema).optional(),
+    sfixed64: z.nullable(SFixed64Rules$inboundSchema).optional(),
+    sint32: z.nullable(SInt32Rules$inboundSchema).optional(),
+    sint64: z.nullable(SInt64Rules$inboundSchema).optional(),
+    string: z.nullable(StringRules$inboundSchema).optional(),
+    timestamp: z.nullable(TimestampRules$inboundSchema).optional(),
+    uint32: z.nullable(UInt32Rules$inboundSchema).optional(),
+    uint64: z.nullable(UInt64Rules$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FieldRules$Outbound = {
   any?: AnyRules$Outbound | null | undefined;
@@ -253,30 +255,32 @@ export const FieldRules$outboundSchema: z.ZodType<
   FieldRules$Outbound,
   z.ZodTypeDef,
   FieldRules
-> = z.object({
-  any: z.nullable(AnyRules$outboundSchema).optional(),
-  bool: z.nullable(BoolRules$outboundSchema).optional(),
-  bytes: z.nullable(BytesRules$outboundSchema).optional(),
-  double: z.nullable(DoubleRules$outboundSchema).optional(),
-  duration: z.nullable(DurationRules$outboundSchema).optional(),
-  enum: z.nullable(EnumRules$outboundSchema).optional(),
-  fixed32: z.nullable(Fixed32Rules$outboundSchema).optional(),
-  fixed64: z.nullable(Fixed64Rules$outboundSchema).optional(),
-  float: z.nullable(FloatRules$outboundSchema).optional(),
-  int32: z.nullable(Int32Rules$outboundSchema).optional(),
-  int64: z.nullable(Int64Rules$outboundSchema).optional(),
-  map: z.nullable(z.lazy(() => MapRules$outboundSchema)).optional(),
-  message: z.nullable(MessageRules$outboundSchema).optional(),
-  repeated: z.nullable(z.lazy(() => RepeatedRules$outboundSchema)).optional(),
-  sfixed32: z.nullable(SFixed32Rules$outboundSchema).optional(),
-  sfixed64: z.nullable(SFixed64Rules$outboundSchema).optional(),
-  sint32: z.nullable(SInt32Rules$outboundSchema).optional(),
-  sint64: z.nullable(SInt64Rules$outboundSchema).optional(),
-  string: z.nullable(StringRules$outboundSchema).optional(),
-  timestamp: z.nullable(TimestampRules$outboundSchema).optional(),
-  uint32: z.nullable(UInt32Rules$outboundSchema).optional(),
-  uint64: z.nullable(UInt64Rules$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    any: z.nullable(AnyRules$outboundSchema).optional(),
+    bool: z.nullable(BoolRules$outboundSchema).optional(),
+    bytes: z.nullable(BytesRules$outboundSchema).optional(),
+    double: z.nullable(DoubleRules$outboundSchema).optional(),
+    duration: z.nullable(DurationRules$outboundSchema).optional(),
+    enum: z.nullable(EnumRules$outboundSchema).optional(),
+    fixed32: z.nullable(Fixed32Rules$outboundSchema).optional(),
+    fixed64: z.nullable(Fixed64Rules$outboundSchema).optional(),
+    float: z.nullable(FloatRules$outboundSchema).optional(),
+    int32: z.nullable(Int32Rules$outboundSchema).optional(),
+    int64: z.nullable(Int64Rules$outboundSchema).optional(),
+    map: z.nullable(z.lazy(() => MapRules$outboundSchema)).optional(),
+    message: z.nullable(MessageRules$outboundSchema).optional(),
+    repeated: z.nullable(z.lazy(() => RepeatedRules$outboundSchema)).optional(),
+    sfixed32: z.nullable(SFixed32Rules$outboundSchema).optional(),
+    sfixed64: z.nullable(SFixed64Rules$outboundSchema).optional(),
+    sint32: z.nullable(SInt32Rules$outboundSchema).optional(),
+    sint64: z.nullable(SInt64Rules$outboundSchema).optional(),
+    string: z.nullable(StringRules$outboundSchema).optional(),
+    timestamp: z.nullable(TimestampRules$outboundSchema).optional(),
+    uint32: z.nullable(UInt32Rules$outboundSchema).optional(),
+    uint64: z.nullable(UInt64Rules$outboundSchema).optional(),
+  })
+);
 
 export function fieldRulesToJSON(fieldRules: FieldRules): string {
   return JSON.stringify(FieldRules$outboundSchema.parse(fieldRules));

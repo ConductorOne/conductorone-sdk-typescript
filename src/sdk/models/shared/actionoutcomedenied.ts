@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,11 +19,13 @@ export const ActionOutcomeDenied$inboundSchema: z.ZodType<
   ActionOutcomeDenied,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    outcomeTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ActionOutcomeDenied$Outbound = {
   outcomeTime?: string | null | undefined;
@@ -34,9 +36,12 @@ export const ActionOutcomeDenied$outboundSchema: z.ZodType<
   ActionOutcomeDenied$Outbound,
   z.ZodTypeDef,
   ActionOutcomeDenied
-> = z.object({
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    outcomeTime: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function actionOutcomeDeniedToJSON(
   actionOutcomeDenied: ActionOutcomeDenied,

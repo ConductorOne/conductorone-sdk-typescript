@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   FundsSpendExtension,
   FundsSpendExtension$Outbound,
@@ -27,9 +28,11 @@ export const MyFundLimitsServiceSetTemporaryLimitRequest$outboundSchema:
     MyFundLimitsServiceSetTemporaryLimitRequest$Outbound,
     z.ZodTypeDef,
     MyFundLimitsServiceSetTemporaryLimitRequest
-  > = z.object({
-    extension: z.nullable(FundsSpendExtension$outboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      extension: z.nullable(FundsSpendExtension$outboundSchema).optional(),
+    })
+  );
 
 export function myFundLimitsServiceSetTemporaryLimitRequestToJSON(
   myFundLimitsServiceSetTemporaryLimitRequest:

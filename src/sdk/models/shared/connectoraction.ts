@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,12 +39,14 @@ export const ConnectorAction$inboundSchema: z.ZodType<
   ConnectorAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actionName: z.string().optional(),
-  argsTemplate: z.nullable(z.record(z.any())).optional(),
-  connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actionName: z.string().optional(),
+    argsTemplate: z.nullable(z.record(z.any())).optional(),
+    connectorRef: z.nullable(ConnectorRef$inboundSchema).optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 /** @internal */
 export type ConnectorAction$Outbound = {
   actionName?: string | undefined;
@@ -58,12 +60,14 @@ export const ConnectorAction$outboundSchema: z.ZodType<
   ConnectorAction$Outbound,
   z.ZodTypeDef,
   ConnectorAction
-> = z.object({
-  actionName: z.string().optional(),
-  argsTemplate: z.nullable(z.record(z.any())).optional(),
-  connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actionName: z.string().optional(),
+    argsTemplate: z.nullable(z.record(z.any())).optional(),
+    connectorRef: z.nullable(ConnectorRef$outboundSchema).optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 
 export function connectorActionToJSON(
   connectorAction: ConnectorAction,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * DecoyUserClientCredentialInput plants a client-credential decoy
@@ -27,9 +28,11 @@ export const DecoyUserClientCredentialInput$outboundSchema: z.ZodType<
   DecoyUserClientCredentialInput$Outbound,
   z.ZodTypeDef,
   DecoyUserClientCredentialInput
-> = z.object({
-  userId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string().optional(),
+  })
+);
 
 export function decoyUserClientCredentialInputToJSON(
   decoyUserClientCredentialInput: DecoyUserClientCredentialInput,

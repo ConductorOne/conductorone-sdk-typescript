@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -81,15 +81,17 @@ export const TFSchemaMapping$inboundSchema: z.ZodType<
   TFSchemaMapping,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  dataSource: z.nullable(DataSource$inboundSchema).optional(),
-  fields: z.nullable(z.array(TFFieldMapping$inboundSchema)).optional(),
-  providerVersion: z.string().optional(),
-  refererShapes: z.nullable(z.array(CompositeKeyFieldSet$inboundSchema))
-    .optional(),
-  resource: z.nullable(Resource$inboundSchema).optional(),
-  tfTypeName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dataSource: z.nullable(DataSource$inboundSchema).optional(),
+    fields: z.nullable(z.array(TFFieldMapping$inboundSchema)).optional(),
+    providerVersion: z.string().optional(),
+    refererShapes: z.nullable(z.array(CompositeKeyFieldSet$inboundSchema))
+      .optional(),
+    resource: z.nullable(Resource$inboundSchema).optional(),
+    tfTypeName: z.string().optional(),
+  })
+);
 
 export function tfSchemaMappingFromJSON(
   jsonString: string,

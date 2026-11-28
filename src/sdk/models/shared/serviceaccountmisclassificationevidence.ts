@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const ServiceAccountMisclassificationEvidence$inboundSchema: z.ZodType<
   ServiceAccountMisclassificationEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  detectionReason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    detectionReason: z.string().optional(),
+  })
+);
 /** @internal */
 export type ServiceAccountMisclassificationEvidence$Outbound = {
   detectionReason?: string | undefined;
@@ -35,9 +37,11 @@ export const ServiceAccountMisclassificationEvidence$outboundSchema: z.ZodType<
   ServiceAccountMisclassificationEvidence$Outbound,
   z.ZodTypeDef,
   ServiceAccountMisclassificationEvidence
-> = z.object({
-  detectionReason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    detectionReason: z.string().optional(),
+  })
+);
 
 export function serviceAccountMisclassificationEvidenceToJSON(
   serviceAccountMisclassificationEvidence:

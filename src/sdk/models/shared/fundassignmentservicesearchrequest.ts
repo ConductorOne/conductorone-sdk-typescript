@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The FundAssignmentServiceSearchRequest message.
@@ -34,11 +35,13 @@ export const FundAssignmentServiceSearchRequest$outboundSchema: z.ZodType<
   FundAssignmentServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   FundAssignmentServiceSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function fundAssignmentServiceSearchRequestToJSON(
   fundAssignmentServiceSearchRequest: FundAssignmentServiceSearchRequest,

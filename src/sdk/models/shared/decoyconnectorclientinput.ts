@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * DecoyConnectorClientInput plants a connector-shaped credential decoy.
@@ -21,7 +22,7 @@ export const DecoyConnectorClientInput$outboundSchema: z.ZodType<
   DecoyConnectorClientInput$Outbound,
   z.ZodTypeDef,
   DecoyConnectorClientInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function decoyConnectorClientInputToJSON(
   decoyConnectorClientInput: DecoyConnectorClientInput,

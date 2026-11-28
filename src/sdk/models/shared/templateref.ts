@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,10 +29,12 @@ export const TemplateRef$inboundSchema: z.ZodType<
   TemplateRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  templateId: z.string().optional(),
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    templateId: z.string().optional(),
+    version: z.string().optional(),
+  })
+);
 /** @internal */
 export type TemplateRef$Outbound = {
   templateId?: string | undefined;
@@ -44,10 +46,12 @@ export const TemplateRef$outboundSchema: z.ZodType<
   TemplateRef$Outbound,
   z.ZodTypeDef,
   TemplateRef
-> = z.object({
-  templateId: z.string().optional(),
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    templateId: z.string().optional(),
+    version: z.string().optional(),
+  })
+);
 
 export function templateRefToJSON(templateRef: TemplateRef): string {
   return JSON.stringify(TemplateRef$outboundSchema.parse(templateRef));

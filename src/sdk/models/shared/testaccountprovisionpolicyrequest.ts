@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * TestAccountProvisionPolicyRequest is the request for testing an account provision policy.
@@ -24,9 +25,11 @@ export const TestAccountProvisionPolicyRequest$outboundSchema: z.ZodType<
   TestAccountProvisionPolicyRequest$Outbound,
   z.ZodTypeDef,
   TestAccountProvisionPolicyRequest
-> = z.object({
-  cel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cel: z.string().optional(),
+  })
+);
 
 export function testAccountProvisionPolicyRequestToJSON(
   testAccountProvisionPolicyRequest: TestAccountProvisionPolicyRequest,

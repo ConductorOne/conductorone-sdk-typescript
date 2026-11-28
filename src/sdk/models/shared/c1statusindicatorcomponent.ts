@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { DynamicBool, DynamicBool$inboundSchema } from "./dynamicbool.js";
@@ -24,12 +24,14 @@ export const C1StatusIndicatorComponent$inboundSchema: z.ZodType<
   C1StatusIndicatorComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.nullable(DynamicString$inboundSchema).optional(),
-  showSpinner: z.nullable(DynamicBool$inboundSchema).optional(),
-  status: z.nullable(DynamicString$inboundSchema).optional(),
-  toolName: z.nullable(DynamicString$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.nullable(DynamicString$inboundSchema).optional(),
+    showSpinner: z.nullable(DynamicBool$inboundSchema).optional(),
+    status: z.nullable(DynamicString$inboundSchema).optional(),
+    toolName: z.nullable(DynamicString$inboundSchema).optional(),
+  })
+);
 
 export function c1StatusIndicatorComponentFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const StringMapRules$inboundSchema: z.ZodType<
   StringMapRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  isRequired: z.boolean().optional(),
-  validateEmpty: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    isRequired: z.boolean().optional(),
+    validateEmpty: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type StringMapRules$Outbound = {
   isRequired?: boolean | undefined;
@@ -41,10 +43,12 @@ export const StringMapRules$outboundSchema: z.ZodType<
   StringMapRules$Outbound,
   z.ZodTypeDef,
   StringMapRules
-> = z.object({
-  isRequired: z.boolean().optional(),
-  validateEmpty: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    isRequired: z.boolean().optional(),
+    validateEmpty: z.boolean().optional(),
+  })
+);
 
 export function stringMapRulesToJSON(stringMapRules: StringMapRules): string {
   return JSON.stringify(StringMapRules$outboundSchema.parse(stringMapRules));

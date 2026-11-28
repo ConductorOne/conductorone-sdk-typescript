@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,6 +26,10 @@ import {
  *   - channelNameCel
  */
 export type SendSlackMessage = {
+  /**
+   * Allow a private channel retry if Slack restricts public channel creation. Defaults to false.
+   */
+  allowPrivateChannelFallback?: boolean | undefined;
   /**
    * The body field.
    */
@@ -74,17 +78,21 @@ export const SendSlackMessage$inboundSchema: z.ZodType<
   SendSlackMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  body: z.string().optional(),
-  channelIsId: z.boolean().optional(),
-  channelName: z.nullable(z.string()).optional(),
-  channelNameCel: z.nullable(z.string()).optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPrivateChannelFallback: z.boolean().optional(),
+    body: z.string().optional(),
+    channelIsId: z.boolean().optional(),
+    channelName: z.nullable(z.string()).optional(),
+    channelNameCel: z.nullable(z.string()).optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdsCel: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type SendSlackMessage$Outbound = {
+  allowPrivateChannelFallback?: boolean | undefined;
   body?: string | undefined;
   channelIsId?: boolean | undefined;
   channelName?: string | null | undefined;
@@ -99,15 +107,18 @@ export const SendSlackMessage$outboundSchema: z.ZodType<
   SendSlackMessage$Outbound,
   z.ZodTypeDef,
   SendSlackMessage
-> = z.object({
-  body: z.string().optional(),
-  channelIsId: z.boolean().optional(),
-  channelName: z.nullable(z.string()).optional(),
-  channelNameCel: z.nullable(z.string()).optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdsCel: z.string().optional(),
-  userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowPrivateChannelFallback: z.boolean().optional(),
+    body: z.string().optional(),
+    channelIsId: z.boolean().optional(),
+    channelName: z.nullable(z.string()).optional(),
+    channelNameCel: z.nullable(z.string()).optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdsCel: z.string().optional(),
+    userRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+  })
+);
 
 export function sendSlackMessageToJSON(
   sendSlackMessage: SendSlackMessage,

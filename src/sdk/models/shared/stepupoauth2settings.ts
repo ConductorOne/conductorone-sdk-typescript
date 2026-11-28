@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,9 +32,11 @@ export const StepUpOAuth2Settings$inboundSchema: z.ZodType<
   StepUpOAuth2Settings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  acrValues: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acrValues: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type StepUpOAuth2Settings$Outbound = {
   acrValues?: Array<string> | null | undefined;
@@ -45,9 +47,11 @@ export const StepUpOAuth2Settings$outboundSchema: z.ZodType<
   StepUpOAuth2Settings$Outbound,
   z.ZodTypeDef,
   StepUpOAuth2Settings
-> = z.object({
-  acrValues: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acrValues: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function stepUpOAuth2SettingsToJSON(
   stepUpOAuth2Settings: StepUpOAuth2Settings,

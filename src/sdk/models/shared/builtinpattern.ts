@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -127,27 +127,29 @@ export const BuiltInPattern$inboundSchema: z.ZodType<
   BuiltInPattern,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  blockOutput: z.nullable(BlockOutputConfig$inboundSchema).optional(),
-  blockToolCall: z.nullable(BlockToolCallConfig$inboundSchema).optional(),
-  creditCardBlocking: z.nullable(CreditCardBlockingConfig$inboundSchema)
-    .optional(),
-  encodedContentGuard: z.nullable(EncodedContentGuardConfig$inboundSchema)
-    .optional(),
-  linkFilter: z.nullable(LinkFilterConfig$inboundSchema).optional(),
-  piiRedaction: z.nullable(PIIRedactionConfig$inboundSchema).optional(),
-  preToolBlock: z.nullable(PreToolBlockConfig$inboundSchema).optional(),
-  promptInjectionScan: z.nullable(PromptInjectionScanConfig$inboundSchema)
-    .optional(),
-  queryScopeLimit: z.nullable(QueryScopeLimitConfig$inboundSchema).optional(),
-  secretsMasking: z.nullable(SecretsMaskingConfig$inboundSchema).optional(),
-  sensitiveFileGuard: z.nullable(SensitiveFileGuardConfig$inboundSchema)
-    .optional(),
-  toolOutputSizeGuard: z.nullable(ToolOutputSizeGuardConfig$inboundSchema)
-    .optional(),
-  writeAuthorization: z.nullable(WriteAuthorizationConfig$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blockOutput: z.nullable(BlockOutputConfig$inboundSchema).optional(),
+    blockToolCall: z.nullable(BlockToolCallConfig$inboundSchema).optional(),
+    creditCardBlocking: z.nullable(CreditCardBlockingConfig$inboundSchema)
+      .optional(),
+    encodedContentGuard: z.nullable(EncodedContentGuardConfig$inboundSchema)
+      .optional(),
+    linkFilter: z.nullable(LinkFilterConfig$inboundSchema).optional(),
+    piiRedaction: z.nullable(PIIRedactionConfig$inboundSchema).optional(),
+    preToolBlock: z.nullable(PreToolBlockConfig$inboundSchema).optional(),
+    promptInjectionScan: z.nullable(PromptInjectionScanConfig$inboundSchema)
+      .optional(),
+    queryScopeLimit: z.nullable(QueryScopeLimitConfig$inboundSchema).optional(),
+    secretsMasking: z.nullable(SecretsMaskingConfig$inboundSchema).optional(),
+    sensitiveFileGuard: z.nullable(SensitiveFileGuardConfig$inboundSchema)
+      .optional(),
+    toolOutputSizeGuard: z.nullable(ToolOutputSizeGuardConfig$inboundSchema)
+      .optional(),
+    writeAuthorization: z.nullable(WriteAuthorizationConfig$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type BuiltInPattern$Outbound = {
   blockOutput?: BlockOutputConfig$Outbound | null | undefined;
@@ -170,27 +172,30 @@ export const BuiltInPattern$outboundSchema: z.ZodType<
   BuiltInPattern$Outbound,
   z.ZodTypeDef,
   BuiltInPattern
-> = z.object({
-  blockOutput: z.nullable(BlockOutputConfig$outboundSchema).optional(),
-  blockToolCall: z.nullable(BlockToolCallConfig$outboundSchema).optional(),
-  creditCardBlocking: z.nullable(CreditCardBlockingConfig$outboundSchema)
-    .optional(),
-  encodedContentGuard: z.nullable(EncodedContentGuardConfig$outboundSchema)
-    .optional(),
-  linkFilter: z.nullable(LinkFilterConfig$outboundSchema).optional(),
-  piiRedaction: z.nullable(PIIRedactionConfig$outboundSchema).optional(),
-  preToolBlock: z.nullable(PreToolBlockConfig$outboundSchema).optional(),
-  promptInjectionScan: z.nullable(PromptInjectionScanConfig$outboundSchema)
-    .optional(),
-  queryScopeLimit: z.nullable(QueryScopeLimitConfig$outboundSchema).optional(),
-  secretsMasking: z.nullable(SecretsMaskingConfig$outboundSchema).optional(),
-  sensitiveFileGuard: z.nullable(SensitiveFileGuardConfig$outboundSchema)
-    .optional(),
-  toolOutputSizeGuard: z.nullable(ToolOutputSizeGuardConfig$outboundSchema)
-    .optional(),
-  writeAuthorization: z.nullable(WriteAuthorizationConfig$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blockOutput: z.nullable(BlockOutputConfig$outboundSchema).optional(),
+    blockToolCall: z.nullable(BlockToolCallConfig$outboundSchema).optional(),
+    creditCardBlocking: z.nullable(CreditCardBlockingConfig$outboundSchema)
+      .optional(),
+    encodedContentGuard: z.nullable(EncodedContentGuardConfig$outboundSchema)
+      .optional(),
+    linkFilter: z.nullable(LinkFilterConfig$outboundSchema).optional(),
+    piiRedaction: z.nullable(PIIRedactionConfig$outboundSchema).optional(),
+    preToolBlock: z.nullable(PreToolBlockConfig$outboundSchema).optional(),
+    promptInjectionScan: z.nullable(PromptInjectionScanConfig$outboundSchema)
+      .optional(),
+    queryScopeLimit: z.nullable(QueryScopeLimitConfig$outboundSchema)
+      .optional(),
+    secretsMasking: z.nullable(SecretsMaskingConfig$outboundSchema).optional(),
+    sensitiveFileGuard: z.nullable(SensitiveFileGuardConfig$outboundSchema)
+      .optional(),
+    toolOutputSizeGuard: z.nullable(ToolOutputSizeGuardConfig$outboundSchema)
+      .optional(),
+    writeAuthorization: z.nullable(WriteAuthorizationConfig$outboundSchema)
+      .optional(),
+  })
+);
 
 export function builtInPatternToJSON(builtInPattern: BuiltInPattern): string {
   return JSON.stringify(BuiltInPattern$outboundSchema.parse(builtInPattern));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const SimilarUsernameMatchEvidence$inboundSchema: z.ZodType<
   SimilarUsernameMatchEvidence,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appUsername: z.string().optional(),
-  identityUsername: z.string().optional(),
-  similarityScore: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUsername: z.string().optional(),
+    identityUsername: z.string().optional(),
+    similarityScore: z.number().optional(),
+  })
+);
 /** @internal */
 export type SimilarUsernameMatchEvidence$Outbound = {
   appUsername?: string | undefined;
@@ -47,11 +49,13 @@ export const SimilarUsernameMatchEvidence$outboundSchema: z.ZodType<
   SimilarUsernameMatchEvidence$Outbound,
   z.ZodTypeDef,
   SimilarUsernameMatchEvidence
-> = z.object({
-  appUsername: z.string().optional(),
-  identityUsername: z.string().optional(),
-  similarityScore: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUsername: z.string().optional(),
+    identityUsername: z.string().optional(),
+    similarityScore: z.number().optional(),
+  })
+);
 
 export function similarUsernameMatchEvidenceToJSON(
   similarUsernameMatchEvidence: SimilarUsernameMatchEvidence,

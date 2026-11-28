@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,18 +40,20 @@ export const ProvisionWaitingOn$inboundSchema: z.ZodType<
   ProvisionWaitingOn,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  devicePlacement: z.nullable(WaitingForDevicePlacement$inboundSchema)
-    .optional(),
-  entitlementMerge: z.nullable(WaitingForEntitlementMerge$inboundSchema)
-    .optional(),
-  fallbackAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  startedWaitingAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    devicePlacement: z.nullable(WaitingForDevicePlacement$inboundSchema)
+      .optional(),
+    entitlementMerge: z.nullable(WaitingForEntitlementMerge$inboundSchema)
+      .optional(),
+    fallbackAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    startedWaitingAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ProvisionWaitingOn$Outbound = {
   devicePlacement?: WaitingForDevicePlacement$Outbound | null | undefined;
@@ -65,15 +67,17 @@ export const ProvisionWaitingOn$outboundSchema: z.ZodType<
   ProvisionWaitingOn$Outbound,
   z.ZodTypeDef,
   ProvisionWaitingOn
-> = z.object({
-  devicePlacement: z.nullable(WaitingForDevicePlacement$outboundSchema)
-    .optional(),
-  entitlementMerge: z.nullable(WaitingForEntitlementMerge$outboundSchema)
-    .optional(),
-  fallbackAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  startedWaitingAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    devicePlacement: z.nullable(WaitingForDevicePlacement$outboundSchema)
+      .optional(),
+    entitlementMerge: z.nullable(WaitingForEntitlementMerge$outboundSchema)
+      .optional(),
+    fallbackAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    startedWaitingAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function provisionWaitingOnToJSON(
   provisionWaitingOn: ProvisionWaitingOn,

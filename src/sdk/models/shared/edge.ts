@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -15,11 +15,23 @@ import {
   EdgeCredentialInjection$outboundSchema,
 } from "./edgecredentialinjection.js";
 import {
+  EdgeEgressCheck,
+  EdgeEgressCheck$inboundSchema,
+  EdgeEgressCheck$Outbound,
+  EdgeEgressCheck$outboundSchema,
+} from "./edgeegresscheck.js";
+import {
   EdgeEgressRule,
   EdgeEgressRule$inboundSchema,
   EdgeEgressRule$Outbound,
   EdgeEgressRule$outboundSchema,
 } from "./edgeegressrule.js";
+import {
+  EdgeInferenceConnection,
+  EdgeInferenceConnection$inboundSchema,
+  EdgeInferenceConnection$Outbound,
+  EdgeInferenceConnection$outboundSchema,
+} from "./edgeinferenceconnection.js";
 import {
   EdgeInferenceRoute,
   EdgeInferenceRoute$inboundSchema,
@@ -75,6 +87,32 @@ export const EdgeMode = {
 export type EdgeMode = OpenEnum<typeof EdgeMode>;
 
 /**
+ * Default inspection profile for hosted egress response bodies. Unspecified
+ *
+ * @remarks
+ *  means strict. Requests always use strict inspection. Web balanced requires
+ *  a runtime that supports it; older runtimes retain strict inspection.
+ */
+export const EdgeResponseInspectionProfile = {
+  EdgeResponseInspectionProfileUnspecified:
+    "EDGE_RESPONSE_INSPECTION_PROFILE_UNSPECIFIED",
+  EdgeResponseInspectionProfileStrict:
+    "EDGE_RESPONSE_INSPECTION_PROFILE_STRICT",
+  EdgeResponseInspectionProfileWebBalanced:
+    "EDGE_RESPONSE_INSPECTION_PROFILE_WEB_BALANCED",
+} as const;
+/**
+ * Default inspection profile for hosted egress response bodies. Unspecified
+ *
+ * @remarks
+ *  means strict. Requests always use strict inspection. Web balanced requires
+ *  a runtime that supports it; older runtimes retain strict inspection.
+ */
+export type EdgeResponseInspectionProfile = OpenEnum<
+  typeof EdgeResponseInspectionProfile
+>;
+
+/**
  * Edge is an application-owned configuration for egress and inference services.
  */
 export type Edge = {
@@ -102,6 +140,13 @@ export type Edge = {
    */
   displayName?: string | undefined;
   /**
+   * Required artifact authorizers, independent of ordinary egress access rules.
+   *
+   * @remarks
+   *  Disabled checks retain their integration references.
+   */
+  egressChecks?: Array<EdgeEgressCheck> | null | undefined;
+  /**
    * The minted egress.connect entitlement (derived from the Edge id) -- grant
    *
    * @remarks
@@ -110,24 +155,22 @@ export type Edge = {
    */
   egressConnectEntitlementId?: string | undefined;
   /**
-   * Ordered egress access rules, evaluated first-match-wins with default
+   * Ordered egress access rules, evaluated first-match-wins. If none decide,
    *
    * @remarks
-   *  deny when none match. Order is significant: a customer expresses "allow
-   *  all except this one user" by placing the specific rule first.
+   *  egress_unmatched_rule applies (deny when absent). Order is significant.
    */
   egressRules?: Array<EdgeEgressRule> | null | undefined;
   /**
-   * Whether egress_rules has ever been deliberately set (via an update_mask
+   * Whether the egress policy has been deliberately configured. Setting either
    *
    * @remarks
-   *  naming it), regardless of the resulting list's length. False means this
-   *  Edge has never touched the feature -- egress is not destination-restricted
-   *  -- even though egress_rules reads empty either way; true with an empty
-   *  egress_rules means every destination is deliberately denied.
+   *  egress_rules or egress_unmatched_rule configures it, even with no ordered
+   *  rules. False with neither means destinations are not restricted by rules.
    */
   egressRulesConfigured?: boolean | undefined;
   egressTls?: EdgeTlsSelection | null | undefined;
+  egressUnmatchedRule?: EdgeEgressRule | null | undefined;
   /**
    * The capabilities this Edge currently serves. A request naming a resource
    *
@@ -141,6 +184,15 @@ export type Edge = {
    */
   id?: string | undefined;
   inference?: EdgeInferenceRoute | null | undefined;
+  /**
+   * Provider connections saved with or without routes, at most one per catalog entry. update_mask
+   *
+   * @remarks
+   *  "inference_connections" replaces the set. The Edge runtime uses them only to list a provider's
+   *  models; they never serve inference. The Edge runtime service principal must hold each Vault's
+   *  OpenSecret grant.
+   */
+  inferenceConnections?: Array<EdgeInferenceConnection> | null | undefined;
   /**
    * The minted inference.invoke entitlement (derived from the Edge id). Empty
    *
@@ -176,6 +228,14 @@ export type Edge = {
    */
   mode?: EdgeMode | undefined;
   /**
+   * Default inspection profile for hosted egress response bodies. Unspecified
+   *
+   * @remarks
+   *  means strict. Requests always use strict inspection. Web balanced requires
+   *  a runtime that supports it; older runtimes retain strict inspection.
+   */
+  responseInspectionProfile?: EdgeResponseInspectionProfile | undefined;
+  /**
    * The `audience` to send when exchanging a token for access to this Edge.
    *
    * @remarks
@@ -199,58 +259,85 @@ export const EnabledKinds$inboundSchema: z.ZodType<
   EnabledKinds,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EnabledKinds);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(EnabledKinds));
 /** @internal */
 export const EnabledKinds$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EnabledKinds
-> = openEnums.outboundSchema(EnabledKinds);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(EnabledKinds));
 
 /** @internal */
 export const EdgeMode$inboundSchema: z.ZodType<
   EdgeMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EdgeMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(EdgeMode));
 /** @internal */
 export const EdgeMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EdgeMode
-> = openEnums.outboundSchema(EdgeMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(EdgeMode));
 
 /** @internal */
-export const Edge$inboundSchema: z.ZodType<Edge, z.ZodTypeDef, unknown> = z
-  .object({
-    allowInferenceBearerTokens: z.boolean().optional(),
-    appId: z.string().optional(),
-    createdAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    credentialInjections: z.nullable(
-      z.array(EdgeCredentialInjection$inboundSchema),
-    ).optional(),
-    displayName: z.string().optional(),
-    egressConnectEntitlementId: z.string().optional(),
-    egressRules: z.nullable(z.array(EdgeEgressRule$inboundSchema)).optional(),
-    egressRulesConfigured: z.boolean().optional(),
-    egressTls: z.nullable(EdgeTlsSelection$inboundSchema).optional(),
-    enabledKinds: z.nullable(z.array(EnabledKinds$inboundSchema)).optional(),
-    id: z.string().optional(),
-    inference: z.nullable(EdgeInferenceRoute$inboundSchema).optional(),
-    inferenceInvokeEntitlementId: z.string().optional(),
-    inferenceModelsReadEntitlementId: z.string().optional(),
-    inferenceRoutes: z.nullable(z.array(EdgeInferenceRoute$inboundSchema))
-      .optional(),
-    mode: EdgeMode$inboundSchema.optional(),
-    tokenAudience: z.string().optional(),
-    tokenResources: z.nullable(EdgeTokenResources$inboundSchema).optional(),
-    tokenScopes: z.nullable(z.array(z.string())).optional(),
-    updatedAt: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-  });
+export const EdgeResponseInspectionProfile$inboundSchema: z.ZodType<
+  EdgeResponseInspectionProfile,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EdgeResponseInspectionProfile)
+);
+/** @internal */
+export const EdgeResponseInspectionProfile$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  EdgeResponseInspectionProfile
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EdgeResponseInspectionProfile)
+);
+
+/** @internal */
+export const Edge$inboundSchema: z.ZodType<Edge, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      allowInferenceBearerTokens: z.boolean().optional(),
+      appId: z.string().optional(),
+      createdAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      credentialInjections: z.nullable(
+        z.array(EdgeCredentialInjection$inboundSchema),
+      ).optional(),
+      displayName: z.string().optional(),
+      egressChecks: z.nullable(z.array(EdgeEgressCheck$inboundSchema))
+        .optional(),
+      egressConnectEntitlementId: z.string().optional(),
+      egressRules: z.nullable(z.array(EdgeEgressRule$inboundSchema)).optional(),
+      egressRulesConfigured: z.boolean().optional(),
+      egressTls: z.nullable(EdgeTlsSelection$inboundSchema).optional(),
+      egressUnmatchedRule: z.nullable(EdgeEgressRule$inboundSchema).optional(),
+      enabledKinds: z.nullable(z.array(EnabledKinds$inboundSchema)).optional(),
+      id: z.string().optional(),
+      inference: z.nullable(EdgeInferenceRoute$inboundSchema).optional(),
+      inferenceConnections: z.nullable(
+        z.array(EdgeInferenceConnection$inboundSchema),
+      ).optional(),
+      inferenceInvokeEntitlementId: z.string().optional(),
+      inferenceModelsReadEntitlementId: z.string().optional(),
+      inferenceRoutes: z.nullable(z.array(EdgeInferenceRoute$inboundSchema))
+        .optional(),
+      mode: EdgeMode$inboundSchema.optional(),
+      responseInspectionProfile: EdgeResponseInspectionProfile$inboundSchema
+        .optional(),
+      tokenAudience: z.string().optional(),
+      tokenResources: z.nullable(EdgeTokenResources$inboundSchema).optional(),
+      tokenScopes: z.nullable(z.array(z.string())).optional(),
+      updatedAt: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+    })
+  );
 /** @internal */
 export type Edge$Outbound = {
   allowInferenceBearerTokens?: boolean | undefined;
@@ -261,17 +348,24 @@ export type Edge$Outbound = {
     | null
     | undefined;
   displayName?: string | undefined;
+  egressChecks?: Array<EdgeEgressCheck$Outbound> | null | undefined;
   egressConnectEntitlementId?: string | undefined;
   egressRules?: Array<EdgeEgressRule$Outbound> | null | undefined;
   egressRulesConfigured?: boolean | undefined;
   egressTls?: EdgeTlsSelection$Outbound | null | undefined;
+  egressUnmatchedRule?: EdgeEgressRule$Outbound | null | undefined;
   enabledKinds?: Array<string> | null | undefined;
   id?: string | undefined;
   inference?: EdgeInferenceRoute$Outbound | null | undefined;
+  inferenceConnections?:
+    | Array<EdgeInferenceConnection$Outbound>
+    | null
+    | undefined;
   inferenceInvokeEntitlementId?: string | undefined;
   inferenceModelsReadEntitlementId?: string | undefined;
   inferenceRoutes?: Array<EdgeInferenceRoute$Outbound> | null | undefined;
   mode?: string | undefined;
+  responseInspectionProfile?: string | undefined;
   tokenAudience?: string | undefined;
   tokenResources?: EdgeTokenResources$Outbound | null | undefined;
   tokenScopes?: Array<string> | null | undefined;
@@ -280,31 +374,44 @@ export type Edge$Outbound = {
 
 /** @internal */
 export const Edge$outboundSchema: z.ZodType<Edge$Outbound, z.ZodTypeDef, Edge> =
-  z.object({
-    allowInferenceBearerTokens: z.boolean().optional(),
-    appId: z.string().optional(),
-    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-    credentialInjections: z.nullable(
-      z.array(EdgeCredentialInjection$outboundSchema),
-    ).optional(),
-    displayName: z.string().optional(),
-    egressConnectEntitlementId: z.string().optional(),
-    egressRules: z.nullable(z.array(EdgeEgressRule$outboundSchema)).optional(),
-    egressRulesConfigured: z.boolean().optional(),
-    egressTls: z.nullable(EdgeTlsSelection$outboundSchema).optional(),
-    enabledKinds: z.nullable(z.array(EnabledKinds$outboundSchema)).optional(),
-    id: z.string().optional(),
-    inference: z.nullable(EdgeInferenceRoute$outboundSchema).optional(),
-    inferenceInvokeEntitlementId: z.string().optional(),
-    inferenceModelsReadEntitlementId: z.string().optional(),
-    inferenceRoutes: z.nullable(z.array(EdgeInferenceRoute$outboundSchema))
-      .optional(),
-    mode: EdgeMode$outboundSchema.optional(),
-    tokenAudience: z.string().optional(),
-    tokenResources: z.nullable(EdgeTokenResources$outboundSchema).optional(),
-    tokenScopes: z.nullable(z.array(z.string())).optional(),
-    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      allowInferenceBearerTokens: z.boolean().optional(),
+      appId: z.string().optional(),
+      createdAt: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+      credentialInjections: z.nullable(
+        z.array(EdgeCredentialInjection$outboundSchema),
+      ).optional(),
+      displayName: z.string().optional(),
+      egressChecks: z.nullable(z.array(EdgeEgressCheck$outboundSchema))
+        .optional(),
+      egressConnectEntitlementId: z.string().optional(),
+      egressRules: z.nullable(z.array(EdgeEgressRule$outboundSchema))
+        .optional(),
+      egressRulesConfigured: z.boolean().optional(),
+      egressTls: z.nullable(EdgeTlsSelection$outboundSchema).optional(),
+      egressUnmatchedRule: z.nullable(EdgeEgressRule$outboundSchema).optional(),
+      enabledKinds: z.nullable(z.array(EnabledKinds$outboundSchema)).optional(),
+      id: z.string().optional(),
+      inference: z.nullable(EdgeInferenceRoute$outboundSchema).optional(),
+      inferenceConnections: z.nullable(
+        z.array(EdgeInferenceConnection$outboundSchema),
+      ).optional(),
+      inferenceInvokeEntitlementId: z.string().optional(),
+      inferenceModelsReadEntitlementId: z.string().optional(),
+      inferenceRoutes: z.nullable(z.array(EdgeInferenceRoute$outboundSchema))
+        .optional(),
+      mode: EdgeMode$outboundSchema.optional(),
+      responseInspectionProfile: EdgeResponseInspectionProfile$outboundSchema
+        .optional(),
+      tokenAudience: z.string().optional(),
+      tokenResources: z.nullable(EdgeTokenResources$outboundSchema).optional(),
+      tokenScopes: z.nullable(z.array(z.string())).optional(),
+      updatedAt: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+    })
+  );
 
 export function edgeToJSON(edge: Edge): string {
   return JSON.stringify(Edge$outboundSchema.parse(edge));

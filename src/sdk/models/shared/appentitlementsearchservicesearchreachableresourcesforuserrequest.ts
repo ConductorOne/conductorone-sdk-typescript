@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SearchReachableResourcesForUser request.
@@ -50,13 +51,15 @@ export const AppEntitlementSearchServiceSearchReachableResourcesForUserRequest$o
     AppEntitlementSearchServiceSearchReachableResourcesForUserRequest$Outbound,
     z.ZodTypeDef,
     AppEntitlementSearchServiceSearchReachableResourcesForUserRequest
-  > = z.object({
-    appIds: z.nullable(z.array(z.string())).optional(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    query: z.string().optional(),
-    userId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appIds: z.nullable(z.array(z.string())).optional(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      query: z.string().optional(),
+      userId: z.string().optional(),
+    })
+  );
 
 export function appEntitlementSearchServiceSearchReachableResourcesForUserRequestToJSON(
   appEntitlementSearchServiceSearchReachableResourcesForUserRequest:

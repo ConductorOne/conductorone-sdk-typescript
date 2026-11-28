@@ -19,10 +19,14 @@ export class GatewayKey extends ClientSDK {
    *  key prefix are returned, never the full key.
    */
   async list(
+    request?:
+      | operations.C1ApiLlmGatewayV1GatewayKeyServiceListRequest
+      | undefined,
     options?: RequestOptions,
   ): Promise<operations.C1ApiLlmGatewayV1GatewayKeyServiceListResponse> {
     return unwrapAsync(gatewayKeyList(
       this,
+      request,
       options,
     ));
   }

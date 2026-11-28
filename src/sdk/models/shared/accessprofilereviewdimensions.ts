@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const AccessProfileReviewDimensions$inboundSchema: z.ZodType<
   AccessProfileReviewDimensions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  composition: z.boolean().optional(),
-  membershipCriteria: z.boolean().optional(),
-  membershipExceptions: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    composition: z.boolean().optional(),
+    membershipCriteria: z.boolean().optional(),
+    membershipExceptions: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type AccessProfileReviewDimensions$Outbound = {
   composition?: boolean | undefined;
@@ -47,11 +49,13 @@ export const AccessProfileReviewDimensions$outboundSchema: z.ZodType<
   AccessProfileReviewDimensions$Outbound,
   z.ZodTypeDef,
   AccessProfileReviewDimensions
-> = z.object({
-  composition: z.boolean().optional(),
-  membershipCriteria: z.boolean().optional(),
-  membershipExceptions: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    composition: z.boolean().optional(),
+    membershipCriteria: z.boolean().optional(),
+    membershipExceptions: z.boolean().optional(),
+  })
+);
 
 export function accessProfileReviewDimensionsToJSON(
   accessProfileReviewDimensions: AccessProfileReviewDimensions,

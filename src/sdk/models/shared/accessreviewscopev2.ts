@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -213,60 +213,69 @@ export const PrincipalTypeFilter$inboundSchema: z.ZodType<
   PrincipalTypeFilter,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(PrincipalTypeFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(PrincipalTypeFilter)
+);
 /** @internal */
 export const PrincipalTypeFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   PrincipalTypeFilter
-> = openEnums.outboundSchema(PrincipalTypeFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(PrincipalTypeFilter)
+);
 
 /** @internal */
 export const AccessReviewScopeV2$inboundSchema: z.ZodType<
   AccessReviewScopeV2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessProfileReviewDimensions: z.nullable(
-    AccessProfileReviewDimensions$inboundSchema,
-  ).optional(),
-  accountCelExpression: z.nullable(CelExpressionScope$inboundSchema).optional(),
-  accountCriteria: z.nullable(AccountCriteriaScope$inboundSchema).optional(),
-  allAccessConflicts: z.nullable(AllAccessConflictsScope$inboundSchema)
-    .optional(),
-  allAccounts: z.nullable(AllAccountsScope$inboundSchema).optional(),
-  allGrants: z.nullable(AllGrantsScope$inboundSchema).optional(),
-  allUsers: z.nullable(AllUsersScope$inboundSchema).optional(),
-  appAccess: z.nullable(ApplicationAccessScope$inboundSchema).optional(),
-  appSelectionCriteria: z.nullable(AppSelectionCriteriaScope$inboundSchema)
-    .optional(),
-  celExpression: z.nullable(CelExpressionScope$inboundSchema).optional(),
-  excludedAppSelectionCriteria: z.nullable(
-    AppSelectionCriteriaScope$inboundSchema,
-  ).optional(),
-  excludedResourceTypeSelections: z.nullable(
-    ResourceTypeSelectionScope$inboundSchema,
-  ).optional(),
-  excludedSpecificResources: z.nullable(SpecificResourcesScope$inboundSchema)
-    .optional(),
-  grantsByCriteria: z.nullable(GrantsByCriteriaScope$inboundSchema).optional(),
-  principalTypeFilter: PrincipalTypeFilter$inboundSchema.optional(),
-  resourceSelection: z.nullable(ResourceSelectionScope$inboundSchema)
-    .optional(),
-  resourceTypeSelections: z.nullable(ResourceTypeSelectionScope$inboundSchema)
-    .optional(),
-  scopeRoleSelection: z.nullable(ScopeRoleSelectionScope$inboundSchema)
-    .optional(),
-  selectedUsers: z.nullable(SelectedUsersScope$inboundSchema).optional(),
-  specificAccessConflicts: z.nullable(
-    SpecificAccessConflictsScope$inboundSchema,
-  ).optional(),
-  specificAccessProfiles: z.nullable(SpecificAccessProfilesScope$inboundSchema)
-    .optional(),
-  specificResources: z.nullable(SpecificResourcesScope$inboundSchema)
-    .optional(),
-  userCriteria: z.nullable(UserCriteriaScope$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileReviewDimensions: z.nullable(
+      AccessProfileReviewDimensions$inboundSchema,
+    ).optional(),
+    accountCelExpression: z.nullable(CelExpressionScope$inboundSchema)
+      .optional(),
+    accountCriteria: z.nullable(AccountCriteriaScope$inboundSchema).optional(),
+    allAccessConflicts: z.nullable(AllAccessConflictsScope$inboundSchema)
+      .optional(),
+    allAccounts: z.nullable(AllAccountsScope$inboundSchema).optional(),
+    allGrants: z.nullable(AllGrantsScope$inboundSchema).optional(),
+    allUsers: z.nullable(AllUsersScope$inboundSchema).optional(),
+    appAccess: z.nullable(ApplicationAccessScope$inboundSchema).optional(),
+    appSelectionCriteria: z.nullable(AppSelectionCriteriaScope$inboundSchema)
+      .optional(),
+    celExpression: z.nullable(CelExpressionScope$inboundSchema).optional(),
+    excludedAppSelectionCriteria: z.nullable(
+      AppSelectionCriteriaScope$inboundSchema,
+    ).optional(),
+    excludedResourceTypeSelections: z.nullable(
+      ResourceTypeSelectionScope$inboundSchema,
+    ).optional(),
+    excludedSpecificResources: z.nullable(SpecificResourcesScope$inboundSchema)
+      .optional(),
+    grantsByCriteria: z.nullable(GrantsByCriteriaScope$inboundSchema)
+      .optional(),
+    principalTypeFilter: PrincipalTypeFilter$inboundSchema.optional(),
+    resourceSelection: z.nullable(ResourceSelectionScope$inboundSchema)
+      .optional(),
+    resourceTypeSelections: z.nullable(ResourceTypeSelectionScope$inboundSchema)
+      .optional(),
+    scopeRoleSelection: z.nullable(ScopeRoleSelectionScope$inboundSchema)
+      .optional(),
+    selectedUsers: z.nullable(SelectedUsersScope$inboundSchema).optional(),
+    specificAccessConflicts: z.nullable(
+      SpecificAccessConflictsScope$inboundSchema,
+    ).optional(),
+    specificAccessProfiles: z.nullable(
+      SpecificAccessProfilesScope$inboundSchema,
+    ).optional(),
+    specificResources: z.nullable(SpecificResourcesScope$inboundSchema)
+      .optional(),
+    userCriteria: z.nullable(UserCriteriaScope$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type AccessReviewScopeV2$Outbound = {
   accessProfileReviewDimensions?:
@@ -320,48 +329,53 @@ export const AccessReviewScopeV2$outboundSchema: z.ZodType<
   AccessReviewScopeV2$Outbound,
   z.ZodTypeDef,
   AccessReviewScopeV2
-> = z.object({
-  accessProfileReviewDimensions: z.nullable(
-    AccessProfileReviewDimensions$outboundSchema,
-  ).optional(),
-  accountCelExpression: z.nullable(CelExpressionScope$outboundSchema)
-    .optional(),
-  accountCriteria: z.nullable(AccountCriteriaScope$outboundSchema).optional(),
-  allAccessConflicts: z.nullable(AllAccessConflictsScope$outboundSchema)
-    .optional(),
-  allAccounts: z.nullable(AllAccountsScope$outboundSchema).optional(),
-  allGrants: z.nullable(AllGrantsScope$outboundSchema).optional(),
-  allUsers: z.nullable(AllUsersScope$outboundSchema).optional(),
-  appAccess: z.nullable(ApplicationAccessScope$outboundSchema).optional(),
-  appSelectionCriteria: z.nullable(AppSelectionCriteriaScope$outboundSchema)
-    .optional(),
-  celExpression: z.nullable(CelExpressionScope$outboundSchema).optional(),
-  excludedAppSelectionCriteria: z.nullable(
-    AppSelectionCriteriaScope$outboundSchema,
-  ).optional(),
-  excludedResourceTypeSelections: z.nullable(
-    ResourceTypeSelectionScope$outboundSchema,
-  ).optional(),
-  excludedSpecificResources: z.nullable(SpecificResourcesScope$outboundSchema)
-    .optional(),
-  grantsByCriteria: z.nullable(GrantsByCriteriaScope$outboundSchema).optional(),
-  principalTypeFilter: PrincipalTypeFilter$outboundSchema.optional(),
-  resourceSelection: z.nullable(ResourceSelectionScope$outboundSchema)
-    .optional(),
-  resourceTypeSelections: z.nullable(ResourceTypeSelectionScope$outboundSchema)
-    .optional(),
-  scopeRoleSelection: z.nullable(ScopeRoleSelectionScope$outboundSchema)
-    .optional(),
-  selectedUsers: z.nullable(SelectedUsersScope$outboundSchema).optional(),
-  specificAccessConflicts: z.nullable(
-    SpecificAccessConflictsScope$outboundSchema,
-  ).optional(),
-  specificAccessProfiles: z.nullable(SpecificAccessProfilesScope$outboundSchema)
-    .optional(),
-  specificResources: z.nullable(SpecificResourcesScope$outboundSchema)
-    .optional(),
-  userCriteria: z.nullable(UserCriteriaScope$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProfileReviewDimensions: z.nullable(
+      AccessProfileReviewDimensions$outboundSchema,
+    ).optional(),
+    accountCelExpression: z.nullable(CelExpressionScope$outboundSchema)
+      .optional(),
+    accountCriteria: z.nullable(AccountCriteriaScope$outboundSchema).optional(),
+    allAccessConflicts: z.nullable(AllAccessConflictsScope$outboundSchema)
+      .optional(),
+    allAccounts: z.nullable(AllAccountsScope$outboundSchema).optional(),
+    allGrants: z.nullable(AllGrantsScope$outboundSchema).optional(),
+    allUsers: z.nullable(AllUsersScope$outboundSchema).optional(),
+    appAccess: z.nullable(ApplicationAccessScope$outboundSchema).optional(),
+    appSelectionCriteria: z.nullable(AppSelectionCriteriaScope$outboundSchema)
+      .optional(),
+    celExpression: z.nullable(CelExpressionScope$outboundSchema).optional(),
+    excludedAppSelectionCriteria: z.nullable(
+      AppSelectionCriteriaScope$outboundSchema,
+    ).optional(),
+    excludedResourceTypeSelections: z.nullable(
+      ResourceTypeSelectionScope$outboundSchema,
+    ).optional(),
+    excludedSpecificResources: z.nullable(SpecificResourcesScope$outboundSchema)
+      .optional(),
+    grantsByCriteria: z.nullable(GrantsByCriteriaScope$outboundSchema)
+      .optional(),
+    principalTypeFilter: PrincipalTypeFilter$outboundSchema.optional(),
+    resourceSelection: z.nullable(ResourceSelectionScope$outboundSchema)
+      .optional(),
+    resourceTypeSelections: z.nullable(
+      ResourceTypeSelectionScope$outboundSchema,
+    ).optional(),
+    scopeRoleSelection: z.nullable(ScopeRoleSelectionScope$outboundSchema)
+      .optional(),
+    selectedUsers: z.nullable(SelectedUsersScope$outboundSchema).optional(),
+    specificAccessConflicts: z.nullable(
+      SpecificAccessConflictsScope$outboundSchema,
+    ).optional(),
+    specificAccessProfiles: z.nullable(
+      SpecificAccessProfilesScope$outboundSchema,
+    ).optional(),
+    specificResources: z.nullable(SpecificResourcesScope$outboundSchema)
+      .optional(),
+    userCriteria: z.nullable(UserCriteriaScope$outboundSchema).optional(),
+  })
+);
 
 export function accessReviewScopeV2ToJSON(
   accessReviewScopeV2: AccessReviewScopeV2,

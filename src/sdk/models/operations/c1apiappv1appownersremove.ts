@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,17 +46,20 @@ export const C1ApiAppV1AppOwnersRemoveRequest$outboundSchema: z.ZodType<
   C1ApiAppV1AppOwnersRemoveRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV1AppOwnersRemoveRequest
-> = z.object({
-  appId: z.string(),
-  userId: z.string(),
-  removeAppOwnerRequest: shared.RemoveAppOwnerRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    userId: "user_id",
-    removeAppOwnerRequest: "RemoveAppOwnerRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    userId: z.string(),
+    removeAppOwnerRequest: shared.RemoveAppOwnerRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      userId: "user_id",
+      removeAppOwnerRequest: "RemoveAppOwnerRequest",
+    });
+  })
+);
 
 export function c1ApiAppV1AppOwnersRemoveRequestToJSON(
   c1ApiAppV1AppOwnersRemoveRequest: C1ApiAppV1AppOwnersRemoveRequest,
@@ -73,20 +76,22 @@ export const C1ApiAppV1AppOwnersRemoveResponse$inboundSchema: z.ZodType<
   C1ApiAppV1AppOwnersRemoveResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  RemoveAppOwnerResponse: shared.RemoveAppOwnerResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "RemoveAppOwnerResponse": "removeAppOwnerResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    RemoveAppOwnerResponse: shared.RemoveAppOwnerResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "RemoveAppOwnerResponse": "removeAppOwnerResponse",
+    });
+  })
+);
 
 export function c1ApiAppV1AppOwnersRemoveResponseFromJSON(
   jsonString: string,

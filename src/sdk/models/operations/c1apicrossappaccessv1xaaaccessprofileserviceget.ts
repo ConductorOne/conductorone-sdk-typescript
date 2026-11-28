@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,14 +47,16 @@ export const C1ApiCrossAppAccessV1XAAAccessProfileServiceGetRequest$outboundSche
     C1ApiCrossAppAccessV1XAAAccessProfileServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiCrossAppAccessV1XAAAccessProfileServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAAccessProfileServiceGetRequestToJSON(
   c1ApiCrossAppAccessV1XAAAccessProfileServiceGetRequest:
@@ -73,21 +75,23 @@ export const C1ApiCrossAppAccessV1XAAAccessProfileServiceGetResponse$inboundSche
     C1ApiCrossAppAccessV1XAAAccessProfileServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    XAAAccessProfileServiceGetResponse: shared
-      .XAAAccessProfileServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "XAAAccessProfileServiceGetResponse":
-        "xaaAccessProfileServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      XAAAccessProfileServiceGetResponse: shared
+        .XAAAccessProfileServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "XAAAccessProfileServiceGetResponse":
+          "xaaAccessProfileServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiCrossAppAccessV1XAAAccessProfileServiceGetResponseFromJSON(
   jsonString: string,

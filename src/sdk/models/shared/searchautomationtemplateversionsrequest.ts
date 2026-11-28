@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SearchAutomationTemplateVersionsRequest message.
@@ -34,11 +35,13 @@ export const SearchAutomationTemplateVersionsRequest$outboundSchema: z.ZodType<
   SearchAutomationTemplateVersionsRequest$Outbound,
   z.ZodTypeDef,
   SearchAutomationTemplateVersionsRequest
-> = z.object({
-  automationTemplateId: z.string().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automationTemplateId: z.string().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  })
+);
 
 export function searchAutomationTemplateVersionsRequestToJSON(
   searchAutomationTemplateVersionsRequest:

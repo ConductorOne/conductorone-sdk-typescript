@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Exporter, Exporter$inboundSchema } from "./exporter.js";
@@ -20,9 +20,11 @@ export const ExportServiceCreateResponse$inboundSchema: z.ZodType<
   ExportServiceCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  exporter: z.nullable(Exporter$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exporter: z.nullable(Exporter$inboundSchema).optional(),
+  })
+);
 
 export function exportServiceCreateResponseFromJSON(
   jsonString: string,

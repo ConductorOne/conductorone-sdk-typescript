@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SnoozeAction parameters for UpdateFindingState.
@@ -26,10 +27,13 @@ export const SnoozeAction$outboundSchema: z.ZodType<
   SnoozeAction$Outbound,
   z.ZodTypeDef,
   SnoozeAction
-> = z.object({
-  reason: z.string().optional(),
-  snoozeUntil: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string().optional(),
+    snoozeUntil: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  })
+);
 
 export function snoozeActionToJSON(snoozeAction: SnoozeAction): string {
   return JSON.stringify(SnoozeAction$outboundSchema.parse(snoozeAction));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessScope,
   AccessScope$Outbound,
@@ -82,18 +83,21 @@ export const CreateAccessProfileFromCohortRequest$outboundSchema: z.ZodType<
   CreateAccessProfileFromCohortRequest$Outbound,
   z.ZodTypeDef,
   CreateAccessProfileFromCohortRequest
-> = z.object({
-  accessScope: z.nullable(AccessScope$outboundSchema).optional(),
-  celExpression: z.string().optional(),
-  createTasks: z.boolean().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enableAutomation: z.boolean().optional(),
-  entitlements: z.nullable(z.array(CohortEntitlement$outboundSchema))
-    .optional(),
-  profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema)).optional(),
-  suggestionId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessScope: z.nullable(AccessScope$outboundSchema).optional(),
+    celExpression: z.string().optional(),
+    createTasks: z.boolean().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enableAutomation: z.boolean().optional(),
+    entitlements: z.nullable(z.array(CohortEntitlement$outboundSchema))
+      .optional(),
+    profileFilters: z.nullable(z.array(ProfileFilter$outboundSchema))
+      .optional(),
+    suggestionId: z.string().optional(),
+  })
+);
 
 export function createAccessProfileFromCohortRequestToJSON(
   createAccessProfileFromCohortRequest: CreateAccessProfileFromCohortRequest,

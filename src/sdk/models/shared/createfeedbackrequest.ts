@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   ClientContext,
   ClientContext$Outbound,
@@ -48,12 +49,14 @@ export const CreateFeedbackRequest$outboundSchema: z.ZodType<
   CreateFeedbackRequest$Outbound,
   z.ZodTypeDef,
   CreateFeedbackRequest
-> = z.object({
-  clientContext: z.nullable(ClientContext$outboundSchema).optional(),
-  datadogContext: z.nullable(DatadogContext$outboundSchema).optional(),
-  description: z.string().optional(),
-  screenshots: z.nullable(z.array(Screenshot$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientContext: z.nullable(ClientContext$outboundSchema).optional(),
+    datadogContext: z.nullable(DatadogContext$outboundSchema).optional(),
+    description: z.string().optional(),
+    screenshots: z.nullable(z.array(Screenshot$outboundSchema)).optional(),
+  })
+);
 
 export function createFeedbackRequestToJSON(
   createFeedbackRequest: CreateFeedbackRequest,

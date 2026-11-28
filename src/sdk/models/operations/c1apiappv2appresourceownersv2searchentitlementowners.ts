@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,23 +56,25 @@ export const C1ApiAppV2AppResourceOwnersV2SearchEntitlementOwnersRequest$outboun
     C1ApiAppV2AppResourceOwnersV2SearchEntitlementOwnersRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2AppResourceOwnersV2SearchEntitlementOwnersRequest
-  > = z.object({
-    appId: z.string(),
-    resourceTypeId: z.string(),
-    resourceId: z.string(),
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-    roleSlug: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      resourceTypeId: "resource_type_id",
-      resourceId: "resource_id",
-      pageSize: "page_size",
-      pageToken: "page_token",
-      roleSlug: "role_slug",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      resourceTypeId: z.string(),
+      resourceId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+      roleSlug: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        resourceTypeId: "resource_type_id",
+        resourceId: "resource_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+        roleSlug: "role_slug",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppResourceOwnersV2SearchEntitlementOwnersRequestToJSON(
   c1ApiAppV2AppResourceOwnersV2SearchEntitlementOwnersRequest:
@@ -90,21 +92,23 @@ export const C1ApiAppV2AppResourceOwnersV2SearchEntitlementOwnersResponse$inboun
     C1ApiAppV2AppResourceOwnersV2SearchEntitlementOwnersResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SearchAppResourceEntitlementOwnersResponse: shared
-      .SearchAppResourceEntitlementOwnersResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SearchAppResourceEntitlementOwnersResponse":
-        "searchAppResourceEntitlementOwnersResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SearchAppResourceEntitlementOwnersResponse: shared
+        .SearchAppResourceEntitlementOwnersResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SearchAppResourceEntitlementOwnersResponse":
+          "searchAppResourceEntitlementOwnersResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppResourceOwnersV2SearchEntitlementOwnersResponseFromJSON(
   jsonString: string,

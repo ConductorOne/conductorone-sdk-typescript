@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -35,20 +35,22 @@ export const C1ApiGolinkV1GoLinkServiceResolveResponse$inboundSchema: z.ZodType<
   C1ApiGolinkV1GoLinkServiceResolveResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  GoLinkServiceResolveResponse: shared
-    .GoLinkServiceResolveResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "GoLinkServiceResolveResponse": "goLinkServiceResolveResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    GoLinkServiceResolveResponse: shared
+      .GoLinkServiceResolveResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "GoLinkServiceResolveResponse": "goLinkServiceResolveResponse",
+    });
+  })
+);
 
 export function c1ApiGolinkV1GoLinkServiceResolveResponseFromJSON(
   jsonString: string,

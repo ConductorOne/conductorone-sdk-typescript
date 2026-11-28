@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   FindingTransformationRule,
   FindingTransformationRule$Outbound,
@@ -26,10 +27,12 @@ export const UpdateFindingTransformationRuleRequest$outboundSchema: z.ZodType<
   UpdateFindingTransformationRuleRequest$Outbound,
   z.ZodTypeDef,
   UpdateFindingTransformationRuleRequest
-> = z.object({
-  transformationRule: z.nullable(FindingTransformationRule$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    transformationRule: z.nullable(FindingTransformationRule$outboundSchema)
+      .optional(),
+  })
+);
 
 export function updateFindingTransformationRuleRequestToJSON(
   updateFindingTransformationRuleRequest:

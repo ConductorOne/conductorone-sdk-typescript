@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SuppressStateAction parameters for UpdateFindingState.
@@ -24,9 +25,11 @@ export const SuppressStateAction$outboundSchema: z.ZodType<
   SuppressStateAction$Outbound,
   z.ZodTypeDef,
   SuppressStateAction
-> = z.object({
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string().optional(),
+  })
+);
 
 export function suppressStateActionToJSON(
   suppressStateAction: SuppressStateAction,

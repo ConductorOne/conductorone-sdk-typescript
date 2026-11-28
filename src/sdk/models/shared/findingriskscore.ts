@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -48,14 +48,17 @@ export const FindingRiskScore$inboundSchema: z.ZodType<
   FindingRiskScore,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  originalScore: z.number().int().optional(),
-  overrideByUserId: z.string().optional(),
-  overrideScore: z.number().int().optional(),
-  riskFactors: z.nullable(z.array(FindingRiskFactor$inboundSchema)).optional(),
-  score: z.number().int().optional(),
-  systemScore: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    originalScore: z.number().int().optional(),
+    overrideByUserId: z.string().optional(),
+    overrideScore: z.number().int().optional(),
+    riskFactors: z.nullable(z.array(FindingRiskFactor$inboundSchema))
+      .optional(),
+    score: z.number().int().optional(),
+    systemScore: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type FindingRiskScore$Outbound = {
   originalScore?: number | undefined;
@@ -71,14 +74,17 @@ export const FindingRiskScore$outboundSchema: z.ZodType<
   FindingRiskScore$Outbound,
   z.ZodTypeDef,
   FindingRiskScore
-> = z.object({
-  originalScore: z.number().int().optional(),
-  overrideByUserId: z.string().optional(),
-  overrideScore: z.number().int().optional(),
-  riskFactors: z.nullable(z.array(FindingRiskFactor$outboundSchema)).optional(),
-  score: z.number().int().optional(),
-  systemScore: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    originalScore: z.number().int().optional(),
+    overrideByUserId: z.string().optional(),
+    overrideScore: z.number().int().optional(),
+    riskFactors: z.nullable(z.array(FindingRiskFactor$outboundSchema))
+      .optional(),
+    score: z.number().int().optional(),
+    systemScore: z.number().int().optional(),
+  })
+);
 
 export function findingRiskScoreToJSON(
   findingRiskScore: FindingRiskScore,

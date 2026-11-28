@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AppResourceType is referenced by an app entitlement defining its resource types. Commonly things like Group or Role.
@@ -29,10 +30,12 @@ export const AppResourceTypeInput$outboundSchema: z.ZodType<
   AppResourceTypeInput$Outbound,
   z.ZodTypeDef,
   AppResourceTypeInput
-> = z.object({
-  displayName: z.string().optional(),
-  traitIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    traitIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function appResourceTypeInputToJSON(
   appResourceTypeInput: AppResourceTypeInput,

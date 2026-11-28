@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerServiceDisconnectRequest removes the calling user's OAuth credential
@@ -20,7 +21,7 @@ export const MCPServerServiceDisconnectRequest$outboundSchema: z.ZodType<
   MCPServerServiceDisconnectRequest$Outbound,
   z.ZodTypeDef,
   MCPServerServiceDisconnectRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpServerServiceDisconnectRequestToJSON(
   mcpServerServiceDisconnectRequest: MCPServerServiceDisconnectRequest,

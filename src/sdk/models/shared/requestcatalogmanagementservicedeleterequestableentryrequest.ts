@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * Delete a single requestable entry
@@ -19,7 +20,7 @@ export const RequestCatalogManagementServiceDeleteRequestableEntryRequest$outbou
     RequestCatalogManagementServiceDeleteRequestableEntryRequest$Outbound,
     z.ZodTypeDef,
     RequestCatalogManagementServiceDeleteRequestableEntryRequest
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function requestCatalogManagementServiceDeleteRequestableEntryRequestToJSON(
   requestCatalogManagementServiceDeleteRequestableEntryRequest:

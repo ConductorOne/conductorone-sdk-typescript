@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -58,19 +58,23 @@ export const GetMySpendStatusResponseState$inboundSchema: z.ZodType<
   GetMySpendStatusResponseState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(GetMySpendStatusResponseState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(GetMySpendStatusResponseState)
+);
 
 /** @internal */
 export const GetMySpendStatusResponse$inboundSchema: z.ZodType<
   GetMySpendStatusResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  block: z.nullable(MySpendBlock$inboundSchema).optional(),
-  currencyCode: z.string().optional(),
-  scopes: z.nullable(z.array(MyEffectiveScope$inboundSchema)).optional(),
-  state: GetMySpendStatusResponseState$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    block: z.nullable(MySpendBlock$inboundSchema).optional(),
+    currencyCode: z.string().optional(),
+    scopes: z.nullable(z.array(MyEffectiveScope$inboundSchema)).optional(),
+    state: GetMySpendStatusResponseState$inboundSchema.optional(),
+  })
+);
 
 export function getMySpendStatusResponseFromJSON(
   jsonString: string,

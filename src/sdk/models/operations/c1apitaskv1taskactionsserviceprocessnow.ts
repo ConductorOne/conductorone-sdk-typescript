@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,17 +51,19 @@ export const C1ApiTaskV1TaskActionsServiceProcessNowRequest$outboundSchema:
     C1ApiTaskV1TaskActionsServiceProcessNowRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceProcessNowRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceProcessNowRequest: shared
-      .TaskActionsServiceProcessNowRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceProcessNowRequest:
-        "TaskActionsServiceProcessNowRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceProcessNowRequest: shared
+        .TaskActionsServiceProcessNowRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceProcessNowRequest:
+          "TaskActionsServiceProcessNowRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceProcessNowRequestToJSON(
   c1ApiTaskV1TaskActionsServiceProcessNowRequest:
@@ -80,21 +82,23 @@ export const C1ApiTaskV1TaskActionsServiceProcessNowResponse$inboundSchema:
     C1ApiTaskV1TaskActionsServiceProcessNowResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskActionsServiceProcessNowResponse: shared
-      .TaskActionsServiceProcessNowResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskActionsServiceProcessNowResponse":
-        "taskActionsServiceProcessNowResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskActionsServiceProcessNowResponse: shared
+        .TaskActionsServiceProcessNowResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskActionsServiceProcessNowResponse":
+          "taskActionsServiceProcessNowResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceProcessNowResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { XAASettings, XAASettings$inboundSchema } from "./xaasettings.js";
@@ -20,9 +20,11 @@ export const XAASettingsServiceUpdateResponse$inboundSchema: z.ZodType<
   XAASettingsServiceUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  settings: z.nullable(XAASettings$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    settings: z.nullable(XAASettings$inboundSchema).optional(),
+  })
+);
 
 export function xaaSettingsServiceUpdateResponseFromJSON(
   jsonString: string,

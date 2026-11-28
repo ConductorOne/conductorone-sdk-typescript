@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,11 +36,13 @@ export const C1UserFilter$inboundSchema: z.ZodType<
   C1UserFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  excludeUserIds: z.nullable(z.array(z.string())).optional(),
-  includeDeactivated: z.boolean().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    excludeUserIds: z.nullable(z.array(z.string())).optional(),
+    includeDeactivated: z.boolean().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type C1UserFilter$Outbound = {
   excludeUserIds?: Array<string> | null | undefined;
@@ -53,11 +55,13 @@ export const C1UserFilter$outboundSchema: z.ZodType<
   C1UserFilter$Outbound,
   z.ZodTypeDef,
   C1UserFilter
-> = z.object({
-  excludeUserIds: z.nullable(z.array(z.string())).optional(),
-  includeDeactivated: z.boolean().optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    excludeUserIds: z.nullable(z.array(z.string())).optional(),
+    includeDeactivated: z.boolean().optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function c1UserFilterToJSON(c1UserFilter: C1UserFilter): string {
   return JSON.stringify(C1UserFilter$outboundSchema.parse(c1UserFilter));

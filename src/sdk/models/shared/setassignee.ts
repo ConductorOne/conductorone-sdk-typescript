@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,9 +35,11 @@ export const SetAssignee$inboundSchema: z.ZodType<
   SetAssignee,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  directAssignee: z.nullable(DirectAssignee$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    directAssignee: z.nullable(DirectAssignee$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SetAssignee$Outbound = {
   directAssignee?: DirectAssignee$Outbound | null | undefined;
@@ -48,9 +50,11 @@ export const SetAssignee$outboundSchema: z.ZodType<
   SetAssignee$Outbound,
   z.ZodTypeDef,
   SetAssignee
-> = z.object({
-  directAssignee: z.nullable(DirectAssignee$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    directAssignee: z.nullable(DirectAssignee$outboundSchema).optional(),
+  })
+);
 
 export function setAssigneeToJSON(setAssignee: SetAssignee): string {
   return JSON.stringify(SetAssignee$outboundSchema.parse(setAssignee));

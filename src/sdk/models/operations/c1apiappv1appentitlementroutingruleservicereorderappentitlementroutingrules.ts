@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,17 +54,19 @@ export const C1ApiAppV1AppEntitlementRoutingRuleServiceReorderAppEntitlementRout
     C1ApiAppV1AppEntitlementRoutingRuleServiceReorderAppEntitlementRoutingRulesRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementRoutingRuleServiceReorderAppEntitlementRoutingRulesRequest
-  > = z.object({
-    appId: z.string(),
-    reorderAppEntitlementRoutingRulesRequest: shared
-      .ReorderAppEntitlementRoutingRulesRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      reorderAppEntitlementRoutingRulesRequest:
-        "ReorderAppEntitlementRoutingRulesRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      reorderAppEntitlementRoutingRulesRequest: shared
+        .ReorderAppEntitlementRoutingRulesRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        reorderAppEntitlementRoutingRulesRequest:
+          "ReorderAppEntitlementRoutingRulesRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementRoutingRuleServiceReorderAppEntitlementRoutingRulesRequestToJSON(
   c1ApiAppV1AppEntitlementRoutingRuleServiceReorderAppEntitlementRoutingRulesRequest:
@@ -84,21 +86,23 @@ export const C1ApiAppV1AppEntitlementRoutingRuleServiceReorderAppEntitlementRout
     C1ApiAppV1AppEntitlementRoutingRuleServiceReorderAppEntitlementRoutingRulesResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ReorderAppEntitlementRoutingRulesResponse: shared
-      .ReorderAppEntitlementRoutingRulesResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ReorderAppEntitlementRoutingRulesResponse":
-        "reorderAppEntitlementRoutingRulesResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ReorderAppEntitlementRoutingRulesResponse: shared
+        .ReorderAppEntitlementRoutingRulesResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ReorderAppEntitlementRoutingRulesResponse":
+          "reorderAppEntitlementRoutingRulesResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementRoutingRuleServiceReorderAppEntitlementRoutingRulesResponseFromJSON(
   jsonString: string,

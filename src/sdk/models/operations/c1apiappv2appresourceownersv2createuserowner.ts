@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -59,24 +59,26 @@ export const C1ApiAppV2AppResourceOwnersV2CreateUserOwnerRequest$outboundSchema:
     C1ApiAppV2AppResourceOwnersV2CreateUserOwnerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2AppResourceOwnersV2CreateUserOwnerRequest
-  > = z.object({
-    appId: z.string(),
-    resourceTypeId: z.string(),
-    resourceId: z.string(),
-    roleSlug: z.string(),
-    userRefId: z.string(),
-    createAppResourceUserOwnerRequest: shared
-      .CreateAppResourceUserOwnerRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      resourceTypeId: "resource_type_id",
-      resourceId: "resource_id",
-      roleSlug: "role_slug",
-      userRefId: "user_ref_id",
-      createAppResourceUserOwnerRequest: "CreateAppResourceUserOwnerRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      resourceTypeId: z.string(),
+      resourceId: z.string(),
+      roleSlug: z.string(),
+      userRefId: z.string(),
+      createAppResourceUserOwnerRequest: shared
+        .CreateAppResourceUserOwnerRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        resourceTypeId: "resource_type_id",
+        resourceId: "resource_id",
+        roleSlug: "role_slug",
+        userRefId: "user_ref_id",
+        createAppResourceUserOwnerRequest: "CreateAppResourceUserOwnerRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppResourceOwnersV2CreateUserOwnerRequestToJSON(
   c1ApiAppV2AppResourceOwnersV2CreateUserOwnerRequest:
@@ -95,21 +97,23 @@ export const C1ApiAppV2AppResourceOwnersV2CreateUserOwnerResponse$inboundSchema:
     C1ApiAppV2AppResourceOwnersV2CreateUserOwnerResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    CreateAppResourceUserOwnerResponse: shared
-      .CreateAppResourceUserOwnerResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "CreateAppResourceUserOwnerResponse":
-        "createAppResourceUserOwnerResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      CreateAppResourceUserOwnerResponse: shared
+        .CreateAppResourceUserOwnerResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "CreateAppResourceUserOwnerResponse":
+          "createAppResourceUserOwnerResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV2AppResourceOwnersV2CreateUserOwnerResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,9 +23,11 @@ export const SSFReceiverStreamServiceGetResponse$inboundSchema: z.ZodType<
   SSFReceiverStreamServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ssfReceiverStream: z.nullable(SSFReceiverStream$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssfReceiverStream: z.nullable(SSFReceiverStream$inboundSchema).optional(),
+  })
+);
 
 export function ssfReceiverStreamServiceGetResponseFromJSON(
   jsonString: string,

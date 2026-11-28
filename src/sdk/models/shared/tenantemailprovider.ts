@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -73,24 +73,26 @@ export const TenantEmailProvider$inboundSchema: z.ZodType<
   TenantEmailProvider,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  awsSes: z.nullable(AWSSESProviderConfig$inboundSchema).optional(),
-  c1Builtin: z.nullable(C1BuiltInProviderConfig$inboundSchema).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  fromAddress: z.string().optional(),
-  fromName: z.string().optional(),
-  googleWorkspace: z.nullable(GoogleWorkspaceProviderConfig$inboundSchema)
-    .optional(),
-  microsoftGraph: z.nullable(MicrosoftGraphProviderConfig$inboundSchema)
-    .optional(),
-  replyToAddress: z.string().optional(),
-  sendgrid: z.nullable(SendGridProviderConfig$inboundSchema).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    awsSes: z.nullable(AWSSESProviderConfig$inboundSchema).optional(),
+    c1Builtin: z.nullable(C1BuiltInProviderConfig$inboundSchema).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    fromAddress: z.string().optional(),
+    fromName: z.string().optional(),
+    googleWorkspace: z.nullable(GoogleWorkspaceProviderConfig$inboundSchema)
+      .optional(),
+    microsoftGraph: z.nullable(MicrosoftGraphProviderConfig$inboundSchema)
+      .optional(),
+    replyToAddress: z.string().optional(),
+    sendgrid: z.nullable(SendGridProviderConfig$inboundSchema).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function tenantEmailProviderFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ResolveAction parameters for UpdateFindingState (manual resolve).
@@ -24,9 +25,11 @@ export const ResolveAction$outboundSchema: z.ZodType<
   ResolveAction$Outbound,
   z.ZodTypeDef,
   ResolveAction
-> = z.object({
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reason: z.string().optional(),
+  })
+);
 
 export function resolveActionToJSON(resolveAction: ResolveAction): string {
   return JSON.stringify(ResolveAction$outboundSchema.parse(resolveAction));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -60,19 +60,21 @@ export const AppSelectionCriteriaScope$inboundSchema: z.ZodType<
   AppSelectionCriteriaScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  annotationMatches: z.nullable(z.array(AnnotationMatch$inboundSchema))
-    .optional(),
-  appIds: z.nullable(z.array(z.string())).optional(),
-  complianceFrameworkAttributeValueIds: z.nullable(z.array(z.string()))
-    .optional(),
-  resourceProfileMatches: z.nullable(
-    z.array(ResourceProfileMatch$inboundSchema),
-  ).optional(),
-  resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$inboundSchema))
-    .optional(),
-  riskLevelAttributeValueIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotationMatches: z.nullable(z.array(AnnotationMatch$inboundSchema))
+      .optional(),
+    appIds: z.nullable(z.array(z.string())).optional(),
+    complianceFrameworkAttributeValueIds: z.nullable(z.array(z.string()))
+      .optional(),
+    resourceProfileMatches: z.nullable(
+      z.array(ResourceProfileMatch$inboundSchema),
+    ).optional(),
+    resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$inboundSchema))
+      .optional(),
+    riskLevelAttributeValueIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 /** @internal */
 export type AppSelectionCriteriaScope$Outbound = {
   annotationMatches?: Array<AnnotationMatch$Outbound> | null | undefined;
@@ -91,19 +93,21 @@ export const AppSelectionCriteriaScope$outboundSchema: z.ZodType<
   AppSelectionCriteriaScope$Outbound,
   z.ZodTypeDef,
   AppSelectionCriteriaScope
-> = z.object({
-  annotationMatches: z.nullable(z.array(AnnotationMatch$outboundSchema))
-    .optional(),
-  appIds: z.nullable(z.array(z.string())).optional(),
-  complianceFrameworkAttributeValueIds: z.nullable(z.array(z.string()))
-    .optional(),
-  resourceProfileMatches: z.nullable(
-    z.array(ResourceProfileMatch$outboundSchema),
-  ).optional(),
-  resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
-    .optional(),
-  riskLevelAttributeValueIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotationMatches: z.nullable(z.array(AnnotationMatch$outboundSchema))
+      .optional(),
+    appIds: z.nullable(z.array(z.string())).optional(),
+    complianceFrameworkAttributeValueIds: z.nullable(z.array(z.string()))
+      .optional(),
+    resourceProfileMatches: z.nullable(
+      z.array(ResourceProfileMatch$outboundSchema),
+    ).optional(),
+    resourceTypeRefs: z.nullable(z.array(ResourceTypeRef$outboundSchema))
+      .optional(),
+    riskLevelAttributeValueIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function appSelectionCriteriaScopeToJSON(
   appSelectionCriteriaScope: AppSelectionCriteriaScope,

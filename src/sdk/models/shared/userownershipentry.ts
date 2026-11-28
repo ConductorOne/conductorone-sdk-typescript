@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -71,23 +71,25 @@ export const OwnershipType$inboundSchema: z.ZodType<
   OwnershipType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(OwnershipType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(OwnershipType));
 
 /** @internal */
 export const UserOwnershipEntry$inboundSchema: z.ZodType<
   UserOwnershipEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appDisplayName: z.string().optional(),
-  appId: z.string().optional(),
-  entitlementDisplayName: z.string().optional(),
-  entitlementId: z.string().optional(),
-  ownershipType: OwnershipType$inboundSchema.optional(),
-  resourceDisplayName: z.string().optional(),
-  resourceId: z.string().optional(),
-  resourceTypeId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appDisplayName: z.string().optional(),
+    appId: z.string().optional(),
+    entitlementDisplayName: z.string().optional(),
+    entitlementId: z.string().optional(),
+    ownershipType: OwnershipType$inboundSchema.optional(),
+    resourceDisplayName: z.string().optional(),
+    resourceId: z.string().optional(),
+    resourceTypeId: z.string().optional(),
+  })
+);
 
 export function userOwnershipEntryFromJSON(
   jsonString: string,

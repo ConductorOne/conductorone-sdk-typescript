@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -84,33 +84,39 @@ export const TaskTypeCertifyOutcome$inboundSchema: z.ZodType<
   TaskTypeCertifyOutcome,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TaskTypeCertifyOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TaskTypeCertifyOutcome)
+);
 /** @internal */
 export const TaskTypeCertifyOutcome$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TaskTypeCertifyOutcome
-> = openEnums.outboundSchema(TaskTypeCertifyOutcome);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TaskTypeCertifyOutcome)
+);
 
 /** @internal */
 export const TaskTypeCertify$inboundSchema: z.ZodType<
   TaskTypeCertify,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessReviewId: z.string().optional(),
-  accessReviewSelection: z.string().optional(),
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  identityUserId: z.string().optional(),
-  outcome: TaskTypeCertifyOutcome$inboundSchema.optional(),
-  outcomeTime: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  resource: z.nullable(AppResourceRef$inboundSchema).optional(),
-  reviewSubject: z.nullable(ReviewSubject$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewId: z.string().optional(),
+    accessReviewSelection: z.string().optional(),
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    identityUserId: z.string().optional(),
+    outcome: TaskTypeCertifyOutcome$inboundSchema.optional(),
+    outcomeTime: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    resource: z.nullable(AppResourceRef$inboundSchema).optional(),
+    reviewSubject: z.nullable(ReviewSubject$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type TaskTypeCertify$Outbound = {
   accessReviewId?: string | undefined;
@@ -130,18 +136,21 @@ export const TaskTypeCertify$outboundSchema: z.ZodType<
   TaskTypeCertify$Outbound,
   z.ZodTypeDef,
   TaskTypeCertify
-> = z.object({
-  accessReviewId: z.string().optional(),
-  accessReviewSelection: z.string().optional(),
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  identityUserId: z.string().optional(),
-  outcome: TaskTypeCertifyOutcome$outboundSchema.optional(),
-  outcomeTime: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  resource: z.nullable(AppResourceRef$outboundSchema).optional(),
-  reviewSubject: z.nullable(ReviewSubject$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessReviewId: z.string().optional(),
+    accessReviewSelection: z.string().optional(),
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    identityUserId: z.string().optional(),
+    outcome: TaskTypeCertifyOutcome$outboundSchema.optional(),
+    outcomeTime: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    resource: z.nullable(AppResourceRef$outboundSchema).optional(),
+    reviewSubject: z.nullable(ReviewSubject$outboundSchema).optional(),
+  })
+);
 
 export function taskTypeCertifyToJSON(
   taskTypeCertify: TaskTypeCertify,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   UserRef,
   UserRef$Outbound,
@@ -44,12 +45,14 @@ export const PersonalClientSearchServiceSearchRequest$outboundSchema: z.ZodType<
   PersonalClientSearchServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   PersonalClientSearchServiceSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  users: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    users: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+  })
+);
 
 export function personalClientSearchServiceSearchRequestToJSON(
   personalClientSearchServiceSearchRequest:

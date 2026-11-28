@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -63,26 +63,32 @@ export const SessionPolicyPolicyRuleMode$inboundSchema: z.ZodType<
   SessionPolicyPolicyRuleMode,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(SessionPolicyPolicyRuleMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(SessionPolicyPolicyRuleMode)
+);
 /** @internal */
 export const SessionPolicyPolicyRuleMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SessionPolicyPolicyRuleMode
-> = openEnums.outboundSchema(SessionPolicyPolicyRuleMode);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SessionPolicyPolicyRuleMode)
+);
 
 /** @internal */
 export const SessionPolicyPolicyRule$inboundSchema: z.ZodType<
   SessionPolicyPolicyRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  id: z.string().optional(),
-  matchCel: z.string().optional(),
-  mode: SessionPolicyPolicyRuleMode$inboundSchema.optional(),
-  outcome: z.nullable(SessionPolicyPolicyOutcome$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    id: z.string().optional(),
+    matchCel: z.string().optional(),
+    mode: SessionPolicyPolicyRuleMode$inboundSchema.optional(),
+    outcome: z.nullable(SessionPolicyPolicyOutcome$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SessionPolicyPolicyRule$Outbound = {
   description?: string | undefined;
@@ -97,13 +103,15 @@ export const SessionPolicyPolicyRule$outboundSchema: z.ZodType<
   SessionPolicyPolicyRule$Outbound,
   z.ZodTypeDef,
   SessionPolicyPolicyRule
-> = z.object({
-  description: z.string().optional(),
-  id: z.string().optional(),
-  matchCel: z.string().optional(),
-  mode: SessionPolicyPolicyRuleMode$outboundSchema.optional(),
-  outcome: z.nullable(SessionPolicyPolicyOutcome$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    id: z.string().optional(),
+    matchCel: z.string().optional(),
+    mode: SessionPolicyPolicyRuleMode$outboundSchema.optional(),
+    outcome: z.nullable(SessionPolicyPolicyOutcome$outboundSchema).optional(),
+  })
+);
 
 export function sessionPolicyPolicyRuleToJSON(
   sessionPolicyPolicyRule: SessionPolicyPolicyRule,

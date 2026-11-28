@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -32,23 +32,29 @@ export const DelegatedVerifiers$inboundSchema: z.ZodType<
   DelegatedVerifiers,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DelegatedVerifiers);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DelegatedVerifiers)
+);
 /** @internal */
 export const DelegatedVerifiers$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DelegatedVerifiers
-> = openEnums.outboundSchema(DelegatedVerifiers);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DelegatedVerifiers)
+);
 
 /** @internal */
 export const AuthConfigC1Local$inboundSchema: z.ZodType<
   AuthConfigC1Local,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  delegatedVerifiers: z.nullable(z.array(DelegatedVerifiers$inboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delegatedVerifiers: z.nullable(z.array(DelegatedVerifiers$inboundSchema))
+      .optional(),
+  })
+);
 /** @internal */
 export type AuthConfigC1Local$Outbound = {
   delegatedVerifiers?: Array<string> | null | undefined;
@@ -59,10 +65,12 @@ export const AuthConfigC1Local$outboundSchema: z.ZodType<
   AuthConfigC1Local$Outbound,
   z.ZodTypeDef,
   AuthConfigC1Local
-> = z.object({
-  delegatedVerifiers: z.nullable(z.array(DelegatedVerifiers$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    delegatedVerifiers: z.nullable(z.array(DelegatedVerifiers$outboundSchema))
+      .optional(),
+  })
+);
 
 export function authConfigC1LocalToJSON(
   authConfigC1Local: AuthConfigC1Local,

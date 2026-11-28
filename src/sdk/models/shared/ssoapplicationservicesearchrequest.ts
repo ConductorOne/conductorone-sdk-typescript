@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SSOApplicationServiceSearchRequest searches SSO applications with filters.
@@ -42,12 +43,14 @@ export const SSOApplicationServiceSearchRequest$outboundSchema: z.ZodType<
   SSOApplicationServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   SSOApplicationServiceSearchRequest
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+  })
+);
 
 export function ssoApplicationServiceSearchRequestToJSON(
   ssoApplicationServiceSearchRequest: SSOApplicationServiceSearchRequest,

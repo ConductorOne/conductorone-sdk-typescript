@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -69,38 +69,44 @@ export const DayOfWeek$inboundSchema: z.ZodType<
   DayOfWeek,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DayOfWeek);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(DayOfWeek));
 /** @internal */
 export const DayOfWeek$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DayOfWeek
-> = openEnums.outboundSchema(DayOfWeek);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(DayOfWeek));
 
 /** @internal */
 export const DigestPreferenceFrequency$inboundSchema: z.ZodType<
   DigestPreferenceFrequency,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DigestPreferenceFrequency);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DigestPreferenceFrequency)
+);
 /** @internal */
 export const DigestPreferenceFrequency$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DigestPreferenceFrequency
-> = openEnums.outboundSchema(DigestPreferenceFrequency);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DigestPreferenceFrequency)
+);
 
 /** @internal */
 export const DigestPreference$inboundSchema: z.ZodType<
   DigestPreference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  dayOfWeek: DayOfWeek$inboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  frequency: DigestPreferenceFrequency$inboundSchema.optional(),
-  locked: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dayOfWeek: DayOfWeek$inboundSchema.optional(),
+    enabled: z.boolean().optional(),
+    frequency: DigestPreferenceFrequency$inboundSchema.optional(),
+    locked: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type DigestPreference$Outbound = {
   dayOfWeek?: string | undefined;
@@ -114,12 +120,14 @@ export const DigestPreference$outboundSchema: z.ZodType<
   DigestPreference$Outbound,
   z.ZodTypeDef,
   DigestPreference
-> = z.object({
-  dayOfWeek: DayOfWeek$outboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  frequency: DigestPreferenceFrequency$outboundSchema.optional(),
-  locked: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dayOfWeek: DayOfWeek$outboundSchema.optional(),
+    enabled: z.boolean().optional(),
+    frequency: DigestPreferenceFrequency$outboundSchema.optional(),
+    locked: z.boolean().optional(),
+  })
+);
 
 export function digestPreferenceToJSON(
   digestPreference: DigestPreference,

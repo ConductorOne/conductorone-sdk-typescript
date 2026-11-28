@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1ApiReportingV1ReportingServiceDeleteRequest$outboundSchema:
     C1ApiReportingV1ReportingServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiReportingV1ReportingServiceDeleteRequest
-  > = z.object({
-    id: z.string(),
-    reportingServiceDeleteRequest: shared
-      .ReportingServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      reportingServiceDeleteRequest: "ReportingServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      reportingServiceDeleteRequest: shared
+        .ReportingServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        reportingServiceDeleteRequest: "ReportingServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceDeleteRequestToJSON(
   c1ApiReportingV1ReportingServiceDeleteRequest:
@@ -78,20 +80,22 @@ export const C1ApiReportingV1ReportingServiceDeleteResponse$inboundSchema:
     C1ApiReportingV1ReportingServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ReportingServiceDeleteResponse: shared
-      .ReportingServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ReportingServiceDeleteResponse": "reportingServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ReportingServiceDeleteResponse: shared
+        .ReportingServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ReportingServiceDeleteResponse": "reportingServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceDeleteResponseFromJSON(
   jsonString: string,

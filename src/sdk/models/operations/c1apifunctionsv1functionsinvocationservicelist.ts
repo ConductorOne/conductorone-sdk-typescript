@@ -4,13 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type C1ApiFunctionsV1FunctionsInvocationServiceListRequest = {
   functionId: string;
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
 };
 
 export type C1ApiFunctionsV1FunctionsInvocationServiceListResponse = {
@@ -37,6 +39,8 @@ export type C1ApiFunctionsV1FunctionsInvocationServiceListResponse = {
 /** @internal */
 export type C1ApiFunctionsV1FunctionsInvocationServiceListRequest$Outbound = {
   function_id: string;
+  page_size?: number | undefined;
+  page_token?: string | undefined;
 };
 
 /** @internal */
@@ -45,13 +49,19 @@ export const C1ApiFunctionsV1FunctionsInvocationServiceListRequest$outboundSchem
     C1ApiFunctionsV1FunctionsInvocationServiceListRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFunctionsV1FunctionsInvocationServiceListRequest
-  > = z.object({
-    functionId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      functionId: "function_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      functionId: z.string(),
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        functionId: "function_id",
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsInvocationServiceListRequestToJSON(
   c1ApiFunctionsV1FunctionsInvocationServiceListRequest:
@@ -70,21 +80,23 @@ export const C1ApiFunctionsV1FunctionsInvocationServiceListResponse$inboundSchem
     C1ApiFunctionsV1FunctionsInvocationServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FunctionsInvocationServiceListResponse: shared
-      .FunctionsInvocationServiceListResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FunctionsInvocationServiceListResponse":
-        "functionsInvocationServiceListResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FunctionsInvocationServiceListResponse: shared
+        .FunctionsInvocationServiceListResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FunctionsInvocationServiceListResponse":
+          "functionsInvocationServiceListResponse",
+      });
+    })
+  );
 
 export function c1ApiFunctionsV1FunctionsInvocationServiceListResponseFromJSON(
   jsonString: string,

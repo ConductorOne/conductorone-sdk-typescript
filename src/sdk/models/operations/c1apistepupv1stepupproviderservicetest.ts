@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiStepupV1StepUpProviderServiceTestRequest$outboundSchema:
     C1ApiStepupV1StepUpProviderServiceTestRequest$Outbound,
     z.ZodTypeDef,
     C1ApiStepupV1StepUpProviderServiceTestRequest
-  > = z.object({
-    id: z.string(),
-    testStepUpProviderRequest: shared.TestStepUpProviderRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      testStepUpProviderRequest: "TestStepUpProviderRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      testStepUpProviderRequest: shared.TestStepUpProviderRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        testStepUpProviderRequest: "TestStepUpProviderRequest",
+      });
+    })
+  );
 
 export function c1ApiStepupV1StepUpProviderServiceTestRequestToJSON(
   c1ApiStepupV1StepUpProviderServiceTestRequest:
@@ -74,20 +76,22 @@ export const C1ApiStepupV1StepUpProviderServiceTestResponse$inboundSchema:
     C1ApiStepupV1StepUpProviderServiceTestResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TestStepUpProviderResponse: shared.TestStepUpProviderResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TestStepUpProviderResponse": "testStepUpProviderResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TestStepUpProviderResponse: shared
+        .TestStepUpProviderResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TestStepUpProviderResponse": "testStepUpProviderResponse",
+      });
+    })
+  );
 
 export function c1ApiStepupV1StepUpProviderServiceTestResponseFromJSON(
   jsonString: string,

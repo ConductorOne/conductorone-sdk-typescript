@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -45,21 +45,24 @@ export const AutomationTemplateVersion$inboundSchema: z.ZodType<
   AutomationTemplateVersion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  automationSteps: z.nullable(z.array(AutomationStep$inboundSchema)).optional(),
-  automationTemplateId: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  triggers: z.nullable(z.array(AutomationTrigger$inboundSchema)).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  version: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    automationSteps: z.nullable(z.array(AutomationStep$inboundSchema))
+      .optional(),
+    automationTemplateId: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    triggers: z.nullable(z.array(AutomationTrigger$inboundSchema)).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    version: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function automationTemplateVersionFromJSON(
   jsonString: string,

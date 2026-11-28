@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { FacetRange, FacetRange$inboundSchema } from "./facetrange.js";
@@ -23,9 +23,11 @@ export const FacetRangeItem$inboundSchema: z.ZodType<
   FacetRangeItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ranges: z.nullable(z.array(FacetRange$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ranges: z.nullable(z.array(FacetRange$inboundSchema)).optional(),
+  })
+);
 
 export function facetRangeItemFromJSON(
   jsonString: string,

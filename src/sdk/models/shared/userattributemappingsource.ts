@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -42,14 +42,16 @@ export const UserAttributeMappingSource$inboundSchema: z.ZodType<
   UserAttributeMappingSource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  appUserProfileAttributeKey: z.string().optional(),
-  priority: z.number().int().optional(),
-  userAttributeMappingId: z.string().optional(),
-  value: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    appUserProfileAttributeKey: z.string().optional(),
+    priority: z.number().int().optional(),
+    userAttributeMappingId: z.string().optional(),
+    value: z.string().optional(),
+  })
+);
 
 export function userAttributeMappingSourceFromJSON(
   jsonString: string,

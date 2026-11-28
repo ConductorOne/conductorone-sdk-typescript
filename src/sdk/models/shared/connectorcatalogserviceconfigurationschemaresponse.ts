@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { ConfigSchema, ConfigSchema$inboundSchema } from "./configschema.js";
@@ -26,10 +26,12 @@ export const ConnectorCatalogServiceConfigurationSchemaResponse$inboundSchema:
     ConnectorCatalogServiceConfigurationSchemaResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    formSchema: z.nullable(RequestSchemaForm$inboundSchema).optional(),
-    schema: z.nullable(ConfigSchema$inboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      formSchema: z.nullable(RequestSchemaForm$inboundSchema).optional(),
+      schema: z.nullable(ConfigSchema$inboundSchema).optional(),
+    })
+  );
 
 export function connectorCatalogServiceConfigurationSchemaResponseFromJSON(
   jsonString: string,

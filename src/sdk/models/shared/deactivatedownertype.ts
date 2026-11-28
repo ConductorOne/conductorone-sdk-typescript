@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -48,22 +48,28 @@ export const DeactivatedOwnerTypeSource$inboundSchema: z.ZodType<
   DeactivatedOwnerTypeSource,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(DeactivatedOwnerTypeSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(DeactivatedOwnerTypeSource)
+);
 /** @internal */
 export const DeactivatedOwnerTypeSource$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   DeactivatedOwnerTypeSource
-> = openEnums.outboundSchema(DeactivatedOwnerTypeSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(DeactivatedOwnerTypeSource)
+);
 
 /** @internal */
 export const DeactivatedOwnerType$inboundSchema: z.ZodType<
   DeactivatedOwnerType,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  source: DeactivatedOwnerTypeSource$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: DeactivatedOwnerTypeSource$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type DeactivatedOwnerType$Outbound = {
   source?: string | undefined;
@@ -74,9 +80,11 @@ export const DeactivatedOwnerType$outboundSchema: z.ZodType<
   DeactivatedOwnerType$Outbound,
   z.ZodTypeDef,
   DeactivatedOwnerType
-> = z.object({
-  source: DeactivatedOwnerTypeSource$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: DeactivatedOwnerTypeSource$outboundSchema.optional(),
+  })
+);
 
 export function deactivatedOwnerTypeToJSON(
   deactivatedOwnerType: DeactivatedOwnerType,

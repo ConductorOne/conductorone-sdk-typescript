@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,16 +49,18 @@ export const C1ApiTaskV1TaskActionsServiceSkipStepRequest$outboundSchema:
     C1ApiTaskV1TaskActionsServiceSkipStepRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceSkipStepRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceSkipStepRequest: shared
-      .TaskActionsServiceSkipStepRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceSkipStepRequest: "TaskActionsServiceSkipStepRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceSkipStepRequest: shared
+        .TaskActionsServiceSkipStepRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceSkipStepRequest: "TaskActionsServiceSkipStepRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceSkipStepRequestToJSON(
   c1ApiTaskV1TaskActionsServiceSkipStepRequest:
@@ -77,20 +79,22 @@ export const C1ApiTaskV1TaskActionsServiceSkipStepResponse$inboundSchema:
     C1ApiTaskV1TaskActionsServiceSkipStepResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskServiceActionResponse: shared.TaskServiceActionResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskServiceActionResponse": "taskServiceActionResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskServiceActionResponse: shared.TaskServiceActionResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskServiceActionResponse": "taskServiceActionResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceSkipStepResponseFromJSON(
   jsonString: string,

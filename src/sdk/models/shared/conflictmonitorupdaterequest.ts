@@ -3,11 +3,47 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AccessConflictNotificationConfig,
   AccessConflictNotificationConfig$Outbound,
   AccessConflictNotificationConfig$outboundSchema,
 } from "./accessconflictnotificationconfig.js";
+import {
+  ConflictMonitorRule,
+  ConflictMonitorRule$Outbound,
+  ConflictMonitorRule$outboundSchema,
+} from "./conflictmonitorrule.js";
+
+/**
+ * Configured severity for new findings. Unset preserves the stored value.
+ *
+ * @remarks
+ *  Explicit values replace the stored configuration, even when responses use medium.
+ *  Monitor responses and new findings use medium until configured severity is
+ *  enabled for your tenant.
+ */
+export const ConflictMonitorUpdateRequestSeverity = {
+  FindingSeverityUnspecified: "FINDING_SEVERITY_UNSPECIFIED",
+  FindingSeverityInfo: "FINDING_SEVERITY_INFO",
+  FindingSeverityLow: "FINDING_SEVERITY_LOW",
+  FindingSeverityMedium: "FINDING_SEVERITY_MEDIUM",
+  FindingSeverityHigh: "FINDING_SEVERITY_HIGH",
+  FindingSeverityCritical: "FINDING_SEVERITY_CRITICAL",
+} as const;
+/**
+ * Configured severity for new findings. Unset preserves the stored value.
+ *
+ * @remarks
+ *  Explicit values replace the stored configuration, even when responses use medium.
+ *  Monitor responses and new findings use medium until configured severity is
+ *  enabled for your tenant.
+ */
+export type ConflictMonitorUpdateRequestSeverity = OpenEnum<
+  typeof ConflictMonitorUpdateRequestSeverity
+>;
 
 /**
  * The request message for updating an existing conflict monitor.
@@ -22,14 +58,36 @@ export type ConflictMonitorUpdateRequest = {
    */
   displayName?: string | undefined;
   /**
-   * When true, the rule flags users who are in set A but NOT in set B ("is not
+   * Deprecated: use rule. Read only when rule is unset. When true, the rule
    *
    * @remarks
-   *  in"), instead of the default A-and-B intersection.
+   *  flags users who are in set A but NOT in set B ("is not in"), instead of
+   *  the default A-and-B intersection.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
    */
   negateGroupB?: boolean | undefined;
   notificationConfig?: AccessConflictNotificationConfig | null | undefined;
+  rule?: ConflictMonitorRule | null | undefined;
+  /**
+   * Configured severity for new findings. Unset preserves the stored value.
+   *
+   * @remarks
+   *  Explicit values replace the stored configuration, even when responses use medium.
+   *  Monitor responses and new findings use medium until configured severity is
+   *  enabled for your tenant.
+   */
+  severity?: ConflictMonitorUpdateRequestSeverity | undefined;
 };
+
+/** @internal */
+export const ConflictMonitorUpdateRequestSeverity$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  ConflictMonitorUpdateRequestSeverity
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ConflictMonitorUpdateRequestSeverity)
+);
 
 /** @internal */
 export type ConflictMonitorUpdateRequest$Outbound = {
@@ -40,6 +98,8 @@ export type ConflictMonitorUpdateRequest$Outbound = {
     | AccessConflictNotificationConfig$Outbound
     | null
     | undefined;
+  rule?: ConflictMonitorRule$Outbound | null | undefined;
+  severity?: string | undefined;
 };
 
 /** @internal */
@@ -47,14 +107,18 @@ export const ConflictMonitorUpdateRequest$outboundSchema: z.ZodType<
   ConflictMonitorUpdateRequest$Outbound,
   z.ZodTypeDef,
   ConflictMonitorUpdateRequest
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  negateGroupB: z.boolean().optional(),
-  notificationConfig: z.nullable(
-    AccessConflictNotificationConfig$outboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    negateGroupB: z.boolean().optional(),
+    notificationConfig: z.nullable(
+      AccessConflictNotificationConfig$outboundSchema,
+    ).optional(),
+    rule: z.nullable(ConflictMonitorRule$outboundSchema).optional(),
+    severity: ConflictMonitorUpdateRequestSeverity$outboundSchema.optional(),
+  })
+);
 
 export function conflictMonitorUpdateRequestToJSON(
   conflictMonitorUpdateRequest: ConflictMonitorUpdateRequest,

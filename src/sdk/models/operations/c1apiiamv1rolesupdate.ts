@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,15 +44,17 @@ export const C1ApiIamV1RolesUpdateRequest$outboundSchema: z.ZodType<
   C1ApiIamV1RolesUpdateRequest$Outbound,
   z.ZodTypeDef,
   C1ApiIamV1RolesUpdateRequest
-> = z.object({
-  roleId: z.string(),
-  updateRoleRequest: shared.UpdateRoleRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    roleId: "role_id",
-    updateRoleRequest: "UpdateRoleRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    roleId: z.string(),
+    updateRoleRequest: shared.UpdateRoleRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      roleId: "role_id",
+      updateRoleRequest: "UpdateRoleRequest",
+    });
+  })
+);
 
 export function c1ApiIamV1RolesUpdateRequestToJSON(
   c1ApiIamV1RolesUpdateRequest: C1ApiIamV1RolesUpdateRequest,
@@ -69,19 +71,21 @@ export const C1ApiIamV1RolesUpdateResponse$inboundSchema: z.ZodType<
   C1ApiIamV1RolesUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  UpdateRolesResponse: shared.UpdateRolesResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "UpdateRolesResponse": "updateRolesResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    UpdateRolesResponse: shared.UpdateRolesResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "UpdateRolesResponse": "updateRolesResponse",
+    });
+  })
+);
 
 export function c1ApiIamV1RolesUpdateResponseFromJSON(
   jsonString: string,

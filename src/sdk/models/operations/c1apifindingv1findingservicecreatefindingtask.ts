@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,16 +47,18 @@ export const C1ApiFindingV1FindingServiceCreateFindingTaskRequest$outboundSchema
     C1ApiFindingV1FindingServiceCreateFindingTaskRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFindingV1FindingServiceCreateFindingTaskRequest
-  > = z.object({
-    findingId: z.string(),
-    createFindingTaskRequest: shared.CreateFindingTaskRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      findingId: "finding_id",
-      createFindingTaskRequest: "CreateFindingTaskRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      findingId: z.string(),
+      createFindingTaskRequest: shared.CreateFindingTaskRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        findingId: "finding_id",
+        createFindingTaskRequest: "CreateFindingTaskRequest",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingServiceCreateFindingTaskRequestToJSON(
   c1ApiFindingV1FindingServiceCreateFindingTaskRequest:
@@ -75,20 +77,22 @@ export const C1ApiFindingV1FindingServiceCreateFindingTaskResponse$inboundSchema
     C1ApiFindingV1FindingServiceCreateFindingTaskResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    CreateFindingTaskResponse: shared.CreateFindingTaskResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "CreateFindingTaskResponse": "createFindingTaskResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      CreateFindingTaskResponse: shared.CreateFindingTaskResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "CreateFindingTaskResponse": "createFindingTaskResponse",
+      });
+    })
+  );
 
 export function c1ApiFindingV1FindingServiceCreateFindingTaskResponseFromJSON(
   jsonString: string,

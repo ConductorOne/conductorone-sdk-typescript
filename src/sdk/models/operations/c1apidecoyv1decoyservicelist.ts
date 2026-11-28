@@ -4,10 +4,15 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type C1ApiDecoyV1DecoyServiceListRequest = {
+  pageSize?: number | undefined;
+  pageToken?: string | undefined;
+};
 
 export type C1ApiDecoyV1DecoyServiceListResponse = {
   /**
@@ -29,24 +34,59 @@ export type C1ApiDecoyV1DecoyServiceListResponse = {
 };
 
 /** @internal */
+export type C1ApiDecoyV1DecoyServiceListRequest$Outbound = {
+  page_size?: number | undefined;
+  page_token?: string | undefined;
+};
+
+/** @internal */
+export const C1ApiDecoyV1DecoyServiceListRequest$outboundSchema: z.ZodType<
+  C1ApiDecoyV1DecoyServiceListRequest$Outbound,
+  z.ZodTypeDef,
+  C1ApiDecoyV1DecoyServiceListRequest
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageSize: "page_size",
+      pageToken: "page_token",
+    });
+  })
+);
+
+export function c1ApiDecoyV1DecoyServiceListRequestToJSON(
+  c1ApiDecoyV1DecoyServiceListRequest: C1ApiDecoyV1DecoyServiceListRequest,
+): string {
+  return JSON.stringify(
+    C1ApiDecoyV1DecoyServiceListRequest$outboundSchema.parse(
+      c1ApiDecoyV1DecoyServiceListRequest,
+    ),
+  );
+}
+
+/** @internal */
 export const C1ApiDecoyV1DecoyServiceListResponse$inboundSchema: z.ZodType<
   C1ApiDecoyV1DecoyServiceListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  DecoyServiceListResponse: shared.DecoyServiceListResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "DecoyServiceListResponse": "decoyServiceListResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    DecoyServiceListResponse: shared.DecoyServiceListResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "DecoyServiceListResponse": "decoyServiceListResponse",
+    });
+  })
+);
 
 export function c1ApiDecoyV1DecoyServiceListResponseFromJSON(
   jsonString: string,

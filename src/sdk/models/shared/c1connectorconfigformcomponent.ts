@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,12 +39,14 @@ export const C1ConnectorConfigFormComponent$inboundSchema: z.ZodType<
   C1ConnectorConfigFormComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  skipActionName: z.string().optional(),
-  submitActionName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    skipActionName: z.string().optional(),
+    submitActionName: z.string().optional(),
+  })
+);
 
 export function c1ConnectorConfigFormComponentFromJSON(
   jsonString: string,

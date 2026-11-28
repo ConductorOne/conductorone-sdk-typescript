@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiTaskV1TaskActionsServiceReassignRequest$outboundSchema:
     C1ApiTaskV1TaskActionsServiceReassignRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceReassignRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceReassignRequest: shared
-      .TaskActionsServiceReassignRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceReassignRequest: "TaskActionsServiceReassignRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceReassignRequest: shared
+        .TaskActionsServiceReassignRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceReassignRequest: "TaskActionsServiceReassignRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceReassignRequestToJSON(
   c1ApiTaskV1TaskActionsServiceReassignRequest:
@@ -79,21 +81,23 @@ export const C1ApiTaskV1TaskActionsServiceReassignResponse$inboundSchema:
     C1ApiTaskV1TaskActionsServiceReassignResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskActionsServiceReassignResponse: shared
-      .TaskActionsServiceReassignResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskActionsServiceReassignResponse":
-        "taskActionsServiceReassignResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskActionsServiceReassignResponse: shared
+        .TaskActionsServiceReassignResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskActionsServiceReassignResponse":
+          "taskActionsServiceReassignResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceReassignResponseFromJSON(
   jsonString: string,

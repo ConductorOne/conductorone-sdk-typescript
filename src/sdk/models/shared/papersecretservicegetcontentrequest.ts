@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The PaperSecretServiceGetContentRequest message.
@@ -27,9 +28,11 @@ export const PaperSecretServiceGetContentRequest$outboundSchema: z.ZodType<
   PaperSecretServiceGetContentRequest$Outbound,
   z.ZodTypeDef,
   PaperSecretServiceGetContentRequest
-> = z.object({
-  readerRecipient: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    readerRecipient: z.string().optional(),
+  })
+);
 
 export function paperSecretServiceGetContentRequestToJSON(
   paperSecretServiceGetContentRequest: PaperSecretServiceGetContentRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The AppSecretExpandMask message.
@@ -24,9 +25,11 @@ export const AppSecretExpandMask$outboundSchema: z.ZodType<
   AppSecretExpandMask$Outbound,
   z.ZodTypeDef,
   AppSecretExpandMask
-> = z.object({
-  paths: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function appSecretExpandMaskToJSON(
   appSecretExpandMask: AppSecretExpandMask,

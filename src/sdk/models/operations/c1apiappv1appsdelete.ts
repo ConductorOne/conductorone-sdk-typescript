@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,14 +44,16 @@ export const C1ApiAppV1AppsDeleteRequest$outboundSchema: z.ZodType<
   C1ApiAppV1AppsDeleteRequest$Outbound,
   z.ZodTypeDef,
   C1ApiAppV1AppsDeleteRequest
-> = z.object({
-  id: z.string(),
-  deleteAppRequest: shared.DeleteAppRequest$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    deleteAppRequest: "DeleteAppRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleteAppRequest: shared.DeleteAppRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      deleteAppRequest: "DeleteAppRequest",
+    });
+  })
+);
 
 export function c1ApiAppV1AppsDeleteRequestToJSON(
   c1ApiAppV1AppsDeleteRequest: C1ApiAppV1AppsDeleteRequest,
@@ -68,19 +70,21 @@ export const C1ApiAppV1AppsDeleteResponse$inboundSchema: z.ZodType<
   C1ApiAppV1AppsDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  DeleteAppResponse: shared.DeleteAppResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "DeleteAppResponse": "deleteAppResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    DeleteAppResponse: shared.DeleteAppResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "DeleteAppResponse": "deleteAppResponse",
+    });
+  })
+);
 
 export function c1ApiAppV1AppsDeleteResponseFromJSON(
   jsonString: string,

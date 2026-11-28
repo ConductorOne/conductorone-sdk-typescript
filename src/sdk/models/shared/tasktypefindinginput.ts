@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TaskTypeFinding message.
@@ -17,7 +18,7 @@ export const TaskTypeFindingInput$outboundSchema: z.ZodType<
   TaskTypeFindingInput$Outbound,
   z.ZodTypeDef,
   TaskTypeFindingInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function taskTypeFindingInputToJSON(
   taskTypeFindingInput: TaskTypeFindingInput,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const ReplacePolicy$inboundSchema: z.ZodType<
   ReplacePolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  policyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policyId: z.string().optional(),
+  })
+);
 /** @internal */
 export type ReplacePolicy$Outbound = {
   policyId?: string | undefined;
@@ -35,9 +37,11 @@ export const ReplacePolicy$outboundSchema: z.ZodType<
   ReplacePolicy$Outbound,
   z.ZodTypeDef,
   ReplacePolicy
-> = z.object({
-  policyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policyId: z.string().optional(),
+  })
+);
 
 export function replacePolicyToJSON(replacePolicy: ReplacePolicy): string {
   return JSON.stringify(ReplacePolicy$outboundSchema.parse(replacePolicy));

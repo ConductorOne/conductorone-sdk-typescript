@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -40,6 +40,8 @@ export const FindingTransformationRuleFindingType = {
   FindingTypeShadowApp: "FINDING_TYPE_SHADOW_APP",
   FindingTypeMcpGatewayToolCallRisk: "FINDING_TYPE_MCP_GATEWAY_TOOL_CALL_RISK",
   FindingTypeEdge: "FINDING_TYPE_EDGE",
+  FindingTypeAccessConflict: "FINDING_TYPE_ACCESS_CONFLICT",
+  FindingTypeConnectorHostOutdated: "FINDING_TYPE_CONNECTOR_HOST_OUTDATED",
 } as const;
 /**
  * The findingType field.
@@ -111,37 +113,43 @@ export const FindingTransformationRuleFindingType$inboundSchema: z.ZodType<
   FindingTransformationRuleFindingType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FindingTransformationRuleFindingType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(FindingTransformationRuleFindingType)
+);
 /** @internal */
 export const FindingTransformationRuleFindingType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FindingTransformationRuleFindingType
-> = openEnums.outboundSchema(FindingTransformationRuleFindingType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FindingTransformationRuleFindingType)
+);
 
 /** @internal */
 export const FindingTransformationRule$inboundSchema: z.ZodType<
   FindingTransformationRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  condition: z.string().optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  evaluationOrder: z.number().int().optional(),
-  findingType: FindingTransformationRuleFindingType$inboundSchema.optional(),
-  id: z.string().optional(),
-  templateId: z.string().optional(),
-  transforms: z.nullable(z.array(FindingTransform$inboundSchema)).optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    condition: z.string().optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    evaluationOrder: z.number().int().optional(),
+    findingType: FindingTransformationRuleFindingType$inboundSchema.optional(),
+    id: z.string().optional(),
+    templateId: z.string().optional(),
+    transforms: z.nullable(z.array(FindingTransform$inboundSchema)).optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type FindingTransformationRule$Outbound = {
   appId?: string | undefined;
@@ -163,20 +171,22 @@ export const FindingTransformationRule$outboundSchema: z.ZodType<
   FindingTransformationRule$Outbound,
   z.ZodTypeDef,
   FindingTransformationRule
-> = z.object({
-  appId: z.string().optional(),
-  condition: z.string().optional(),
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  evaluationOrder: z.number().int().optional(),
-  findingType: FindingTransformationRuleFindingType$outboundSchema.optional(),
-  id: z.string().optional(),
-  templateId: z.string().optional(),
-  transforms: z.nullable(z.array(FindingTransform$outboundSchema)).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    condition: z.string().optional(),
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    evaluationOrder: z.number().int().optional(),
+    findingType: FindingTransformationRuleFindingType$outboundSchema.optional(),
+    id: z.string().optional(),
+    templateId: z.string().optional(),
+    transforms: z.nullable(z.array(FindingTransform$outboundSchema)).optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function findingTransformationRuleToJSON(
   findingTransformationRule: FindingTransformationRule,

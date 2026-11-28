@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * ArtifactServiceSearchRequest searches only audience-visible catalog metadata.
@@ -51,12 +52,14 @@ export const ArtifactServiceSearchRequest$outboundSchema: z.ZodType<
   ArtifactServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   ArtifactServiceSearchRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    tags: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function artifactServiceSearchRequestToJSON(
   artifactServiceSearchRequest: ArtifactServiceSearchRequest,

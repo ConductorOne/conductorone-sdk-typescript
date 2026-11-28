@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,15 +47,17 @@ export const C1ApiAppV1AppEntitlementOwnersListOwnerIDsRequest$outboundSchema:
     C1ApiAppV1AppEntitlementOwnersListOwnerIDsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppEntitlementOwnersListOwnerIDsRequest
-  > = z.object({
-    appId: z.string(),
-    entitlementId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      entitlementId: "entitlement_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      entitlementId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        entitlementId: "entitlement_id",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementOwnersListOwnerIDsRequestToJSON(
   c1ApiAppV1AppEntitlementOwnersListOwnerIDsRequest:
@@ -74,21 +76,23 @@ export const C1ApiAppV1AppEntitlementOwnersListOwnerIDsResponse$inboundSchema:
     C1ApiAppV1AppEntitlementOwnersListOwnerIDsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListAppEntitlementOwnerIDsResponse: shared
-      .ListAppEntitlementOwnerIDsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListAppEntitlementOwnerIDsResponse":
-        "listAppEntitlementOwnerIDsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListAppEntitlementOwnerIDsResponse: shared
+        .ListAppEntitlementOwnerIDsResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListAppEntitlementOwnerIDsResponse":
+          "listAppEntitlementOwnerIDsResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppEntitlementOwnersListOwnerIDsResponseFromJSON(
   jsonString: string,

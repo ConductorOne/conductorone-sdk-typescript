@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -117,27 +117,32 @@ export const SlackChannelSettings$inboundSchema: z.ZodType<
   SlackChannelSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessProvisioned: z.nullable(AccessProvisionedPreference$inboundSchema)
-    .optional(),
-  approvalNeeded: z.nullable(ApprovalNeededPreference$inboundSchema).optional(),
-  commentOnRequest: z.nullable(CommentOnRequestPreference$inboundSchema)
-    .optional(),
-  completion: z.nullable(CompletionPreference$inboundSchema).optional(),
-  connectorIssues: z.nullable(ConnectorIssuesPreference$inboundSchema)
-    .optional(),
-  digest: z.nullable(DigestPreference$inboundSchema).optional(),
-  enabled: z.boolean().optional(),
-  expiringAccess: z.nullable(ExpiringAccessPreference$inboundSchema).optional(),
-  findings: z.nullable(FindingsPreference$inboundSchema).optional(),
-  isConfigured: z.boolean().optional(),
-  provisioningRequest: z.nullable(ProvisioningRequestPreference$inboundSchema)
-    .optional(),
-  requestCreated: z.nullable(RequestCreatedPreference$inboundSchema).optional(),
-  reviews: z.nullable(ReviewsPreference$inboundSchema).optional(),
-  system: z.nullable(SystemPreference$inboundSchema).optional(),
-  taskReminders: z.nullable(TaskRemindersPreference$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProvisioned: z.nullable(AccessProvisionedPreference$inboundSchema)
+      .optional(),
+    approvalNeeded: z.nullable(ApprovalNeededPreference$inboundSchema)
+      .optional(),
+    commentOnRequest: z.nullable(CommentOnRequestPreference$inboundSchema)
+      .optional(),
+    completion: z.nullable(CompletionPreference$inboundSchema).optional(),
+    connectorIssues: z.nullable(ConnectorIssuesPreference$inboundSchema)
+      .optional(),
+    digest: z.nullable(DigestPreference$inboundSchema).optional(),
+    enabled: z.boolean().optional(),
+    expiringAccess: z.nullable(ExpiringAccessPreference$inboundSchema)
+      .optional(),
+    findings: z.nullable(FindingsPreference$inboundSchema).optional(),
+    isConfigured: z.boolean().optional(),
+    provisioningRequest: z.nullable(ProvisioningRequestPreference$inboundSchema)
+      .optional(),
+    requestCreated: z.nullable(RequestCreatedPreference$inboundSchema)
+      .optional(),
+    reviews: z.nullable(ReviewsPreference$inboundSchema).optional(),
+    system: z.nullable(SystemPreference$inboundSchema).optional(),
+    taskReminders: z.nullable(TaskRemindersPreference$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SlackChannelSettings$Outbound = {
   accessProvisioned?: AccessProvisionedPreference$Outbound | null | undefined;
@@ -165,30 +170,34 @@ export const SlackChannelSettings$outboundSchema: z.ZodType<
   SlackChannelSettings$Outbound,
   z.ZodTypeDef,
   SlackChannelSettings
-> = z.object({
-  accessProvisioned: z.nullable(AccessProvisionedPreference$outboundSchema)
-    .optional(),
-  approvalNeeded: z.nullable(ApprovalNeededPreference$outboundSchema)
-    .optional(),
-  commentOnRequest: z.nullable(CommentOnRequestPreference$outboundSchema)
-    .optional(),
-  completion: z.nullable(CompletionPreference$outboundSchema).optional(),
-  connectorIssues: z.nullable(ConnectorIssuesPreference$outboundSchema)
-    .optional(),
-  digest: z.nullable(DigestPreference$outboundSchema).optional(),
-  enabled: z.boolean().optional(),
-  expiringAccess: z.nullable(ExpiringAccessPreference$outboundSchema)
-    .optional(),
-  findings: z.nullable(FindingsPreference$outboundSchema).optional(),
-  isConfigured: z.boolean().optional(),
-  provisioningRequest: z.nullable(ProvisioningRequestPreference$outboundSchema)
-    .optional(),
-  requestCreated: z.nullable(RequestCreatedPreference$outboundSchema)
-    .optional(),
-  reviews: z.nullable(ReviewsPreference$outboundSchema).optional(),
-  system: z.nullable(SystemPreference$outboundSchema).optional(),
-  taskReminders: z.nullable(TaskRemindersPreference$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessProvisioned: z.nullable(AccessProvisionedPreference$outboundSchema)
+      .optional(),
+    approvalNeeded: z.nullable(ApprovalNeededPreference$outboundSchema)
+      .optional(),
+    commentOnRequest: z.nullable(CommentOnRequestPreference$outboundSchema)
+      .optional(),
+    completion: z.nullable(CompletionPreference$outboundSchema).optional(),
+    connectorIssues: z.nullable(ConnectorIssuesPreference$outboundSchema)
+      .optional(),
+    digest: z.nullable(DigestPreference$outboundSchema).optional(),
+    enabled: z.boolean().optional(),
+    expiringAccess: z.nullable(ExpiringAccessPreference$outboundSchema)
+      .optional(),
+    findings: z.nullable(FindingsPreference$outboundSchema).optional(),
+    isConfigured: z.boolean().optional(),
+    provisioningRequest: z.nullable(
+      ProvisioningRequestPreference$outboundSchema,
+    ).optional(),
+    requestCreated: z.nullable(RequestCreatedPreference$outboundSchema)
+      .optional(),
+    reviews: z.nullable(ReviewsPreference$outboundSchema).optional(),
+    system: z.nullable(SystemPreference$outboundSchema).optional(),
+    taskReminders: z.nullable(TaskRemindersPreference$outboundSchema)
+      .optional(),
+  })
+);
 
 export function slackChannelSettingsToJSON(
   slackChannelSettings: SlackChannelSettings,

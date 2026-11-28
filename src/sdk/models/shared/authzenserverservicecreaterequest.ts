@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AuthzenServerServiceCreateRequest creates an AuthZEN server for an app.
@@ -27,9 +28,11 @@ export const AuthzenServerServiceCreateRequest$outboundSchema: z.ZodType<
   AuthzenServerServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   AuthzenServerServiceCreateRequest
-> = z.object({
-  displayName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+  })
+);
 
 export function authzenServerServiceCreateRequestToJSON(
   authzenServerServiceCreateRequest: AuthzenServerServiceCreateRequest,

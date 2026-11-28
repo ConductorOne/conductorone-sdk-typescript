@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -79,17 +79,19 @@ export const ReportingServiceGetRunProvenanceResponse$inboundSchema: z.ZodType<
   ReportingServiceGetRunProvenanceResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  editInstruction: z.string().optional(),
-  programCommitId: z.string().optional(),
-  programFunctionId: z.string().optional(),
-  programId: z.string().optional(),
-  programInput: z.string().optional(),
-  programSource: z.string().optional(),
-  sources: z.nullable(z.array(A2UIProvenanceSource$inboundSchema)).optional(),
-  steps: z.nullable(z.array(A2UIProvenanceStep$inboundSchema)).optional(),
-  stepsAvailable: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    editInstruction: z.string().optional(),
+    programCommitId: z.string().optional(),
+    programFunctionId: z.string().optional(),
+    programId: z.string().optional(),
+    programInput: z.string().optional(),
+    programSource: z.string().optional(),
+    sources: z.nullable(z.array(A2UIProvenanceSource$inboundSchema)).optional(),
+    steps: z.nullable(z.array(A2UIProvenanceStep$inboundSchema)).optional(),
+    stepsAvailable: z.boolean().optional(),
+  })
+);
 
 export function reportingServiceGetRunProvenanceResponseFromJSON(
   jsonString: string,

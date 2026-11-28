@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const CampaignEntitlementDetails$inboundSchema: z.ZodType<
   CampaignEntitlementDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  entitlementId: z.string().optional(),
-  policyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    entitlementId: z.string().optional(),
+    policyId: z.string().optional(),
+  })
+);
 /** @internal */
 export type CampaignEntitlementDetails$Outbound = {
   appId?: string | undefined;
@@ -47,11 +49,13 @@ export const CampaignEntitlementDetails$outboundSchema: z.ZodType<
   CampaignEntitlementDetails$Outbound,
   z.ZodTypeDef,
   CampaignEntitlementDetails
-> = z.object({
-  appId: z.string().optional(),
-  entitlementId: z.string().optional(),
-  policyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    entitlementId: z.string().optional(),
+    policyId: z.string().optional(),
+  })
+);
 
 export function campaignEntitlementDetailsToJSON(
   campaignEntitlementDetails: CampaignEntitlementDetails,

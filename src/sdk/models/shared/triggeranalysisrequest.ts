@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The TriggerAnalysisRequest message.
@@ -17,7 +18,7 @@ export const TriggerAnalysisRequest$outboundSchema: z.ZodType<
   TriggerAnalysisRequest$Outbound,
   z.ZodTypeDef,
   TriggerAnalysisRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function triggerAnalysisRequestToJSON(
   triggerAnalysisRequest: TriggerAnalysisRequest,

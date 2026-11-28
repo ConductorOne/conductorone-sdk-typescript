@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -72,33 +72,39 @@ export const FundPolicyPeriod$inboundSchema: z.ZodType<
   FundPolicyPeriod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(FundPolicyPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(FundPolicyPeriod)
+);
 /** @internal */
 export const FundPolicyPeriod$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   FundPolicyPeriod
-> = openEnums.outboundSchema(FundPolicyPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(FundPolicyPeriod)
+);
 
 /** @internal */
 export const FundPolicy$inboundSchema: z.ZodType<
   FundPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  currencyCode: z.string().optional(),
-  defaultLimit: z.nullable(FundsSpendLimit$inboundSchema).optional(),
-  orgCeiling: z.nullable(FundsSpendControls$inboundSchema).optional(),
-  period: FundPolicyPeriod$inboundSchema.optional(),
-  spendRemedyRequestPolicyId: z.string().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    currencyCode: z.string().optional(),
+    defaultLimit: z.nullable(FundsSpendLimit$inboundSchema).optional(),
+    orgCeiling: z.nullable(FundsSpendControls$inboundSchema).optional(),
+    period: FundPolicyPeriod$inboundSchema.optional(),
+    spendRemedyRequestPolicyId: z.string().optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type FundPolicy$Outbound = {
   createdAt?: string | null | undefined;
@@ -116,16 +122,18 @@ export const FundPolicy$outboundSchema: z.ZodType<
   FundPolicy$Outbound,
   z.ZodTypeDef,
   FundPolicy
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  currencyCode: z.string().optional(),
-  defaultLimit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
-  orgCeiling: z.nullable(FundsSpendControls$outboundSchema).optional(),
-  period: FundPolicyPeriod$outboundSchema.optional(),
-  spendRemedyRequestPolicyId: z.string().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    currencyCode: z.string().optional(),
+    defaultLimit: z.nullable(FundsSpendLimit$outboundSchema).optional(),
+    orgCeiling: z.nullable(FundsSpendControls$outboundSchema).optional(),
+    period: FundPolicyPeriod$outboundSchema.optional(),
+    spendRemedyRequestPolicyId: z.string().optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function fundPolicyToJSON(fundPolicy: FundPolicy): string {
   return JSON.stringify(FundPolicy$outboundSchema.parse(fundPolicy));

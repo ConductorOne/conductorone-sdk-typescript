@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const CampaignInsights$inboundSchema: z.ZodType<
   CampaignInsights,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  markdown: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    markdown: z.string().optional(),
+  })
+);
 /** @internal */
 export type CampaignInsights$Outbound = {
   markdown?: string | undefined;
@@ -35,9 +37,11 @@ export const CampaignInsights$outboundSchema: z.ZodType<
   CampaignInsights$Outbound,
   z.ZodTypeDef,
   CampaignInsights
-> = z.object({
-  markdown: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    markdown: z.string().optional(),
+  })
+);
 
 export function campaignInsightsToJSON(
   campaignInsights: CampaignInsights,

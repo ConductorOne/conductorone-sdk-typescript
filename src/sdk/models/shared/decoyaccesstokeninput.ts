@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * DecoyAccessTokenInput mints a session access-token decoy under an
@@ -29,10 +30,12 @@ export const DecoyAccessTokenInput$outboundSchema: z.ZodType<
   DecoyAccessTokenInput$Outbound,
   z.ZodTypeDef,
   DecoyAccessTokenInput
-> = z.object({
-  expiresIn: z.nullable(z.string()).optional(),
-  subjectUserId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiresIn: z.nullable(z.string()).optional(),
+    subjectUserId: z.string().optional(),
+  })
+);
 
 export function decoyAccessTokenInputToJSON(
   decoyAccessTokenInput: DecoyAccessTokenInput,

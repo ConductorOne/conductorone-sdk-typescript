@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,14 +40,16 @@ export const AppEntitlementView$inboundSchema: z.ZodType<
   AppEntitlementView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlement: z.nullable(AppEntitlement$inboundSchema).optional(),
-  appPath: z.string().optional(),
-  appResourcePath: z.string().optional(),
-  appResourceTypePath: z.string().optional(),
-  objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlement: z.nullable(AppEntitlement$inboundSchema).optional(),
+    appPath: z.string().optional(),
+    appResourcePath: z.string().optional(),
+    appResourceTypePath: z.string().optional(),
+    objectPermissions: z.nullable(ActorObjectPermissions$inboundSchema)
+      .optional(),
+  })
+);
 
 export function appEntitlementViewFromJSON(
   jsonString: string,

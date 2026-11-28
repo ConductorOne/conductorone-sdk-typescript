@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiFundsV1FundAssignmentServiceGetRequest$outboundSchema:
     C1ApiFundsV1FundAssignmentServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiFundsV1FundAssignmentServiceGetRequest
-  > = z.object({
-    userId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundAssignmentServiceGetRequestToJSON(
   c1ApiFundsV1FundAssignmentServiceGetRequest:
@@ -70,20 +72,22 @@ export const C1ApiFundsV1FundAssignmentServiceGetResponse$inboundSchema:
     C1ApiFundsV1FundAssignmentServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    FundAssignmentServiceGetResponse: shared
-      .FundAssignmentServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "FundAssignmentServiceGetResponse": "fundAssignmentServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      FundAssignmentServiceGetResponse: shared
+        .FundAssignmentServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "FundAssignmentServiceGetResponse": "fundAssignmentServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiFundsV1FundAssignmentServiceGetResponseFromJSON(
   jsonString: string,

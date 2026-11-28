@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -75,39 +75,49 @@ export const McpOnboardingTargetKind$inboundSchema: z.ZodType<
   McpOnboardingTargetKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(McpOnboardingTargetKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(McpOnboardingTargetKind)
+);
 /** @internal */
 export const McpOnboardingTargetKind$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   McpOnboardingTargetKind
-> = openEnums.outboundSchema(McpOnboardingTargetKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(McpOnboardingTargetKind)
+);
 
 /** @internal */
 export const McpOnboardingTargetStatus$inboundSchema: z.ZodType<
   McpOnboardingTargetStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(McpOnboardingTargetStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(McpOnboardingTargetStatus)
+);
 /** @internal */
 export const McpOnboardingTargetStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   McpOnboardingTargetStatus
-> = openEnums.outboundSchema(McpOnboardingTargetStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(McpOnboardingTargetStatus)
+);
 
 /** @internal */
 export const McpOnboardingTarget$inboundSchema: z.ZodType<
   McpOnboardingTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  kind: McpOnboardingTargetKind$inboundSchema.optional(),
-  mcpServerId: z.string().optional(),
-  status: McpOnboardingTargetStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    kind: McpOnboardingTargetKind$inboundSchema.optional(),
+    mcpServerId: z.string().optional(),
+    status: McpOnboardingTargetStatus$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type McpOnboardingTarget$Outbound = {
   displayName?: string | undefined;
@@ -122,13 +132,15 @@ export const McpOnboardingTarget$outboundSchema: z.ZodType<
   McpOnboardingTarget$Outbound,
   z.ZodTypeDef,
   McpOnboardingTarget
-> = z.object({
-  displayName: z.string().optional(),
-  id: z.string().optional(),
-  kind: McpOnboardingTargetKind$outboundSchema.optional(),
-  mcpServerId: z.string().optional(),
-  status: McpOnboardingTargetStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+    id: z.string().optional(),
+    kind: McpOnboardingTargetKind$outboundSchema.optional(),
+    mcpServerId: z.string().optional(),
+    status: McpOnboardingTargetStatus$outboundSchema.optional(),
+  })
+);
 
 export function mcpOnboardingTargetToJSON(
   mcpOnboardingTarget: McpOnboardingTarget,

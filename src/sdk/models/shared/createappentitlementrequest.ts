@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -144,7 +145,7 @@ export const CreateAppEntitlementRequestDurationUnset$outboundSchema: z.ZodType<
   CreateAppEntitlementRequestDurationUnset$Outbound,
   z.ZodTypeDef,
   CreateAppEntitlementRequestDurationUnset
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function createAppEntitlementRequestDurationUnsetToJSON(
   createAppEntitlementRequestDurationUnset:
@@ -162,7 +163,9 @@ export const CreateAppEntitlementRequestPurpose$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   CreateAppEntitlementRequestPurpose
-> = openEnums.outboundSchema(CreateAppEntitlementRequestPurpose);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(CreateAppEntitlementRequestPurpose)
+);
 
 /** @internal */
 export type CreateAppEntitlementRequest$Outbound = {
@@ -199,34 +202,36 @@ export const CreateAppEntitlementRequest$outboundSchema: z.ZodType<
   CreateAppEntitlementRequest$Outbound,
   z.ZodTypeDef,
   CreateAppEntitlementRequest
-> = z.object({
-  alias: z.string().optional(),
-  annotations: z.record(z.string()).optional(),
-  appEntitlementOwnerIds: z.nullable(z.array(z.string())).optional(),
-  appResourceId: z.string().optional(),
-  appResourceTypeId: z.string().optional(),
-  certifyPolicyId: z.string().optional(),
-  complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
-  deprovisionerPolicy: z.nullable(ProvisionPolicyInput$outboundSchema)
-    .optional(),
-  description: z.string().optional(),
-  displayName: z.string(),
-  durationGrant: z.nullable(z.string()).optional(),
-  durationUnset: z.nullable(
-    z.lazy(() => CreateAppEntitlementRequestDurationUnset$outboundSchema),
-  ).optional(),
-  emergencyGrantEnabled: z.boolean().optional(),
-  emergencyGrantPolicyId: z.string().optional(),
-  expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
-  grantPolicyId: z.string().optional(),
-  matchBatonId: z.string().optional(),
-  overrideAccessRequestsDefaults: z.boolean().optional(),
-  provisionPolicy: z.nullable(ProvisionPolicyInput$outboundSchema).optional(),
-  purpose: CreateAppEntitlementRequestPurpose$outboundSchema.optional(),
-  revokePolicyId: z.string().optional(),
-  riskLevelValueId: z.string().optional(),
-  slug: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alias: z.string().optional(),
+    annotations: z.record(z.string()).optional(),
+    appEntitlementOwnerIds: z.nullable(z.array(z.string())).optional(),
+    appResourceId: z.string().optional(),
+    appResourceTypeId: z.string().optional(),
+    certifyPolicyId: z.string().optional(),
+    complianceFrameworkValueIds: z.nullable(z.array(z.string())).optional(),
+    deprovisionerPolicy: z.nullable(ProvisionPolicyInput$outboundSchema)
+      .optional(),
+    description: z.string().optional(),
+    displayName: z.string(),
+    durationGrant: z.nullable(z.string()).optional(),
+    durationUnset: z.nullable(
+      z.lazy(() => CreateAppEntitlementRequestDurationUnset$outboundSchema),
+    ).optional(),
+    emergencyGrantEnabled: z.boolean().optional(),
+    emergencyGrantPolicyId: z.string().optional(),
+    expandMask: z.nullable(AppEntitlementExpandMask$outboundSchema).optional(),
+    grantPolicyId: z.string().optional(),
+    matchBatonId: z.string().optional(),
+    overrideAccessRequestsDefaults: z.boolean().optional(),
+    provisionPolicy: z.nullable(ProvisionPolicyInput$outboundSchema).optional(),
+    purpose: CreateAppEntitlementRequestPurpose$outboundSchema.optional(),
+    revokePolicyId: z.string().optional(),
+    riskLevelValueId: z.string().optional(),
+    slug: z.string().optional(),
+  })
+);
 
 export function createAppEntitlementRequestToJSON(
   createAppEntitlementRequest: CreateAppEntitlementRequest,

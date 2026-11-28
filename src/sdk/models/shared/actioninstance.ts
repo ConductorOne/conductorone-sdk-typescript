@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -114,35 +114,41 @@ export const ActionInstanceState$inboundSchema: z.ZodType<
   ActionInstanceState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ActionInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ActionInstanceState)
+);
 /** @internal */
 export const ActionInstanceState$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ActionInstanceState
-> = openEnums.outboundSchema(ActionInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ActionInstanceState)
+);
 
 /** @internal */
 export const ActionInstance$inboundSchema: z.ZodType<
   ActionInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: z.nullable(Action$inboundSchema).optional(),
-  automation: z.nullable(ActionTargetAutomationInstance$inboundSchema)
-    .optional(),
-  batonResourceActionInstance: z.nullable(
-    ActionTargetBatonResourceActionInstance$inboundSchema,
-  ).optional(),
-  cancelled: z.nullable(ActionOutcomeCancelled$inboundSchema).optional(),
-  clientIdApprovalInstance: z.nullable(
-    ActionTargetClientIdApprovalInstance$inboundSchema,
-  ).optional(),
-  denied: z.nullable(ActionOutcomeDenied$inboundSchema).optional(),
-  error: z.nullable(ActionOutcomeError$inboundSchema).optional(),
-  state: ActionInstanceState$inboundSchema.optional(),
-  success: z.nullable(ActionOutcomeSuccess$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(Action$inboundSchema).optional(),
+    automation: z.nullable(ActionTargetAutomationInstance$inboundSchema)
+      .optional(),
+    batonResourceActionInstance: z.nullable(
+      ActionTargetBatonResourceActionInstance$inboundSchema,
+    ).optional(),
+    cancelled: z.nullable(ActionOutcomeCancelled$inboundSchema).optional(),
+    clientIdApprovalInstance: z.nullable(
+      ActionTargetClientIdApprovalInstance$inboundSchema,
+    ).optional(),
+    denied: z.nullable(ActionOutcomeDenied$inboundSchema).optional(),
+    error: z.nullable(ActionOutcomeError$inboundSchema).optional(),
+    state: ActionInstanceState$inboundSchema.optional(),
+    success: z.nullable(ActionOutcomeSuccess$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ActionInstance$Outbound = {
   action?: Action$Outbound | null | undefined;
@@ -167,22 +173,24 @@ export const ActionInstance$outboundSchema: z.ZodType<
   ActionInstance$Outbound,
   z.ZodTypeDef,
   ActionInstance
-> = z.object({
-  action: z.nullable(Action$outboundSchema).optional(),
-  automation: z.nullable(ActionTargetAutomationInstance$outboundSchema)
-    .optional(),
-  batonResourceActionInstance: z.nullable(
-    ActionTargetBatonResourceActionInstance$outboundSchema,
-  ).optional(),
-  cancelled: z.nullable(ActionOutcomeCancelled$outboundSchema).optional(),
-  clientIdApprovalInstance: z.nullable(
-    ActionTargetClientIdApprovalInstance$outboundSchema,
-  ).optional(),
-  denied: z.nullable(ActionOutcomeDenied$outboundSchema).optional(),
-  error: z.nullable(ActionOutcomeError$outboundSchema).optional(),
-  state: ActionInstanceState$outboundSchema.optional(),
-  success: z.nullable(ActionOutcomeSuccess$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: z.nullable(Action$outboundSchema).optional(),
+    automation: z.nullable(ActionTargetAutomationInstance$outboundSchema)
+      .optional(),
+    batonResourceActionInstance: z.nullable(
+      ActionTargetBatonResourceActionInstance$outboundSchema,
+    ).optional(),
+    cancelled: z.nullable(ActionOutcomeCancelled$outboundSchema).optional(),
+    clientIdApprovalInstance: z.nullable(
+      ActionTargetClientIdApprovalInstance$outboundSchema,
+    ).optional(),
+    denied: z.nullable(ActionOutcomeDenied$outboundSchema).optional(),
+    error: z.nullable(ActionOutcomeError$outboundSchema).optional(),
+    state: ActionInstanceState$outboundSchema.optional(),
+    success: z.nullable(ActionOutcomeSuccess$outboundSchema).optional(),
+  })
+);
 
 export function actionInstanceToJSON(actionInstance: ActionInstance): string {
   return JSON.stringify(ActionInstance$outboundSchema.parse(actionInstance));

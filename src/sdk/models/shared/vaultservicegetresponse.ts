@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Vault, Vault$inboundSchema } from "./vault.js";
@@ -20,9 +20,11 @@ export const VaultServiceGetResponse$inboundSchema: z.ZodType<
   VaultServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vault: z.nullable(Vault$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vault: z.nullable(Vault$inboundSchema).optional(),
+  })
+);
 
 export function vaultServiceGetResponseFromJSON(
   jsonString: string,

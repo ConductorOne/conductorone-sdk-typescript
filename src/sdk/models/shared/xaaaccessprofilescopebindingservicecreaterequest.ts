@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAAccessProfileScopeBindingServiceCreateRequest binds scopes to a profile.
@@ -25,9 +26,11 @@ export const XAAAccessProfileScopeBindingServiceCreateRequest$outboundSchema:
     XAAAccessProfileScopeBindingServiceCreateRequest$Outbound,
     z.ZodTypeDef,
     XAAAccessProfileScopeBindingServiceCreateRequest
-  > = z.object({
-    xaaScopeIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      xaaScopeIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function xaaAccessProfileScopeBindingServiceCreateRequestToJSON(
   xaaAccessProfileScopeBindingServiceCreateRequest:

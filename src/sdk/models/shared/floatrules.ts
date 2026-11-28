@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -73,16 +73,18 @@ export const FloatRules$inboundSchema: z.ZodType<
   FloatRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  const: z.number().optional(),
-  gt: z.number().optional(),
-  gte: z.number().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.number())).optional(),
-  lt: z.number().optional(),
-  lte: z.number().optional(),
-  notIn: z.nullable(z.array(z.number())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.number().optional(),
+    gt: z.number().optional(),
+    gte: z.number().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.number())).optional(),
+    lt: z.number().optional(),
+    lte: z.number().optional(),
+    notIn: z.nullable(z.array(z.number())).optional(),
+  })
+);
 /** @internal */
 export type FloatRules$Outbound = {
   const?: number | undefined;
@@ -100,16 +102,18 @@ export const FloatRules$outboundSchema: z.ZodType<
   FloatRules$Outbound,
   z.ZodTypeDef,
   FloatRules
-> = z.object({
-  const: z.number().optional(),
-  gt: z.number().optional(),
-  gte: z.number().optional(),
-  ignoreEmpty: z.boolean().optional(),
-  in: z.nullable(z.array(z.number())).optional(),
-  lt: z.number().optional(),
-  lte: z.number().optional(),
-  notIn: z.nullable(z.array(z.number())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    const: z.number().optional(),
+    gt: z.number().optional(),
+    gte: z.number().optional(),
+    ignoreEmpty: z.boolean().optional(),
+    in: z.nullable(z.array(z.number())).optional(),
+    lt: z.number().optional(),
+    lte: z.number().optional(),
+    notIn: z.nullable(z.array(z.number())).optional(),
+  })
+);
 
 export function floatRulesToJSON(floatRules: FloatRules): string {
   return JSON.stringify(FloatRules$outboundSchema.parse(floatRules));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,13 +39,16 @@ export const AppEntitlementProxyView$inboundSchema: z.ZodType<
   AppEntitlementProxyView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appProxyEntitlement: z.nullable(AppEntitlementProxy$inboundSchema).optional(),
-  dstAppEntitlementPath: z.string().optional(),
-  dstAppPath: z.string().optional(),
-  srcAppEntitlementPath: z.string().optional(),
-  srcAppPath: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appProxyEntitlement: z.nullable(AppEntitlementProxy$inboundSchema)
+      .optional(),
+    dstAppEntitlementPath: z.string().optional(),
+    dstAppPath: z.string().optional(),
+    srcAppEntitlementPath: z.string().optional(),
+    srcAppPath: z.string().optional(),
+  })
+);
 
 export function appEntitlementProxyViewFromJSON(
   jsonString: string,

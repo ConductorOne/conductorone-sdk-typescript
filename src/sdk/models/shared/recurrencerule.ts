@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -69,30 +69,32 @@ export const Frequency$inboundSchema: z.ZodType<
   Frequency,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(Frequency);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(Frequency));
 /** @internal */
 export const Frequency$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   Frequency
-> = openEnums.outboundSchema(Frequency);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Frequency));
 
 /** @internal */
 export const RecurrenceRule$inboundSchema: z.ZodType<
   RecurrenceRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  endDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  frequency: Frequency$inboundSchema,
-  interval: z.number().int().optional(),
-  occurrences: z.nullable(z.number().int()).optional(),
-  startDate: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    frequency: Frequency$inboundSchema,
+    interval: z.number().int().optional(),
+    occurrences: z.nullable(z.number().int()).optional(),
+    startDate: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type RecurrenceRule$Outbound = {
   endDate?: string | null | undefined;
@@ -107,13 +109,15 @@ export const RecurrenceRule$outboundSchema: z.ZodType<
   RecurrenceRule$Outbound,
   z.ZodTypeDef,
   RecurrenceRule
-> = z.object({
-  endDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  frequency: Frequency$outboundSchema,
-  interval: z.number().int().optional(),
-  occurrences: z.nullable(z.number().int()).optional(),
-  startDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    frequency: Frequency$outboundSchema,
+    interval: z.number().int().optional(),
+    occurrences: z.nullable(z.number().int()).optional(),
+    startDate: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function recurrenceRuleToJSON(recurrenceRule: RecurrenceRule): string {
   return JSON.stringify(RecurrenceRule$outboundSchema.parse(recurrenceRule));

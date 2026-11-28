@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   BundleAutomationRuleCEL,
   BundleAutomationRuleCEL$Outbound,
@@ -70,17 +71,19 @@ export const CreateBundleAutomationRequest$outboundSchema: z.ZodType<
   CreateBundleAutomationRequest$Outbound,
   z.ZodTypeDef,
   CreateBundleAutomationRequest
-> = z.object({
-  cel: z.nullable(BundleAutomationRuleCEL$outboundSchema).optional(),
-  createTasks: z.boolean().optional(),
-  disableCircuitBreaker: z.boolean().optional(),
-  enabled: z.boolean().optional(),
-  enforceOnSmallProfiles: z.boolean().optional(),
-  entitlements: z.nullable(BundleAutomationRuleEntitlement$outboundSchema)
-    .optional(),
-  removedMembersThresholdPercent: z.number().int().transform(v => `${v}`)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cel: z.nullable(BundleAutomationRuleCEL$outboundSchema).optional(),
+    createTasks: z.boolean().optional(),
+    disableCircuitBreaker: z.boolean().optional(),
+    enabled: z.boolean().optional(),
+    enforceOnSmallProfiles: z.boolean().optional(),
+    entitlements: z.nullable(BundleAutomationRuleEntitlement$outboundSchema)
+      .optional(),
+    removedMembersThresholdPercent: z.number().int().transform(v => `${v}`)
+      .optional(),
+  })
+);
 
 export function createBundleAutomationRequestToJSON(
   createBundleAutomationRequest: CreateBundleAutomationRequest,

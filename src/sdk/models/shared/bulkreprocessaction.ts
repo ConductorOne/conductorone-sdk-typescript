@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * BulkReprocessAction re-evaluates eligible findings against transformation
@@ -62,10 +63,12 @@ export const BulkReprocessAction$outboundSchema: z.ZodType<
   BulkReprocessAction$Outbound,
   z.ZodTypeDef,
   BulkReprocessAction
-> = z.object({
-  overrideHumanEdits: z.boolean().optional(),
-  runDispatchers: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    overrideHumanEdits: z.boolean().optional(),
+    runDispatchers: z.boolean().optional(),
+  })
+);
 
 export function bulkReprocessActionToJSON(
   bulkReprocessAction: BulkReprocessAction,

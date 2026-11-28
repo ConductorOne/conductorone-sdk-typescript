@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,11 +31,13 @@ export const UserAttributeTypeConfigCustomAppUserProfile$inboundSchema:
     UserAttributeTypeConfigCustomAppUserProfile,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    appId: z.string().optional(),
-    appUserProfileAttributeKey: z.string().optional(),
-    userProfileAttributeKey: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string().optional(),
+      appUserProfileAttributeKey: z.string().optional(),
+      userProfileAttributeKey: z.string().optional(),
+    })
+  );
 /** @internal */
 export type UserAttributeTypeConfigCustomAppUserProfile$Outbound = {
   appId?: string | undefined;
@@ -49,11 +51,13 @@ export const UserAttributeTypeConfigCustomAppUserProfile$outboundSchema:
     UserAttributeTypeConfigCustomAppUserProfile$Outbound,
     z.ZodTypeDef,
     UserAttributeTypeConfigCustomAppUserProfile
-  > = z.object({
-    appId: z.string().optional(),
-    appUserProfileAttributeKey: z.string().optional(),
-    userProfileAttributeKey: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string().optional(),
+      appUserProfileAttributeKey: z.string().optional(),
+      userProfileAttributeKey: z.string().optional(),
+    })
+  );
 
 export function userAttributeTypeConfigCustomAppUserProfileToJSON(
   userAttributeTypeConfigCustomAppUserProfile:

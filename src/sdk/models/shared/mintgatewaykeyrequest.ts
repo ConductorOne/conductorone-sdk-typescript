@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The MintGatewayKeyRequest message.
@@ -24,9 +25,11 @@ export const MintGatewayKeyRequest$outboundSchema: z.ZodType<
   MintGatewayKeyRequest$Outbound,
   z.ZodTypeDef,
   MintGatewayKeyRequest
-> = z.object({
-  displayName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string().optional(),
+  })
+);
 
 export function mintGatewayKeyRequestToJSON(
   mintGatewayKeyRequest: MintGatewayKeyRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,17 +54,19 @@ export const C1ApiAiGovernanceV1ClassifierTemplateServiceInstantiateClassifierTe
     C1ApiAiGovernanceV1ClassifierTemplateServiceInstantiateClassifierTemplateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1ClassifierTemplateServiceInstantiateClassifierTemplateRequest
-  > = z.object({
-    templateId: z.string(),
-    instantiateClassifierTemplateRequest: shared
-      .InstantiateClassifierTemplateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      templateId: "template_id",
-      instantiateClassifierTemplateRequest:
-        "InstantiateClassifierTemplateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      templateId: z.string(),
+      instantiateClassifierTemplateRequest: shared
+        .InstantiateClassifierTemplateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        templateId: "template_id",
+        instantiateClassifierTemplateRequest:
+          "InstantiateClassifierTemplateRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ClassifierTemplateServiceInstantiateClassifierTemplateRequestToJSON(
   c1ApiAiGovernanceV1ClassifierTemplateServiceInstantiateClassifierTemplateRequest:
@@ -84,21 +86,23 @@ export const C1ApiAiGovernanceV1ClassifierTemplateServiceInstantiateClassifierTe
     C1ApiAiGovernanceV1ClassifierTemplateServiceInstantiateClassifierTemplateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    InstantiateClassifierTemplateResponse: shared
-      .InstantiateClassifierTemplateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "InstantiateClassifierTemplateResponse":
-        "instantiateClassifierTemplateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      InstantiateClassifierTemplateResponse: shared
+        .InstantiateClassifierTemplateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "InstantiateClassifierTemplateResponse":
+          "instantiateClassifierTemplateResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ClassifierTemplateServiceInstantiateClassifierTemplateResponseFromJSON(
   jsonString: string,

@@ -14,7 +14,8 @@ let value: SlackChannelTarget = {};
 
 ## Fields
 
-| Field                  | Type                   | Required               | Description            |
-| ---------------------- | ---------------------- | ---------------------- | ---------------------- |
-| `channelId`            | *string*               | :heavy_minus_sign:     | The channelId field.   |
-| `channelName`          | *string*               | :heavy_minus_sign:     | The channelName field. |
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `allowPrivateChannelFallback`                                                                | *boolean*                                                                                    | :heavy_minus_sign:                                                                           | Allow a private channel retry if Slack restricts public channel creation. Defaults to false. |
+| `channelId`                                                                                  | *string*                                                                                     | :heavy_minus_sign:                                                                           | The channelId field.                                                                         |
+| `channelName`                                                                                | *string*                                                                                     | :heavy_minus_sign:                                                                           | The channelName field.                                                                       |

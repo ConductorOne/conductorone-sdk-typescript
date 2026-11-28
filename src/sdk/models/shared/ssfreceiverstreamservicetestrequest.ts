@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SSFReceiverStreamServiceTestRequest identifies the stream to test and an optional subject for identity resolution validation.
@@ -30,9 +31,11 @@ export const SSFReceiverStreamServiceTestRequest$outboundSchema: z.ZodType<
   SSFReceiverStreamServiceTestRequest$Outbound,
   z.ZodTypeDef,
   SSFReceiverStreamServiceTestRequest
-> = z.object({
-  testSubject: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    testSubject: z.string().optional(),
+  })
+);
 
 export function ssfReceiverStreamServiceTestRequestToJSON(
   ssfReceiverStreamServiceTestRequest: SSFReceiverStreamServiceTestRequest,

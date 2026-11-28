@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { User, User$inboundSchema } from "./user.js";
@@ -32,12 +32,14 @@ export const UserWithAppEntitlementUserBindingView$inboundSchema: z.ZodType<
   UserWithAppEntitlementUserBindingView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  appUserId: z.string().optional(),
-  user: z.nullable(User$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    appUserId: z.string().optional(),
+    user: z.nullable(User$inboundSchema).optional(),
+  })
+);
 
 export function userWithAppEntitlementUserBindingViewFromJSON(
   jsonString: string,

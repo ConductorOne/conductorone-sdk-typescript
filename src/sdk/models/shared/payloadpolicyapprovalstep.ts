@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -44,17 +45,19 @@ export const PayloadPolicyApprovalStepExpanded$inboundSchema: z.ZodType<
   PayloadPolicyApprovalStepExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 /** @internal */
 export type PayloadPolicyApprovalStepExpanded$Outbound = {
   "@type"?: string | undefined;
@@ -66,18 +69,20 @@ export const PayloadPolicyApprovalStepExpanded$outboundSchema: z.ZodType<
   PayloadPolicyApprovalStepExpanded$Outbound,
   z.ZodTypeDef,
   PayloadPolicyApprovalStepExpanded
-> = z.object({
-  atType: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      atType: "@type",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    atType: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        atType: "@type",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function payloadPolicyApprovalStepExpandedToJSON(
   payloadPolicyApprovalStepExpanded: PayloadPolicyApprovalStepExpanded,
@@ -103,12 +108,14 @@ export const PayloadPolicyApprovalStep$inboundSchema: z.ZodType<
   PayloadPolicyApprovalStep,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => PayloadPolicyApprovalStepExpanded$inboundSchema)),
-  ).optional(),
-  taskView: z.nullable(TaskView$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expanded: z.nullable(
+      z.array(z.lazy(() => PayloadPolicyApprovalStepExpanded$inboundSchema)),
+    ).optional(),
+    taskView: z.nullable(TaskView$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type PayloadPolicyApprovalStep$Outbound = {
   expanded?:
@@ -123,12 +130,14 @@ export const PayloadPolicyApprovalStep$outboundSchema: z.ZodType<
   PayloadPolicyApprovalStep$Outbound,
   z.ZodTypeDef,
   PayloadPolicyApprovalStep
-> = z.object({
-  expanded: z.nullable(
-    z.array(z.lazy(() => PayloadPolicyApprovalStepExpanded$outboundSchema)),
-  ).optional(),
-  taskView: z.nullable(TaskView$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expanded: z.nullable(
+      z.array(z.lazy(() => PayloadPolicyApprovalStepExpanded$outboundSchema)),
+    ).optional(),
+    taskView: z.nullable(TaskView$outboundSchema).optional(),
+  })
+);
 
 export function payloadPolicyApprovalStepToJSON(
   payloadPolicyApprovalStep: PayloadPolicyApprovalStep,

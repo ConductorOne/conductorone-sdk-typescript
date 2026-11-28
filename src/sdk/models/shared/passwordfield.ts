@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const PasswordField$inboundSchema: z.ZodType<
   PasswordField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  multiline: z.nullable(z.boolean()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    multiline: z.nullable(z.boolean()).optional(),
+  })
+);
 /** @internal */
 export type PasswordField$Outbound = {
   multiline?: boolean | null | undefined;
@@ -38,9 +40,11 @@ export const PasswordField$outboundSchema: z.ZodType<
   PasswordField$Outbound,
   z.ZodTypeDef,
   PasswordField
-> = z.object({
-  multiline: z.nullable(z.boolean()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    multiline: z.nullable(z.boolean()).optional(),
+  })
+);
 
 export function passwordFieldToJSON(passwordField: PasswordField): string {
   return JSON.stringify(PasswordField$outboundSchema.parse(passwordField));

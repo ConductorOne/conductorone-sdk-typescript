@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPAccessProfileToolBindingServiceGetAccessProfilesForToolsRequest requests
@@ -30,9 +31,11 @@ export const MCPAccessProfileToolBindingServiceGetAccessProfilesForToolsRequest$
     MCPAccessProfileToolBindingServiceGetAccessProfilesForToolsRequest$Outbound,
     z.ZodTypeDef,
     MCPAccessProfileToolBindingServiceGetAccessProfilesForToolsRequest
-  > = z.object({
-    mcpToolIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      mcpToolIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function mcpAccessProfileToolBindingServiceGetAccessProfilesForToolsRequestToJSON(
   mcpAccessProfileToolBindingServiceGetAccessProfilesForToolsRequest:

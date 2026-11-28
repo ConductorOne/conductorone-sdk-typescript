@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -43,9 +43,11 @@ export const C1ApiAiGovernanceV1ToolGatesServiceGetRequest$outboundSchema:
     C1ApiAiGovernanceV1ToolGatesServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1ToolGatesServiceGetRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiAiGovernanceV1ToolGatesServiceGetRequestToJSON(
   c1ApiAiGovernanceV1ToolGatesServiceGetRequest:
@@ -64,20 +66,22 @@ export const C1ApiAiGovernanceV1ToolGatesServiceGetResponse$inboundSchema:
     C1ApiAiGovernanceV1ToolGatesServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ToolGatesServiceGetResponse: shared
-      .ToolGatesServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ToolGatesServiceGetResponse": "toolGatesServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ToolGatesServiceGetResponse: shared
+        .ToolGatesServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ToolGatesServiceGetResponse": "toolGatesServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ToolGatesServiceGetResponseFromJSON(
   jsonString: string,

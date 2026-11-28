@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -29,9 +30,11 @@ export const ForceRunBundleAutomationRequest$outboundSchema: z.ZodType<
   ForceRunBundleAutomationRequest$Outbound,
   z.ZodTypeDef,
   ForceRunBundleAutomationRequest
-> = z.object({
-  refs: z.nullable(z.array(AppEntitlementRef$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    refs: z.nullable(z.array(AppEntitlementRef$outboundSchema)).optional(),
+  })
+);
 
 export function forceRunBundleAutomationRequestToJSON(
   forceRunBundleAutomationRequest: ForceRunBundleAutomationRequest,

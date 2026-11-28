@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -89,36 +89,44 @@ export const TargetedAppUserTypes$inboundSchema: z.ZodType<
   TargetedAppUserTypes,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TargetedAppUserTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TargetedAppUserTypes)
+);
 /** @internal */
 export const TargetedAppUserTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   TargetedAppUserTypes
-> = openEnums.outboundSchema(TargetedAppUserTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(TargetedAppUserTypes)
+);
 
 /** @internal */
 export const UsageBasedRevocationTrigger$inboundSchema: z.ZodType<
   UsageBasedRevocationTrigger,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  enabledAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  excludedGroupRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-    .optional(),
-  excludedUserRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
-  includeUsersWithNoActivity: z.boolean().optional(),
-  runDelayed: z.nullable(RunDelayed$inboundSchema).optional(),
-  runImmediately: z.nullable(RunImmediately$inboundSchema).optional(),
-  targetedAppUserTypes: z.nullable(z.array(TargetedAppUserTypes$inboundSchema))
-    .optional(),
-  targetedEntitlementRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
-    .optional(),
-  unusedForDays: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    enabledAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    excludedGroupRefs: z.nullable(z.array(AppEntitlementRef$inboundSchema))
+      .optional(),
+    excludedUserRefs: z.nullable(z.array(UserRef$inboundSchema)).optional(),
+    includeUsersWithNoActivity: z.boolean().optional(),
+    runDelayed: z.nullable(RunDelayed$inboundSchema).optional(),
+    runImmediately: z.nullable(RunImmediately$inboundSchema).optional(),
+    targetedAppUserTypes: z.nullable(
+      z.array(TargetedAppUserTypes$inboundSchema),
+    ).optional(),
+    targetedEntitlementRefs: z.nullable(
+      z.array(AppEntitlementRef$inboundSchema),
+    ).optional(),
+    unusedForDays: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type UsageBasedRevocationTrigger$Outbound = {
   appId?: string | undefined;
@@ -141,21 +149,25 @@ export const UsageBasedRevocationTrigger$outboundSchema: z.ZodType<
   UsageBasedRevocationTrigger$Outbound,
   z.ZodTypeDef,
   UsageBasedRevocationTrigger
-> = z.object({
-  appId: z.string().optional(),
-  enabledAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  excludedGroupRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  excludedUserRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
-  includeUsersWithNoActivity: z.boolean().optional(),
-  runDelayed: z.nullable(RunDelayed$outboundSchema).optional(),
-  runImmediately: z.nullable(RunImmediately$outboundSchema).optional(),
-  targetedAppUserTypes: z.nullable(z.array(TargetedAppUserTypes$outboundSchema))
-    .optional(),
-  targetedEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  unusedForDays: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    enabledAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    excludedGroupRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+      .optional(),
+    excludedUserRefs: z.nullable(z.array(UserRef$outboundSchema)).optional(),
+    includeUsersWithNoActivity: z.boolean().optional(),
+    runDelayed: z.nullable(RunDelayed$outboundSchema).optional(),
+    runImmediately: z.nullable(RunImmediately$outboundSchema).optional(),
+    targetedAppUserTypes: z.nullable(
+      z.array(TargetedAppUserTypes$outboundSchema),
+    ).optional(),
+    targetedEntitlementRefs: z.nullable(
+      z.array(AppEntitlementRef$outboundSchema),
+    ).optional(),
+    unusedForDays: z.number().int().optional(),
+  })
+);
 
 export function usageBasedRevocationTriggerToJSON(
   usageBasedRevocationTrigger: UsageBasedRevocationTrigger,

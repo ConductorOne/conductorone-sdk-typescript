@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -52,15 +52,17 @@ export const C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomat
     C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest
-  > = z.object({
-    id: z.number().int().transform(v => `${v}`),
-    terminateAutomationRequest: shared.TerminateAutomationRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      terminateAutomationRequest: "TerminateAutomationRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.number().int().transform(v => `${v}`),
+      terminateAutomationRequest: shared
+        .TerminateAutomationRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        terminateAutomationRequest: "TerminateAutomationRequest",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequestToJSON(
   c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationRequest:
@@ -80,20 +82,22 @@ export const C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomat
     C1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TerminateAutomationResponse: shared
-      .TerminateAutomationResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TerminateAutomationResponse": "terminateAutomationResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TerminateAutomationResponse: shared
+        .TerminateAutomationResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TerminateAutomationResponse": "terminateAutomationResponse",
+      });
+    })
+  );
 
 export function c1ApiAutomationsV1AutomationExecutionActionsServiceTerminateAutomationResponseFromJSON(
   jsonString: string,

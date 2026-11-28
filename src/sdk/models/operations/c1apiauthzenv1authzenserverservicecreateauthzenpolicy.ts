@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -55,17 +55,20 @@ export const C1ApiAuthzenV1AuthzenServerServiceCreateAuthzenPolicyRequest$outbou
     C1ApiAuthzenV1AuthzenServerServiceCreateAuthzenPolicyRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAuthzenV1AuthzenServerServiceCreateAuthzenPolicyRequest
-  > = z.object({
-    appId: z.string(),
-    authzenServerServiceCreateAuthzenPolicyRequest: shared
-      .AuthzenServerServiceCreateAuthzenPolicyRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      authzenServerServiceCreateAuthzenPolicyRequest:
-        "AuthzenServerServiceCreateAuthzenPolicyRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      authzenServerServiceCreateAuthzenPolicyRequest: shared
+        .AuthzenServerServiceCreateAuthzenPolicyRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        authzenServerServiceCreateAuthzenPolicyRequest:
+          "AuthzenServerServiceCreateAuthzenPolicyRequest",
+      });
+    })
+  );
 
 export function c1ApiAuthzenV1AuthzenServerServiceCreateAuthzenPolicyRequestToJSON(
   c1ApiAuthzenV1AuthzenServerServiceCreateAuthzenPolicyRequest:
@@ -83,21 +86,24 @@ export const C1ApiAuthzenV1AuthzenServerServiceCreateAuthzenPolicyResponse$inbou
     C1ApiAuthzenV1AuthzenServerServiceCreateAuthzenPolicyResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AuthzenServerServiceCreateAuthzenPolicyResponse: shared
-      .AuthzenServerServiceCreateAuthzenPolicyResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AuthzenServerServiceCreateAuthzenPolicyResponse":
-        "authzenServerServiceCreateAuthzenPolicyResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AuthzenServerServiceCreateAuthzenPolicyResponse: shared
+        .AuthzenServerServiceCreateAuthzenPolicyResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AuthzenServerServiceCreateAuthzenPolicyResponse":
+          "authzenServerServiceCreateAuthzenPolicyResponse",
+      });
+    })
+  );
 
 export function c1ApiAuthzenV1AuthzenServerServiceCreateAuthzenPolicyResponseFromJSON(
   jsonString: string,

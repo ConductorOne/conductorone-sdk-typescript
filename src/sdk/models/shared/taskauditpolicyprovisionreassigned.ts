@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { User, User$inboundSchema } from "./user.js";
@@ -35,12 +35,14 @@ export const TaskAuditPolicyProvisionReassigned$inboundSchema: z.ZodType<
   TaskAuditPolicyProvisionReassigned,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  newPolicyStepId: z.string().optional(),
-  newUsers: z.nullable(z.array(z.string())).optional(),
-  oldPolicyStepId: z.string().optional(),
-  users: z.nullable(z.array(User$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    newPolicyStepId: z.string().optional(),
+    newUsers: z.nullable(z.array(z.string())).optional(),
+    oldPolicyStepId: z.string().optional(),
+    users: z.nullable(z.array(User$inboundSchema)).optional(),
+  })
+);
 
 export function taskAuditPolicyProvisionReassignedFromJSON(
   jsonString: string,

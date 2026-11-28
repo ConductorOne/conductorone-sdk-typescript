@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The SessionPolicyServiceUnassignGroupRequest message.
@@ -17,7 +18,7 @@ export const SessionPolicyServiceUnassignGroupRequest$outboundSchema: z.ZodType<
   SessionPolicyServiceUnassignGroupRequest$Outbound,
   z.ZodTypeDef,
   SessionPolicyServiceUnassignGroupRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function sessionPolicyServiceUnassignGroupRequestToJSON(
   sessionPolicyServiceUnassignGroupRequest:

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ExternalOAuthClientServiceRevokeRequest message.
@@ -24,9 +25,11 @@ export const ExternalOAuthClientServiceRevokeRequest$outboundSchema: z.ZodType<
   ExternalOAuthClientServiceRevokeRequest$Outbound,
   z.ZodTypeDef,
   ExternalOAuthClientServiceRevokeRequest
-> = z.object({
-  clientId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string().optional(),
+  })
+);
 
 export function externalOAuthClientServiceRevokeRequestToJSON(
   externalOAuthClientServiceRevokeRequest:

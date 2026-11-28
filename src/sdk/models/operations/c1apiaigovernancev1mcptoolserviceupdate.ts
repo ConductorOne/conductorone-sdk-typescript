@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -53,19 +53,21 @@ export const C1ApiAiGovernanceV1MCPToolServiceUpdateRequest$outboundSchema:
     C1ApiAiGovernanceV1MCPToolServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1MCPToolServiceUpdateRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    id: z.string(),
-    mcpToolServiceUpdateRequest: shared
-      .MCPToolServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      mcpToolServiceUpdateRequest: "MCPToolServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      id: z.string(),
+      mcpToolServiceUpdateRequest: shared
+        .MCPToolServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        mcpToolServiceUpdateRequest: "MCPToolServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPToolServiceUpdateRequestToJSON(
   c1ApiAiGovernanceV1MCPToolServiceUpdateRequest:
@@ -84,20 +86,22 @@ export const C1ApiAiGovernanceV1MCPToolServiceUpdateResponse$inboundSchema:
     C1ApiAiGovernanceV1MCPToolServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    MCPToolServiceUpdateResponse: shared
-      .MCPToolServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "MCPToolServiceUpdateResponse": "mcpToolServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      MCPToolServiceUpdateResponse: shared
+        .MCPToolServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "MCPToolServiceUpdateResponse": "mcpToolServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1MCPToolServiceUpdateResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -70,19 +70,22 @@ export const EdgeServiceGetInferenceUsageSummaryRollupResponse$inboundSchema:
     EdgeServiceGetInferenceUsageSummaryRollupResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    authRejectedCount: z.string().optional(),
-    authRejectedTotal: z.string().optional(),
-    edgeCount: z.number().int().optional(),
-    modelBreakdown: z.nullable(z.array(TBUsageModelBreakdown$inboundSchema))
-      .optional(),
-    series: z.nullable(z.array(TBUsageSummaryBucket$inboundSchema)).optional(),
-    totalCacheReadTokens: z.string().optional(),
-    totalCacheWriteTokens: z.string().optional(),
-    totalInputTokens: z.string().optional(),
-    totalOutputTokens: z.string().optional(),
-    totalRequests: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      authRejectedCount: z.string().optional(),
+      authRejectedTotal: z.string().optional(),
+      edgeCount: z.number().int().optional(),
+      modelBreakdown: z.nullable(z.array(TBUsageModelBreakdown$inboundSchema))
+        .optional(),
+      series: z.nullable(z.array(TBUsageSummaryBucket$inboundSchema))
+        .optional(),
+      totalCacheReadTokens: z.string().optional(),
+      totalCacheWriteTokens: z.string().optional(),
+      totalInputTokens: z.string().optional(),
+      totalOutputTokens: z.string().optional(),
+      totalRequests: z.string().optional(),
+    })
+  );
 
 export function edgeServiceGetInferenceUsageSummaryRollupResponseFromJSON(
   jsonString: string,

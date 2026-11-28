@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,13 +45,15 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceGetRequest$outboundSchema:
     C1ApiRequestSchemaV1RequestSchemaServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiRequestSchemaV1RequestSchemaServiceGetRequest
-  > = z.object({
-    requestSchemaId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      requestSchemaId: "request_schema_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      requestSchemaId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        requestSchemaId: "request_schema_id",
+      });
+    })
+  );
 
 export function c1ApiRequestSchemaV1RequestSchemaServiceGetRequestToJSON(
   c1ApiRequestSchemaV1RequestSchemaServiceGetRequest:
@@ -70,20 +72,22 @@ export const C1ApiRequestSchemaV1RequestSchemaServiceGetResponse$inboundSchema:
     C1ApiRequestSchemaV1RequestSchemaServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    RequestSchemaServiceGetResponse: shared
-      .RequestSchemaServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "RequestSchemaServiceGetResponse": "requestSchemaServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      RequestSchemaServiceGetResponse: shared
+        .RequestSchemaServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "RequestSchemaServiceGetResponse": "requestSchemaServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiRequestSchemaV1RequestSchemaServiceGetResponseFromJSON(
   jsonString: string,

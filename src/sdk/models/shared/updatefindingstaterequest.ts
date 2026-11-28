@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AcceptRiskAction,
   AcceptRiskAction$Outbound,
@@ -71,14 +72,16 @@ export const UpdateFindingStateRequest$outboundSchema: z.ZodType<
   UpdateFindingStateRequest$Outbound,
   z.ZodTypeDef,
   UpdateFindingStateRequest
-> = z.object({
-  acceptRisk: z.nullable(AcceptRiskAction$outboundSchema).optional(),
-  reopen: z.nullable(ReopenAction$outboundSchema).optional(),
-  resolve: z.nullable(ResolveAction$outboundSchema).optional(),
-  snooze: z.nullable(SnoozeAction$outboundSchema).optional(),
-  suppress: z.nullable(SuppressStateAction$outboundSchema).optional(),
-  unsuppress: z.nullable(UnsuppressAction$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acceptRisk: z.nullable(AcceptRiskAction$outboundSchema).optional(),
+    reopen: z.nullable(ReopenAction$outboundSchema).optional(),
+    resolve: z.nullable(ResolveAction$outboundSchema).optional(),
+    snooze: z.nullable(SnoozeAction$outboundSchema).optional(),
+    suppress: z.nullable(SuppressStateAction$outboundSchema).optional(),
+    unsuppress: z.nullable(UnsuppressAction$outboundSchema).optional(),
+  })
+);
 
 export function updateFindingStateRequestToJSON(
   updateFindingStateRequest: UpdateFindingStateRequest,

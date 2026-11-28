@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -46,7 +47,9 @@ export const EntitlementGroup$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   EntitlementGroup
-> = openEnums.outboundSchema(EntitlementGroup);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(EntitlementGroup)
+);
 
 /** @internal */
 export type DeleteAppEntitlementMonitorBindingRequest$Outbound = {
@@ -62,12 +65,14 @@ export const DeleteAppEntitlementMonitorBindingRequest$outboundSchema:
     DeleteAppEntitlementMonitorBindingRequest$Outbound,
     z.ZodTypeDef,
     DeleteAppEntitlementMonitorBindingRequest
-  > = z.object({
-    appEntitlementId: z.string().optional(),
-    appId: z.string().optional(),
-    entitlementGroup: EntitlementGroup$outboundSchema.optional(),
-    monitorId: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appEntitlementId: z.string().optional(),
+      appId: z.string().optional(),
+      entitlementGroup: EntitlementGroup$outboundSchema.optional(),
+      monitorId: z.string().optional(),
+    })
+  );
 
 export function deleteAppEntitlementMonitorBindingRequestToJSON(
   deleteAppEntitlementMonitorBindingRequest:

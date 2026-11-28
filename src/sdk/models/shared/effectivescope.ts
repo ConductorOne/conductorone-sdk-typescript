@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -95,35 +95,39 @@ export const EffectiveScopePeriodKind$inboundSchema: z.ZodType<
   EffectiveScopePeriodKind,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(EffectiveScopePeriodKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(EffectiveScopePeriodKind)
+);
 
 /** @internal */
 export const EffectiveScope$inboundSchema: z.ZodType<
   EffectiveScope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accountInitialized: z.boolean().optional(),
-  authority: z.nullable(AuthorityRef$inboundSchema).optional(),
-  authorityFromExtension: z.boolean().optional(),
-  budgetKey: z.string().optional(),
-  lifetimeConsumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  limitNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  periodEnd: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  periodKey: z.string().optional(),
-  periodKind: EffectiveScopePeriodKind$inboundSchema.optional(),
-  periodStart: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  remainingNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  reservedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  scope: z.nullable(FundsAccountScope$inboundSchema).optional(),
-  tracking: z.boolean().optional(),
-  windowCommittedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-  windowConsumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountInitialized: z.boolean().optional(),
+    authority: z.nullable(AuthorityRef$inboundSchema).optional(),
+    authorityFromExtension: z.boolean().optional(),
+    budgetKey: z.string().optional(),
+    lifetimeConsumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    limitNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    periodEnd: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    periodKey: z.string().optional(),
+    periodKind: EffectiveScopePeriodKind$inboundSchema.optional(),
+    periodStart: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    remainingNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    reservedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    scope: z.nullable(FundsAccountScope$inboundSchema).optional(),
+    tracking: z.boolean().optional(),
+    windowCommittedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+    windowConsumedNano: z.string().transform(v => parseInt(v, 10)).optional(),
+  })
+);
 
 export function effectiveScopeFromJSON(
   jsonString: string,

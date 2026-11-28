@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -52,15 +52,19 @@ export const WebhookSource$inboundSchema: z.ZodType<
   WebhookSource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approvalStep: z.nullable(WebhookSourceApprovalStep$inboundSchema).optional(),
-  policyPostAction: z.nullable(WebhookSourcePolicyPostAction$inboundSchema)
-    .optional(),
-  provisionStep: z.nullable(WebhookSourceProvisionStep$inboundSchema)
-    .optional(),
-  test: z.nullable(WebhookSourceTest$inboundSchema).optional(),
-  workflowStep: z.nullable(WebhookSourceWorkflowStep$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approvalStep: z.nullable(WebhookSourceApprovalStep$inboundSchema)
+      .optional(),
+    policyPostAction: z.nullable(WebhookSourcePolicyPostAction$inboundSchema)
+      .optional(),
+    provisionStep: z.nullable(WebhookSourceProvisionStep$inboundSchema)
+      .optional(),
+    test: z.nullable(WebhookSourceTest$inboundSchema).optional(),
+    workflowStep: z.nullable(WebhookSourceWorkflowStep$inboundSchema)
+      .optional(),
+  })
+);
 
 export function webhookSourceFromJSON(
   jsonString: string,

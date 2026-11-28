@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -37,10 +37,12 @@ export const EdgeServiceGetInferenceUsageAttributionRollupResponse$inboundSchema
     EdgeServiceGetInferenceUsageAttributionRollupResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    edgeCount: z.number().int().optional(),
-    rows: z.nullable(z.array(TBUsageAttributionRow$inboundSchema)).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      edgeCount: z.number().int().optional(),
+      rows: z.nullable(z.array(TBUsageAttributionRow$inboundSchema)).optional(),
+    })
+  );
 
 export function edgeServiceGetInferenceUsageAttributionRollupResponseFromJSON(
   jsonString: string,

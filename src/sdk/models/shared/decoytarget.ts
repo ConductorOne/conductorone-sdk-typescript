@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,9 +27,11 @@ export const DecoyTarget$inboundSchema: z.ZodType<
   DecoyTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  decoyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decoyId: z.string().optional(),
+  })
+);
 /** @internal */
 export type DecoyTarget$Outbound = {
   decoyId?: string | undefined;
@@ -40,9 +42,11 @@ export const DecoyTarget$outboundSchema: z.ZodType<
   DecoyTarget$Outbound,
   z.ZodTypeDef,
   DecoyTarget
-> = z.object({
-  decoyId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decoyId: z.string().optional(),
+  })
+);
 
 export function decoyTargetToJSON(decoyTarget: DecoyTarget): string {
   return JSON.stringify(DecoyTarget$outboundSchema.parse(decoyTarget));

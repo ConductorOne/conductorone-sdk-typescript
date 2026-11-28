@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -50,18 +50,20 @@ export const C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$outbo
     C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest$Outbound,
     z.ZodTypeDef,
     C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest
-  > = z.object({
-    taskId: z.string(),
-    taskActionsServiceEscalateToEmergencyAccessRequest: shared
-      .TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      taskId: "task_id",
-      taskActionsServiceEscalateToEmergencyAccessRequest:
-        "TaskActionsServiceEscalateToEmergencyAccessRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      taskId: z.string(),
+      taskActionsServiceEscalateToEmergencyAccessRequest: shared
+        .TaskActionsServiceEscalateToEmergencyAccessRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        taskId: "task_id",
+        taskActionsServiceEscalateToEmergencyAccessRequest:
+          "TaskActionsServiceEscalateToEmergencyAccessRequest",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequestToJSON(
   c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessRequest:
@@ -79,20 +81,22 @@ export const C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse$inbo
     C1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    TaskServiceActionResponse: shared.TaskServiceActionResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "TaskServiceActionResponse": "taskServiceActionResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      TaskServiceActionResponse: shared.TaskServiceActionResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "TaskServiceActionResponse": "taskServiceActionResponse",
+      });
+    })
+  );
 
 export function c1ApiTaskV1TaskActionsServiceEscalateToEmergencyAccessResponseFromJSON(
   jsonString: string,

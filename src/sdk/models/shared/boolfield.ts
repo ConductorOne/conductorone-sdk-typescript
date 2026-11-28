@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,12 +49,14 @@ export const BoolField$inboundSchema: z.ZodType<
   BoolField,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  checkboxField: z.nullable(CheckboxField$inboundSchema).optional(),
-  defaultValue: z.boolean().optional(),
-  rules: z.nullable(BoolRules$inboundSchema).optional(),
-  toggleField: z.nullable(ToggleField$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checkboxField: z.nullable(CheckboxField$inboundSchema).optional(),
+    defaultValue: z.boolean().optional(),
+    rules: z.nullable(BoolRules$inboundSchema).optional(),
+    toggleField: z.nullable(ToggleField$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type BoolField$Outbound = {
   checkboxField?: CheckboxField$Outbound | null | undefined;
@@ -68,12 +70,14 @@ export const BoolField$outboundSchema: z.ZodType<
   BoolField$Outbound,
   z.ZodTypeDef,
   BoolField
-> = z.object({
-  checkboxField: z.nullable(CheckboxField$outboundSchema).optional(),
-  defaultValue: z.boolean().optional(),
-  rules: z.nullable(BoolRules$outboundSchema).optional(),
-  toggleField: z.nullable(ToggleField$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    checkboxField: z.nullable(CheckboxField$outboundSchema).optional(),
+    defaultValue: z.boolean().optional(),
+    rules: z.nullable(BoolRules$outboundSchema).optional(),
+    toggleField: z.nullable(ToggleField$outboundSchema).optional(),
+  })
+);
 
 export function boolFieldToJSON(boolField: BoolField): string {
   return JSON.stringify(BoolField$outboundSchema.parse(boolField));

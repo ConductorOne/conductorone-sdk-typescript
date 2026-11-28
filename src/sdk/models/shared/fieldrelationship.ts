@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -59,13 +59,15 @@ export const FieldRelationship$inboundSchema: z.ZodType<
   FieldRelationship,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  atLeastOne: z.nullable(AtLeastOne$inboundSchema).optional(),
-  dependentOn: z.nullable(DependentOn$inboundSchema).optional(),
-  fieldNames: z.nullable(z.array(z.string())).optional(),
-  mutuallyExclusive: z.nullable(MutuallyExclusive$inboundSchema).optional(),
-  requiredTogether: z.nullable(RequiredTogether$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    atLeastOne: z.nullable(AtLeastOne$inboundSchema).optional(),
+    dependentOn: z.nullable(DependentOn$inboundSchema).optional(),
+    fieldNames: z.nullable(z.array(z.string())).optional(),
+    mutuallyExclusive: z.nullable(MutuallyExclusive$inboundSchema).optional(),
+    requiredTogether: z.nullable(RequiredTogether$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FieldRelationship$Outbound = {
   atLeastOne?: AtLeastOne$Outbound | null | undefined;
@@ -80,13 +82,15 @@ export const FieldRelationship$outboundSchema: z.ZodType<
   FieldRelationship$Outbound,
   z.ZodTypeDef,
   FieldRelationship
-> = z.object({
-  atLeastOne: z.nullable(AtLeastOne$outboundSchema).optional(),
-  dependentOn: z.nullable(DependentOn$outboundSchema).optional(),
-  fieldNames: z.nullable(z.array(z.string())).optional(),
-  mutuallyExclusive: z.nullable(MutuallyExclusive$outboundSchema).optional(),
-  requiredTogether: z.nullable(RequiredTogether$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    atLeastOne: z.nullable(AtLeastOne$outboundSchema).optional(),
+    dependentOn: z.nullable(DependentOn$outboundSchema).optional(),
+    fieldNames: z.nullable(z.array(z.string())).optional(),
+    mutuallyExclusive: z.nullable(MutuallyExclusive$outboundSchema).optional(),
+    requiredTogether: z.nullable(RequiredTogether$outboundSchema).optional(),
+  })
+);
 
 export function fieldRelationshipToJSON(
   fieldRelationship: FieldRelationship,

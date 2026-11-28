@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * IdentityPolicyTenantDefaults is the tenant-wide set of default identity
@@ -60,15 +61,17 @@ export const IdentityPolicyTenantDefaultsInput$outboundSchema: z.ZodType<
   IdentityPolicyTenantDefaultsInput$Outbound,
   z.ZodTypeDef,
   IdentityPolicyTenantDefaultsInput
-> = z.object({
-  credentialInventoryPolicyId: z.string().optional(),
-  enrollmentRequirementId: z.string().optional(),
-  recoveryPolicyId: z.string().optional(),
-  resourcePolicyId: z.string().optional(),
-  sessionPolicyId: z.string().optional(),
-  signInPolicyId: z.string().optional(),
-  universalPromiseIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credentialInventoryPolicyId: z.string().optional(),
+    enrollmentRequirementId: z.string().optional(),
+    recoveryPolicyId: z.string().optional(),
+    resourcePolicyId: z.string().optional(),
+    sessionPolicyId: z.string().optional(),
+    signInPolicyId: z.string().optional(),
+    universalPromiseIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function identityPolicyTenantDefaultsInputToJSON(
   identityPolicyTenantDefaultsInput: IdentityPolicyTenantDefaultsInput,

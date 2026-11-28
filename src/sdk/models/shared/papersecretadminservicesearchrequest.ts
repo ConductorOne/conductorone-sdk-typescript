@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -113,19 +114,21 @@ export const SecretType$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SecretType
-> = openEnums.outboundSchema(SecretType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(SecretType));
 
 /** @internal */
 export const SharingMode$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SharingMode
-> = openEnums.outboundSchema(SharingMode);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(SharingMode));
 
 /** @internal */
 export const PaperSecretAdminServiceSearchRequestSortBy$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, PaperSecretAdminServiceSearchRequestSortBy> =
-    openEnums.outboundSchema(PaperSecretAdminServiceSearchRequestSortBy);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(PaperSecretAdminServiceSearchRequestSortBy)
+    );
 
 /** @internal */
 export const PaperSecretAdminServiceSearchRequestStatuses$outboundSchema:
@@ -133,7 +136,9 @@ export const PaperSecretAdminServiceSearchRequestStatuses$outboundSchema:
     string,
     z.ZodTypeDef,
     PaperSecretAdminServiceSearchRequestStatuses
-  > = openEnums.outboundSchema(PaperSecretAdminServiceSearchRequestStatuses);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(PaperSecretAdminServiceSearchRequestStatuses)
+  );
 
 /** @internal */
 export type PaperSecretAdminServiceSearchRequest$Outbound = {
@@ -155,22 +160,26 @@ export const PaperSecretAdminServiceSearchRequest$outboundSchema: z.ZodType<
   PaperSecretAdminServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   PaperSecretAdminServiceSearchRequest
-> = z.object({
-  createdAfter: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  creatorUserIds: z.nullable(z.array(z.string())).optional(),
-  includeDeleted: z.boolean().optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  secretType: SecretType$outboundSchema.optional(),
-  sharingMode: SharingMode$outboundSchema.optional(),
-  sortBy: PaperSecretAdminServiceSearchRequestSortBy$outboundSchema.optional(),
-  statuses: z.nullable(
-    z.array(PaperSecretAdminServiceSearchRequestStatuses$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAfter: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    creatorUserIds: z.nullable(z.array(z.string())).optional(),
+    includeDeleted: z.boolean().optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    secretType: SecretType$outboundSchema.optional(),
+    sharingMode: SharingMode$outboundSchema.optional(),
+    sortBy: PaperSecretAdminServiceSearchRequestSortBy$outboundSchema
+      .optional(),
+    statuses: z.nullable(
+      z.array(PaperSecretAdminServiceSearchRequestStatuses$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function paperSecretAdminServiceSearchRequestToJSON(
   paperSecretAdminServiceSearchRequest: PaperSecretAdminServiceSearchRequest,

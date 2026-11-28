@@ -3,11 +3,43 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import {
   AccessConflictNotificationConfig,
   AccessConflictNotificationConfig$Outbound,
   AccessConflictNotificationConfig$outboundSchema,
 } from "./accessconflictnotificationconfig.js";
+import {
+  ConflictMonitorRule,
+  ConflictMonitorRule$Outbound,
+  ConflictMonitorRule$outboundSchema,
+} from "./conflictmonitorrule.js";
+
+/**
+ * Configured severity for new findings. Defaults to medium when unset.
+ *
+ * @remarks
+ *  The value is stored, but monitor responses and new findings use medium until
+ *  configured severity is enabled for your tenant.
+ */
+export const Severity = {
+  FindingSeverityUnspecified: "FINDING_SEVERITY_UNSPECIFIED",
+  FindingSeverityInfo: "FINDING_SEVERITY_INFO",
+  FindingSeverityLow: "FINDING_SEVERITY_LOW",
+  FindingSeverityMedium: "FINDING_SEVERITY_MEDIUM",
+  FindingSeverityHigh: "FINDING_SEVERITY_HIGH",
+  FindingSeverityCritical: "FINDING_SEVERITY_CRITICAL",
+} as const;
+/**
+ * Configured severity for new findings. Defaults to medium when unset.
+ *
+ * @remarks
+ *  The value is stored, but monitor responses and new findings use medium until
+ *  configured severity is enabled for your tenant.
+ */
+export type Severity = OpenEnum<typeof Severity>;
 
 /**
  * The request message for creating a new conflict monitor.
@@ -22,7 +54,23 @@ export type ConflictMonitorCreateRequest = {
    */
   displayName: string;
   notificationConfig?: AccessConflictNotificationConfig | null | undefined;
+  rule?: ConflictMonitorRule | null | undefined;
+  /**
+   * Configured severity for new findings. Defaults to medium when unset.
+   *
+   * @remarks
+   *  The value is stored, but monitor responses and new findings use medium until
+   *  configured severity is enabled for your tenant.
+   */
+  severity?: Severity | undefined;
 };
+
+/** @internal */
+export const Severity$outboundSchema: z.ZodType<
+  string,
+  z.ZodTypeDef,
+  Severity
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(Severity));
 
 /** @internal */
 export type ConflictMonitorCreateRequest$Outbound = {
@@ -32,6 +80,8 @@ export type ConflictMonitorCreateRequest$Outbound = {
     | AccessConflictNotificationConfig$Outbound
     | null
     | undefined;
+  rule?: ConflictMonitorRule$Outbound | null | undefined;
+  severity?: string | undefined;
 };
 
 /** @internal */
@@ -39,13 +89,17 @@ export const ConflictMonitorCreateRequest$outboundSchema: z.ZodType<
   ConflictMonitorCreateRequest$Outbound,
   z.ZodTypeDef,
   ConflictMonitorCreateRequest
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string(),
-  notificationConfig: z.nullable(
-    AccessConflictNotificationConfig$outboundSchema,
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string(),
+    notificationConfig: z.nullable(
+      AccessConflictNotificationConfig$outboundSchema,
+    ).optional(),
+    rule: z.nullable(ConflictMonitorRule$outboundSchema).optional(),
+    severity: Severity$outboundSchema.optional(),
+  })
+);
 
 export function conflictMonitorCreateRequestToJSON(
   conflictMonitorCreateRequest: ConflictMonitorCreateRequest,

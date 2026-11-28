@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -62,16 +62,18 @@ export const TaskAuditConnectorActionResult$inboundSchema: z.ZodType<
   TaskAuditConnectorActionResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appId: z.string().optional(),
-  cancelled: z.nullable(TaskAuditCancelledResult$inboundSchema).optional(),
-  connectorActionId: z.string().optional(),
-  connectorId: z.string().optional(),
-  error: z.nullable(TaskAuditErrorResult$inboundSchema).optional(),
-  pending: z.nullable(TaskAuditPendingResult$inboundSchema).optional(),
-  success: z.nullable(TaskAuditSuccessResult$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appId: z.string().optional(),
+    cancelled: z.nullable(TaskAuditCancelledResult$inboundSchema).optional(),
+    connectorActionId: z.string().optional(),
+    connectorId: z.string().optional(),
+    error: z.nullable(TaskAuditErrorResult$inboundSchema).optional(),
+    pending: z.nullable(TaskAuditPendingResult$inboundSchema).optional(),
+    success: z.nullable(TaskAuditSuccessResult$inboundSchema).optional(),
+  })
+);
 
 export function taskAuditConnectorActionResultFromJSON(
   jsonString: string,

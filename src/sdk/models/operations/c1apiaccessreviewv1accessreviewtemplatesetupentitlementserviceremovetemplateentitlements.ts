@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,17 +54,20 @@ export const C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceRemov
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceRemoveTemplateEntitlementsRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceRemoveTemplateEntitlementsRequest
-  > = z.object({
-    accessReviewTemplateId: z.string(),
-    accessReviewRemoveTemplateEntitlementsRequest: shared
-      .AccessReviewRemoveTemplateEntitlementsRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessReviewTemplateId: "access_review_template_id",
-      accessReviewRemoveTemplateEntitlementsRequest:
-        "AccessReviewRemoveTemplateEntitlementsRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessReviewTemplateId: z.string(),
+      accessReviewRemoveTemplateEntitlementsRequest: shared
+        .AccessReviewRemoveTemplateEntitlementsRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        accessReviewTemplateId: "access_review_template_id",
+        accessReviewRemoveTemplateEntitlementsRequest:
+          "AccessReviewRemoveTemplateEntitlementsRequest",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceRemoveTemplateEntitlementsRequestToJSON(
   c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceRemoveTemplateEntitlementsRequest:
@@ -84,21 +87,24 @@ export const C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceRemov
     C1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceRemoveTemplateEntitlementsResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AccessReviewRemoveTemplateEntitlementsResponse: shared
-      .AccessReviewRemoveTemplateEntitlementsResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AccessReviewRemoveTemplateEntitlementsResponse":
-        "accessReviewRemoveTemplateEntitlementsResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AccessReviewRemoveTemplateEntitlementsResponse: shared
+        .AccessReviewRemoveTemplateEntitlementsResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AccessReviewRemoveTemplateEntitlementsResponse":
+          "accessReviewRemoveTemplateEntitlementsResponse",
+      });
+    })
+  );
 
 export function c1ApiAccessreviewV1AccessReviewTemplateSetupEntitlementServiceRemoveTemplateEntitlementsResponseFromJSON(
   jsonString: string,

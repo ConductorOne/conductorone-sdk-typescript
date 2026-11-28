@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -17,6 +18,7 @@ export const MCPAutomaticAccessProvisioningAccessLevel = {
   McpSystemToolsetRead: "MCP_SYSTEM_TOOLSET_READ",
   McpSystemToolsetAllApproved: "MCP_SYSTEM_TOOLSET_ALL_APPROVED",
   McpSystemToolsetCustom: "MCP_SYSTEM_TOOLSET_CUSTOM",
+  McpSystemToolsetWrite: "MCP_SYSTEM_TOOLSET_WRITE",
 } as const;
 /**
  * The system toolset granted through automatic access, independently of requestable access.
@@ -55,7 +57,9 @@ export type MCPAutomaticAccessProvisioning = {
 /** @internal */
 export const MCPAutomaticAccessProvisioningAccessLevel$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, MCPAutomaticAccessProvisioningAccessLevel> =
-    openEnums.outboundSchema(MCPAutomaticAccessProvisioningAccessLevel);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(MCPAutomaticAccessProvisioningAccessLevel)
+    );
 
 /** @internal */
 export type MCPAutomaticAccessProvisioning$Outbound = {
@@ -69,12 +73,14 @@ export const MCPAutomaticAccessProvisioning$outboundSchema: z.ZodType<
   MCPAutomaticAccessProvisioning$Outbound,
   z.ZodTypeDef,
   MCPAutomaticAccessProvisioning
-> = z.object({
-  accessLevel: MCPAutomaticAccessProvisioningAccessLevel$outboundSchema
-    .optional(),
-  enabled: z.boolean().optional(),
-  toolsetIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessLevel: MCPAutomaticAccessProvisioningAccessLevel$outboundSchema
+      .optional(),
+    enabled: z.boolean().optional(),
+    toolsetIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function mcpAutomaticAccessProvisioningToJSON(
   mcpAutomaticAccessProvisioning: MCPAutomaticAccessProvisioning,

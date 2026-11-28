@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -59,25 +59,27 @@ export const C1ApiAppV2ConnectorOwnersDeleteEntitlementOwnerRequest$outboundSche
     C1ApiAppV2ConnectorOwnersDeleteEntitlementOwnerRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV2ConnectorOwnersDeleteEntitlementOwnerRequest
-  > = z.object({
-    appId: z.string(),
-    connectorId: z.string(),
-    roleSlug: z.string(),
-    appEntitlementRefAppId: z.string(),
-    appEntitlementRefId: z.string(),
-    deleteConnectorEntitlementOwnerRequest: shared
-      .DeleteConnectorEntitlementOwnerRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      connectorId: "connector_id",
-      roleSlug: "role_slug",
-      appEntitlementRefAppId: "app_entitlement_ref_app_id",
-      appEntitlementRefId: "app_entitlement_ref_id",
-      deleteConnectorEntitlementOwnerRequest:
-        "DeleteConnectorEntitlementOwnerRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      connectorId: z.string(),
+      roleSlug: z.string(),
+      appEntitlementRefAppId: z.string(),
+      appEntitlementRefId: z.string(),
+      deleteConnectorEntitlementOwnerRequest: shared
+        .DeleteConnectorEntitlementOwnerRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        connectorId: "connector_id",
+        roleSlug: "role_slug",
+        appEntitlementRefAppId: "app_entitlement_ref_app_id",
+        appEntitlementRefId: "app_entitlement_ref_id",
+        deleteConnectorEntitlementOwnerRequest:
+          "DeleteConnectorEntitlementOwnerRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV2ConnectorOwnersDeleteEntitlementOwnerRequestToJSON(
   c1ApiAppV2ConnectorOwnersDeleteEntitlementOwnerRequest:
@@ -96,21 +98,23 @@ export const C1ApiAppV2ConnectorOwnersDeleteEntitlementOwnerResponse$inboundSche
     C1ApiAppV2ConnectorOwnersDeleteEntitlementOwnerResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteConnectorEntitlementOwnerResponse: shared
-      .DeleteConnectorEntitlementOwnerResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteConnectorEntitlementOwnerResponse":
-        "deleteConnectorEntitlementOwnerResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteConnectorEntitlementOwnerResponse: shared
+        .DeleteConnectorEntitlementOwnerResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteConnectorEntitlementOwnerResponse":
+          "deleteConnectorEntitlementOwnerResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV2ConnectorOwnersDeleteEntitlementOwnerResponseFromJSON(
   jsonString: string,

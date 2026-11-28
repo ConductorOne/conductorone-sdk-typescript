@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -66,21 +66,23 @@ export const EscalationInstance$inboundSchema: z.ZodType<
   EscalationInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  alreadyEscalated: z.boolean().optional(),
-  cancelTicket: z.nullable(EscalationInstanceCancelTicket$inboundSchema)
-    .optional(),
-  escalationComment: z.string().optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  reassignToApprovers: z.nullable(
-    EscalationInstanceReassignToApprovers$inboundSchema,
-  ).optional(),
-  replacePolicy: z.nullable(EscalationInstanceReplacePolicy$inboundSchema)
-    .optional(),
-  skipStep: z.nullable(EscalationInstanceSkipStep$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alreadyEscalated: z.boolean().optional(),
+    cancelTicket: z.nullable(EscalationInstanceCancelTicket$inboundSchema)
+      .optional(),
+    escalationComment: z.string().optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    reassignToApprovers: z.nullable(
+      EscalationInstanceReassignToApprovers$inboundSchema,
+    ).optional(),
+    replacePolicy: z.nullable(EscalationInstanceReplacePolicy$inboundSchema)
+      .optional(),
+    skipStep: z.nullable(EscalationInstanceSkipStep$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type EscalationInstance$Outbound = {
   alreadyEscalated?: boolean | undefined;
@@ -100,19 +102,21 @@ export const EscalationInstance$outboundSchema: z.ZodType<
   EscalationInstance$Outbound,
   z.ZodTypeDef,
   EscalationInstance
-> = z.object({
-  alreadyEscalated: z.boolean().optional(),
-  cancelTicket: z.nullable(EscalationInstanceCancelTicket$outboundSchema)
-    .optional(),
-  escalationComment: z.string().optional(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  reassignToApprovers: z.nullable(
-    EscalationInstanceReassignToApprovers$outboundSchema,
-  ).optional(),
-  replacePolicy: z.nullable(EscalationInstanceReplacePolicy$outboundSchema)
-    .optional(),
-  skipStep: z.nullable(EscalationInstanceSkipStep$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alreadyEscalated: z.boolean().optional(),
+    cancelTicket: z.nullable(EscalationInstanceCancelTicket$outboundSchema)
+      .optional(),
+    escalationComment: z.string().optional(),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    reassignToApprovers: z.nullable(
+      EscalationInstanceReassignToApprovers$outboundSchema,
+    ).optional(),
+    replacePolicy: z.nullable(EscalationInstanceReplacePolicy$outboundSchema)
+      .optional(),
+    skipStep: z.nullable(EscalationInstanceSkipStep$outboundSchema).optional(),
+  })
+);
 
 export function escalationInstanceToJSON(
   escalationInstance: EscalationInstance,

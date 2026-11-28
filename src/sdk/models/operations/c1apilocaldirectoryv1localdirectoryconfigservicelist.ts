@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,15 +48,17 @@ export const C1ApiLocalDirectoryV1LocalDirectoryConfigServiceListRequest$outboun
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceListRequest$Outbound,
     z.ZodTypeDef,
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceListRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalDirectoryConfigServiceListRequestToJSON(
   c1ApiLocalDirectoryV1LocalDirectoryConfigServiceListRequest:
@@ -74,21 +76,23 @@ export const C1ApiLocalDirectoryV1LocalDirectoryConfigServiceListResponse$inboun
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceListResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    LocalDirectoryConfigServiceListResponse: shared
-      .LocalDirectoryConfigServiceListResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "LocalDirectoryConfigServiceListResponse":
-        "localDirectoryConfigServiceListResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      LocalDirectoryConfigServiceListResponse: shared
+        .LocalDirectoryConfigServiceListResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "LocalDirectoryConfigServiceListResponse":
+          "localDirectoryConfigServiceListResponse",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalDirectoryConfigServiceListResponseFromJSON(
   jsonString: string,

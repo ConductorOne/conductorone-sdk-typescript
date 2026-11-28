@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -72,37 +72,41 @@ export const WebhookInstanceState$inboundSchema: z.ZodType<
   WebhookInstanceState,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(WebhookInstanceState);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(WebhookInstanceState)
+);
 
 /** @internal */
 export const WebhookInstance$inboundSchema: z.ZodType<
   WebhookInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  attempts: z.number().int().optional(),
-  completedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string().optional(),
-  lastAttemptedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  source: z.nullable(WebhookSource$inboundSchema).optional(),
-  spec: z.nullable(WebhookSpec$inboundSchema).optional(),
-  state: WebhookInstanceState$inboundSchema.optional(),
-  supersededReason: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  webhookId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attempts: z.number().int().optional(),
+    completedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string().optional(),
+    lastAttemptedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    source: z.nullable(WebhookSource$inboundSchema).optional(),
+    spec: z.nullable(WebhookSpec$inboundSchema).optional(),
+    state: WebhookInstanceState$inboundSchema.optional(),
+    supersededReason: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    webhookId: z.string().optional(),
+  })
+);
 
 export function webhookInstanceFromJSON(
   jsonString: string,

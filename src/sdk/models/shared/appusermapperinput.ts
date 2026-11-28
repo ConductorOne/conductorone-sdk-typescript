@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppUserMapperMatchCaseInput,
   AppUserMapperMatchCaseInput$Outbound,
@@ -29,10 +30,13 @@ export const AppUserMapperInput$outboundSchema: z.ZodType<
   AppUserMapperInput$Outbound,
   z.ZodTypeDef,
   AppUserMapperInput
-> = z.object({
-  mappingCases: z.nullable(z.array(AppUserMapperMatchCaseInput$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mappingCases: z.nullable(
+      z.array(AppUserMapperMatchCaseInput$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function appUserMapperInputToJSON(
   appUserMapperInput: AppUserMapperInput,

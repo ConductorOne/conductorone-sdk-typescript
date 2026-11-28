@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppResourceExpandMask,
   AppResourceExpandMask$Outbound,
@@ -35,11 +36,13 @@ export const AppResourceServiceUpdateRequest$outboundSchema: z.ZodType<
   AppResourceServiceUpdateRequest$Outbound,
   z.ZodTypeDef,
   AppResourceServiceUpdateRequest
-> = z.object({
-  appResource: z.nullable(AppResourceInput$outboundSchema).optional(),
-  expandMask: z.nullable(AppResourceExpandMask$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appResource: z.nullable(AppResourceInput$outboundSchema).optional(),
+    expandMask: z.nullable(AppResourceExpandMask$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function appResourceServiceUpdateRequestToJSON(
   appResourceServiceUpdateRequest: AppResourceServiceUpdateRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AccessReviewScopeV2,
   AccessReviewScopeV2$Outbound,
@@ -37,12 +38,14 @@ export const AccessReviewSetScopeByResourceTypeRequest$outboundSchema:
     AccessReviewSetScopeByResourceTypeRequest$Outbound,
     z.ZodTypeDef,
     AccessReviewSetScopeByResourceTypeRequest
-  > = z.object({
-    resourceTypeSelections: z.nullable(
-      z.array(ResourceTypeIdRef$outboundSchema),
-    ).optional(),
-    scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      resourceTypeSelections: z.nullable(
+        z.array(ResourceTypeIdRef$outboundSchema),
+      ).optional(),
+      scopeV2: z.nullable(AccessReviewScopeV2$outboundSchema).optional(),
+    })
+  );
 
 export function accessReviewSetScopeByResourceTypeRequestToJSON(
   accessReviewSetScopeByResourceTypeRequest:

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -85,24 +85,26 @@ export const EdgeServiceGetEgressTrafficSummaryRollupResponse$inboundSchema:
     EdgeServiceGetEgressTrafficSummaryRollupResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    agentKindCounts: z.nullable(z.array(AgentKindCount$inboundSchema))
-      .optional(),
-    allowedEvents: z.string().optional(),
-    deniedEvents: z.string().optional(),
-    distinctAgentCount: z.string().optional(),
-    distinctDestinationCount: z.string().transform(v => parseInt(v, 10))
-      .optional(),
-    distinctToolCount: z.string().optional(),
-    edgeCount: z.number().int().optional(),
-    fallbackAgentCount: z.string().transform(v => parseInt(v, 10)).optional(),
-    series: z.nullable(z.array(TBTrafficSummaryBucket$inboundSchema))
-      .optional(),
-    totalEvents: z.string().optional(),
-    totalRequestBytes: z.string().optional(),
-    totalResponseBytes: z.string().optional(),
-    unspecifiedEvents: z.string().optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      agentKindCounts: z.nullable(z.array(AgentKindCount$inboundSchema))
+        .optional(),
+      allowedEvents: z.string().optional(),
+      deniedEvents: z.string().optional(),
+      distinctAgentCount: z.string().optional(),
+      distinctDestinationCount: z.string().transform(v => parseInt(v, 10))
+        .optional(),
+      distinctToolCount: z.string().optional(),
+      edgeCount: z.number().int().optional(),
+      fallbackAgentCount: z.string().transform(v => parseInt(v, 10)).optional(),
+      series: z.nullable(z.array(TBTrafficSummaryBucket$inboundSchema))
+        .optional(),
+      totalEvents: z.string().optional(),
+      totalRequestBytes: z.string().optional(),
+      totalResponseBytes: z.string().optional(),
+      unspecifiedEvents: z.string().optional(),
+    })
+  );
 
 export function edgeServiceGetEgressTrafficSummaryRollupResponseFromJSON(
   jsonString: string,

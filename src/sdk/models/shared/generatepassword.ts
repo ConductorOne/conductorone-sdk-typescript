@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,10 +31,12 @@ export const GeneratePassword$inboundSchema: z.ZodType<
   GeneratePassword,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  passwordPolicyId: z.string().optional(),
-  policy: z.nullable(GeneratePasswordPolicy$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    passwordPolicyId: z.string().optional(),
+    policy: z.nullable(GeneratePasswordPolicy$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type GeneratePassword$Outbound = {
   passwordPolicyId?: string | undefined;
@@ -46,10 +48,12 @@ export const GeneratePassword$outboundSchema: z.ZodType<
   GeneratePassword$Outbound,
   z.ZodTypeDef,
   GeneratePassword
-> = z.object({
-  passwordPolicyId: z.string().optional(),
-  policy: z.nullable(GeneratePasswordPolicy$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    passwordPolicyId: z.string().optional(),
+    policy: z.nullable(GeneratePasswordPolicy$outboundSchema).optional(),
+  })
+);
 
 export function generatePasswordToJSON(
   generatePassword: GeneratePassword,

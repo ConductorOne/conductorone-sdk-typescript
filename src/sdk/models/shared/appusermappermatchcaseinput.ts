@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * AppUserMapperMatchCase defines a single matching rule for uplift account mapping.
@@ -29,10 +30,12 @@ export const AppUserMapperMatchCaseInput$outboundSchema: z.ZodType<
   AppUserMapperMatchCaseInput$Outbound,
   z.ZodTypeDef,
   AppUserMapperMatchCaseInput
-> = z.object({
-  appUserKeyCel: z.string().optional(),
-  userKeyCel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserKeyCel: z.string().optional(),
+    userKeyCel: z.string().optional(),
+  })
+);
 
 export function appUserMapperMatchCaseInputToJSON(
   appUserMapperMatchCaseInput: AppUserMapperMatchCaseInput,

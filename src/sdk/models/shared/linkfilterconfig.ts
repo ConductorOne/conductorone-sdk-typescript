@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,24 +51,30 @@ export const LinkFilterConfigAction$inboundSchema: z.ZodType<
   LinkFilterConfigAction,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(LinkFilterConfigAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(LinkFilterConfigAction)
+);
 /** @internal */
 export const LinkFilterConfigAction$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   LinkFilterConfigAction
-> = openEnums.outboundSchema(LinkFilterConfigAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(LinkFilterConfigAction)
+);
 
 /** @internal */
 export const LinkFilterConfig$inboundSchema: z.ZodType<
   LinkFilterConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: LinkFilterConfigAction$inboundSchema.optional(),
-  allowedHosts: z.nullable(z.array(z.string())).optional(),
-  blockImages: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: LinkFilterConfigAction$inboundSchema.optional(),
+    allowedHosts: z.nullable(z.array(z.string())).optional(),
+    blockImages: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type LinkFilterConfig$Outbound = {
   action?: string | undefined;
@@ -81,11 +87,13 @@ export const LinkFilterConfig$outboundSchema: z.ZodType<
   LinkFilterConfig$Outbound,
   z.ZodTypeDef,
   LinkFilterConfig
-> = z.object({
-  action: LinkFilterConfigAction$outboundSchema.optional(),
-  allowedHosts: z.nullable(z.array(z.string())).optional(),
-  blockImages: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: LinkFilterConfigAction$outboundSchema.optional(),
+    allowedHosts: z.nullable(z.array(z.string())).optional(),
+    blockImages: z.boolean().optional(),
+  })
+);
 
 export function linkFilterConfigToJSON(
   linkFilterConfig: LinkFilterConfig,

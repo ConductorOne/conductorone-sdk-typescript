@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -48,14 +48,16 @@ export const C1ApiLocalDirectoryV1LocalUserInvitationServiceGetRequest$outboundS
     C1ApiLocalDirectoryV1LocalUserInvitationServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiLocalDirectoryV1LocalUserInvitationServiceGetRequest
-  > = z.object({
-    directoryAppId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      directoryAppId: "directory_app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      directoryAppId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        directoryAppId: "directory_app_id",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalUserInvitationServiceGetRequestToJSON(
   c1ApiLocalDirectoryV1LocalUserInvitationServiceGetRequest:
@@ -73,21 +75,23 @@ export const C1ApiLocalDirectoryV1LocalUserInvitationServiceGetResponse$inboundS
     C1ApiLocalDirectoryV1LocalUserInvitationServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    LocalUserInvitationServiceGetResponse: shared
-      .LocalUserInvitationServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "LocalUserInvitationServiceGetResponse":
-        "localUserInvitationServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      LocalUserInvitationServiceGetResponse: shared
+        .LocalUserInvitationServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "LocalUserInvitationServiceGetResponse":
+          "localUserInvitationServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalUserInvitationServiceGetResponseFromJSON(
   jsonString: string,

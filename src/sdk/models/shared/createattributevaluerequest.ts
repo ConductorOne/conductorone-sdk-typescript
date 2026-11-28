@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The CreateAttributeValueRequest message.
@@ -29,10 +30,12 @@ export const CreateAttributeValueRequest$outboundSchema: z.ZodType<
   CreateAttributeValueRequest$Outbound,
   z.ZodTypeDef,
   CreateAttributeValueRequest
-> = z.object({
-  attributeTypeId: z.string().optional(),
-  value: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attributeTypeId: z.string().optional(),
+    value: z.string().optional(),
+  })
+);
 
 export function createAttributeValueRequestToJSON(
   createAttributeValueRequest: CreateAttributeValueRequest,

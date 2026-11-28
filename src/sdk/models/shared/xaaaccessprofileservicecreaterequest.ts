@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * XAAAccessProfileServiceCreateRequest creates a new access profile.
@@ -34,11 +35,13 @@ export const XAAAccessProfileServiceCreateRequest$outboundSchema: z.ZodType<
   XAAAccessProfileServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   XAAAccessProfileServiceCreateRequest
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  xaaResourceServerId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    xaaResourceServerId: z.string().optional(),
+  })
+);
 
 export function xaaAccessProfileServiceCreateRequestToJSON(
   xaaAccessProfileServiceCreateRequest: XAAAccessProfileServiceCreateRequest,

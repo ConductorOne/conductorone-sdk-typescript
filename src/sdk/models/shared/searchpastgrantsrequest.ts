@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppEntitlementRef,
   AppEntitlementRef$Outbound,
@@ -64,17 +65,19 @@ export const SearchPastGrantsRequest$outboundSchema: z.ZodType<
   SearchPastGrantsRequest$Outbound,
   z.ZodTypeDef,
   SearchPastGrantsRequest
-> = z.object({
-  appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
-    .optional(),
-  appIds: z.nullable(z.array(z.string())).optional(),
-  appUserRefs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
-  expandMask: z.nullable(
-    AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
-  ).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementRefs: z.nullable(z.array(AppEntitlementRef$outboundSchema))
+      .optional(),
+    appIds: z.nullable(z.array(z.string())).optional(),
+    appUserRefs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
+    expandMask: z.nullable(
+      AppEntitlementUserBindingExpandHistoryMask$outboundSchema,
+    ).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  })
+);
 
 export function searchPastGrantsRequestToJSON(
   searchPastGrantsRequest: SearchPastGrantsRequest,

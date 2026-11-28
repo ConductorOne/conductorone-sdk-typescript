@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { DynamicString, DynamicString$inboundSchema } from "./dynamicstring.js";
@@ -32,12 +32,14 @@ export const C1CredentialOfferingPickerComponent$inboundSchema: z.ZodType<
   C1CredentialOfferingPickerComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  label: z.nullable(DynamicString$inboundSchema).optional(),
-  required: z.boolean().optional(),
-  value: z.nullable(DynamicString$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    label: z.nullable(DynamicString$inboundSchema).optional(),
+    required: z.boolean().optional(),
+    value: z.nullable(DynamicString$inboundSchema).optional(),
+  })
+);
 
 export function c1CredentialOfferingPickerComponentFromJSON(
   jsonString: string,

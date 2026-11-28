@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -110,8 +111,10 @@ export const AutomationsCreateAutomationRequestCircuitBreakerPeriod$outboundSche
     string,
     z.ZodTypeDef,
     AutomationsCreateAutomationRequestCircuitBreakerPeriod
-  > = openEnums.outboundSchema(
-    AutomationsCreateAutomationRequestCircuitBreakerPeriod,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      AutomationsCreateAutomationRequestCircuitBreakerPeriod,
+    )
   );
 
 /** @internal */
@@ -136,26 +139,28 @@ export const AutomationsCreateAutomationRequest$outboundSchema: z.ZodType<
   AutomationsCreateAutomationRequest$Outbound,
   z.ZodTypeDef,
   AutomationsCreateAutomationRequest
-> = z.object({
-  annotations: z.record(z.string()).optional(),
-  appId: z.string().optional(),
-  automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
-    .optional(),
-  circuitBreakerMax: z.number().int().optional(),
-  circuitBreakerPeriod:
-    AutomationsCreateAutomationRequestCircuitBreakerPeriod$outboundSchema
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: z.record(z.string()).optional(),
+    appId: z.string().optional(),
+    automationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
       .optional(),
-  context: z.nullable(AutomationContext$outboundSchema).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  draftAutomationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
-    .optional(),
-  draftTriggers: z.nullable(z.array(AutomationTrigger$outboundSchema))
-    .optional(),
-  enabled: z.boolean().optional(),
-  isDraft: z.boolean().optional(),
-  triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
-});
+    circuitBreakerMax: z.number().int().optional(),
+    circuitBreakerPeriod:
+      AutomationsCreateAutomationRequestCircuitBreakerPeriod$outboundSchema
+        .optional(),
+    context: z.nullable(AutomationContext$outboundSchema).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    draftAutomationSteps: z.nullable(z.array(AutomationStep$outboundSchema))
+      .optional(),
+    draftTriggers: z.nullable(z.array(AutomationTrigger$outboundSchema))
+      .optional(),
+    enabled: z.boolean().optional(),
+    isDraft: z.boolean().optional(),
+    triggers: z.nullable(z.array(AutomationTrigger$outboundSchema)).optional(),
+  })
+);
 
 export function automationsCreateAutomationRequestToJSON(
   automationsCreateAutomationRequest: AutomationsCreateAutomationRequest,

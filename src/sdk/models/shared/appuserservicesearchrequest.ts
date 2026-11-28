@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -133,6 +134,18 @@ export type AppUserServiceSearchRequest = {
    * When true, excludes app users belonging to soft-deleted apps.
    */
   excludeDeletedApps?: boolean | undefined;
+  /**
+   * Remove accounts with a record from any of these other applications.
+   */
+  excludeSourceAppIds?: Array<string> | null | undefined;
+  /**
+   * Remove accounts with a record from any of these connectors of the application. Together with
+   *
+   * @remarks
+   *  exclude_source_app_ids, this finds accounts that share no source with a given set, such as accounts that
+   *  could be merged with another.
+   */
+  excludeSourceConnectorIds?: Array<string> | null | undefined;
   expandMask?: AppUserExpandMask | null | undefined;
   /**
    * Restrict to app users whose NHI trait classification (nhi_type) matches one of
@@ -162,6 +175,21 @@ export type AppUserServiceSearchRequest = {
    */
   sortBy?: AppUserServiceSearchRequestSortBy | undefined;
   /**
+   * Restrict results to accounts with a record from at least one of these other applications,
+   *
+   * @remarks
+   *  whose accounts are bound to this application, or from one of the connectors in source_connector_ids.
+   */
+  sourceAppIds?: Array<string> | null | undefined;
+  /**
+   * Restrict results to accounts with a record from at least one of these connectors of the
+   *
+   * @remarks
+   *  application, or from at least one of the applications in source_app_ids. When both are
+   *  empty, sources aren't used to include accounts.
+   */
+  sourceConnectorIds?: Array<string> | null | undefined;
+  /**
    * A list of user IDs to restrict the search by.
    */
   userIds?: Array<string> | null | undefined;
@@ -186,40 +214,50 @@ export const AppUserServiceSearchRequestAgentStatuses$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppUserServiceSearchRequestAgentStatuses
-> = openEnums.outboundSchema(AppUserServiceSearchRequestAgentStatuses);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AppUserServiceSearchRequestAgentStatuses)
+);
 
 /** @internal */
 export const AppUserDomains$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppUserDomains
-> = openEnums.outboundSchema(AppUserDomains);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.outboundSchema(AppUserDomains));
 
 /** @internal */
 export const AppUserServiceSearchRequestAppUserStatuses$outboundSchema:
   z.ZodType<string, z.ZodTypeDef, AppUserServiceSearchRequestAppUserStatuses> =
-    openEnums.outboundSchema(AppUserServiceSearchRequestAppUserStatuses);
+    /* @__PURE__ */ lazySchema$(() =>
+      openEnums.outboundSchema(AppUserServiceSearchRequestAppUserStatuses)
+    );
 
 /** @internal */
 export const AppUserServiceSearchRequestAppUserTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppUserServiceSearchRequestAppUserTypes
-> = openEnums.outboundSchema(AppUserServiceSearchRequestAppUserTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AppUserServiceSearchRequestAppUserTypes)
+);
 
 /** @internal */
 export const AppUserServiceSearchRequestNhiTypes$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppUserServiceSearchRequestNhiTypes
-> = openEnums.outboundSchema(AppUserServiceSearchRequestNhiTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AppUserServiceSearchRequestNhiTypes)
+);
 
 /** @internal */
 export const AppUserServiceSearchRequestSortBy$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   AppUserServiceSearchRequestSortBy
-> = openEnums.outboundSchema(AppUserServiceSearchRequestSortBy);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(AppUserServiceSearchRequestSortBy)
+);
 
 /** @internal */
 export type AppUserServiceSearchRequest$Outbound = {
@@ -233,6 +271,8 @@ export type AppUserServiceSearchRequest$Outbound = {
   appUserTypes?: Array<string> | null | undefined;
   excludeAppUserIds?: Array<string> | null | undefined;
   excludeDeletedApps?: boolean | undefined;
+  excludeSourceAppIds?: Array<string> | null | undefined;
+  excludeSourceConnectorIds?: Array<string> | null | undefined;
   expandMask?: AppUserExpandMask$Outbound | null | undefined;
   nhiTypes?: Array<string> | null | undefined;
   pageSize?: number | undefined;
@@ -240,6 +280,8 @@ export type AppUserServiceSearchRequest$Outbound = {
   query?: string | undefined;
   refs?: Array<AppUserRef$Outbound> | null | undefined;
   sortBy?: string | undefined;
+  sourceAppIds?: Array<string> | null | undefined;
+  sourceConnectorIds?: Array<string> | null | undefined;
   userIds?: Array<string> | null | undefined;
   withOpenFindings?: boolean | undefined;
   withoutResponsibleParty?: boolean | undefined;
@@ -250,36 +292,43 @@ export const AppUserServiceSearchRequest$outboundSchema: z.ZodType<
   AppUserServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   AppUserServiceSearchRequest
-> = z.object({
-  agentStatuses: z.nullable(
-    z.array(AppUserServiceSearchRequestAgentStatuses$outboundSchema),
-  ).optional(),
-  appId: z.string().optional(),
-  appIds: z.nullable(z.array(z.string())).optional(),
-  appUserDomains: z.nullable(z.array(AppUserDomains$outboundSchema)).optional(),
-  appUserIds: z.nullable(z.array(z.string())).optional(),
-  appUserStatusDetails: z.nullable(z.array(z.string())).optional(),
-  appUserStatuses: z.nullable(
-    z.array(AppUserServiceSearchRequestAppUserStatuses$outboundSchema),
-  ).optional(),
-  appUserTypes: z.nullable(
-    z.array(AppUserServiceSearchRequestAppUserTypes$outboundSchema),
-  ).optional(),
-  excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
-  excludeDeletedApps: z.boolean().optional(),
-  expandMask: z.nullable(AppUserExpandMask$outboundSchema).optional(),
-  nhiTypes: z.nullable(
-    z.array(AppUserServiceSearchRequestNhiTypes$outboundSchema),
-  ).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
-  sortBy: AppUserServiceSearchRequestSortBy$outboundSchema.optional(),
-  userIds: z.nullable(z.array(z.string())).optional(),
-  withOpenFindings: z.boolean().optional(),
-  withoutResponsibleParty: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentStatuses: z.nullable(
+      z.array(AppUserServiceSearchRequestAgentStatuses$outboundSchema),
+    ).optional(),
+    appId: z.string().optional(),
+    appIds: z.nullable(z.array(z.string())).optional(),
+    appUserDomains: z.nullable(z.array(AppUserDomains$outboundSchema))
+      .optional(),
+    appUserIds: z.nullable(z.array(z.string())).optional(),
+    appUserStatusDetails: z.nullable(z.array(z.string())).optional(),
+    appUserStatuses: z.nullable(
+      z.array(AppUserServiceSearchRequestAppUserStatuses$outboundSchema),
+    ).optional(),
+    appUserTypes: z.nullable(
+      z.array(AppUserServiceSearchRequestAppUserTypes$outboundSchema),
+    ).optional(),
+    excludeAppUserIds: z.nullable(z.array(z.string())).optional(),
+    excludeDeletedApps: z.boolean().optional(),
+    excludeSourceAppIds: z.nullable(z.array(z.string())).optional(),
+    excludeSourceConnectorIds: z.nullable(z.array(z.string())).optional(),
+    expandMask: z.nullable(AppUserExpandMask$outboundSchema).optional(),
+    nhiTypes: z.nullable(
+      z.array(AppUserServiceSearchRequestNhiTypes$outboundSchema),
+    ).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(AppUserRef$outboundSchema)).optional(),
+    sortBy: AppUserServiceSearchRequestSortBy$outboundSchema.optional(),
+    sourceAppIds: z.nullable(z.array(z.string())).optional(),
+    sourceConnectorIds: z.nullable(z.array(z.string())).optional(),
+    userIds: z.nullable(z.array(z.string())).optional(),
+    withOpenFindings: z.boolean().optional(),
+    withoutResponsibleParty: z.boolean().optional(),
+  })
+);
 
 export function appUserServiceSearchRequestToJSON(
   appUserServiceSearchRequest: AppUserServiceSearchRequest,

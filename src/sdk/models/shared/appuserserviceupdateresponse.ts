@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -39,17 +40,19 @@ export const AppUserServiceUpdateResponseExpanded$inboundSchema: z.ZodType<
   AppUserServiceUpdateResponseExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 
 export function appUserServiceUpdateResponseExpandedFromJSON(
   jsonString: string,
@@ -67,12 +70,14 @@ export const AppUserServiceUpdateResponse$inboundSchema: z.ZodType<
   AppUserServiceUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appUserView: z.nullable(AppUserView$inboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => AppUserServiceUpdateResponseExpanded$inboundSchema)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appUserView: z.nullable(AppUserView$inboundSchema).optional(),
+    expanded: z.nullable(
+      z.array(z.lazy(() => AppUserServiceUpdateResponseExpanded$inboundSchema)),
+    ).optional(),
+  })
+);
 
 export function appUserServiceUpdateResponseFromJSON(
   jsonString: string,

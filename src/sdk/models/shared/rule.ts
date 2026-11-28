@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -64,13 +64,15 @@ export type Rule = {
 };
 
 /** @internal */
-export const Rule$inboundSchema: z.ZodType<Rule, z.ZodTypeDef, unknown> = z
-  .object({
-    condition: z.string().optional(),
-    policyId: z.nullable(z.string()).optional(),
-    policyKey: z.string().optional(),
-    stepKey: z.nullable(z.string()).optional(),
-  });
+export const Rule$inboundSchema: z.ZodType<Rule, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      condition: z.string().optional(),
+      policyId: z.nullable(z.string()).optional(),
+      policyKey: z.string().optional(),
+      stepKey: z.nullable(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type Rule$Outbound = {
   condition?: string | undefined;
@@ -81,12 +83,14 @@ export type Rule$Outbound = {
 
 /** @internal */
 export const Rule$outboundSchema: z.ZodType<Rule$Outbound, z.ZodTypeDef, Rule> =
-  z.object({
-    condition: z.string().optional(),
-    policyId: z.nullable(z.string()).optional(),
-    policyKey: z.string().optional(),
-    stepKey: z.nullable(z.string()).optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      condition: z.string().optional(),
+      policyId: z.nullable(z.string()).optional(),
+      policyKey: z.string().optional(),
+      stepKey: z.nullable(z.string()).optional(),
+    })
+  );
 
 export function ruleToJSON(rule: Rule): string {
   return JSON.stringify(Rule$outboundSchema.parse(rule));

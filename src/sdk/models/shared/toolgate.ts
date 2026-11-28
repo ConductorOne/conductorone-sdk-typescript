@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -60,26 +60,28 @@ export const ToolGate$inboundSchema: z.ZodType<
   ToolGate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  deletedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  filter: z.nullable(ToolGateFilter$inboundSchema).optional(),
-  grantPolicyId: z.string().optional(),
-  id: z.string().optional(),
-  managedByGuardrails: z.boolean().optional(),
-  priority: z.number().int().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    deletedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    filter: z.nullable(ToolGateFilter$inboundSchema).optional(),
+    grantPolicyId: z.string().optional(),
+    id: z.string().optional(),
+    managedByGuardrails: z.boolean().optional(),
+    priority: z.number().int().optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type ToolGate$Outbound = {
   createdAt?: string | null | undefined;
@@ -101,20 +103,22 @@ export const ToolGate$outboundSchema: z.ZodType<
   ToolGate$Outbound,
   z.ZodTypeDef,
   ToolGate
-> = z.object({
-  createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  enabled: z.boolean().optional(),
-  filter: z.nullable(ToolGateFilter$outboundSchema).optional(),
-  grantPolicyId: z.string().optional(),
-  id: z.string().optional(),
-  managedByGuardrails: z.boolean().optional(),
-  priority: z.number().int().optional(),
-  tenantId: z.string().optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    enabled: z.boolean().optional(),
+    filter: z.nullable(ToolGateFilter$outboundSchema).optional(),
+    grantPolicyId: z.string().optional(),
+    id: z.string().optional(),
+    managedByGuardrails: z.boolean().optional(),
+    priority: z.number().int().optional(),
+    tenantId: z.string().optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function toolGateToJSON(toolGate: ToolGate): string {
   return JSON.stringify(ToolGate$outboundSchema.parse(toolGate));

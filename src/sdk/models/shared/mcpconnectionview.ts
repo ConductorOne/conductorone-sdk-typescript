@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -116,34 +116,40 @@ export const MCPConnectionViewAuthMethod$inboundSchema: z.ZodType<
   MCPConnectionViewAuthMethod,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MCPConnectionViewAuthMethod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MCPConnectionViewAuthMethod)
+);
 
 /** @internal */
 export const MCPConnectionViewServerType$inboundSchema: z.ZodType<
   MCPConnectionViewServerType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(MCPConnectionViewServerType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(MCPConnectionViewServerType)
+);
 
 /** @internal */
 export const MCPConnectionView$inboundSchema: z.ZodType<
   MCPConnectionView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  authMethod: MCPConnectionViewAuthMethod$inboundSchema.optional(),
-  authorizedAsEmail: z.string().optional(),
-  authorizedAsName: z.string().optional(),
-  connected: z.boolean().optional(),
-  connectedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  connectorId: z.string().optional(),
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  serverType: MCPConnectionViewServerType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    authMethod: MCPConnectionViewAuthMethod$inboundSchema.optional(),
+    authorizedAsEmail: z.string().optional(),
+    authorizedAsName: z.string().optional(),
+    connected: z.boolean().optional(),
+    connectedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    connectorId: z.string().optional(),
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    serverType: MCPConnectionViewServerType$inboundSchema.optional(),
+  })
+);
 
 export function mcpConnectionViewFromJSON(
   jsonString: string,

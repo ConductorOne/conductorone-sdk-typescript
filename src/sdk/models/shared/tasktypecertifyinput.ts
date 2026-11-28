@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AppResourceRef,
   AppResourceRef$Outbound,
@@ -38,10 +39,12 @@ export const TaskTypeCertifyInput$outboundSchema: z.ZodType<
   TaskTypeCertifyInput$Outbound,
   z.ZodTypeDef,
   TaskTypeCertifyInput
-> = z.object({
-  resource: z.nullable(AppResourceRef$outboundSchema).optional(),
-  reviewSubject: z.nullable(ReviewSubjectInput$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resource: z.nullable(AppResourceRef$outboundSchema).optional(),
+    reviewSubject: z.nullable(ReviewSubjectInput$outboundSchema).optional(),
+  })
+);
 
 export function taskTypeCertifyInputToJSON(
   taskTypeCertifyInput: TaskTypeCertifyInput,

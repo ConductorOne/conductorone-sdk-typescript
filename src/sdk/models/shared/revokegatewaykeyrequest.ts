@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The RevokeGatewayKeyRequest message.
@@ -17,7 +18,7 @@ export const RevokeGatewayKeyRequest$outboundSchema: z.ZodType<
   RevokeGatewayKeyRequest$Outbound,
   z.ZodTypeDef,
   RevokeGatewayKeyRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function revokeGatewayKeyRequestToJSON(
   revokeGatewayKeyRequest: RevokeGatewayKeyRequest,

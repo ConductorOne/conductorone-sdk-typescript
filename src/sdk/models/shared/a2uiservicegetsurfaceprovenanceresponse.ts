@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -106,20 +106,22 @@ export const A2UIServiceGetSurfaceProvenanceResponse$inboundSchema: z.ZodType<
   A2UIServiceGetSurfaceProvenanceResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  programCommitId: z.string().optional(),
-  programFunctionId: z.string().optional(),
-  programInput: z.string().optional(),
-  programInvocationId: z.string().optional(),
-  programSource: z.string().optional(),
-  sources: z.nullable(z.array(A2UIProvenanceSource$inboundSchema)).optional(),
-  stepObjectsVisible: z.boolean().optional(),
-  steps: z.nullable(z.array(A2UIProvenanceStep$inboundSchema)).optional(),
-  stepsAvailable: z.boolean().optional(),
-  toolCalls: z.nullable(z.array(A2UIProvenanceToolCall$inboundSchema))
-    .optional(),
-  transcriptAvailable: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    programCommitId: z.string().optional(),
+    programFunctionId: z.string().optional(),
+    programInput: z.string().optional(),
+    programInvocationId: z.string().optional(),
+    programSource: z.string().optional(),
+    sources: z.nullable(z.array(A2UIProvenanceSource$inboundSchema)).optional(),
+    stepObjectsVisible: z.boolean().optional(),
+    steps: z.nullable(z.array(A2UIProvenanceStep$inboundSchema)).optional(),
+    stepsAvailable: z.boolean().optional(),
+    toolCalls: z.nullable(z.array(A2UIProvenanceToolCall$inboundSchema))
+      .optional(),
+    transcriptAvailable: z.boolean().optional(),
+  })
+);
 
 export function a2UIServiceGetSurfaceProvenanceResponseFromJSON(
   jsonString: string,

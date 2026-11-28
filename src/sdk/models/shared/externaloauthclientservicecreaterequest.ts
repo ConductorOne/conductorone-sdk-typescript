@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -60,8 +61,8 @@ export const ExternalOAuthClientServiceCreateRequestAuthMethod$outboundSchema:
     string,
     z.ZodTypeDef,
     ExternalOAuthClientServiceCreateRequestAuthMethod
-  > = openEnums.outboundSchema(
-    ExternalOAuthClientServiceCreateRequestAuthMethod,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(ExternalOAuthClientServiceCreateRequestAuthMethod)
   );
 
 /** @internal */
@@ -77,13 +78,15 @@ export const ExternalOAuthClientServiceCreateRequest$outboundSchema: z.ZodType<
   ExternalOAuthClientServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   ExternalOAuthClientServiceCreateRequest
-> = z.object({
-  authMethod: ExternalOAuthClientServiceCreateRequestAuthMethod$outboundSchema
-    .optional(),
-  clientName: z.string().optional(),
-  publicJwks: z.string().optional(),
-  redirectUris: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authMethod: ExternalOAuthClientServiceCreateRequestAuthMethod$outboundSchema
+      .optional(),
+    clientName: z.string().optional(),
+    publicJwks: z.string().optional(),
+    redirectUris: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function externalOAuthClientServiceCreateRequestToJSON(
   externalOAuthClientServiceCreateRequest:

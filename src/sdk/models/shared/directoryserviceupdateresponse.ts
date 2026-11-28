@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -39,17 +40,19 @@ export const DirectoryServiceUpdateResponseExpanded$inboundSchema: z.ZodType<
   DirectoryServiceUpdateResponseExpanded,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    "@type": z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "@type": "atType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      "@type": z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "@type": "atType",
+    });
+  })
+);
 
 export function directoryServiceUpdateResponseExpandedFromJSON(
   jsonString: string,
@@ -67,12 +70,16 @@ export const DirectoryServiceUpdateResponse$inboundSchema: z.ZodType<
   DirectoryServiceUpdateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  directoryView: z.nullable(DirectoryView$inboundSchema).optional(),
-  expanded: z.nullable(
-    z.array(z.lazy(() => DirectoryServiceUpdateResponseExpanded$inboundSchema)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    directoryView: z.nullable(DirectoryView$inboundSchema).optional(),
+    expanded: z.nullable(
+      z.array(
+        z.lazy(() => DirectoryServiceUpdateResponseExpanded$inboundSchema),
+      ),
+    ).optional(),
+  })
+);
 
 export function directoryServiceUpdateResponseFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -44,15 +44,17 @@ export const C1ApiFundsV1AppCapServiceListRequest$outboundSchema: z.ZodType<
   C1ApiFundsV1AppCapServiceListRequest$Outbound,
   z.ZodTypeDef,
   C1ApiFundsV1AppCapServiceListRequest
-> = z.object({
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pageSize: "page_size",
-    pageToken: "page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pageSize: "page_size",
+      pageToken: "page_token",
+    });
+  })
+);
 
 export function c1ApiFundsV1AppCapServiceListRequestToJSON(
   c1ApiFundsV1AppCapServiceListRequest: C1ApiFundsV1AppCapServiceListRequest,
@@ -69,20 +71,22 @@ export const C1ApiFundsV1AppCapServiceListResponse$inboundSchema: z.ZodType<
   C1ApiFundsV1AppCapServiceListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  AppCapServiceListResponse: shared.AppCapServiceListResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "AppCapServiceListResponse": "appCapServiceListResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    AppCapServiceListResponse: shared.AppCapServiceListResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "AppCapServiceListResponse": "appCapServiceListResponse",
+    });
+  })
+);
 
 export function c1ApiFundsV1AppCapServiceListResponseFromJSON(
   jsonString: string,

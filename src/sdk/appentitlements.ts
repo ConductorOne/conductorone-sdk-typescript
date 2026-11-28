@@ -258,7 +258,9 @@ export class AppEntitlements extends ClientSDK {
    * Delete
    *
    * @remarks
-   * Delete an app entitlement by ID.
+   * Delete an app entitlement by ID. Returns 404 Not Found when the app has no
+   *  entitlement with that ID. Deleting an entitlement that is already deleted
+   *  succeeds and changes nothing.
    */
   async delete(
     request: operations.C1ApiAppV1AppEntitlementsDeleteRequest,

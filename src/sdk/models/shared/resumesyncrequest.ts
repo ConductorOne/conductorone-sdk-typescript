@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ResumeSyncRequest message contains the fields required to resume syncing for a connector.
@@ -17,7 +18,7 @@ export const ResumeSyncRequest$outboundSchema: z.ZodType<
   ResumeSyncRequest$Outbound,
   z.ZodTypeDef,
   ResumeSyncRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function resumeSyncRequestToJSON(
   resumeSyncRequest: ResumeSyncRequest,

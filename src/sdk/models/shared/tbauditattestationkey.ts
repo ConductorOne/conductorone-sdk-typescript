@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -49,18 +49,22 @@ export const TBAuditAttestationKeyStatus$inboundSchema: z.ZodType<
   TBAuditAttestationKeyStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TBAuditAttestationKeyStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TBAuditAttestationKeyStatus)
+);
 
 /** @internal */
 export const TBAuditAttestationKey$inboundSchema: z.ZodType<
   TBAuditAttestationKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  keyId: z.string().optional(),
-  publicKey: z.string().optional(),
-  status: TBAuditAttestationKeyStatus$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string().optional(),
+    publicKey: z.string().optional(),
+    status: TBAuditAttestationKeyStatus$inboundSchema.optional(),
+  })
+);
 
 export function tbAuditAttestationKeyFromJSON(
   jsonString: string,

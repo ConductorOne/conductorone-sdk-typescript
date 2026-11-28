@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,24 +51,30 @@ export const ConnectorActionRefOperation$inboundSchema: z.ZodType<
   ConnectorActionRefOperation,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(ConnectorActionRefOperation);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(ConnectorActionRefOperation)
+);
 /** @internal */
 export const ConnectorActionRefOperation$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   ConnectorActionRefOperation
-> = openEnums.outboundSchema(ConnectorActionRefOperation);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(ConnectorActionRefOperation)
+);
 
 /** @internal */
 export const ConnectorActionRef$inboundSchema: z.ZodType<
   ConnectorActionRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  operation: ConnectorActionRefOperation$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    operation: ConnectorActionRefOperation$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ConnectorActionRef$Outbound = {
   appId?: string | undefined;
@@ -81,11 +87,13 @@ export const ConnectorActionRef$outboundSchema: z.ZodType<
   ConnectorActionRef$Outbound,
   z.ZodTypeDef,
   ConnectorActionRef
-> = z.object({
-  appId: z.string().optional(),
-  connectorId: z.string().optional(),
-  operation: ConnectorActionRefOperation$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string().optional(),
+    connectorId: z.string().optional(),
+    operation: ConnectorActionRefOperation$outboundSchema.optional(),
+  })
+);
 
 export function connectorActionRefToJSON(
   connectorActionRef: ConnectorActionRef,

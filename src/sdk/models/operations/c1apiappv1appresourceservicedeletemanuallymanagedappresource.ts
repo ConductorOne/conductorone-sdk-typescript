@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -58,20 +58,22 @@ export const C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest
     C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest
-  > = z.object({
-    appId: z.string(),
-    appResourceTypeId: z.string(),
-    id: z.string(),
-    deleteManuallyManagedAppResourceRequest: shared
-      .DeleteManuallyManagedAppResourceRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      appResourceTypeId: "app_resource_type_id",
-      deleteManuallyManagedAppResourceRequest:
-        "DeleteManuallyManagedAppResourceRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      appResourceTypeId: z.string(),
+      id: z.string(),
+      deleteManuallyManagedAppResourceRequest: shared
+        .DeleteManuallyManagedAppResourceRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        appResourceTypeId: "app_resource_type_id",
+        deleteManuallyManagedAppResourceRequest:
+          "DeleteManuallyManagedAppResourceRequest",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequestToJSON(
   c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRequest:
@@ -91,21 +93,23 @@ export const C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceRespons
     C1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    DeleteManuallyManagedAppResourceResponse: shared
-      .DeleteManuallyManagedAppResourceResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "DeleteManuallyManagedAppResourceResponse":
-        "deleteManuallyManagedAppResourceResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      DeleteManuallyManagedAppResourceResponse: shared
+        .DeleteManuallyManagedAppResourceResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "DeleteManuallyManagedAppResourceResponse":
+          "deleteManuallyManagedAppResourceResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppResourceServiceDeleteManuallyManagedAppResourceResponseFromJSON(
   jsonString: string,

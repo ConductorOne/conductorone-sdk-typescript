@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -42,9 +42,11 @@ export const C1ApiGolinkV1GoLinkServiceGetRequest$outboundSchema: z.ZodType<
   C1ApiGolinkV1GoLinkServiceGetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiGolinkV1GoLinkServiceGetRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function c1ApiGolinkV1GoLinkServiceGetRequestToJSON(
   c1ApiGolinkV1GoLinkServiceGetRequest: C1ApiGolinkV1GoLinkServiceGetRequest,
@@ -61,20 +63,22 @@ export const C1ApiGolinkV1GoLinkServiceGetResponse$inboundSchema: z.ZodType<
   C1ApiGolinkV1GoLinkServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  GoLinkServiceGetResponse: shared.GoLinkServiceGetResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "GoLinkServiceGetResponse": "goLinkServiceGetResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    GoLinkServiceGetResponse: shared.GoLinkServiceGetResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "GoLinkServiceGetResponse": "goLinkServiceGetResponse",
+    });
+  })
+);
 
 export function c1ApiGolinkV1GoLinkServiceGetResponseFromJSON(
   jsonString: string,

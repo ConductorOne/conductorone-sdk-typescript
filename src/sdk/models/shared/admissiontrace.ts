@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { AuthorityRef, AuthorityRef$inboundSchema } from "./authorityref.js";
@@ -31,10 +31,12 @@ export const AdmissionTrace$inboundSchema: z.ZodType<
   AdmissionTrace,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allocations: z.nullable(z.array(TraceAllocation$inboundSchema)).optional(),
-  authorityRefs: z.nullable(z.array(AuthorityRef$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allocations: z.nullable(z.array(TraceAllocation$inboundSchema)).optional(),
+    authorityRefs: z.nullable(z.array(AuthorityRef$inboundSchema)).optional(),
+  })
+);
 
 export function admissionTraceFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,12 +26,14 @@ export const SpendRemedyPersonalExtensionRequest$inboundSchema: z.ZodType<
   SpendRemedyPersonalExtensionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  total: z.nullable(FundsMoney$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    total: z.nullable(FundsMoney$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SpendRemedyPersonalExtensionRequest$Outbound = {
   expiresAt?: string | null | undefined;
@@ -43,10 +45,12 @@ export const SpendRemedyPersonalExtensionRequest$outboundSchema: z.ZodType<
   SpendRemedyPersonalExtensionRequest$Outbound,
   z.ZodTypeDef,
   SpendRemedyPersonalExtensionRequest
-> = z.object({
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  total: z.nullable(FundsMoney$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    total: z.nullable(FundsMoney$outboundSchema).optional(),
+  })
+);
 
 export function spendRemedyPersonalExtensionRequestToJSON(
   spendRemedyPersonalExtensionRequest: SpendRemedyPersonalExtensionRequest,

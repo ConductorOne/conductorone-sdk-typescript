@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1ApiAiGovernanceV1ToolGatesServiceUpdateRequest$outboundSchema:
     C1ApiAiGovernanceV1ToolGatesServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAiGovernanceV1ToolGatesServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    toolGatesServiceUpdateRequest: shared
-      .ToolGatesServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      toolGatesServiceUpdateRequest: "ToolGatesServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      toolGatesServiceUpdateRequest: shared
+        .ToolGatesServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        toolGatesServiceUpdateRequest: "ToolGatesServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ToolGatesServiceUpdateRequestToJSON(
   c1ApiAiGovernanceV1ToolGatesServiceUpdateRequest:
@@ -78,20 +80,22 @@ export const C1ApiAiGovernanceV1ToolGatesServiceUpdateResponse$inboundSchema:
     C1ApiAiGovernanceV1ToolGatesServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ToolGatesServiceUpdateResponse: shared
-      .ToolGatesServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ToolGatesServiceUpdateResponse": "toolGatesServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ToolGatesServiceUpdateResponse: shared
+        .ToolGatesServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ToolGatesServiceUpdateResponse": "toolGatesServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiAiGovernanceV1ToolGatesServiceUpdateResponseFromJSON(
   jsonString: string,

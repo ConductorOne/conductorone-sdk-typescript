@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest deletes a
@@ -29,9 +30,11 @@ export const SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest$outboun
     SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest$Outbound,
     z.ZodTypeDef,
     SSOApplicationServiceBatchDeleteSubjectCompatibilityRequest
-  > = z.object({
-    userIds: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userIds: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function ssoApplicationServiceBatchDeleteSubjectCompatibilityRequestToJSON(
   ssoApplicationServiceBatchDeleteSubjectCompatibilityRequest:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1ApiReportingV1ReportingServiceUpdateRequest$outboundSchema:
     C1ApiReportingV1ReportingServiceUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiReportingV1ReportingServiceUpdateRequest
-  > = z.object({
-    id: z.string(),
-    reportingServiceUpdateRequest: shared
-      .ReportingServiceUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      reportingServiceUpdateRequest: "ReportingServiceUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      reportingServiceUpdateRequest: shared
+        .ReportingServiceUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        reportingServiceUpdateRequest: "ReportingServiceUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceUpdateRequestToJSON(
   c1ApiReportingV1ReportingServiceUpdateRequest:
@@ -78,20 +80,22 @@ export const C1ApiReportingV1ReportingServiceUpdateResponse$inboundSchema:
     C1ApiReportingV1ReportingServiceUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ReportingServiceUpdateResponse: shared
-      .ReportingServiceUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ReportingServiceUpdateResponse": "reportingServiceUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ReportingServiceUpdateResponse: shared
+        .ReportingServiceUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ReportingServiceUpdateResponse": "reportingServiceUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiReportingV1ReportingServiceUpdateResponseFromJSON(
   jsonString: string,

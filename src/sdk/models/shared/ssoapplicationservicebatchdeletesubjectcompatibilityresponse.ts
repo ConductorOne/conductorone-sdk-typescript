@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,12 +34,14 @@ export const SSOApplicationServiceBatchDeleteSubjectCompatibilityResponse$inboun
     SSOApplicationServiceBatchDeleteSubjectCompatibilityResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    deletedRows: z.number().int().optional(),
-    issues: z.nullable(
-      z.array(SSOSubjectCompatibilityDeleteIssue$inboundSchema),
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      deletedRows: z.number().int().optional(),
+      issues: z.nullable(
+        z.array(SSOSubjectCompatibilityDeleteIssue$inboundSchema),
+      ).optional(),
+    })
+  );
 
 export function ssoApplicationServiceBatchDeleteSubjectCompatibilityResponseFromJSON(
   jsonString: string,

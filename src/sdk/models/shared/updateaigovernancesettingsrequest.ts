@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   AIGovernanceSettings,
   AIGovernanceSettings$Outbound,
@@ -31,11 +32,13 @@ export const UpdateAIGovernanceSettingsRequest$outboundSchema: z.ZodType<
   UpdateAIGovernanceSettingsRequest$Outbound,
   z.ZodTypeDef,
   UpdateAIGovernanceSettingsRequest
-> = z.object({
-  aiGovernanceSettings: z.nullable(AIGovernanceSettings$outboundSchema)
-    .optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    aiGovernanceSettings: z.nullable(AIGovernanceSettings$outboundSchema)
+      .optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateAIGovernanceSettingsRequestToJSON(
   updateAIGovernanceSettingsRequest: UpdateAIGovernanceSettingsRequest,

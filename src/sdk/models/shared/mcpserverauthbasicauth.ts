@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerAuthBasicAuth provides HTTP Basic authentication (RFC 7617).
@@ -42,10 +43,12 @@ export const MCPServerAuthBasicAuth$outboundSchema: z.ZodType<
   MCPServerAuthBasicAuth$Outbound,
   z.ZodTypeDef,
   MCPServerAuthBasicAuth
-> = z.object({
-  password: z.string().optional(),
-  username: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    password: z.string().optional(),
+    username: z.string().optional(),
+  })
+);
 
 export function mcpServerAuthBasicAuthToJSON(
   mcpServerAuthBasicAuth: MCPServerAuthBasicAuth,

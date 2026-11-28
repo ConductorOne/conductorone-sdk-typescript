@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeleteAutomationRequest message.
@@ -17,7 +18,7 @@ export const AutomationsDeleteAutomationRequest$outboundSchema: z.ZodType<
   AutomationsDeleteAutomationRequest$Outbound,
   z.ZodTypeDef,
   AutomationsDeleteAutomationRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function automationsDeleteAutomationRequestToJSON(
   automationsDeleteAutomationRequest: AutomationsDeleteAutomationRequest,

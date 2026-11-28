@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,16 +51,18 @@ export const C1ApiA2uiV1A2UIServiceSubmitActionRequest$outboundSchema:
     C1ApiA2uiV1A2UIServiceSubmitActionRequest$Outbound,
     z.ZodTypeDef,
     C1ApiA2uiV1A2UIServiceSubmitActionRequest
-  > = z.object({
-    surfaceId: z.string(),
-    a2UIServiceSubmitActionRequest: shared
-      .A2UIServiceSubmitActionRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      surfaceId: "surface_id",
-      a2UIServiceSubmitActionRequest: "A2UIServiceSubmitActionRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      surfaceId: z.string(),
+      a2UIServiceSubmitActionRequest: shared
+        .A2UIServiceSubmitActionRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        surfaceId: "surface_id",
+        a2UIServiceSubmitActionRequest: "A2UIServiceSubmitActionRequest",
+      });
+    })
+  );
 
 export function c1ApiA2uiV1A2UIServiceSubmitActionRequestToJSON(
   c1ApiA2uiV1A2UIServiceSubmitActionRequest:
@@ -76,20 +78,22 @@ export function c1ApiA2uiV1A2UIServiceSubmitActionRequestToJSON(
 /** @internal */
 export const C1ApiA2uiV1A2UIServiceSubmitActionResponse$inboundSchema:
   z.ZodType<C1ApiA2uiV1A2UIServiceSubmitActionResponse, z.ZodTypeDef, unknown> =
-    z.object({
-      ContentType: z.string(),
-      StatusCode: z.number().int(),
-      RawResponse: z.instanceof(Response),
-      A2UIServiceSubmitActionResponse: shared
-        .A2UIServiceSubmitActionResponse$inboundSchema.optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "ContentType": "contentType",
-        "StatusCode": "statusCode",
-        "RawResponse": "rawResponse",
-        "A2UIServiceSubmitActionResponse": "a2UIServiceSubmitActionResponse",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        ContentType: z.string(),
+        StatusCode: z.number().int(),
+        RawResponse: z.instanceof(Response),
+        A2UIServiceSubmitActionResponse: shared
+          .A2UIServiceSubmitActionResponse$inboundSchema.optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "ContentType": "contentType",
+          "StatusCode": "statusCode",
+          "RawResponse": "rawResponse",
+          "A2UIServiceSubmitActionResponse": "a2UIServiceSubmitActionResponse",
+        });
+      })
+    );
 
 export function c1ApiA2uiV1A2UIServiceSubmitActionResponseFromJSON(
   jsonString: string,

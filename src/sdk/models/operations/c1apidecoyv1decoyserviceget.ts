@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -42,9 +42,11 @@ export const C1ApiDecoyV1DecoyServiceGetRequest$outboundSchema: z.ZodType<
   C1ApiDecoyV1DecoyServiceGetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiDecoyV1DecoyServiceGetRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function c1ApiDecoyV1DecoyServiceGetRequestToJSON(
   c1ApiDecoyV1DecoyServiceGetRequest: C1ApiDecoyV1DecoyServiceGetRequest,
@@ -61,20 +63,22 @@ export const C1ApiDecoyV1DecoyServiceGetResponse$inboundSchema: z.ZodType<
   C1ApiDecoyV1DecoyServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  DecoyServiceGetResponse: shared.DecoyServiceGetResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "DecoyServiceGetResponse": "decoyServiceGetResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    DecoyServiceGetResponse: shared.DecoyServiceGetResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "DecoyServiceGetResponse": "decoyServiceGetResponse",
+    });
+  })
+);
 
 export function c1ApiDecoyV1DecoyServiceGetResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -104,8 +105,8 @@ export const UpdateOnboardingSettingsRequestMcpOnboardingStatus$outboundSchema:
     string,
     z.ZodTypeDef,
     UpdateOnboardingSettingsRequestMcpOnboardingStatus
-  > = openEnums.outboundSchema(
-    UpdateOnboardingSettingsRequestMcpOnboardingStatus,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(UpdateOnboardingSettingsRequestMcpOnboardingStatus)
   );
 
 /** @internal */
@@ -113,7 +114,9 @@ export const UpdateOnboardingSettingsRequestStatus$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   UpdateOnboardingSettingsRequestStatus
-> = openEnums.outboundSchema(UpdateOnboardingSettingsRequestStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(UpdateOnboardingSettingsRequestStatus)
+);
 
 /** @internal */
 export type UpdateOnboardingSettingsRequest$Outbound = {
@@ -129,16 +132,18 @@ export const UpdateOnboardingSettingsRequest$outboundSchema: z.ZodType<
   UpdateOnboardingSettingsRequest$Outbound,
   z.ZodTypeDef,
   UpdateOnboardingSettingsRequest
-> = z.object({
-  conversationId: z.string().optional(),
-  mcpOnboardingGoal: z.nullable(z.string()).optional(),
-  mcpOnboardingStatus: z.nullable(
-    UpdateOnboardingSettingsRequestMcpOnboardingStatus$outboundSchema,
-  ).optional(),
-  mcpOnboardingTargets: z.nullable(McpOnboardingTargetList$outboundSchema)
-    .optional(),
-  status: UpdateOnboardingSettingsRequestStatus$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string().optional(),
+    mcpOnboardingGoal: z.nullable(z.string()).optional(),
+    mcpOnboardingStatus: z.nullable(
+      UpdateOnboardingSettingsRequestMcpOnboardingStatus$outboundSchema,
+    ).optional(),
+    mcpOnboardingTargets: z.nullable(McpOnboardingTargetList$outboundSchema)
+      .optional(),
+    status: UpdateOnboardingSettingsRequestStatus$outboundSchema.optional(),
+  })
+);
 
 export function updateOnboardingSettingsRequestToJSON(
   updateOnboardingSettingsRequest: UpdateOnboardingSettingsRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   GroupAuthzVault,
   GroupAuthzVault$Outbound,
@@ -54,13 +55,15 @@ export const VaultServiceCreateRequest$outboundSchema: z.ZodType<
   VaultServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   VaultServiceCreateRequest
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string(),
-  groupAuthzVault: z.nullable(GroupAuthzVault$outboundSchema).optional(),
-  magicVault: z.nullable(MagicVault$outboundSchema).optional(),
-  ownerIds: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string(),
+    groupAuthzVault: z.nullable(GroupAuthzVault$outboundSchema).optional(),
+    magicVault: z.nullable(MagicVault$outboundSchema).optional(),
+    ownerIds: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function vaultServiceCreateRequestToJSON(
   vaultServiceCreateRequest: VaultServiceCreateRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,11 +31,13 @@ export const GoLinkChooserOptionInput$inboundSchema: z.ZodType<
   GoLinkChooserOptionInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  label: z.string().optional(),
-  target: z.nullable(GoLinkTargetInput$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    label: z.string().optional(),
+    target: z.nullable(GoLinkTargetInput$inboundSchema).optional(),
+  })
+);
 
 export function goLinkChooserOptionInputFromJSON(
   jsonString: string,

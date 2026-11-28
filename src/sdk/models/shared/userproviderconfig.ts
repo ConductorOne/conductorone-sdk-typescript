@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const UserProviderConfig$inboundSchema: z.ZodType<
   UserProviderConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  inputTransformationCel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputTransformationCel: z.string().optional(),
+  })
+);
 /** @internal */
 export type UserProviderConfig$Outbound = {
   inputTransformationCel?: string | undefined;
@@ -35,9 +37,11 @@ export const UserProviderConfig$outboundSchema: z.ZodType<
   UserProviderConfig$Outbound,
   z.ZodTypeDef,
   UserProviderConfig
-> = z.object({
-  inputTransformationCel: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputTransformationCel: z.string().optional(),
+  })
+);
 
 export function userProviderConfigToJSON(
   userProviderConfig: UserProviderConfig,

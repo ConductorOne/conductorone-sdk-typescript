@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const SnoozeRoutingAction$inboundSchema: z.ZodType<
   SnoozeRoutingAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  duration: z.nullable(z.string()).optional(),
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    duration: z.nullable(z.string()).optional(),
+    reason: z.string().optional(),
+  })
+);
 /** @internal */
 export type SnoozeRoutingAction$Outbound = {
   duration?: string | null | undefined;
@@ -41,10 +43,12 @@ export const SnoozeRoutingAction$outboundSchema: z.ZodType<
   SnoozeRoutingAction$Outbound,
   z.ZodTypeDef,
   SnoozeRoutingAction
-> = z.object({
-  duration: z.nullable(z.string()).optional(),
-  reason: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    duration: z.nullable(z.string()).optional(),
+    reason: z.string().optional(),
+  })
+);
 
 export function snoozeRoutingActionToJSON(
   snoozeRoutingAction: SnoozeRoutingAction,

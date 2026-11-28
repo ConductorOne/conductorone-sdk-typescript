@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -54,17 +54,20 @@ export const C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminReques
     C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest$Outbound,
     z.ZodTypeDef,
     C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest
-  > = z.object({
-    userId: z.string(),
-    setExpiringUserDelegationBindingByAdminRequest: shared
-      .SetExpiringUserDelegationBindingByAdminRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      userId: "user_id",
-      setExpiringUserDelegationBindingByAdminRequest:
-        "SetExpiringUserDelegationBindingByAdminRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      userId: z.string(),
+      setExpiringUserDelegationBindingByAdminRequest: shared
+        .SetExpiringUserDelegationBindingByAdminRequest$outboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        userId: "user_id",
+        setExpiringUserDelegationBindingByAdminRequest:
+          "SetExpiringUserDelegationBindingByAdminRequest",
+      });
+    })
+  );
 
 export function c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequestToJSON(
   c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRequest:
@@ -84,21 +87,24 @@ export const C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminRespon
     C1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    SetExpiringUserDelegationBindingByAdminResponse: shared
-      .SetExpiringUserDelegationBindingByAdminResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "SetExpiringUserDelegationBindingByAdminResponse":
-        "setExpiringUserDelegationBindingByAdminResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      SetExpiringUserDelegationBindingByAdminResponse: shared
+        .SetExpiringUserDelegationBindingByAdminResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "SetExpiringUserDelegationBindingByAdminResponse":
+          "setExpiringUserDelegationBindingByAdminResponse",
+      });
+    })
+  );
 
 export function c1ApiUserV1UserServiceSetExpiringUserDelegationBindingByAdminResponseFromJSON(
   jsonString: string,

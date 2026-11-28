@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * MCPServerServiceResyncToolsRequest re-runs tool discovery for an external MCP
@@ -21,7 +22,7 @@ export const MCPServerServiceResyncToolsRequest$outboundSchema: z.ZodType<
   MCPServerServiceResyncToolsRequest$Outbound,
   z.ZodTypeDef,
   MCPServerServiceResyncToolsRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function mcpServerServiceResyncToolsRequestToJSON(
   mcpServerServiceResyncToolsRequest: MCPServerServiceResyncToolsRequest,

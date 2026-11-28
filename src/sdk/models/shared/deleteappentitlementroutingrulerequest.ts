@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeleteAppEntitlementRoutingRuleRequest message.
@@ -17,7 +18,7 @@ export const DeleteAppEntitlementRoutingRuleRequest$outboundSchema: z.ZodType<
   DeleteAppEntitlementRoutingRuleRequest$Outbound,
   z.ZodTypeDef,
   DeleteAppEntitlementRoutingRuleRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteAppEntitlementRoutingRuleRequestToJSON(
   deleteAppEntitlementRoutingRuleRequest:

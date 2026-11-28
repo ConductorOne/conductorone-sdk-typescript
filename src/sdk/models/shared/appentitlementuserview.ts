@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -46,20 +46,23 @@ export const AppEntitlementUserView$inboundSchema: z.ZodType<
   AppEntitlementUserView,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  appEntitlementId: z.string().optional(),
-  appEntitlementUserBindingCreatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  appEntitlementUserBindingDeprovisionAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  appId: z.string().optional(),
-  appUser: z.nullable(AppUserView$inboundSchema).optional(),
-  appUserId: z.string().optional(),
-  grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema)).optional(),
-  originatingTicketId: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appEntitlementId: z.string().optional(),
+    appEntitlementUserBindingCreatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    appEntitlementUserBindingDeprovisionAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    appId: z.string().optional(),
+    appUser: z.nullable(AppUserView$inboundSchema).optional(),
+    appUserId: z.string().optional(),
+    grantSources: z.nullable(z.array(AppEntitlementRef$inboundSchema))
+      .optional(),
+    originatingTicketId: z.string().optional(),
+  })
+);
 
 export function appEntitlementUserViewFromJSON(
   jsonString: string,

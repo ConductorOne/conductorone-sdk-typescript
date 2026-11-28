@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -43,20 +43,22 @@ export const InputType$inboundSchema: z.ZodType<
   InputType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(InputType);
+> = /* @__PURE__ */ lazySchema$(() => openEnums.inboundSchema(InputType));
 
 /** @internal */
 export const DateTimeInputComponent$inboundSchema: z.ZodType<
   DateTimeInputComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  inputType: InputType$inboundSchema.optional(),
-  label: z.nullable(DynamicString$inboundSchema).optional(),
-  max: z.nullable(DynamicString$inboundSchema).optional(),
-  min: z.nullable(DynamicString$inboundSchema).optional(),
-  value: z.nullable(DynamicString$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputType: InputType$inboundSchema.optional(),
+    label: z.nullable(DynamicString$inboundSchema).optional(),
+    max: z.nullable(DynamicString$inboundSchema).optional(),
+    min: z.nullable(DynamicString$inboundSchema).optional(),
+    value: z.nullable(DynamicString$inboundSchema).optional(),
+  })
+);
 
 export function dateTimeInputComponentFromJSON(
   jsonString: string,

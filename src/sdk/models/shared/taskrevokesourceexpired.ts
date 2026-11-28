@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,11 +19,13 @@ export const TaskRevokeSourceExpired$inboundSchema: z.ZodType<
   TaskRevokeSourceExpired,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expiredAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiredAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type TaskRevokeSourceExpired$Outbound = {
   expiredAt?: string | null | undefined;
@@ -34,9 +36,11 @@ export const TaskRevokeSourceExpired$outboundSchema: z.ZodType<
   TaskRevokeSourceExpired$Outbound,
   z.ZodTypeDef,
   TaskRevokeSourceExpired
-> = z.object({
-  expiredAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiredAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function taskRevokeSourceExpiredToJSON(
   taskRevokeSourceExpired: TaskRevokeSourceExpired,

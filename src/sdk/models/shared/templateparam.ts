@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -57,20 +57,24 @@ export const TemplateParamType$inboundSchema: z.ZodType<
   TemplateParamType,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(TemplateParamType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(TemplateParamType)
+);
 
 /** @internal */
 export const TemplateParam$inboundSchema: z.ZodType<
   TemplateParam,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  displayName: z.string().optional(),
-  key: z.string().optional(),
-  required: z.boolean().optional(),
-  type: TemplateParamType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    displayName: z.string().optional(),
+    key: z.string().optional(),
+    required: z.boolean().optional(),
+    type: TemplateParamType$inboundSchema.optional(),
+  })
+);
 
 export function templateParamFromJSON(
   jsonString: string,

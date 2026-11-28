@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -49,17 +49,19 @@ export const C1ApiAppV1AppManagedStateServiceGetRequest$outboundSchema:
     C1ApiAppV1AppManagedStateServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAppV1AppManagedStateServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-    resourceTypeId: z.string(),
-    resourceId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      resourceTypeId: "resource_type_id",
-      resourceId: "resource_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      resourceTypeId: z.string(),
+      resourceId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        resourceTypeId: "resource_type_id",
+        resourceId: "resource_id",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppManagedStateServiceGetRequestToJSON(
   c1ApiAppV1AppManagedStateServiceGetRequest:
@@ -78,20 +80,23 @@ export const C1ApiAppV1AppManagedStateServiceGetResponse$inboundSchema:
     C1ApiAppV1AppManagedStateServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetAppManagedStateBindingResponse: shared
-      .GetAppManagedStateBindingResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetAppManagedStateBindingResponse": "getAppManagedStateBindingResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetAppManagedStateBindingResponse: shared
+        .GetAppManagedStateBindingResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetAppManagedStateBindingResponse":
+          "getAppManagedStateBindingResponse",
+      });
+    })
+  );
 
 export function c1ApiAppV1AppManagedStateServiceGetResponseFromJSON(
   jsonString: string,

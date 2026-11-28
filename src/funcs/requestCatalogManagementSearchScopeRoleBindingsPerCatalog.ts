@@ -8,9 +8,8 @@ import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
-import { RequestOptions } from "../lib/sdks.js";
+import { encodePath, RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
-import { pathToFunc } from "../lib/url.js";
 import { ConductoroneSDKTypescriptError } from "../sdk/models/errors/conductoronesdktypescripterror.js";
 import {
   ConnectionError,
@@ -100,9 +99,14 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path = pathToFunc("/api/v1/catalogs/{catalog_id}/scope_role_bindings")(
+  const pathResult = encodePath(
+    "/api/v1/catalogs/{catalog_id}/scope_role_bindings",
     pathParams,
   );
+  if (!pathResult.ok) {
+    return [pathResult, { status: "invalid" }];
+  }
+  const path = pathResult.value;
 
   const query = encodeFormQuery({
     "app_id": payload.app_id,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -43,9 +43,11 @@ export const C1ApiAttributeV1AttributesGetAttributeValueRequest$outboundSchema:
     C1ApiAttributeV1AttributesGetAttributeValueRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesGetAttributeValueRequest
-  > = z.object({
-    id: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+    })
+  );
 
 export function c1ApiAttributeV1AttributesGetAttributeValueRequestToJSON(
   c1ApiAttributeV1AttributesGetAttributeValueRequest:
@@ -64,20 +66,22 @@ export const C1ApiAttributeV1AttributesGetAttributeValueResponse$inboundSchema:
     C1ApiAttributeV1AttributesGetAttributeValueResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    GetAttributeValueResponse: shared.GetAttributeValueResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "GetAttributeValueResponse": "getAttributeValueResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      GetAttributeValueResponse: shared.GetAttributeValueResponse$inboundSchema
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "GetAttributeValueResponse": "getAttributeValueResponse",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesGetAttributeValueResponseFromJSON(
   jsonString: string,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The DeleteClassifierRequest message.
@@ -17,7 +18,7 @@ export const DeleteClassifierRequest$outboundSchema: z.ZodType<
   DeleteClassifierRequest$Outbound,
   z.ZodTypeDef,
   DeleteClassifierRequest
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function deleteClassifierRequestToJSON(
   deleteClassifierRequest: DeleteClassifierRequest,

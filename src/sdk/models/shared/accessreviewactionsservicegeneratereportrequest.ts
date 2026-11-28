@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -60,8 +61,10 @@ export const AccessReviewActionsServiceGenerateReportRequestFormat$outboundSchem
     string,
     z.ZodTypeDef,
     AccessReviewActionsServiceGenerateReportRequestFormat
-  > = openEnums.outboundSchema(
-    AccessReviewActionsServiceGenerateReportRequestFormat,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    openEnums.outboundSchema(
+      AccessReviewActionsServiceGenerateReportRequestFormat,
+    )
   );
 
 /** @internal */
@@ -79,13 +82,16 @@ export const AccessReviewActionsServiceGenerateReportRequest$outboundSchema:
     AccessReviewActionsServiceGenerateReportRequest$Outbound,
     z.ZodTypeDef,
     AccessReviewActionsServiceGenerateReportRequest
-  > = z.object({
-    format: AccessReviewActionsServiceGenerateReportRequestFormat$outboundSchema
-      .optional(),
-    reportColumnConfig: z.nullable(
-      AccessReviewReportColumnConfig$outboundSchema,
-    ).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      format:
+        AccessReviewActionsServiceGenerateReportRequestFormat$outboundSchema
+          .optional(),
+      reportColumnConfig: z.nullable(
+        AccessReviewReportColumnConfig$outboundSchema,
+      ).optional(),
+    })
+  );
 
 export function accessReviewActionsServiceGenerateReportRequestToJSON(
   accessReviewActionsServiceGenerateReportRequest:

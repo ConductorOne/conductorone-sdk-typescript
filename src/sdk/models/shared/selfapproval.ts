@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -44,14 +44,16 @@ export const SelfApproval$inboundSchema: z.ZodType<
   SelfApproval,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assignedUserIds: z.nullable(z.array(z.string())).optional(),
-  fallback: z.boolean().optional(),
-  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
-    .optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignedUserIds: z.nullable(z.array(z.string())).optional(),
+    fallback: z.boolean().optional(),
+    fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$inboundSchema))
+      .optional(),
+    fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+    isGroupFallbackEnabled: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type SelfApproval$Outbound = {
   assignedUserIds?: Array<string> | null | undefined;
@@ -66,14 +68,17 @@ export const SelfApproval$outboundSchema: z.ZodType<
   SelfApproval$Outbound,
   z.ZodTypeDef,
   SelfApproval
-> = z.object({
-  assignedUserIds: z.nullable(z.array(z.string())).optional(),
-  fallback: z.boolean().optional(),
-  fallbackGroupIds: z.nullable(z.array(AppEntitlementReference$outboundSchema))
-    .optional(),
-  fallbackUserIds: z.nullable(z.array(z.string())).optional(),
-  isGroupFallbackEnabled: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignedUserIds: z.nullable(z.array(z.string())).optional(),
+    fallback: z.boolean().optional(),
+    fallbackGroupIds: z.nullable(
+      z.array(AppEntitlementReference$outboundSchema),
+    ).optional(),
+    fallbackUserIds: z.nullable(z.array(z.string())).optional(),
+    isGroupFallbackEnabled: z.boolean().optional(),
+  })
+);
 
 export function selfApprovalToJSON(selfApproval: SelfApproval): string {
   return JSON.stringify(SelfApproval$outboundSchema.parse(selfApproval));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -61,7 +62,9 @@ export const SigningAlgorithmFilter$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   SigningAlgorithmFilter
-> = openEnums.outboundSchema(SigningAlgorithmFilter);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(SigningAlgorithmFilter)
+);
 
 /** @internal */
 export type XAAResourceServerServiceSearchRequest$Outbound = {
@@ -79,17 +82,19 @@ export const XAAResourceServerServiceSearchRequest$outboundSchema: z.ZodType<
   XAAResourceServerServiceSearchRequest$Outbound,
   z.ZodTypeDef,
   XAAResourceServerServiceSearchRequest
-> = z.object({
-  appIds: z.nullable(z.array(z.string())).optional(),
-  disabled: z.nullable(z.boolean()).optional(),
-  pageSize: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  query: z.string().optional(),
-  refs: z.nullable(z.array(XAAResourceServerRef$outboundSchema)).optional(),
-  signingAlgorithmFilter: z.nullable(
-    z.array(SigningAlgorithmFilter$outboundSchema),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appIds: z.nullable(z.array(z.string())).optional(),
+    disabled: z.nullable(z.boolean()).optional(),
+    pageSize: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    query: z.string().optional(),
+    refs: z.nullable(z.array(XAAResourceServerRef$outboundSchema)).optional(),
+    signingAlgorithmFilter: z.nullable(
+      z.array(SigningAlgorithmFilter$outboundSchema),
+    ).optional(),
+  })
+);
 
 export function xaaResourceServerServiceSearchRequestToJSON(
   xaaResourceServerServiceSearchRequest: XAAResourceServerServiceSearchRequest,

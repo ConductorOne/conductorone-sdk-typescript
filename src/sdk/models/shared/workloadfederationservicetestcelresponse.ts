@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const WorkloadFederationServiceTestCELResponse$inboundSchema: z.ZodType<
   WorkloadFederationServiceTestCELResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: z.string().optional(),
-  expression: z.string().optional(),
-  matched: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: z.string().optional(),
+    expression: z.string().optional(),
+    matched: z.boolean().optional(),
+  })
+);
 
 export function workloadFederationServiceTestCELResponseFromJSON(
   jsonString: string,

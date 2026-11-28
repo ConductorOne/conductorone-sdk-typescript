@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { Role, Role$inboundSchema } from "./role.js";
@@ -20,9 +20,11 @@ export const UpdateRolesResponse$inboundSchema: z.ZodType<
   UpdateRolesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.nullable(Role$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.nullable(Role$inboundSchema).optional(),
+  })
+);
 
 export function updateRolesResponseFromJSON(
   jsonString: string,

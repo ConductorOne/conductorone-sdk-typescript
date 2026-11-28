@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -199,56 +199,59 @@ export const A2UIComponent$inboundSchema: z.ZodType<
   A2UIComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  button: z.nullable(ButtonComponent$inboundSchema).optional(),
-  c1AppUserPicker: z.nullable(C1AppUserPickerComponent$inboundSchema)
-    .optional(),
-  c1Chart: z.nullable(C1ChartComponent$inboundSchema).optional(),
-  c1CodeBlock: z.nullable(C1CodeBlockComponent$inboundSchema).optional(),
-  c1ConnectorConfigForm: z.nullable(
-    C1ConnectorConfigFormComponent$inboundSchema,
-  ).optional(),
-  c1ConnectorSyncDetail: z.nullable(
-    C1ConnectorSyncDetailComponent$inboundSchema,
-  ).optional(),
-  c1ConnectorSyncProgress: z.nullable(
-    C1ConnectorSyncProgressComponent$inboundSchema,
-  ).optional(),
-  c1CredentialOfferingPicker: z.nullable(
-    C1CredentialOfferingPickerComponent$inboundSchema,
-  ).optional(),
-  c1DurationPicker: z.nullable(C1DurationPickerComponent$inboundSchema)
-    .optional(),
-  c1MetricCards: z.nullable(C1MetricCardsComponent$inboundSchema).optional(),
-  c1MsTeamsNotifications: z.nullable(
-    C1MSTeamsNotificationsComponent$inboundSchema,
-  ).optional(),
-  c1OnboardingPlan: z.nullable(C1OnboardingPlanComponent$inboundSchema)
-    .optional(),
-  c1OnboardingWelcome: z.nullable(C1OnboardingWelcomeComponent$inboundSchema)
-    .optional(),
-  c1ResourcePicker: z.nullable(C1ResourcePickerComponent$inboundSchema)
-    .optional(),
-  c1SlackNotifications: z.nullable(C1SlackNotificationsComponent$inboundSchema)
-    .optional(),
-  c1StatusIndicator: z.nullable(C1StatusIndicatorComponent$inboundSchema)
-    .optional(),
-  c1Table: z.nullable(C1TableComponent$inboundSchema).optional(),
-  c1TodoList: z.nullable(C1TodoListComponent$inboundSchema).optional(),
-  card: z.nullable(CardComponent$inboundSchema).optional(),
-  checkBox: z.nullable(CheckBoxComponent$inboundSchema).optional(),
-  choicePicker: z.nullable(ChoicePickerComponent$inboundSchema).optional(),
-  column: z.nullable(ColumnComponent$inboundSchema).optional(),
-  dateTimeInput: z.nullable(DateTimeInputComponent$inboundSchema).optional(),
-  divider: z.nullable(DividerComponent$inboundSchema).optional(),
-  id: z.string().optional(),
-  progressBar: z.nullable(ProgressBarComponent$inboundSchema).optional(),
-  row: z.nullable(RowComponent$inboundSchema).optional(),
-  slider: z.nullable(SliderComponent$inboundSchema).optional(),
-  text: z.nullable(TextComponent$inboundSchema).optional(),
-  textField: z.nullable(TextFieldComponent$inboundSchema).optional(),
-  weight: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    button: z.nullable(ButtonComponent$inboundSchema).optional(),
+    c1AppUserPicker: z.nullable(C1AppUserPickerComponent$inboundSchema)
+      .optional(),
+    c1Chart: z.nullable(C1ChartComponent$inboundSchema).optional(),
+    c1CodeBlock: z.nullable(C1CodeBlockComponent$inboundSchema).optional(),
+    c1ConnectorConfigForm: z.nullable(
+      C1ConnectorConfigFormComponent$inboundSchema,
+    ).optional(),
+    c1ConnectorSyncDetail: z.nullable(
+      C1ConnectorSyncDetailComponent$inboundSchema,
+    ).optional(),
+    c1ConnectorSyncProgress: z.nullable(
+      C1ConnectorSyncProgressComponent$inboundSchema,
+    ).optional(),
+    c1CredentialOfferingPicker: z.nullable(
+      C1CredentialOfferingPickerComponent$inboundSchema,
+    ).optional(),
+    c1DurationPicker: z.nullable(C1DurationPickerComponent$inboundSchema)
+      .optional(),
+    c1MetricCards: z.nullable(C1MetricCardsComponent$inboundSchema).optional(),
+    c1MsTeamsNotifications: z.nullable(
+      C1MSTeamsNotificationsComponent$inboundSchema,
+    ).optional(),
+    c1OnboardingPlan: z.nullable(C1OnboardingPlanComponent$inboundSchema)
+      .optional(),
+    c1OnboardingWelcome: z.nullable(C1OnboardingWelcomeComponent$inboundSchema)
+      .optional(),
+    c1ResourcePicker: z.nullable(C1ResourcePickerComponent$inboundSchema)
+      .optional(),
+    c1SlackNotifications: z.nullable(
+      C1SlackNotificationsComponent$inboundSchema,
+    ).optional(),
+    c1StatusIndicator: z.nullable(C1StatusIndicatorComponent$inboundSchema)
+      .optional(),
+    c1Table: z.nullable(C1TableComponent$inboundSchema).optional(),
+    c1TodoList: z.nullable(C1TodoListComponent$inboundSchema).optional(),
+    card: z.nullable(CardComponent$inboundSchema).optional(),
+    checkBox: z.nullable(CheckBoxComponent$inboundSchema).optional(),
+    choicePicker: z.nullable(ChoicePickerComponent$inboundSchema).optional(),
+    column: z.nullable(ColumnComponent$inboundSchema).optional(),
+    dateTimeInput: z.nullable(DateTimeInputComponent$inboundSchema).optional(),
+    divider: z.nullable(DividerComponent$inboundSchema).optional(),
+    id: z.string().optional(),
+    progressBar: z.nullable(ProgressBarComponent$inboundSchema).optional(),
+    row: z.nullable(RowComponent$inboundSchema).optional(),
+    slider: z.nullable(SliderComponent$inboundSchema).optional(),
+    text: z.nullable(TextComponent$inboundSchema).optional(),
+    textField: z.nullable(TextFieldComponent$inboundSchema).optional(),
+    weight: z.number().int().optional(),
+  })
+);
 
 export function a2UIComponentFromJSON(
   jsonString: string,

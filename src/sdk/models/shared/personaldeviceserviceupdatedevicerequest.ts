@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import {
   PersonalDeviceInput,
   PersonalDeviceInput$Outbound,
@@ -28,10 +29,12 @@ export const PersonalDeviceServiceUpdateDeviceRequest$outboundSchema: z.ZodType<
   PersonalDeviceServiceUpdateDeviceRequest$Outbound,
   z.ZodTypeDef,
   PersonalDeviceServiceUpdateDeviceRequest
-> = z.object({
-  device: z.nullable(PersonalDeviceInput$outboundSchema).optional(),
-  updateMask: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    device: z.nullable(PersonalDeviceInput$outboundSchema).optional(),
+    updateMask: z.nullable(z.string()).optional(),
+  })
+);
 
 export function personalDeviceServiceUpdateDeviceRequestToJSON(
   personalDeviceServiceUpdateDeviceRequest:

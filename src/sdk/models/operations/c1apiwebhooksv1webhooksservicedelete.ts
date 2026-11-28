@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -51,15 +51,17 @@ export const C1ApiWebhooksV1WebhooksServiceDeleteRequest$outboundSchema:
     C1ApiWebhooksV1WebhooksServiceDeleteRequest$Outbound,
     z.ZodTypeDef,
     C1ApiWebhooksV1WebhooksServiceDeleteRequest
-  > = z.object({
-    id: z.string(),
-    webhooksServiceDeleteRequest: shared
-      .WebhooksServiceDeleteRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      webhooksServiceDeleteRequest: "WebhooksServiceDeleteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      webhooksServiceDeleteRequest: shared
+        .WebhooksServiceDeleteRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        webhooksServiceDeleteRequest: "WebhooksServiceDeleteRequest",
+      });
+    })
+  );
 
 export function c1ApiWebhooksV1WebhooksServiceDeleteRequestToJSON(
   c1ApiWebhooksV1WebhooksServiceDeleteRequest:
@@ -78,20 +80,22 @@ export const C1ApiWebhooksV1WebhooksServiceDeleteResponse$inboundSchema:
     C1ApiWebhooksV1WebhooksServiceDeleteResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    WebhooksServiceDeleteResponse: shared
-      .WebhooksServiceDeleteResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "WebhooksServiceDeleteResponse": "webhooksServiceDeleteResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      WebhooksServiceDeleteResponse: shared
+        .WebhooksServiceDeleteResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "WebhooksServiceDeleteResponse": "webhooksServiceDeleteResponse",
+      });
+    })
+  );
 
 export function c1ApiWebhooksV1WebhooksServiceDeleteResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -95,25 +95,29 @@ export const GrantEntitlements$inboundSchema: z.ZodType<
   GrantEntitlements,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  exclusionCriteria: z.nullable(GrantEntitlementExclusionCriteria$inboundSchema)
-    .optional(),
-  exclusionList: z.nullable(GrantEntitlementExclusionList$inboundSchema)
-    .optional(),
-  exclusionListCel: z.nullable(GrantEntitlementExclusionListCel$inboundSchema)
-    .optional(),
-  exclusionNone: z.nullable(GrantEntitlementExclusionNone$inboundSchema)
-    .optional(),
-  inclusionCriteria: z.nullable(GrantEntitlementInclusionCriteria$inboundSchema)
-    .optional(),
-  inclusionList: z.nullable(GrantEntitlementInclusionList$inboundSchema)
-    .optional(),
-  inclusionListCel: z.nullable(GrantEntitlementInclusionListCel$inboundSchema)
-    .optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.string().optional(),
-  userRef: z.nullable(UserRef$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exclusionCriteria: z.nullable(
+      GrantEntitlementExclusionCriteria$inboundSchema,
+    ).optional(),
+    exclusionList: z.nullable(GrantEntitlementExclusionList$inboundSchema)
+      .optional(),
+    exclusionListCel: z.nullable(GrantEntitlementExclusionListCel$inboundSchema)
+      .optional(),
+    exclusionNone: z.nullable(GrantEntitlementExclusionNone$inboundSchema)
+      .optional(),
+    inclusionCriteria: z.nullable(
+      GrantEntitlementInclusionCriteria$inboundSchema,
+    ).optional(),
+    inclusionList: z.nullable(GrantEntitlementInclusionList$inboundSchema)
+      .optional(),
+    inclusionListCel: z.nullable(GrantEntitlementInclusionListCel$inboundSchema)
+      .optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.string().optional(),
+    userRef: z.nullable(UserRef$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type GrantEntitlements$Outbound = {
   exclusionCriteria?:
@@ -145,27 +149,31 @@ export const GrantEntitlements$outboundSchema: z.ZodType<
   GrantEntitlements$Outbound,
   z.ZodTypeDef,
   GrantEntitlements
-> = z.object({
-  exclusionCriteria: z.nullable(
-    GrantEntitlementExclusionCriteria$outboundSchema,
-  ).optional(),
-  exclusionList: z.nullable(GrantEntitlementExclusionList$outboundSchema)
-    .optional(),
-  exclusionListCel: z.nullable(GrantEntitlementExclusionListCel$outboundSchema)
-    .optional(),
-  exclusionNone: z.nullable(GrantEntitlementExclusionNone$outboundSchema)
-    .optional(),
-  inclusionCriteria: z.nullable(
-    GrantEntitlementInclusionCriteria$outboundSchema,
-  ).optional(),
-  inclusionList: z.nullable(GrantEntitlementInclusionList$outboundSchema)
-    .optional(),
-  inclusionListCel: z.nullable(GrantEntitlementInclusionListCel$outboundSchema)
-    .optional(),
-  useSubjectUser: z.boolean().optional(),
-  userIdCel: z.string().optional(),
-  userRef: z.nullable(UserRef$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exclusionCriteria: z.nullable(
+      GrantEntitlementExclusionCriteria$outboundSchema,
+    ).optional(),
+    exclusionList: z.nullable(GrantEntitlementExclusionList$outboundSchema)
+      .optional(),
+    exclusionListCel: z.nullable(
+      GrantEntitlementExclusionListCel$outboundSchema,
+    ).optional(),
+    exclusionNone: z.nullable(GrantEntitlementExclusionNone$outboundSchema)
+      .optional(),
+    inclusionCriteria: z.nullable(
+      GrantEntitlementInclusionCriteria$outboundSchema,
+    ).optional(),
+    inclusionList: z.nullable(GrantEntitlementInclusionList$outboundSchema)
+      .optional(),
+    inclusionListCel: z.nullable(
+      GrantEntitlementInclusionListCel$outboundSchema,
+    ).optional(),
+    useSubjectUser: z.boolean().optional(),
+    userIdCel: z.string().optional(),
+    userRef: z.nullable(UserRef$outboundSchema).optional(),
+  })
+);
 
 export function grantEntitlementsToJSON(
   grantEntitlements: GrantEntitlements,

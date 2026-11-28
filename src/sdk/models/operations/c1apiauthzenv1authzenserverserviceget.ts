@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -47,14 +47,16 @@ export const C1ApiAuthzenV1AuthzenServerServiceGetRequest$outboundSchema:
     C1ApiAuthzenV1AuthzenServerServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAuthzenV1AuthzenServerServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+      });
+    })
+  );
 
 export function c1ApiAuthzenV1AuthzenServerServiceGetRequestToJSON(
   c1ApiAuthzenV1AuthzenServerServiceGetRequest:
@@ -73,20 +75,22 @@ export const C1ApiAuthzenV1AuthzenServerServiceGetResponse$inboundSchema:
     C1ApiAuthzenV1AuthzenServerServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    AuthzenServerServiceGetResponse: shared
-      .AuthzenServerServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "AuthzenServerServiceGetResponse": "authzenServerServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      AuthzenServerServiceGetResponse: shared
+        .AuthzenServerServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "AuthzenServerServiceGetResponse": "authzenServerServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiAuthzenV1AuthzenServerServiceGetResponseFromJSON(
   jsonString: string,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import { OrgDomain, OrgDomain$inboundSchema } from "./orgdomain.js";
@@ -23,9 +23,11 @@ export const UpdateOrgDomainResponse$inboundSchema: z.ZodType<
   UpdateOrgDomainResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  list: z.nullable(z.array(OrgDomain$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    list: z.nullable(z.array(OrgDomain$inboundSchema)).optional(),
+  })
+);
 
 export function updateOrgDomainResponseFromJSON(
   jsonString: string,

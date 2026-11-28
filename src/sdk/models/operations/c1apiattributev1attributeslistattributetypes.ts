@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -45,15 +45,17 @@ export const C1ApiAttributeV1AttributesListAttributeTypesRequest$outboundSchema:
     C1ApiAttributeV1AttributesListAttributeTypesRequest$Outbound,
     z.ZodTypeDef,
     C1ApiAttributeV1AttributesListAttributeTypesRequest
-  > = z.object({
-    pageSize: z.number().int().optional(),
-    pageToken: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      pageSize: "page_size",
-      pageToken: "page_token",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      pageSize: z.number().int().optional(),
+      pageToken: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        pageSize: "page_size",
+        pageToken: "page_token",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesListAttributeTypesRequestToJSON(
   c1ApiAttributeV1AttributesListAttributeTypesRequest:
@@ -72,20 +74,22 @@ export const C1ApiAttributeV1AttributesListAttributeTypesResponse$inboundSchema:
     C1ApiAttributeV1AttributesListAttributeTypesResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    ListAttributeTypesResponse: shared.ListAttributeTypesResponse$inboundSchema
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "ListAttributeTypesResponse": "listAttributeTypesResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      ListAttributeTypesResponse: shared
+        .ListAttributeTypesResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "ListAttributeTypesResponse": "listAttributeTypesResponse",
+      });
+    })
+  );
 
 export function c1ApiAttributeV1AttributesListAttributeTypesResponseFromJSON(
   jsonString: string,

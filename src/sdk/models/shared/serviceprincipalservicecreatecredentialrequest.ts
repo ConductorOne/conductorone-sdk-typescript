@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 
 /**
  * The ServicePrincipalServiceCreateCredentialRequest message.
@@ -45,13 +46,15 @@ export const ServicePrincipalServiceCreateCredentialRequest$outboundSchema:
     ServicePrincipalServiceCreateCredentialRequest$Outbound,
     z.ZodTypeDef,
     ServicePrincipalServiceCreateCredentialRequest
-  > = z.object({
-    allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
-    displayName: z.string().optional(),
-    expires: z.nullable(z.string()).optional(),
-    requireDpop: z.boolean().optional(),
-    scopedRoles: z.nullable(z.array(z.string())).optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      allowSourceCidrs: z.nullable(z.array(z.string())).optional(),
+      displayName: z.string().optional(),
+      expires: z.nullable(z.string()).optional(),
+      requireDpop: z.boolean().optional(),
+      scopedRoles: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 
 export function servicePrincipalServiceCreateCredentialRequestToJSON(
   servicePrincipalServiceCreateCredentialRequest:

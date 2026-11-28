@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -89,39 +89,43 @@ export const LocalUserInvitationStatus$inboundSchema: z.ZodType<
   LocalUserInvitationStatus,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(LocalUserInvitationStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(LocalUserInvitationStatus)
+);
 
 /** @internal */
 export const LocalUserInvitation$inboundSchema: z.ZodType<
   LocalUserInvitation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  acceptedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  createdUserId: z.string().optional(),
-  directoryAppId: z.string().optional(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string().optional(),
-  initialRoleIds: z.nullable(z.array(z.string())).optional(),
-  invitedByUserId: z.string().optional(),
-  jobId: z.string().optional(),
-  onboardingFlowId: z.string().optional(),
-  purpose: z.string().optional(),
-  sponsorUserId: z.string().optional(),
-  status: LocalUserInvitationStatus$inboundSchema.optional(),
-  updatedAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    acceptedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    createdUserId: z.string().optional(),
+    directoryAppId: z.string().optional(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string().optional(),
+    initialRoleIds: z.nullable(z.array(z.string())).optional(),
+    invitedByUserId: z.string().optional(),
+    jobId: z.string().optional(),
+    onboardingFlowId: z.string().optional(),
+    purpose: z.string().optional(),
+    sponsorUserId: z.string().optional(),
+    status: LocalUserInvitationStatus$inboundSchema.optional(),
+    updatedAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 
 export function localUserInvitationFromJSON(
   jsonString: string,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -56,18 +56,20 @@ export const C1ApiEdgeV1EdgeServicePreviewEgressRulesUpdateRequest$outboundSchem
     C1ApiEdgeV1EdgeServicePreviewEgressRulesUpdateRequest$Outbound,
     z.ZodTypeDef,
     C1ApiEdgeV1EdgeServicePreviewEgressRulesUpdateRequest
-  > = z.object({
-    appId: z.string(),
-    id: z.string(),
-    edgeServicePreviewEgressRulesUpdateRequest: shared
-      .EdgeServicePreviewEgressRulesUpdateRequest$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-      edgeServicePreviewEgressRulesUpdateRequest:
-        "EdgeServicePreviewEgressRulesUpdateRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+      id: z.string(),
+      edgeServicePreviewEgressRulesUpdateRequest: shared
+        .EdgeServicePreviewEgressRulesUpdateRequest$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+        edgeServicePreviewEgressRulesUpdateRequest:
+          "EdgeServicePreviewEgressRulesUpdateRequest",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServicePreviewEgressRulesUpdateRequestToJSON(
   c1ApiEdgeV1EdgeServicePreviewEgressRulesUpdateRequest:
@@ -86,21 +88,23 @@ export const C1ApiEdgeV1EdgeServicePreviewEgressRulesUpdateResponse$inboundSchem
     C1ApiEdgeV1EdgeServicePreviewEgressRulesUpdateResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    EdgeServicePreviewEgressRulesUpdateResponse: shared
-      .EdgeServicePreviewEgressRulesUpdateResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "EdgeServicePreviewEgressRulesUpdateResponse":
-        "edgeServicePreviewEgressRulesUpdateResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      EdgeServicePreviewEgressRulesUpdateResponse: shared
+        .EdgeServicePreviewEgressRulesUpdateResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "EdgeServicePreviewEgressRulesUpdateResponse":
+          "edgeServicePreviewEgressRulesUpdateResponse",
+      });
+    })
+  );
 
 export function c1ApiEdgeV1EdgeServicePreviewEgressRulesUpdateResponseFromJSON(
   jsonString: string,

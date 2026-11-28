@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -42,9 +42,11 @@ export const C1ApiArtifactV1ArtifactServiceGetRequest$outboundSchema: z.ZodType<
   C1ApiArtifactV1ArtifactServiceGetRequest$Outbound,
   z.ZodTypeDef,
   C1ApiArtifactV1ArtifactServiceGetRequest
-> = z.object({
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+  })
+);
 
 export function c1ApiArtifactV1ArtifactServiceGetRequestToJSON(
   c1ApiArtifactV1ArtifactServiceGetRequest:
@@ -62,20 +64,22 @@ export const C1ApiArtifactV1ArtifactServiceGetResponse$inboundSchema: z.ZodType<
   C1ApiArtifactV1ArtifactServiceGetResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ContentType: z.string(),
-  StatusCode: z.number().int(),
-  RawResponse: z.instanceof(Response),
-  ArtifactServiceGetResponse: shared.ArtifactServiceGetResponse$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ContentType": "contentType",
-    "StatusCode": "statusCode",
-    "RawResponse": "rawResponse",
-    "ArtifactServiceGetResponse": "artifactServiceGetResponse",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ContentType: z.string(),
+    StatusCode: z.number().int(),
+    RawResponse: z.instanceof(Response),
+    ArtifactServiceGetResponse: shared.ArtifactServiceGetResponse$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ContentType": "contentType",
+      "StatusCode": "statusCode",
+      "RawResponse": "rawResponse",
+      "ArtifactServiceGetResponse": "artifactServiceGetResponse",
+    });
+  })
+);
 
 export function c1ApiArtifactV1ArtifactServiceGetResponseFromJSON(
   jsonString: string,

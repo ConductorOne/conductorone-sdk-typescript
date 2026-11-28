@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -46,13 +46,15 @@ export const C1ApiLocalDirectoryV1LocalDirectoryConfigServiceGetRequest$outbound
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceGetRequest$Outbound,
     z.ZodTypeDef,
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceGetRequest
-  > = z.object({
-    appId: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      appId: "app_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      appId: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        appId: "app_id",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalDirectoryConfigServiceGetRequestToJSON(
   c1ApiLocalDirectoryV1LocalDirectoryConfigServiceGetRequest:
@@ -70,21 +72,23 @@ export const C1ApiLocalDirectoryV1LocalDirectoryConfigServiceGetResponse$inbound
     C1ApiLocalDirectoryV1LocalDirectoryConfigServiceGetResponse,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    ContentType: z.string(),
-    StatusCode: z.number().int(),
-    RawResponse: z.instanceof(Response),
-    LocalDirectoryConfigServiceGetResponse: shared
-      .LocalDirectoryConfigServiceGetResponse$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ContentType": "contentType",
-      "StatusCode": "statusCode",
-      "RawResponse": "rawResponse",
-      "LocalDirectoryConfigServiceGetResponse":
-        "localDirectoryConfigServiceGetResponse",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      ContentType: z.string(),
+      StatusCode: z.number().int(),
+      RawResponse: z.instanceof(Response),
+      LocalDirectoryConfigServiceGetResponse: shared
+        .LocalDirectoryConfigServiceGetResponse$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ContentType": "contentType",
+        "StatusCode": "statusCode",
+        "RawResponse": "rawResponse",
+        "LocalDirectoryConfigServiceGetResponse":
+          "localDirectoryConfigServiceGetResponse",
+      });
+    })
+  );
 
 export function c1ApiLocalDirectoryV1LocalDirectoryConfigServiceGetResponseFromJSON(
   jsonString: string,

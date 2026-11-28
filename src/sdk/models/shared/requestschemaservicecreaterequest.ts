@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 import {
@@ -51,7 +52,7 @@ export type RequestSchemaServiceCreateRequest = {
    */
   fieldRelationships?: Array<FieldRelationship> | null | undefined;
   /**
-   * The form fields that users must fill out when requesting access.
+   * The form fields that users must fill out when requesting access. Fields are optional; a form with no fields can still control whether the justification field is shown.
    */
   fields?: Array<FormField> | null | undefined;
   /**
@@ -69,7 +70,9 @@ export const JustificationVisibility$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   JustificationVisibility
-> = openEnums.outboundSchema(JustificationVisibility);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(JustificationVisibility)
+);
 
 /** @internal */
 export type RequestSchemaServiceCreateRequest$Outbound = {
@@ -86,15 +89,17 @@ export const RequestSchemaServiceCreateRequest$outboundSchema: z.ZodType<
   RequestSchemaServiceCreateRequest$Outbound,
   z.ZodTypeDef,
   RequestSchemaServiceCreateRequest
-> = z.object({
-  description: z.string().optional(),
-  fieldGroups: z.nullable(z.array(FormFieldGroup$outboundSchema)).optional(),
-  fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
-    .optional(),
-  fields: z.nullable(z.array(FormField$outboundSchema)).optional(),
-  justificationVisibility: JustificationVisibility$outboundSchema.optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    fieldGroups: z.nullable(z.array(FormFieldGroup$outboundSchema)).optional(),
+    fieldRelationships: z.nullable(z.array(FieldRelationship$outboundSchema))
+      .optional(),
+    fields: z.nullable(z.array(FormField$outboundSchema)).optional(),
+    justificationVisibility: JustificationVisibility$outboundSchema.optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function requestSchemaServiceCreateRequestToJSON(
   requestSchemaServiceCreateRequest: RequestSchemaServiceCreateRequest,
